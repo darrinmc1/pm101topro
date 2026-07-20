@@ -1,7 +1,9 @@
-import Link from "next/link"
-import { Quote } from "lucide-react"
+"use client"
 
+import Link from "next/link"
+import { Quote, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 
 const TESTIMONIALS = [
   {
@@ -24,21 +26,32 @@ const TESTIMONIALS = [
   },
 ]
 
+const STAGGER = ["stagger-1", "stagger-2", "stagger-3"] as const
+
 export function Testimonials() {
+  const headingRef = useScrollReveal<HTMLDivElement>({ threshold: 0.2 })
+  const gridRef    = useScrollReveal<HTMLDivElement>({ threshold: 0.08 })
+  const ctaRef     = useScrollReveal<HTMLDivElement>({ threshold: 0.15 })
+
   return (
     <section className="py-20">
       <div className="container">
-        <div className="mx-auto max-w-2xl text-center">
+
+        <div ref={headingRef} className="reveal-up mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tightest text-foreground">
             Trusted by people learning to lead
           </h2>
         </div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {TESTIMONIALS.map((t) => (
+        <div
+          ref={gridRef}
+          className="mt-12 grid gap-5 md:grid-cols-3"
+        >
+          {TESTIMONIALS.map((t, i) => (
             <figure
               key={t.name}
-              className="flex flex-col rounded-xl border border-border bg-surface p-6"
+              className={`card-lift reveal-up flex flex-col rounded-xl border
+                          border-border bg-surface p-6 ${STAGGER[i]}`}
             >
               <Quote className="h-6 w-6 text-accent/60" aria-hidden="true" />
               <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-foreground">
@@ -52,17 +65,33 @@ export function Testimonials() {
           ))}
         </div>
 
-        <div className="mt-14 flex flex-col items-center gap-4 rounded-2xl border border-border bg-surface p-10 text-center">
-          <h3 className="text-2xl font-bold tracking-tightest text-foreground">
+        {/* CTA banner */}
+        <div
+          ref={ctaRef}
+          className="reveal-scale mt-14 flex flex-col items-center gap-4 rounded-2xl
+                     border border-border bg-surface p-10 text-center
+                     relative overflow-hidden"
+        >
+          {/* Subtle glow behind CTA */}
+          <div
+            className="pointer-events-none absolute left-1/2 top-0 h-32 w-64
+                       -translate-x-1/2 rounded-full bg-accent/10 blur-[60px]"
+            aria-hidden="true"
+          />
+          <h3 className="relative text-2xl font-bold tracking-tightest text-foreground">
             Ready to start your journey?
           </h3>
-          <p className="max-w-md text-muted-foreground">
+          <p className="relative max-w-md text-muted-foreground">
             Every course has a free first lesson. No credit card required.
           </p>
-          <Button asChild size="lg">
-            <Link href="/courses">Start learning free</Link>
+          <Button asChild size="lg" className="relative group">
+            <Link href="/courses">
+              Start learning free
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
           </Button>
         </div>
+
       </div>
     </section>
   )

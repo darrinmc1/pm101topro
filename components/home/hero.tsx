@@ -1,45 +1,69 @@
+"use client"
+
 import Link from "next/link"
 import { ArrowRight, Sparkles } from "lucide-react"
-
 import { Button } from "@/components/ui/button"
-
-const STATS = [
-  { value: "8", label: "methodologies" },
-  { value: "40+", label: "lessons" },
-  { value: "8", label: "document types" },
-  { value: "AI", label: "assisted" },
-]
+import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 
 export function Hero() {
+  const headingRef  = useScrollReveal<HTMLDivElement>({ threshold: 0.1 })
+  const subtitleRef = useScrollReveal<HTMLParagraphElement>({ threshold: 0.1 })
+  const ctaRef      = useScrollReveal<HTMLDivElement>({ threshold: 0.1 })
+
   return (
     <section className="relative overflow-hidden border-b border-border">
+      {/* Dot-grid background */}
       <div className="absolute inset-0 bg-dot-grid opacity-60" aria-hidden="true" />
+
+      {/* Animated orb */}
       <div
-        className="absolute left-1/2 top-0 h-64 w-[40rem] -translate-x-1/2 rounded-full bg-accent/20 blur-[120px]"
+        className="orb-animate pointer-events-none absolute left-1/2 top-0
+                   h-80 w-[48rem] -translate-x-1/2 rounded-full
+                   bg-gradient-to-br from-accent/30 via-accent-glow/20 to-accent-secondary/10
+                   blur-[100px]"
         aria-hidden="true"
       />
+      <div
+        className="pointer-events-none absolute right-1/4 top-24 h-48 w-64
+                   rounded-full bg-accent-secondary/10 blur-[80px]"
+        aria-hidden="true"
+        style={{ animation: "orb-drift 11s ease-in-out 2s infinite" }}
+      />
 
-      <div className="container relative flex flex-col items-center py-20 text-center md:py-28">
-        <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted-foreground">
+      <div className="container relative flex flex-col items-center py-24 text-center md:py-36">
+
+        <span className="badge-pop inline-flex items-center gap-2 rounded-full border
+                         border-border bg-surface px-3 py-1 text-xs font-medium
+                         text-muted-foreground">
           <Sparkles className="h-3.5 w-3.5 text-accent-secondary" />
           Learn PM + generate real project documents
         </span>
 
-        <h1 className="mt-6 max-w-3xl text-balance text-4xl font-extrabold tracking-tightest text-foreground sm:text-5xl md:text-6xl">
-          From <span className="text-accent text-glow">PM101</span> to{" "}
-          <span className="text-accent-secondary">Pro.</span>
-        </h1>
+        <div ref={headingRef} className="reveal-up mt-6 stagger-1">
+          <h1 className="max-w-3xl text-balance text-4xl font-extrabold
+                         tracking-tightest text-foreground sm:text-5xl md:text-6xl">
+            From <span className="text-accent text-glow">PM101</span> to{" "}
+            <span className="text-accent-secondary">Pro.</span>
+          </h1>
+        </div>
 
-        <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
+        <p
+          ref={subtitleRef}
+          className="reveal-up mt-5 max-w-xl text-pretty text-base
+                     leading-relaxed text-muted-foreground md:text-lg stagger-2"
+        >
           Master project management from your first charter to running a PMO.
-          Free courses. AI-powered document tools.
+          Free courses across every methodology, plus AI-powered document tools.
         </p>
 
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Button asChild size="lg">
+        <div
+          ref={ctaRef}
+          className="reveal-up mt-8 flex flex-col gap-3 sm:flex-row stagger-3"
+        >
+          <Button asChild size="lg" className="group">
             <Link href="/courses">
               Start learning free
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline">
@@ -47,20 +71,6 @@ export function Hero() {
           </Button>
         </div>
 
-        <dl className="mt-14 grid w-full max-w-2xl grid-cols-2 gap-4 sm:grid-cols-4">
-          {STATS.map((stat) => (
-            <div
-              key={stat.label}
-              className="rounded-xl border border-border bg-surface/60 px-4 py-5 text-center"
-            >
-              <dt className="sr-only">{stat.label}</dt>
-              <dd className="text-2xl font-bold tracking-tight text-foreground">
-                {stat.value}
-              </dd>
-              <dd className="mt-1 text-xs text-muted-foreground">{stat.label}</dd>
-            </div>
-          ))}
-        </dl>
       </div>
     </section>
   )

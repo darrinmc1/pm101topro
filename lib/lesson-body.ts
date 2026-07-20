@@ -273,65 +273,6 @@ const LESSON_CONTENT: Record<string, Omit<LessonBody, "practiceDocId">> = {
     ],
   },
 
-} // end LESSON_CONTENT
-
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-export function getLessonBody(course: Course, lesson: Lesson): LessonBody {
-  const content = LESSON_CONTENT[lesson.slug]
-
-  if (content) {
-    return {
-      ...content,
-      practiceDocId: PRACTICE_MAP[lesson.slug],
-    }
-  }
-
-  // Generic fallback for lessons not yet written
-  const intro =
-    lesson.summary ||
-    `In this lesson we build practical, job-ready understanding of ${lesson.title.toLowerCase()} within the ${course.title} course.`
-
-  return {
-    intro,
-    sections: [
-      {
-        id: "overview",
-        title: "Overview",
-        body: [
-          `${lesson.title} is a core building block on your path from 101 to Pro. This lesson focuses on what actually matters in practice — the concepts you will use on a real project, not exam trivia.`,
-          `By the end you'll be able to recognise the pattern, apply it to your own work, and explain it clearly to stakeholders.`,
-        ],
-      },
-      {
-        id: "key-concepts",
-        title: "Key concepts",
-        body: [
-          `We break the topic into a handful of memorable ideas. Each concept links back to the ${course.title} objective so the learning compounds as you progress through the course.`,
-          `Watch for the callouts — they highlight the mistakes new project managers make most often, and how to avoid them.`,
-        ],
-      },
-      {
-        id: "in-practice",
-        title: "In practice",
-        body: [
-          `Here's how this plays out on a live project. Imagine you've just been handed responsibility with limited information and a nervous sponsor. This is exactly where the concepts above earn their keep.`,
-          `Follow the worked example, then try the reflection prompt with a project of your own.`,
-        ],
-      },
-      {
-        id: "summary",
-        title: "Summary & next steps",
-        body: [
-          `You now have a working grasp of ${lesson.title.toLowerCase()}. Mark this lesson complete to advance your level rail, then continue to the next lesson to keep the momentum.`,
-        ],
-      },
-    ],
-    practiceDocId: PRACTICE_MAP[lesson.slug],
-  }
-}
-
   // ── COURSE: Agile Fundamentals ─────────────────────────────────────────────
 
   "agile-vs-waterfall": {
@@ -625,4 +566,62 @@ export function getLessonBody(course: Course, lesson: Lesson): LessonBody {
       },
     ],
   },
+} // end LESSON_CONTENT
+
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+export function getLessonBody(course: Course, lesson: Lesson): LessonBody {
+  const content = LESSON_CONTENT[lesson.slug]
+
+  if (content) {
+    return {
+      ...content,
+      practiceDocId: PRACTICE_MAP[lesson.slug],
+    }
+  }
+
+  // Generic fallback for lessons not yet written
+  const intro =
+    lesson.summary ||
+    `In this lesson we build practical, job-ready understanding of ${lesson.title.toLowerCase()} within the ${course.title} course.`
+
+  return {
+    intro,
+    sections: [
+      {
+        id: "overview",
+        title: "Overview",
+        body: [
+          `${lesson.title} is a core building block on your path from 101 to Pro. This lesson focuses on what actually matters in practice — the concepts you will use on a real project, not exam trivia.`,
+          `By the end you'll be able to recognise the pattern, apply it to your own work, and explain it clearly to stakeholders.`,
+        ],
+      },
+      {
+        id: "key-concepts",
+        title: "Key concepts",
+        body: [
+          `We break the topic into a handful of memorable ideas. Each concept links back to the ${course.title} objective so the learning compounds as you progress through the course.`,
+          `Watch for the callouts — they highlight the mistakes new project managers make most often, and how to avoid them.`,
+        ],
+      },
+      {
+        id: "in-practice",
+        title: "In practice",
+        body: [
+          `Here's how this plays out on a live project. Imagine you've just been handed responsibility with limited information and a nervous sponsor. This is exactly where the concepts above earn their keep.`,
+          `Follow the worked example, then try the reflection prompt with a project of your own.`,
+        ],
+      },
+      {
+        id: "summary",
+        title: "Summary & next steps",
+        body: [
+          `You now have a working grasp of ${lesson.title.toLowerCase()}. Mark this lesson complete to advance your level rail, then continue to the next lesson to keep the momentum.`,
+        ],
+      },
+    ],
+    practiceDocId: PRACTICE_MAP[lesson.slug],
+  }
+}
 
