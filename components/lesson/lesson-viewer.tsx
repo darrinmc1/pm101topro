@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, Check, Circle, Lock, PlayCircle } from "lucide-react"
 import type { Course, Lesson } from "@/lib/content"
@@ -11,6 +11,17 @@ import { LevelBadge } from "@/components/level-badge"
 import { LessonContent } from "@/components/lesson/lesson-content"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+
+function readProgress(): Record<string, number> {
+  if (typeof window === "undefined") return {}
+  try {
+    return JSON.parse(localStorage.getItem("pm101topro_progress") || "{}")
+  } catch { return {} }
+}
+
+function writeProgress(progress: Record<string, number>) {
+  try { localStorage.setItem("pm101topro_progress", JSON.stringify(progress)) } catch {}
+}
 
 export function LessonViewer({
   course,
@@ -28,7 +39,28 @@ export function LessonViewer({
   const prev = index > 0 ? course.lessons[index - 1] : null
   const next = index < total - 1 ? course.lessons[index + 1] : null
 
-  // Completion including this lesson if marked done.
+  useEffect(() => {
+    const prog = readProgress()
+    const doneCount = prog[course.slug] ?? 0
+    setCompleted(doneCount > index)
+  }, [course.slug, index])
+
+  const handleToggle = () => {
+    setCompleted((c) => {
+      const prog = readProgress()
+      const current = prog[course.slug] ?? 0
+      if (!c) {
+        // Mark complete: update to at least this lesson
+        prog[course.slug] = Math.max(current, index + 1)
+      } else {
+        // Unmark: set back to previous lesson
+        prog[course.slug] = Math.min(current, index)
+      }
+      writeProgress(prog)
+      return !c
+    })
+  }
+
   const doneCount = index + (completed ? 1 : 0)
   const coursePercent = Math.round((doneCount / total) * 100)
 
@@ -59,8 +91,7 @@ export function LessonViewer({
           <ol className="mt-6 space-y-1">
             {course.lessons.map((l, i) => {
               const isCurrent = l.slug === lesson.slug
-              const isDone = i < index || (isCurrent && completed)
-              const locked = !l.isFree && i > 0
+              const isDone = i <= index || (isCurrent && completed)
               return (
                 <li key={l.slug}>
                   <Link
@@ -76,8 +107,6 @@ export function LessonViewer({
                       <Check className="h-4 w-4 shrink-0 text-accent" />
                     ) : isCurrent ? (
                       <PlayCircle className="h-4 w-4 shrink-0 text-accent" />
-                    ) : locked ? (
-                      <Lock className="h-4 w-4 shrink-0 opacity-60" />
                     ) : (
                       <Circle className="h-4 w-4 shrink-0 opacity-60" />
                     )}
@@ -115,7 +144,7 @@ export function LessonViewer({
         {/* Complete + nav */}
         <div className="mt-12 border-t border-border pt-6">
           <Button
-            onClick={() => setCompleted((c) => !c)}
+            onClick={handleToggle}
             variant={completed ? "secondary" : "default"}
             className="w-full sm:w-auto"
           >

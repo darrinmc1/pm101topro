@@ -106,6 +106,50 @@ export const BLOG_POSTS: BlogPost[] = [
       "The secret is to assign ownership and follow up. An insight without an owner is just a diary entry. Give each action a named person and a deadline, and review it at the start of the next retro. That's how learning becomes process.",
     ],
   },
+  {
+    slug: "meetings-that-should-have-been-emails",
+    title: "Meetings that should have been emails",
+    excerpt:
+      "A simple framework to decide whether to book the room or write the message — and save everyone an hour.",
+    category: "Communication",
+    date: "2026-07-18",
+    readMins: 5,
+    body: [
+      "The most expensive recurring cost in most organisations isn't software or office space — it's meetings. A one-hour meeting with eight people costs eight person-hours. If that meeting produces nothing but a 'let's continue this offline,' you've burned a full working day for no output.",
+      "Before scheduling any meeting, ask three questions. First: is there a decision to be made? If no one is making a decision, the meeting probably doesn't need to happen. Second: can this be handled async? A shared document with comments, a Slack thread, or a recorded Loom can often replace a synchronous discussion. Third: who actually needs to be there? The answer is rarely everyone who was invited last time.",
+      "If the meeting passes all three tests, keep it short, structured, and outcome-oriented. If it fails any test, cancel it and send an email instead. Your team will thank you — silently, because they're in fewer meetings.",
+    ],
+  },
+  {
+    slug: "what-your-stakeholders-actually-want",
+    title: "What your stakeholders actually want (but won't say)",
+    excerpt:
+      "Stakeholders don't want status updates. They want to know whether they should be worried.",
+    category: "Stakeholders",
+    date: "2026-07-25",
+    readMins: 6,
+    body: [
+      "Here's a truth that most project managers learn the hard way: stakeholders don't read your status reports for information. They read them for reassurance. Every status update, whether they admit it or not, answers exactly one question: should I be worried about this project?",
+      "The most effective PMs understand this and structure their communication accordingly. Lead with the answer to the unspoken question. 'The project is on track. Here's what we accomplished this week.' Or: 'We have an issue. Here's what happened, what we're doing about it, and what I need from you.' Everything else is noise.",
+      "The second unspoken need: stakeholders want to look prepared. When you surface a risk early and tell them what you're doing about it, they look competent to their leadership. When you surprise them with a problem they didn't see coming, they look caught off guard. Surface issues early, even if you're still working on the solution.",
+      "The third need: stakeholders want to trust that you're in control. Confidence signals — structured reporting, clear next steps, named owners, dates — matter more than any individual data point. A PM who communicates uncertainty with a plan is trusted. A PM who communicates certainty without evidence is not.",
+    ],
+  },
+  {
+    slug: "why-estimates-are-wrong",
+    title: "Why estimates are wrong (and how to make them less wrong)",
+    excerpt:
+      "Estimates are always wrong. The skill is knowing how wrong and narrowing the cone of uncertainty.",
+    category: "Fundamentals",
+    date: "2026-08-01",
+    readMins: 7,
+    body: [
+      "The first thing every new project manager learns is that their estimates will be wrong. The second thing they learn is that nobody wants to hear that. The tension between honest uncertainty and organisational demand for precision is the defining challenge of project estimation.",
+      "The cone of uncertainty is a useful mental model: early in a project, the range of possible outcomes is very wide — a feature might take anywhere from two weeks to two months. As the project progresses, the cone narrows. By the time you're actually building the thing, you know within a narrower range. The mistake managers make is treating early estimates as firm commitments.",
+      "Better estimation comes from three practices. First: always express estimates as ranges, not single numbers. 'Two to four weeks' is honest. 'Three weeks' is a guess you've committed to. Second: use reference class forecasting — what did similar work actually take in the past? Historical data beats expert intuition every time. Third: re-estimate at each stage. The estimate you gave at project kickoff is obsolete by the time you reach the build phase. Update it openly.",
+      "The most important habit: when an estimate is wrong, don't defend it. Explain what changed, what you learned, and what the new estimate is. PMs who treat estimates as commitments they must defend destroy trust. PMs who treat estimates as forecasts they update build it.",
+    ],
+  },
 ]
 
 export function getPost(slug: string): BlogPost | undefined {
