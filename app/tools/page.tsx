@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { ArrowRight, Sparkles } from "lucide-react"
 import { DOC_TYPES } from "@/lib/documents"
 import { Card } from "@/components/ui/card"
+import { PmWisdom } from "@/components/pm-wisdom"
 
 export const metadata: Metadata = {
   title: "AI PM Document Generator",
@@ -49,6 +50,12 @@ export default function ToolsPage() {
               </Link>
             )
           })}
+        </div>
+      </section>
+
+      <section className="container pb-20">
+        <div className="mx-auto max-w-lg">
+          <PmWisdom />
         </div>
       </section>
     </>

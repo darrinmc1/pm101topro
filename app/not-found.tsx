@@ -9,7 +9,18 @@ const SUGGESTIONS = [
   { href: "/blog", label: "Blog" },
 ]
 
+const PM_JOKES = [
+  "Stakeholder added it to scope — but forgot to update the timeline.",
+  "This page was deprioritised in the last sprint retro.",
+  "Estimated at 2 story points. We're now on sprint 12.",
+  "The PM said 'just a quick pivot' — and here we are.",
+  "Original estimate: 2 hours. Current status: 404.",
+  "This URL was approved at the steering committee — then descoped.",
+]
+
 export default function NotFound() {
+  const joke = PM_JOKES[Math.floor(Math.random() * PM_JOKES.length)]
+
   return (
     <div className="relative overflow-hidden">
       <div className="bg-dot-grid absolute inset-0 opacity-60" aria-hidden />
@@ -27,6 +38,10 @@ export default function NotFound() {
         <p className="mt-4 max-w-md text-pretty leading-relaxed text-muted-foreground">
           The page you&apos;re looking for may have moved, been renamed, or never
           shipped. Let&apos;s get you back to something useful.
+        </p>
+
+        <p className="mt-6 text-sm italic text-muted-foreground/60">
+          {joke}
         </p>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">

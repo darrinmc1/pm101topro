@@ -28,6 +28,13 @@ const PRACTICE_MAP: Record<string, string> = {
   "baselining-schedule": "wbs-schedule",
   "activity-sequencing": "wbs-schedule",
   "portfolio-selection": "stakeholder-register",
+  "your-first-week": "stakeholder-register",
+  "negotiation-basics": "project-charter",
+  "scope-negotiation": "project-charter",
+  "quality-planning": "wbs-schedule",
+  "vendor-selection": "project-charter",
+  "change-models": "stakeholder-register",
+  "capacity-planning": "wbs-schedule",
 }
 
 // ---------------------------------------------------------------------------
@@ -566,6 +573,106 @@ const LESSON_CONTENT: Record<string, Omit<LessonBody, "practiceDocId">> = {
       },
     ],
   },
+
+  // ── COURSE: Getting Started as a PM ─────────────────────────────────────
+
+  "your-first-week": {
+    intro:
+      "Your first week as a project manager sets the trajectory for everything that follows. You don't need to know every detail on day one — but you do need to ask the right questions, meet the right people, and establish the habits that build trust before you need it.",
+    sections: [
+      {
+        id: "before-you-start",
+        title: "Before day one",
+        body: [
+          "A great first week starts before you walk in the door. Ask your hiring manager for the project charter, any existing RAID log, and recent status reports. Read them not to memorise details but to form questions — what's missing, what's vague, what seems inconsistent.",
+          "Also ask about team structure: who's on the core project team, who are the key stakeholders, and who has been in the role before. If you're replacing someone, ask if they left a handover note. (They probably didn't. That's the first lesson in project management: documentation is always less complete than you'd hope.)",
+          "Set up a simple personal onboarding tracker — a document or kanban board with three columns: People to meet, Things to read, Questions to ask. Update it every day and aim to clear it by the end of your second week.",
+        ],
+      },
+      {
+        id: "first-meetings",
+        title: "The right first meetings",
+        body: [
+          "Schedule 30-minute 1:1s with each team member and key stakeholder in your first three days. The goal isn't to gather status — it's to understand what each person cares about, what frustrates them, and what they need from a PM to do their best work.",
+          "A useful framework: ask every person three questions. (1) What's going well right now? (2) What's not going well? (3) What can I do in my first month that would make your life easier? Record the answers — patterns will emerge that none of the written documentation revealed.",
+          "Skip the impulse to 'prove yourself' by suggesting improvements on day two. Listen first. The fastest way to lose credibility is to recommend changes before you understand why things are the way they are. Most processes that look broken exist because someone was working around a constraint you haven't seen yet.",
+        ],
+      },
+      {
+        id: "early-wins",
+        title: "Early wins that build trust",
+        body: [
+          "While you're listening and learning, look for small, low-effort improvements that remove a known frustration. A cluttered kanban board that needs cleaning. A status template that no one reads. A recurring meeting that's lost its purpose. These are quick wins that signal you're paying attention.",
+          "One of the highest-leverage early actions: update the risk register. It's almost certainly stale. Adding two real risks and emailing the team with 'I noticed we hadn't captured X and Y — does that feel right?' immediately positions you as someone who protects the project.",
+          "Another: clarify decision authority. Ask your sponsor: 'What decisions do you want to make yourself, and what are you happy for me to own?' That one conversation prevents weeks of backing-and-forthing on scope changes, vendor choices, and resource requests.",
+        ],
+      },
+      {
+        id: "common-traps",
+        title: "Traps new PMs fall into",
+        body: [
+          "The most common mistake is over-promising. A new PM wants to be helpful, so they say 'I'll look into that' to every request. Thirty requests later, nothing has moved, and trust erodes faster than if you'd said 'I can do two of those this week — which matters most?'",
+          "Another trap: treating the plan as sacred. New PMs often spend their first week building a detailed Gantt chart, only to discover the underlying assumptions were wrong. Build a lightweight milestone plan first, validate it with the team, then add detail iteratively.",
+          "Finally: don't hide bad news. If you discover something's off track in your first week, surface it immediately. New PMs worry this makes them look incompetent. In reality, discovering and escalating an issue on day two demonstrates competence. Discovering it and saying nothing until week four is what erodes trust.",
+        ],
+      },
+    ],
+  },
+
+  // ── COURSE: Negotiation for PMs ─────────────────────────────────────────
+
+  "negotiation-basics": {
+    intro:
+      "Project management is negotiation disguised as coordination. Every day you negotiate scope, timeline, resources, and priority — often with people who hold all the cards. This lesson builds the mental framework that turns those conversations from confrontation into problem-solving.",
+    sections: [
+      {
+        id: "positions-vs-interests",
+        title: "Positions vs interests",
+        body: [
+          "A position is what someone says they want. An interest is why they want it. In negotiation, the magic happens when you move past the position and discover the underlying interest — because interests can often be met in multiple ways, while positions feel rigid.",
+          "Example: a stakeholder demands a three-week delivery (their position). Their interest might be that they've promised a launch at a conference. If you know that, you can explore alternatives: a phased delivery that gets the core feature live by the conference and adds the rest later. Same interest, different solution.",
+          "Your job in every negotiation is to stay curious long enough to uncover the interest. Ask 'What's driving that timeline?' and 'What would solving this look like from your perspective?' rather than defending your position.",
+        ],
+      },
+      {
+        id: "batna-zopa",
+        title: "BATNA and ZOPA",
+        body: [
+          "BATNA (Best Alternative To a Negotiated Agreement) is your fallback if no deal is reached. Knowing your BATNA gives you leverage — if your alternative is strong, you can walk away. If it's weak, you negotiate harder. Never enter a negotiation without knowing your BATNA and, ideally, theirs.",
+          "ZOPA (Zone of Possible Agreement) is the range where a deal is possible — where what you're willing to accept overlaps with what they're willing to offer. If the ZOPA is empty, there's no deal to be made. Recognising that early saves everyone time.",
+          "In a PM context: your BATNA for a scope negotiation might be 'delay Feature X to a phase 2, freeing capacity for the stakeholder's request.' Theirs might be 'take it to the steering committee.' The ZOPA is somewhere between those two outcomes — your job is to find it.",
+        ],
+      },
+    ],
+  },
+
+  // ── COURSE: Meeting Facilitation ────────────────────────────────────────
+
+  "meeting-design": {
+    intro:
+      "The single biggest productivity gain available to most organisations costs nothing: better meetings. The difference between a meeting that wastes an hour and one that produces a decision is design — specifically, knowing the answer to three questions before you send the invite.",
+    sections: [
+      {
+        id: "purpose-outcome",
+        title: "Purpose and outcome",
+        body: [
+          "Every meeting needs two things: a clear purpose (why are we gathering?) and a defined outcome (what will be different when we leave?). If you can't articulate both before scheduling, don't schedule the meeting — send an email.",
+          "A purpose might be 'Decide whether to proceed with Vendor A or B' while the outcome is 'A decision recorded in the minutes with rationale and assigned actions.' A purpose of 'Discuss the Q3 roadmap' is too vague — what specifically needs to happen as a result of the discussion?",
+          "Write both in the invite. 'Purpose: Review and approve the project charter. Outcome: Signed charter or list of required changes.' This lets attendees prepare and signals that the meeting has real stakes, not just a slide deck to sit through.",
+        ],
+      },
+      {
+        id: "agenda-design",
+        title: "Designing the agenda",
+        body: [
+          "Once you know the outcome, work backwards to design the agenda. Each agenda item should be a verb — Decide, Approve, Review, Generate, Align — followed by the time allocated and the preparation required. 'Decide vendor selection (15m, pre-read: scorecards in shared drive)' is a usable agenda item. 'Vendor update' is not.",
+          "Timebox ruthlessly. Parkinson's Law says work expands to fill the time available. If you allocate 30 minutes for a decision, it will take 30 minutes. If you allocate 10, people will find a way to decide in 10. Start with the shortest reasonable time and extend only if the discussion demands it.",
+          "Send the agenda 24 hours in advance. A meeting where attendees see the agenda for the first time when they arrive is not a meeting — it's a performance. People need time to form thoughts, check data, and prepare questions. Respect that time and you'll get better decisions.",
+        ],
+      },
+    ],
+  },
+
 } // end LESSON_CONTENT
 
 // ---------------------------------------------------------------------------

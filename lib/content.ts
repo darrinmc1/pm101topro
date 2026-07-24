@@ -367,6 +367,134 @@ export const COURSES: Course[] = [
       lesson("final-mock-review", "Final mock review", false, 12, "A full scenario set with worked rationale."),
     ],
   },
+
+  // ----- New: 101 Beginner -----
+  {
+    slug: "getting-started-as-a-pm",
+    title: "Getting Started as a PM",
+    description:
+      "You've got the title — now what? Navigate onboarding, build credibility, avoid the classic first-project traps, and set yourself up for long-term growth.",
+    methodology: "general",
+    level: "101",
+    lessons: [
+      lesson("your-first-week", "Your first week as a PM", true, 7, "What to learn, who to meet, and what to ask before day one."),
+      lesson("reading-the-room", "Reading the room", false, 8, "Organisational culture, politics, and unspoken rules."),
+      lesson("building-credibility", "Building credibility fast", false, 9, "Earning trust with sponsors, dev teams, and stakeholders."),
+      lesson("first-project-checklist", "First project checklist", false, 8, "The practical steps every new PM should follow."),
+      lesson("finding-a-mentor", "Finding a mentor", false, 6, "How to find guidance and grow beyond your first year."),
+    ],
+  },
+  {
+    slug: "meeting-facilitation",
+    title: "Meeting Facilitation",
+    description:
+      "Most meetings waste time. Learn to design, facilitate, and close sessions that produce decisions, not just more meetings.",
+    methodology: "general",
+    level: "101",
+    lessons: [
+      lesson("meeting-design", "Meeting design", true, 7, "Purpose, outcomes, and designing the agenda before the invite."),
+      lesson("facilitation-techniques", "Facilitation techniques", false, 9, "Keeping the room engaged and the discussion on track."),
+      lesson("remote-meetings", "Remote meetings", false, 8, "Async-first facilitation for distributed teams."),
+      lesson("decision-making", "Decision-making in meetings", false, 8, "Moving from discussion to clear, recorded decisions."),
+      lesson("post-meeting", "After the meeting", false, 6, "Minutes, actions, and closing the loop."),
+    ],
+  },
+
+  // ----- New: Intermediate -----
+  {
+    slug: "vendor-management",
+    title: "Vendor Management",
+    description:
+      "Third parties bring risk and reward. Select vendors, negotiate contracts, manage delivery, and exit cleanly.",
+    methodology: "traditional",
+    level: "intermediate",
+    lessons: [
+      lesson("vendor-selection", "Vendor selection", true, 9, "RFx, scoring matrices, and due diligence."),
+      lesson("contract-types", "Contract types", false, 10, "Fixed price, T&M, and outcome-based contracts."),
+      lesson("vendor-relationships", "Vendor relationships", false, 9, "Governance, SLAs, and day-to-day management."),
+      lesson("vendor-risk", "Vendor risk", false, 8, "Assessing and mitigating third-party risk."),
+      lesson("contract-exit", "Contract exit", false, 7, "Transition planning and offboarding vendors."),
+    ],
+  },
+  {
+    slug: "quality-management",
+    title: "Quality Management",
+    description:
+      "Quality isn't testing at the end — it's built in from the start. Plan, assure, and control quality across the delivery lifecycle.",
+    methodology: "general",
+    level: "intermediate",
+    lessons: [
+      lesson("quality-planning", "Quality planning", true, 8, "Standards, metrics, and the quality management plan."),
+      lesson("quality-assurance", "Quality assurance", false, 9, "Process audits and building quality into workflows."),
+      lesson("quality-control", "Quality control", false, 9, "Inspection, testing, and acceptance criteria."),
+      lesson("continuous-improvement", "Continuous quality improvement", false, 8, "Root cause analysis and corrective action."),
+      lesson("quality-reporting", "Quality reporting", false, 7, "Communicating quality metrics to stakeholders."),
+    ],
+  },
+
+  // ----- New: Advanced -----
+  {
+    slug: "negotiation-for-pms",
+    title: "Negotiation for PMs",
+    description:
+      "PMs negotiate constantly — scope, budget, timeline, resources. Move from compromise to principled deals that preserve relationships.",
+    methodology: "general",
+    level: "advanced",
+    lessons: [
+      lesson("negotiation-basics", "Negotiation basics", true, 8, "BATNA, ZOPA, and the difference between position and interest."),
+      lesson("principled-negotiation", "Principled negotiation", false, 10, "Separating people from the problem — the Harvard method."),
+      lesson("scope-negotiation", "Scope negotiation", false, 9, "Handling scope creep without burning goodwill."),
+      lesson("resource-negotiation", "Resource negotiation", false, 9, "Getting the right people at the right time."),
+      lesson("difficult-conversations", "Difficult conversations", false, 9, "Saying no, managing expectations, and preserving trust."),
+    ],
+  },
+  {
+    slug: "organisational-change",
+    title: "Organisational Change Management",
+    description:
+      "Projects change organisations — whether you plan for it or not. Lead adoption, manage resistance, and embed lasting change.",
+    methodology: "general",
+    level: "advanced",
+    lessons: [
+      lesson("change-models", "Change models", true, 9, "ADKAR, Kotter, and Prosci frameworks compared."),
+      lesson("stakeholder-impact", "Stakeholder impact", false, 10, "Mapping who is affected and how their work changes."),
+      lesson("communication-strategy", "Communication strategy", false, 9, "Messaging change at the right time through the right channels."),
+      lesson("training-adoption", "Training & adoption", false, 10, "Designing interventions that actually change behaviour."),
+      lesson("sustaining-change", "Sustaining change", false, 8, "Handoffs, reinforcement, and measuring adoption over time."),
+    ],
+  },
+
+  // ----- New: PMO Level -----
+  {
+    slug: "pmo-setup-playbook",
+    title: "PMO Setup Playbook",
+    description:
+      "Building a PMO from scratch or reshaping one. Define the mandate, pick the model, staff the office, and prove value within 90 days.",
+    methodology: "general",
+    level: "pmo",
+    lessons: [
+      lesson("defining-mandate", "Defining the mandate", true, 10, "Sponsorship, charter, and the scope of the PMO's authority."),
+      lesson("pmo-model-selection", "PMO model selection", false, 10, "Supportive, controlling, or directive — which fits your org."),
+      lesson("pmo-processes", "PMO processes", false, 11, "The essential processes every PMO needs from day one."),
+      lesson("staffing-pmo", "Staffing the PMO", false, 9, "Roles, capabilities, and building the right team."),
+      lesson("pmo-roi", "Demonstrating PMO value", false, 9, "Metrics and stories that prove the PMO's contribution."),
+    ],
+  },
+  {
+    slug: "resource-management",
+    title: "Resource Management",
+    description:
+      "People are your scarcest resource. Forecast demand, allocate capacity, resolve conflicts, and optimise utilisation without burning teams out.",
+    methodology: "traditional",
+    level: "pmo",
+    lessons: [
+      lesson("capacity-planning", "Capacity planning", true, 10, "Forecasting demand and mapping resource availability."),
+      lesson("resource-allocation", "Resource allocation", false, 10, "Assigning the right people to the right work."),
+      lesson("conflict-resolution", "Resource conflict resolution", false, 9, "Managing competing priorities across the portfolio."),
+      lesson("utilisation-metrics", "Utilisation metrics", false, 8, "Measuring productivity without creating perverse incentives."),
+      lesson("workforce-planning", "Workforce planning", false, 10, "Strategic hiring, contractors, and building capability pipelines."),
+    ],
+  },
 ]
 
 export function getCourse(slug: string): Course | undefined {

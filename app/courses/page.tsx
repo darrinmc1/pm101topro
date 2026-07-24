@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 
 import { CoursesBrowser } from "@/components/courses-browser"
 import { LEVEL_ORDER, type Level } from "@/lib/content"
+import { PmWisdom } from "@/components/pm-wisdom"
 
 export const metadata: Metadata = {
   title: "Courses",
@@ -37,6 +38,9 @@ export default async function CoursesPage({
 
         <div className="mt-10">
           <CoursesBrowser initialLevel={initialLevel} />
+        </div>
+        <div className="mt-10 max-w-lg">
+          <PmWisdom />
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import { PmWisdom } from "@/components/pm-wisdom"
 import {
   Accordion,
   AccordionContent,
@@ -157,6 +158,12 @@ export default function PricingPage() {
               </AccordionItem>
             ))}
           </Accordion>
+        </div>
+      </section>
+
+      <section className="container pb-20">
+        <div className="mx-auto max-w-lg">
+          <PmWisdom />
         </div>
       </section>
     </>

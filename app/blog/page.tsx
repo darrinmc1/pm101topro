@@ -4,6 +4,7 @@ import { ArrowRight, Clock } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
 import { BLOG_POSTS, formatDate } from "@/lib/blog"
+import { PmWisdom } from "@/components/pm-wisdom"
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -68,6 +69,12 @@ export default function BlogPage() {
               </Card>
             </Link>
           ))}
+        </div>
+      </section>
+
+      <section className="container pb-20">
+        <div className="mx-auto max-w-lg">
+          <PmWisdom />
         </div>
       </section>
     </>
