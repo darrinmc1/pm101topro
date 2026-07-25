@@ -1,27 +1,68 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, ArrowRight, Check, Copy, Loader2, RefreshCw, Sparkles } from "lucide-react"
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  Copy,
+  Crown,
+  Loader2,
+  RefreshCw,
+  Sparkles,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 
-type Phase = "questions" | "generating" | "result"
+type Phase = "questions" | "generating" | "result" | "error"
 
-// Only serializable fields are passed from the server page (no icon component).
 export type WizardDoc = {
   id: string
   name: string
   questions: string[]
 }
 
+/** Check how many free generations the user has used */
+function getFreeUsage(): number {
+  if (typeof window === "undefined") return 0
+  try {
+    return Number(localStorage.getItem("pm101_free_uses") || "0")
+  } catch {
+    return 0
+  }
+}
+
+/** Increment free usage counter */
+function useFreeTrial(): number {
+  try {
+    const next = getFreeUsage() + 1
+    localStorage.setItem("pm101_free_uses", String(next))
+    return next
+  } catch {
+    return 99
+  }
+}
+
+const FREE_LIMIT = 1
+
 export function DocumentWizard({ doc }: { doc: WizardDoc }) {
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<string[]>(() => doc.questions.map(() => ""))
   const [phase, setPhase] = useState<Phase>("questions")
+  const [draft, setDraft] = useState("")
+  const [error, setError] = useState("")
   const [copied, setCopied] = useState(false)
+  const [showWall, setShowWall] = useState(false)
+
+  // Check if the user has exhausted their free trial
+  useEffect(() => {
+    if (getFreeUsage() >= FREE_LIMIT) {
+      setShowWall(true)
+    }
+  }, [])
 
   const total = doc.questions.length
   const isLast = step === total - 1
@@ -35,14 +76,37 @@ export function DocumentWizard({ doc }: { doc: WizardDoc }) {
     })
   }
 
-  function generate() {
+  const generate = useCallback(async () => {
     setPhase("generating")
-    // Simulated generation for the UI-first pass. A real /api/generate route
-    // (AI SDK + Vercel AI Gateway) will replace this timeout.
-    setTimeout(() => setPhase("result"), 1400)
-  }
+    setError("")
 
-  const draft = useMemo(() => buildDraft(doc, answers), [doc, answers])
+    try {
+      const res = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          docName: doc.name,
+          questions: doc.questions,
+          answers,
+        }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        setError(data.error || "Generation failed. Please try again.")
+        setPhase("error")
+        return
+      }
+
+      setDraft(data.draft)
+      useFreeTrial()
+      setPhase("result")
+    } catch (err) {
+      setError("Network error — check your connection and try again.")
+      setPhase("error")
+    }
+  }, [doc, answers])
 
   async function copyDraft() {
     try {
@@ -54,6 +118,11 @@ export function DocumentWizard({ doc }: { doc: WizardDoc }) {
     }
   }
 
+  // --- Show the subscription wall if over the free limit ---
+  if (showWall) {
+    return <SubscribeWall />
+  }
+
   if (phase === "generating") {
     return (
       <Card className="flex flex-col items-center justify-center gap-4 border-border bg-surface px-6 py-20 text-center">
@@ -61,9 +130,9 @@ export function DocumentWizard({ doc }: { doc: WizardDoc }) {
           <Loader2 className="h-6 w-6 animate-spin" />
         </div>
         <div>
-          <p className="text-lg font-semibold text-foreground">Drafting your {doc.name.toLowerCase()}…</p>
+          <p className="text-lg font-semibold text-foreground">Drafting your {doc.name.toLowerCase()}&hellip;</p>
           <p className="mt-1 text-sm text-muted-foreground">
-            Structuring your answers into a professional document.
+            Structuring your answers into a professional document using AI.
           </p>
         </div>
       </Card>
@@ -77,7 +146,7 @@ export function DocumentWizard({ doc }: { doc: WizardDoc }) {
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="inline-flex items-center gap-2 text-sm font-medium text-accent">
               <Sparkles className="h-4 w-4" />
-              Draft ready — edit freely below
+              AI-generated draft &mdash; edit freely below
             </div>
             <div className="flex gap-2">
               <Button variant="secondary" size="sm" onClick={copyDraft}>
@@ -98,15 +167,48 @@ export function DocumentWizard({ doc }: { doc: WizardDoc }) {
             </div>
           </div>
           <Textarea
-            defaultValue={draft}
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
             className="mt-4 min-h-[420px] resize-y bg-background font-mono text-sm leading-relaxed"
             aria-label={`Generated ${doc.name}`}
           />
         </Card>
-        <p className="text-center text-xs text-muted-foreground">
-          This is a preview draft generated from your answers. Connect the AI generator to produce fully tailored,
-          model-written documents.
-        </p>
+
+        <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4 text-center">
+          <p className="text-sm text-amber-300 font-semibold">
+            ✨ That was your free generation!
+          </p>
+          <p className="mt-1 text-xs text-amber-400/80">
+            Subscribe to Pro for unlimited AI document generation, full course access, and more.
+          </p>
+          <Button asChild className="mt-3" size="sm">
+            <Link href="/pricing">
+              <Crown className="mr-1 h-4 w-4" />
+              Go Pro
+            </Link>
+          </Button>
+        </div>
+      </div>
+    )
+  }
+
+  if (phase === "error") {
+    return (
+      <div className="space-y-4">
+        <Card className="border-destructive/30 bg-destructive/5 p-6 text-center">
+          <p className="text-lg font-semibold text-destructive">Something went wrong</p>
+          <p className="mt-2 text-sm text-muted-foreground">{error}</p>
+          <Button
+            variant="outline"
+            className="mt-4"
+            onClick={() => {
+              setPhase("questions")
+              setError("")
+            }}
+          >
+            Try again
+          </Button>
+        </Card>
       </div>
     )
   }
@@ -136,7 +238,7 @@ export function DocumentWizard({ doc }: { doc: WizardDoc }) {
           id="answer"
           value={answers[step]}
           onChange={(e) => setAnswer(e.target.value)}
-          placeholder="Type your answer… (optional — you can refine later)"
+          placeholder="Type your answer&hellip; (optional &mdash; you can refine later)"
           className="mt-4 min-h-[140px] bg-background"
           autoFocus
         />
@@ -186,21 +288,32 @@ export function DocumentWizard({ doc }: { doc: WizardDoc }) {
   )
 }
 
-function buildDraft(doc: WizardDoc, answers: string[]): string {
-  const today = new Date().toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  })
-  const lines: string[] = []
-  lines.push(`# ${doc.name}`)
-  lines.push(`Generated ${today} · PM101 to Pro`)
-  lines.push("")
-  doc.questions.forEach((q, i) => {
-    const a = answers[i]?.trim()
-    lines.push(`## ${q.replace(/\?$/, "")}`)
-    lines.push(a && a.length > 0 ? a : "_To be completed._")
-    lines.push("")
-  })
-  return lines.join("\n")
+/** Subscription wall shown after the free trial is exhausted */
+function SubscribeWall() {
+  return (
+    <Card className="border-border bg-surface p-10 text-center">
+      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/10">
+        <Crown className="h-8 w-8 text-accent" />
+      </div>
+      <h2 className="mt-6 text-2xl font-bold text-foreground">Unlock unlimited AI document generation</h2>
+      <p className="mx-auto mt-3 max-w-md text-muted-foreground">
+        You&apos;ve used your free generation. Subscribe to Pro for unlimited AI-powered documents,
+        every course at every level, and downloadable templates.
+      </p>
+      <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        <Button asChild size="lg">
+          <Link href="/pricing">
+            <Crown className="mr-2 h-5 w-5" />
+            Go Pro &mdash; &pound;12/month
+          </Link>
+        </Button>
+        <Button asChild variant="ghost" size="lg">
+          <Link href="/courses">Browse free courses instead</Link>
+        </Button>
+      </div>
+      <p className="mt-4 text-xs text-muted-foreground">
+        Free tier includes the full 101 Beginner track and the first lesson of every course.
+      </p>
+    </Card>
+  )
 }
