@@ -673,6 +673,346 @@ const LESSON_CONTENT: Record<string, Omit<LessonBody, "practiceDocId">> = {
     ],
   },
 
+
+  // ── COURSE: Scope, Time & Cost ─────────────────────────────────────────────
+
+  "defining-scope": {
+    intro:
+      "Scope is the single most negotiated word in a project manager's vocabulary. Everyone wants more of it. No one wants to pay for it. And scope creep? That's not a villain. It's what happens when you never clearly said what was in the box.",
+    sections: [
+      {
+        id: "scope-statement",
+        title: "The scope statement: your project's restraining order",
+        body: [
+          "A scope statement is a document that says, in professional language, 'this is what we're building, this is what we're not building, and if you try to add things without adjusting something else, I will point at this document like it's a legally binding restraining order.'",
+          "The two most important parts are the inclusions (what's in scope) and the exclusions (what's explicitly out). Exclusions are the unsung heroes. The stakeholder who asks 'can we also add a mobile app?' gets a polite 'that's in our exclusions list — happy to discuss what we'd descope to make room.'",
+          "A good scope statement is specific enough to test. 'Improve customer experience' is a vibe, not a scope item. 'Reduce checkout flow from five steps to three, measured by abandoned cart rate' is a scope item. One of these ends up in a fight. The other ends up in a status report that says 'done.'",
+        ],
+      },
+      {
+        id: "scope-creep",
+        title: "Scope creep (and its surprisingly boring reality)",
+        body: [
+          "Scope creep sounds dramatic — like a horror movie where the project quietly grows teeth. In reality, it's much more mundane: someone asks for 'one small thing,' you say yes because it seems harmless, and six 'small things' later your timeline has quietly doubled.",
+          "Each individual addition is reasonable. That's the trap. No single scope addition is big enough to justify a formal change request. But collectively, they add up to a project that's now doing 40% more work than originally planned with the same budget and deadline. Congratulations — your team is now in the 'working harder, not smarter' phase of project management.",
+          "The fix is boring but effective: maintain the scope statement as a living document, review every addition against it, and make the trade-off visible every single time. 'Happy to add that. We'd need to push the deadline by two days or remove X. Which do you prefer?' After the third time you ask that, stakeholders start thinking harder about whether that 'small thing' is actually worth it.",
+        ],
+      },
+      {
+        id: "summary",
+        title: "Summary & next steps",
+        body: [
+          "Scope is defined by what's in, what's out, and who has the authority to change either. A good scope statement prevents more arguments than any other project document. Scope creep happens one reasonable request at a time — the antidote is making every trade-off visible before saying yes.",
+          "Next up: the WBS — the tool that turns your scope statement from a document into something you can actually schedule and estimate.",
+        ],
+      },
+    ],
+  },
+
+  "wbs-deep-dive": {
+    intro:
+      "A Work Breakdown Structure (WBS) is the project manager's answer to the question 'what actually needs to happen?' It takes a vague scope statement and turns it into a hierarchical list of work packages — specific enough to estimate, assign, and track. It is not sexy. It is extremely useful.",
+    sections: [
+      {
+        id: "what-is-wbs",
+        title: "What a WBS actually is (and isn't)",
+        body: [
+          "A WBS is a deliverable-oriented decomposition of the project work. In human language: you take the final deliverable and keep breaking it into smaller pieces until each piece is small enough to estimate and assign to a single person or team.",
+          "It is not a list of tasks. It is not a schedule. It is not a Gantt chart. It is a map of everything the project produces, arranged hierarchically so nothing gets forgotten. Think of it as a packing list for your project — except forgetting to pack the tent means 40 people sleep in the rain.",
+          "The 100% rule: the WBS should capture 100% of the work defined by the project scope. If something is in scope but not in the WBS, it will not get done. If something is in the WBS but not in scope, you've added work you weren't authorised to do. Both problems show up three weeks before the deadline, which is PM-speak for 'way too late.'",
+        ],
+      },
+      {
+        id: "building-wbs",
+        title: "Building your first WBS",
+        body: [
+          "Start at the top: the final deliverable. Then ask: what are the major components that make up this deliverable? Each component becomes a Level 2 item. Then decompose each Level 2 item into Level 3. Keep going until each work package passes the '80-hour rule' — it should take no more than 80 hours (two weeks) of effort to complete.",
+          "A common mistake is decomposing unevenly. One branch goes five levels deep while another stops at two. The WBS should have consistent granularity — not because uniformity is beautiful, but because uneven decomposition hides work. The branch you stopped decomposing is the branch that will surprise you at the worst possible moment.",
+          "Another common mistake: decomposing based on organisational structure instead of deliverables. Your WBS should reflect the work to be done, not your org chart. 'IT department's work' is not a WBS element. 'User authentication system' is. One of these tells you what will be built. The other tells you which department to blame if it's late. Aim for the former.",
+        ],
+      },
+      {
+        id: "summary",
+        title: "Summary & next steps",
+        body: [
+          "The WBS decomposes scope into manageable work packages. Follow the 100% rule, decompose to 80-hour chunks, and organise by deliverable not department. A good WBS is the foundation of everything that follows: estimating, scheduling, and risk management.",
+          "Next: estimating techniques — because guessing with confidence is a skill, not a personality trait.",
+        ],
+      },
+    ],
+  },
+
+  "estimating-techniques": {
+    intro:
+      "Estimating is the art of predicting the future while knowing you're probably wrong. The goal isn't perfect accuracy — it's narrowing the cone of uncertainty enough that stakeholders can make good decisions. If you ever meet someone who claims their estimates are always right, nod politely and don't let them near your project.",
+    sections: [
+      {
+        id: "three-techniques",
+        title: "Three techniques that actually work",
+        body: [
+          "Analogous estimating: look at similar work from the past and use that as your baseline. 'We built a customer portal last year in 12 weeks. This one is 30% more complex, so let's estimate 16 weeks.' It's fast, it's simple, and it's only as good as your historical data — which, to be honest, is usually a spreadsheet someone forgot to update.",
+          "Parametric estimating: use a statistical relationship between variables. 'Each user story takes our team an average of 1.3 days. We have 40 stories. That's 52 days, assuming the coffee machine doesn't break and nobody goes on leave.' This is more precise than analogous, but garbage in, garbage out — your '1.3 days' figure is only useful if it was actually measured, not guessed.",
+          "Three-point estimating: the PMP exam's gift to the world. For each task, estimate the best case (optimistic), worst case (pessimistic), and most likely case. Then apply the PERT formula: (Optimistic + 4×Most Likely + Pessimistic) / 6. The result is a weighted average that accounts for uncertainty. The real benefit isn't the math — it's that the conversation forces you to think about what could go wrong before it does.",
+        ],
+      },
+      {
+        id: "dont-do-this",
+        title: "What not to do (field notes from the hall of shame)",
+        body: [
+          "Don't pad estimates secretly. Adding 50% 'just in case' without telling anyone destroys trust and makes everyone else's planning unreliable. If you need contingency, be transparent about it. 'I estimate 8 weeks, and I'd recommend adding 2 weeks of contingency for the integration risk we identified.' That's honesty. 'The estimate is 10 weeks' when you know it's 8 is a future fight waiting to happen.",
+          "Don't let the first number spoken become the anchor. In meetings, whoever throws out the first estimate tends to set the range everyone argues around. If a stakeholder says 'this should take two weeks' and you think it's six, don't start negotiating down from two — start from the data. 'Based on similar work, our team averages five to seven weeks for this scope. Let me walk you through why.'",
+          "Don't estimate in isolation and then spring it on the team. The people doing the work have the best information about how long it takes. Ask them. Their estimates will be more accurate than yours, and they'll be more committed to a timeline they helped create. This is not abdication — it's delegation of the part you're worst at.",
+        ],
+      },
+      {
+        id: "summary",
+        title: "Summary & next steps",
+        body: [
+          "Analogous, parametric, and three-point estimating each have their place. The common thread: good estimates come from data, historical records, and the people doing the work — not from optimism or pressure. Be transparent about uncertainty, and never let the first number spoken become the only number considered.",
+          "Next: budget management — turning estimates into something the finance department won't immediately return marked 'insufficient rigour.'",
+        ],
+      },
+    ],
+  },
+
+  "budget-management": {
+    intro:
+      "A project budget is an estimate of costs, expressed in a format the finance department will accept, with enough contingency to survive reality. If estimating is predicting the future, budgeting is putting a price tag on that prediction and defending it to people whose entire job is questioning price tags.",
+    sections: [
+      {
+        id: "budget-components",
+        title: "What goes into a budget",
+        body: [
+          "Labour costs are usually the biggest line item. Hours × blended hourly rate for each person on the team. Don't forget the people who aren't on the project full-time — the legal review that takes two hours, the architect's three review sessions, the procurement manager who processes your purchase orders. These 'partial allocations' add up faster than you think.",
+          "Non-labour costs include software licences, cloud infrastructure, travel, training, external vendors, and the mysterious category known as 'miscellaneous' that every experienced PM budgets for because something always comes up. The printer will jam. A contractor will need onboarding. Someone will order the wrong size cables. Miscellaneous is not laziness — it's realism.",
+          "Contingency is not padding. Padding is hiding extra budget because you don't trust the estimates. Contingency is an explicit, risk-based reserve calculated from your risk register. If you identified a 30% chance that a vendor will be late, costing $10K, your contingency includes $3K for that risk. When someone asks 'what's the contingency for?' you can point to specific risks, not your gut feeling.",
+        ],
+      },
+      {
+        id: "budget-tracking",
+        title: "Tracking budget vs actuals",
+        body: [
+          "The golden rule of budget tracking: actual spend means nothing without context. 'We've spent 60% of the budget' sounds alarming until you add 'and we've completed 70% of the work.' Conversely, 'we've only spent 40% of the budget' sounds great until someone points out you're 60% through the timeline. The relationship between spend and progress is what matters.",
+          "Earned Value Management (EVM) is the formal way to track this. It compares three numbers: Planned Value (what you planned to have done by now), Earned Value (what you've actually delivered), and Actual Cost (what you've actually spent). The ratios give you a schedule performance index (SPI) and a cost performance index (CPI). An SPI of 0.8 means you're moving at 80% of planned speed. A CPI of 1.2 means you're getting more value per dollar than expected — enjoy it while it lasts.",
+          "For PMs who don't want to become EVM mathematicians overnight: track the simple version. Each week, update three numbers: planned spend to date, actual spend to date, and % work complete. If actual spend exceeds planned spend AND % complete is behind, you have a problem. If both are ahead, you have a different problem — but at least the team is productive.",
+        ],
+      },
+      {
+        id: "summary",
+        title: "Summary & next steps",
+        body: [
+          "Budgets include labour, non-labour, and explicit contingency based on risk. Track spend relative to progress, not in isolation. Earned Value Management is the formal method, but the simple version — planned vs actual vs % complete — catches most problems early enough to act.",
+          "Next: baseline and change control — the process that keeps your budget and schedule from drifting into fantasy territory.",
+        ],
+      },
+    ],
+  },
+
+  "baseline-change-control": {
+    intro:
+      "A baseline is a snapshot of your plan at a specific point in time — scope, schedule, and budget, frozen and agreed upon. Change control is the process that protects that baseline from being eroded one 'small adjustment' at a time. Without a baseline, you have no way to measure progress. Without change control, your baseline is a suggestion.",
+    sections: [
+      {
+        id: "what-is-baseline",
+        title: "The baseline: your project's original sin",
+        body: [
+          "At the end of planning, you freeze your scope, schedule, and budget. That frozen version is the baseline. From that moment forward, every deviation from it is a change that needs to be evaluated, approved, and communicated. The baseline is the truth. Everything else is a departure from the truth that needs justification.",
+          "A common beginner mistake is treating the baseline as permanent. It's not — it's the starting point. Changes happen. The baseline should be updated when approved changes occur. But the key word is approved. If the schedule slips by two weeks because someone didn't plan for a dependency, that's not a change — that's an error. If a stakeholder adds a new feature, that IS a change, and it requires a formal change request.",
+          "The psychological trick: stakeholders respect a baseline they helped create. Involve them in the planning process and get explicit sign-off on the baseline. A stakeholder who signed the baseline is much less likely to demand additions without understanding the consequences — because they know you have a signed document that says otherwise.",
+        ],
+      },
+      {
+        id: "change-control-process",
+        title: "A change control process that doesn't collapse under pressure",
+        body: [
+          "Every change control process needs four things. First: a change request form — simple, one page, asking what the change is, why it's needed, what it impacts (scope, schedule, budget, quality, risk), and who's requesting it. If someone can't fill out one page, the change probably isn't that important.",
+          "Second: a change review board (or at least a designated approver). For small changes, the PM may have authority. For medium changes, the sponsor signs off. For large changes that reshape the project, the steering committee decides. The key is knowing which threshold triggers which approval level before the first change request lands on your desk.",
+          "Third: a log. Every change request — approved or rejected — goes into a change log. This is your audit trail. When someone asks at the end of the project 'why did this take so much longer than planned?' the change log is your evidence. 'We approved 12 change requests that added 6 weeks of work.' Hard to argue with documentation.",
+          "Fourth: communication. When a change is approved, everyone who needs to know should know. Not just the person who requested it — the team, the stakeholders, the finance department. An approved change that nobody acts on is a meeting that should have been an email, except with more disappointment.",
+        ],
+      },
+      {
+        id: "summary",
+        title: "Summary & next steps",
+        body: [
+          "The baseline is your frozen plan — scope, schedule, budget. Change control is the process that manages deviations from it. Four components: a change request form, a clear approval authority, a change log, and communication. A baseline without change control is a new year's resolution. Change control without a baseline is arguing about whether something changed when you never agreed where you started.",
+          "Next: Working with Stakeholders — because projects fail more often because of people problems than spreadsheet problems.",
+        ],
+      },
+    ],
+  },
+
+  // ── COURSE: Working with Stakeholders ─────────────────────────────────────
+
+  "stakeholder-identification": {
+    intro:
+      "Stakeholder identification is the project management equivalent of checking who else is in the room before you say something you might regret. The people who can affect your project are rarely limited to the ones on the org chart — and the ones you miss are the ones who will surface at the worst possible moment with a veto you didn't know existed.",
+    sections: [
+      {
+        id: "who-is-stakeholder",
+        title: "Who counts as a stakeholder (spoiler: more people than you think)",
+        body: [
+          "A stakeholder is anyone who can affect or be affected by the project. This includes people you'd expect (sponsor, team, customers) and people you might not (the compliance officer who needs to approve the final product, the facilities manager who needs to allocate desk space for the implementation team, the IT security team that will audit whatever you build).",
+          "The most dangerous stakeholder is the one you didn't identify. They don't show up to meetings because they weren't invited. They don't raise concerns because they don't know the project exists. And then one day, three weeks before go-live, they say 'I need to review this before it launches, and the review window is six weeks.' That conversation is not their fault — it's yours, for not finding them earlier.",
+          "A practical exercise: look at your project scope and ask 'who would be affected if this project succeeded or failed dramatically?' Then ask 'who could stop this project if they wanted to?' Then ask 'who would complain they weren't consulted if they saw the finished product?' The answers to these three questions form the core of your stakeholder list.",
+        ],
+      },
+      {
+        id: "finding-hidden-stakeholders",
+        title: "Finding the invisible ones",
+        body: [
+          "Some stakeholders are hidden by design — they don't need to engage until a specific trigger point. The legal team doesn't need to be in your weekly standup, but they need to be on your radar for when the contract review phase hits. The procurement team doesn't care about your project until you need to buy something that exceeds their threshold.",
+          "Others are hidden because they don't know they're stakeholders. The operations team that will inherit your system after launch. The training team that will need to build onboarding materials. The support desk that will field calls when users can't figure out the new interface. Find them early, brief them early, and they'll be allies. Find them on launch day and they'll be obstacles.",
+          "Technique: the stakeholder snowball. Start with the obvious stakeholders and ask each one 'who else should I be talking to?' Each conversation adds names. After three rounds, you'll have a list that's 80% complete. The remaining 20% will introduce themselves — usually by email, usually with a tone that suggests they should have been consulted earlier.",
+        ],
+      },
+      {
+        id: "summary",
+        title: "Summary & next steps",
+        body: [
+          "Stakeholders are anyone who can affect or be affected by your project. The ones you miss are the ones who will cause the most problems. Use the snowball technique — ask every stakeholder 'who else?' — to build your list. Document everything in a stakeholder register, not a mental list that gets emptier as the project gets more stressful.",
+          "Next: the power/interest grid — a tool for deciding which stakeholders get your attention and which ones can survive on email updates without you feeling guilty about it.",
+        ],
+      },
+    ],
+  },
+
+  "power-interest-grid": {
+    intro:
+      "Not all stakeholders are created equal. Some have the power to cancel your project. Others just want to be kept in the loop. The power/interest grid helps you decide who gets how much of your limited attention — because if you're treating everyone the same, you're either exhausting yourself on low-impact stakeholders or neglecting the ones who matter.",
+    sections: [
+      {
+        id: "the-grid",
+        title: "The grid: four boxes, one useful framework",
+        body: [
+          "The power/interest grid plots stakeholders on two axes. Power: how much influence do they have over the project? Interest: how much do they care about the outcome? This creates four quadrants, each requiring a different engagement strategy.",
+          "High power, high interest: these are your key players — the sponsor, the steering committee, the customer executive. They need close management: frequent updates, direct access, and involvement in major decisions. These are the people you call before the meeting, not during it.",
+          "High power, low interest: keep them satisfied. They could stop your project if they wanted to, but they don't care enough to pay close attention. The risk is that something triggers their interest at the wrong moment — a budget overrun, a missed deadline, a complaint from someone they trust. Regular but concise status updates prevent surprises. Don't overwhelm them with detail; they'll start paying attention to the wrong things.",
+          "Low power, high interest: keep them informed. These are the power users, the subject matter experts, the early adopters who care deeply but can't single-handedly stop the project. They're valuable sources of feedback and advocacy. A monthly newsletter, a Slack channel, or a demo session goes a long way. Ignore them and they become low-power, high-interest, and loud.",
+          "Low power, low interest: monitor with minimal effort. Group emails, quarterly summaries, a note in the company newsletter. Your attention is finite — don't spend it here unless something changes that moves them into another quadrant.",
+        ],
+      },
+      {
+        id: "grid-in-practice",
+        title: "Using the grid when stakeholders change quadrants",
+        body: [
+          "The grid is not a one-time exercise. Stakeholders move. A new regulation might bump a compliance officer from low-power to high-power overnight. A project delay might turn an apathetic executive into a highly interested micromanager. Review your stakeholder map at every phase gate and after any significant event.",
+          "When a stakeholder moves quadrants, your engagement strategy needs to move with them. The most common failure is treating a newly empowered stakeholder with their old engagement level. If the CFO suddenly cares about your project because of a budget review, a monthly email is no longer sufficient — book the meeting, prepare the briefing, and treat the relationship with the weight it now carries.",
+          "The other common failure is not moving stakeholders down when they should be. A stakeholder who was critical during planning may be less important during execution. Don't keep sending them daily updates out of habit — you're wasting their attention and training them to ignore your messages. Adjust engagement levels as the project evolves.",
+        ],
+      },
+      {
+        id: "summary",
+        title: "Summary & next steps",
+        body: [
+          "Use the power/interest grid to allocate your limited engagement effort. High power + high interest = close management. High power + low interest = keep satisfied. Low power + high interest = keep informed. Low power + low interest = monitor. Review and update the grid regularly — stakeholders change quadrants, and yesterday's strategy is tomorrow's blind spot.",
+          "Next: communication planning — because 'I sent an email' is not a communication strategy, it's evidence that you tried.",
+        ],
+      },
+    ],
+  },
+
+  "communication-planning": {
+    intro:
+      "A communication plan answers one question: who needs what information, when, and through which channel? Without one, you default to 'send everything to everyone' — which means the people who need critical updates drown in noise, and the people who don't need anything learn to ignore you entirely.",
+    sections: [
+      {
+        id: "what-goes-in",
+        title: "What goes in a communication plan",
+        body: [
+          "For each stakeholder group, define: what information they need, how often they need it, what format works best for them, who's responsible for delivering it, and how they can escalate if they need more. A steering committee member needs a one-page dashboard weekly. The project team needs a 15-minute standup daily. The wider organisation needs a monthly newsletter that doesn't assume they know what a sprint is.",
+          "The most common mistake is designing the plan around what's easy for the PM to produce rather than what's useful for the stakeholder to receive. A detailed 10-page status report is easy for you (you're already tracking the data), but it's useless to an executive who wants three bullet points and a RAG status. Flip it: ask stakeholders what they want, then design the plan around that. Yes, it's more work. Yes, it means your updates actually get read.",
+          "Include a 'how to escalate' section in the plan. A stakeholder who needs information urgently should know exactly who to contact and how. Without this, they'll escalate through whatever channel is available — usually by emailing your boss, copying your boss's boss, and adding a subject line that makes everyone's day worse.",
+        ],
+      },
+      {
+        id: "channel-discipline",
+        title: "Channel discipline (or: please stop sending everything by email)",
+        body: [
+          "Every channel has a strength. Email is good for records and async communication. Slack is good for quick questions and informal updates. Meetings are good for decisions and alignment. A shared document is good for collaboration and version control. The problem is not having too many channels — it's using them all for everything until nobody knows where to look for anything.",
+          "Set explicit rules. 'All status updates go in the project tracker, not email. All decisions are captured in the decision log, not Slack threads over three days. All document changes happen in the shared drive, not on local copies named final_v2_REVIEWED.docx.' The team will forget these rules. That's fine — gently redirect them until the habit forms. A project where everyone knows where to find information runs noticeably smoother than one where finding yesterday's decision requires an archaeological dig through your chat history.",
+          "The single most effective communication habit: the weekly one-page status report. Not a dashboard with 47 metrics. Not a deck with 12 slides. One page: what we accomplished, what's blocked, what's next, and the RAG status. Send it the same day every week. Stakeholders will learn to expect it, read it, and trust it. That consistency is worth more than any amount of detailed reporting you could produce on demand.",
+        ],
+      },
+      {
+        id: "summary",
+        title: "Summary & next steps",
+        body: [
+          "A communication plan defines who gets what information, when, and how. Design it around stakeholder needs, not your convenience. Establish channel discipline — each channel has a purpose, use it accordingly. The weekly one-page status report is the single highest-ROI communication habit you can build.",
+          "Next: managing resistance — because not every stakeholder is rooting for you, and that's fine if you know how to handle it.",
+        ],
+      },
+    ],
+  },
+
+  "managing-resistance": {
+    intro:
+      "Resistance to a project is rarely about the project itself. It's usually about what the project threatens: autonomy, competence, belonging, or status. A stakeholder who seems 'difficult' is often just someone who hasn't been properly engaged yet. The trick is figuring out what they're actually afraid of before you start labelling them as the problem.",
+    sections: [
+      {
+        id: "why-people-resist",
+        title: "The real reasons people resist (it's not because they're difficult)",
+        body: [
+          "Loss of control: the project changes something they currently own. A department head who controlled a budget suddenly has to follow a new process. A team lead who made all the decisions now has a PM coordinating their work. The resistance isn't about the project — it's about what the project takes away from them.",
+          "Loss of competence: the project introduces new tools, processes, or skills. People who were experts at the old way suddenly feel like beginners. This is deeply uncomfortable, especially for senior team members who aren't used to not knowing things. Their resistance is often a mask for 'I'm afraid I'll look stupid.'",
+          "Uncertainty and fear: the project creates an unknown future. Will there be redundancies? Will roles change? Will the new system make their job harder before it makes it easier? People resist what they don't understand, and projects are terrible at explaining themselves to the people they affect most.",
+          "The solution to all three is the same: listen first, explain second. Acknowledge the loss. Respect the expertise. Address the uncertainty. Most resistant stakeholders become supporters once they feel heard — not because they agree, but because they trust that you're not going to steamroll them.",
+        ],
+      },
+      {
+        id: "converting-resistance",
+        title: "Techniques for converting resistance into support",
+        body: [
+          "Involve early, involve often. The best way to prevent resistance is to make potential resistors part of the process before they have a reason to resist. Invite them to planning sessions. Ask for their input on decisions that affect them. People support what they help create — it's not a cliché, it's a survival instinct for your project.",
+          "Find the issue behind the position. A stakeholder who says 'I don't support this project' has a reason they're not stating directly. Maybe they think the project is poorly scoped. Maybe they're protecting their team from disruption. Maybe they just weren't included in the initial conversations and feel slighted. Ask open questions until you understand the real concern, then address that concern directly.",
+          "Give them a role. The most effective way to turn a resistor into an ally is to give them something meaningful to own. Make them a subject matter expert on the review board. Put them in charge of a workstream that leverages their expertise. Resistance thrives in the absence of responsibility. Give someone a job to do and they'll start acting like someone who wants the project to succeed.",
+          "Know when to escalate. If you've tried genuine engagement, listened to concerns, and addressed them, and the stakeholder is still blocking progress — escalate. Not as a complaint, but as a factual statement: 'We've been unable to resolve X. I need the sponsor's help to move forward.' Some resistance can only be resolved by someone higher in the power structure. That's what the sponsor is for.",
+        ],
+      },
+      {
+        id: "summary",
+        title: "Summary & next steps",
+        body: [
+          "Resistance usually comes from loss of control, loss of competence, or uncertainty. Address the root cause, not the symptom. Involve potential resistors early. Find the real concern behind their position. Give them a role that makes them invested. Escalate only when genuine engagement has failed. Most resistant stakeholders aren't enemies — they're future allies who haven't been properly engaged yet.",
+          "Next: reporting up — because your stakeholders need to know what's happening, and 'everything's fine' followed by 'actually it's not' is not a communication strategy.",
+        ],
+      },
+    ],
+  },
+
+  "reporting-up": {
+    intro:
+      "Status reporting is the art of telling people what they need to know without triggering unnecessary panic or, equally bad, total disengagement. The goal is not to impress stakeholders with how much work is happening — it's to give them enough information to make good decisions and enough confidence to leave you alone.",
+    sections: [
+      {
+        id: "what-executives-want",
+        title: "What executives actually want from a status report",
+        body: [
+          "Executives don't want to know what you did this week. They want to know whether the project is on track, and if it's not, what they need to do about it. Every status report should answer exactly three questions: are we on track (Green/Amber/Red), what's the biggest risk or issue right now, and what do you need from me? Everything else is supporting detail that can live below the fold.",
+          "A good RAG status has teeth. Green means the PM would bet their reputation that the milestone will be hit. Amber means there's a known risk that could cause a miss unless something changes — and the PM should state what that something is. Red means a milestone is definitely going to be missed without intervention. A project that's been 'Amber' for three months with no escalation isn't Amber — it's Red with a reporting problem.",
+          "A common mistake: using status reports to demonstrate how hard the team is working instead of how the project is tracking. 'The team completed 47 tasks this week' tells an executive nothing useful. 'We're on track for the October milestone, but the vendor integration is two weeks behind — we need a decision on whether to allocate internal resources or accept the delay' tells them exactly what they need to know and do.",
+        ],
+      },
+      {
+        id: "escalation-timing",
+        title: "When and how to escalate (the bit most PMs get wrong)",
+        body: [
+          "The #1 rule of escalation: escalate early, escalate often, escalate with a proposed solution. A PM who escalates a problem at the exact moment they discover it is seen as proactive. A PM who escalates the same problem two weeks later is seen as reactive. The difference between the two is not the problem — it's the timing.",
+          "When you escalate, always include: what the problem is, what caused it (if known), what impact it will have on scope/schedule/budget, and at least one proposed solution. An escalation without a proposed solution is just complaining in a more formal setting. 'The vendor is two weeks late and I need help' is a cry for help. 'The vendor is two weeks late, I've discussed accelerated delivery but they can't commit, and I need you to authorise switching to a backup vendor' is an escalation.",
+          "The exception: very urgent problems that need immediate attention. In that case, escalate first with the facts, then follow up with the proposed solution. But don't make a habit of it. Stakeholders who constantly receive half-baked escalations start treating all escalations as noise, which defeats the purpose.",
+        ],
+      },
+      {
+        id: "summary",
+        title: "Summary & next steps",
+        body: [
+          "Status reports should answer: are we on track, what's the biggest risk, and what do you need from me. RAG status must have teeth — don't sit on Amber for months. Escalate early with a proposed solution. The most trusted PMs are the ones who surface problems before they become crises, not the ones who deliver perfect news until suddenly they don't.",
+          "You've completed Working with Stakeholders. Next up: Risk Management in Practice — because optimism is not a risk mitigation strategy.",
+        ],
+      },
+    ],
+  },
+
 } // end LESSON_CONTENT
 
 // ---------------------------------------------------------------------------
