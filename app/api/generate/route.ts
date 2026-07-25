@@ -38,6 +38,7 @@ Format the output as clean markdown. Start with a title "# ${docName}".`
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          model: 'free',
           docName: doc?.name,
           prompt,
           questions,
