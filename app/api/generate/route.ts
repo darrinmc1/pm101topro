@@ -31,7 +31,6 @@ ${qaPairs}
 Format the output as clean markdown. Start with a title "# ${docName}".`
 
   try {
-      try {
     // Route through n8n AI gateway if configured
     if (N8N_WEBHOOK) {
       const res = await fetch(N8N_WEBHOOK, {
