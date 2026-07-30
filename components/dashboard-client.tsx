@@ -22,7 +22,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { PmWisdom } from "@/components/pm-wisdom"
 
 const SAVED_DOCUMENTS = [
-  { id: "doc-1", docTypeId: "project-charter", docTypeName: "Project Charter", title: "Website Relaunch — June", createdAt: "2 days ago" },
+  { id: "doc-1", docTypeId: "project-charter", docTypeName: "Project Charter", title: "Website Relaunch - June", createdAt: "2 days ago" },
   { id: "doc-2", docTypeId: "status-report", docTypeName: "Status Report", title: "Q2 Platform Migration", createdAt: "5 days ago" },
   { id: "doc-3", docTypeId: "risk-register", docTypeName: "Risk Register", title: "Cloud Migration Risks", createdAt: "1 week ago" },
 ]
@@ -55,7 +55,7 @@ export function DashboardClient() {
     { icon: PlayCircle, label: "Courses in progress", value: coursesInProgress },
     { icon: GraduationCap, label: "Courses completed", value: coursesCompleted },
     { icon: FileText, label: "Documents created", value: SAVED_DOCUMENTS.length },
-    { icon: Flame, label: "Day streak", value: Object.keys(allProgress).length > 0 ? "🔥" : "—" },
+    { icon: Flame, label: "Day streak", value: Object.keys(allProgress).length > 0 ? "🔥" : " - " },
   ]
 
   return (
@@ -151,7 +151,7 @@ export function DashboardClient() {
               <Link
                 key={doc.id}
                 href={`/tools/${doc.docTypeId}`}
-                className="flex items-center gap-3 p-4 transition-colors hover:bg-surface-raised"
+                className="flex items-center gap-3 p-4 transition-colors active:scale-[0.96] transition-transform hover:bg-surface-raised"
               >
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent">
                   <FileText className="h-4 w-4" />
@@ -165,7 +165,7 @@ export function DashboardClient() {
             ))}
             <Link
               href="/tools"
-              className="flex items-center gap-3 p-4 text-sm font-medium text-accent transition-colors hover:bg-surface-raised"
+              className="flex items-center gap-3 p-4 text-sm font-medium text-accent transition-colors active:scale-[0.96] transition-transform hover:bg-surface-raised"
             >
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-dashed border-border">
                 <Plus className="h-4 w-4" />
@@ -185,7 +185,7 @@ export function DashboardClient() {
               <Link
                 key={p.course.slug}
                 href={`/courses/${p.course.slug}`}
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 text-sm text-foreground transition-colors hover:bg-surface-raised"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 text-sm text-foreground transition-colors active:scale-[0.96] transition-transform hover:bg-surface-raised"
               >
                 <CheckCircle2 className="h-4 w-4 text-accent" />
                 {p.course.title}

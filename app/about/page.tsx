@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card"
 export const metadata: Metadata = {
   title: "About",
   description:
-    "pm101toPro exists to take anyone from their first project to running the room — practical project management for every methodology.",
+    "pm101toPro exists to take anyone from their first project to running the room - practical project management for every methodology.",
 }
 
 const VALUES = [
@@ -19,7 +19,7 @@ const VALUES = [
   {
     icon: Layers,
     title: "Every methodology",
-    body: "Traditional, Agile, PMP and general practice — because real teams rarely fit into one neat box.",
+    body: "Traditional, Agile, PMP and general practice - because real teams rarely fit into one neat box.",
   },
   {
     icon: GraduationCap,
@@ -43,7 +43,7 @@ export default function AboutPage() {
             From your first project to running the room
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
-            Most people fall into project management sideways — handed a project, a nervous sponsor, and no roadmap.
+            Most people fall into project management sideways - handed a project, a nervous sponsor, and no roadmap.
             pm101toPro is the roadmap. We turn scattered, jargon-heavy PM knowledge into a structured path anyone can
             follow, backed by AI tools that produce the documents real projects demand.
           </p>

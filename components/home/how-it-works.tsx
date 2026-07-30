@@ -12,7 +12,7 @@ const STEPS = [
   {
     icon: GraduationCap,
     title: "Learn by doing",
-    body: "Structured, practical lessons — no fluff, no 40-minute videos. Just what you need.",
+    body: "Structured, practical lessons - no fluff, no 40-minute videos. Just what you need.",
   },
   {
     icon: Wand2,
@@ -42,7 +42,7 @@ export function HowItWorks() {
           </p>
         </div>
 
-        {/* Connector line between cards — draws in on scroll */}
+        {/* Connector line between cards - draws in on scroll */}
         <div className="relative mt-12 hidden md:block" aria-hidden="true">
           <div
             ref={lineRef}

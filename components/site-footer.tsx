@@ -40,8 +40,13 @@ export function SiteFooter() {
       <div className="border-t border-border">
         <div className="container flex flex-col gap-2 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 pm101toPro.com</p>
+          <div className="flex gap-4">
+            <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
+            <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
+            <Link href="/cookies" className="hover:text-foreground transition-colors">Cookies</Link>
+          </div>
           <p className="font-mono text-muted-foreground/50">
-            {/* Footer easter egg — cycles through PM jokes on each visit */}
+            {/* Footer easter egg - cycles through PM jokes on each visit */}
             {
               [
                 "From PM 101 to Pro.",

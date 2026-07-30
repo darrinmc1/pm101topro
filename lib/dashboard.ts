@@ -80,7 +80,7 @@ export const SAVED_DOCUMENTS: SavedDocument[] = [
     id: "doc-1",
     docTypeId: "project-charter",
     docTypeName: "Project Charter",
-    title: "Website Relaunch — June",
+    title: "Website Relaunch - June",
     createdAt: "2 days ago",
   },
   {

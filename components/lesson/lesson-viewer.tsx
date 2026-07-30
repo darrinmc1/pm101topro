@@ -100,7 +100,7 @@ export function LessonViewer({
                       "flex items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors",
                       isCurrent
                         ? "bg-accent/10 text-foreground"
-                        : "text-muted-foreground hover:bg-surface-raised hover:text-foreground",
+                        : "text-muted-foreground active:scale-[0.96] transition-transform hover:bg-surface-raised hover:text-foreground",
                     )}
                   >
                     {isDone ? (

@@ -10,12 +10,12 @@ const SUGGESTIONS = [
 ]
 
 const PM_JOKES = [
-  "Stakeholder added it to scope — but forgot to update the timeline.",
+  "Stakeholder added it to scope - but forgot to update the timeline.",
   "This page was deprioritised in the last sprint retro.",
   "Estimated at 2 story points. We're now on sprint 12.",
-  "The PM said 'just a quick pivot' — and here we are.",
+  "The PM said 'just a quick pivot' - and here we are.",
   "Original estimate: 2 hours. Current status: 404.",
-  "This URL was approved at the steering committee — then descoped.",
+  "This URL was approved at the steering committee - then descoped.",
 ]
 
 export default function NotFound() {
@@ -30,7 +30,7 @@ export default function NotFound() {
         </span>
 
         <p className="mt-8 font-mono text-sm font-medium uppercase tracking-widest text-accent">
-          404 — Off the roadmap
+          404 - Off the roadmap
         </p>
         <h1 className="mt-3 text-balance text-3xl font-bold tracking-tight sm:text-4xl">
           This page isn&apos;t on the plan
@@ -65,7 +65,7 @@ export default function NotFound() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="flex items-center justify-between rounded-xl border border-border bg-surface px-4 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent/50 hover:bg-surface-raised"
+                  className="flex items-center justify-between rounded-xl border border-border bg-surface px-4 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent/50 active:scale-[0.96] transition-transform hover:bg-surface-raised"
                 >
                   {item.label}
                   <ArrowRight className="h-4 w-4 text-muted-foreground" />

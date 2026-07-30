@@ -14,7 +14,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "The PMP prep path is genuinely well structured. The AI document tool is what made me subscribe — it saves me hours every week.",
+      "The PMP prep path is genuinely well structured. The AI document tool is what made me subscribe - it saves me hours every week.",
     name: "Marcus D.",
     role: "PMP candidate",
   },

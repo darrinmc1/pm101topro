@@ -39,7 +39,7 @@ export function ToolTeaser() {
     <section className="border-b border-border py-20">
       <div className="container grid items-center gap-12 lg:grid-cols-2">
 
-        {/* Left — copy */}
+        {/* Left - copy */}
         <div ref={textRef} className="reveal-left">
           <span className="font-mono text-xs uppercase tracking-widest text-accent-secondary">
             AI Document Generator
@@ -78,7 +78,7 @@ export function ToolTeaser() {
           </Button>
         </div>
 
-        {/* Right — animated mockup */}
+        {/* Right - animated mockup */}
         <div ref={mockupRef} className="reveal-right">
           <DocMockup />
         </div>
@@ -105,7 +105,7 @@ function DocMockup() {
       </div>
 
       <div className="space-y-4 py-4">
-        {/* User message — types in */}
+        {/* User message - types in */}
         <div className="flex justify-end">
           <div className="max-w-[80%] rounded-2xl rounded-br-sm bg-accent
                           px-4 py-2.5 text-sm text-accent-foreground min-h-[2.5rem]">
@@ -117,7 +117,7 @@ function DocMockup() {
           </div>
         </div>
 
-        {/* AI response — fades in after typing finishes */}
+        {/* AI response - fades in after typing finishes */}
         <div
           className={`flex justify-start transition-opacity duration-500 ${done ? "opacity-100" : "opacity-0"}`}
         >
@@ -127,7 +127,7 @@ function DocMockup() {
           </div>
         </div>
 
-        {/* Generated doc preview — fades in after AI response */}
+        {/* Generated doc preview - fades in after AI response */}
         <div
           className={`rounded-xl border border-white/10 bg-background/60 p-4
                       transition-all duration-700 delay-300

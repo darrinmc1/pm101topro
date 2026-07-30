@@ -26,7 +26,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
 export const metadata: Metadata = {
-  title: "Dashboard — pm101toPro",
+  title: "Dashboard - pm101toPro",
   description: "Your learning progress, saved documents, and recommended next steps.",
 }
 
@@ -162,7 +162,7 @@ export default function DashboardPage() {
                 <Link
                   key={doc.id}
                   href={`/tools/${doc.docTypeId}`}
-                  className="flex items-center gap-3 p-4 transition-colors hover:bg-surface-raised"
+                  className="flex items-center gap-3 p-4 transition-colors active:scale-[0.96] transition-transform hover:bg-surface-raised"
                 >
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent">
                     <FileText className="h-4 w-4" />
@@ -180,7 +180,7 @@ export default function DashboardPage() {
               ))}
               <Link
                 href="/tools"
-                className="flex items-center gap-3 p-4 text-sm font-medium text-accent transition-colors hover:bg-surface-raised"
+                className="flex items-center gap-3 p-4 text-sm font-medium text-accent transition-colors active:scale-[0.96] transition-transform hover:bg-surface-raised"
               >
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-dashed border-border">
                   <Plus className="h-4 w-4" />
@@ -201,7 +201,7 @@ export default function DashboardPage() {
               <Link
                 key={p.course.slug}
                 href={`/courses/${p.course.slug}`}
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 text-sm text-foreground transition-colors hover:bg-surface-raised"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 text-sm text-foreground transition-colors active:scale-[0.96] transition-transform hover:bg-surface-raised"
               >
                 <CheckCircle2 className="h-4 w-4 text-accent" />
                 {p.course.title}

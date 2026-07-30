@@ -10,7 +10,7 @@ interface ScrollRevealOptions {
 
 /**
  * Attaches a data-visible="true" attribute to the element when it enters
- * the viewport. CSS handles the actual transition — no animation library needed.
+ * the viewport. CSS handles the actual transition - no animation library needed.
  */
 export function useScrollReveal<T extends HTMLElement>(
   options: ScrollRevealOptions = {},

@@ -8,7 +8,7 @@ import { PmWisdom } from "@/components/pm-wisdom"
 export const metadata: Metadata = {
   title: "AI PM Document Generator",
   description:
-    "Generate professional project management documents — charters, risk registers, RACI matrices and more — with a guided AI wizard.",
+    "Generate professional project management documents - charters, risk registers, RACI matrices and more - with a guided AI wizard.",
 }
 
 export default function ToolsPage() {

@@ -22,10 +22,10 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Project Structure
 
 ```
-app/         — Next.js App Router pages (courses, blog, tools, pricing, etc.)
-components/  — Reusable UI components (shadcn/ui + custom)
-lib/         — Data sources (blog posts, courses, documents)
-public/      — Static assets
+app/         - Next.js App Router pages (courses, blog, tools, pricing, etc.)
+components/  - Reusable UI components (shadcn/ui + custom)
+lib/         - Data sources (blog posts, courses, documents)
+public/      - Static assets
 ```
 
 ## Deployment
@@ -40,4 +40,4 @@ Deployed on [Vercel](https://vercel.com). Push to `main` to deploy.
 
 ## License
 
-Private — Empire-HQ portfolio project.
+Private - Empire-HQ portfolio project.

@@ -108,7 +108,7 @@ export const COURSES: Course[] = [
     slug: "working-with-stakeholders",
     title: "Working with Stakeholders",
     description:
-      "People decide whether projects succeed. Identify, map, and engage stakeholders — even the difficult ones.",
+      "People decide whether projects succeed. Identify, map, and engage stakeholders - even the difficult ones.",
     methodology: "general",
     level: "intermediate",
     lessons: [
@@ -129,7 +129,7 @@ export const COURSES: Course[] = [
     lessons: [
       lesson("risk-frameworks", "Risk frameworks", true, 9, "Structuring identification, analysis, and response."),
       lesson("qualitative-quantitative", "Qualitative vs quantitative", false, 10, "Probability/impact matrices and expected monetary value."),
-      lesson("risk-response-strategies", "Risk response strategies", false, 9, "Avoid, transfer, mitigate, accept — and when to use each."),
+      lesson("risk-response-strategies", "Risk response strategies", false, 9, "Avoid, transfer, mitigate, accept - and when to use each."),
       lesson("monitoring-control", "Monitoring & control", false, 8, "Keeping the register alive throughout delivery."),
       lesson("risk-workshops", "Risk workshops", false, 8, "Facilitating sessions that surface real risks."),
     ],
@@ -200,7 +200,7 @@ export const COURSES: Course[] = [
     slug: "intro-to-certifications",
     title: "Intro to PM Certifications",
     description:
-      "CAPM, PMP, PRINCE2, and Scrum — what each certification means, who it's for, and how to choose your path.",
+      "CAPM, PMP, PRINCE2, and Scrum - what each certification means, who it's for, and how to choose your path.",
     methodology: "pmp",
     level: "101",
     lessons: [
@@ -373,7 +373,7 @@ export const COURSES: Course[] = [
     slug: "getting-started-as-a-pm",
     title: "Getting Started as a PM",
     description:
-      "You've got the title — now what? Navigate onboarding, build credibility, avoid the classic first-project traps, and set yourself up for long-term growth.",
+      "You've got the title - now what? Navigate onboarding, build credibility, avoid the classic first-project traps, and set yourself up for long-term growth.",
     methodology: "general",
     level: "101",
     lessons: [
@@ -420,7 +420,7 @@ export const COURSES: Course[] = [
     slug: "quality-management",
     title: "Quality Management",
     description:
-      "Quality isn't testing at the end — it's built in from the start. Plan, assure, and control quality across the delivery lifecycle.",
+      "Quality isn't testing at the end - it's built in from the start. Plan, assure, and control quality across the delivery lifecycle.",
     methodology: "general",
     level: "intermediate",
     lessons: [
@@ -437,12 +437,12 @@ export const COURSES: Course[] = [
     slug: "negotiation-for-pms",
     title: "Negotiation for PMs",
     description:
-      "PMs negotiate constantly — scope, budget, timeline, resources. Move from compromise to principled deals that preserve relationships.",
+      "PMs negotiate constantly - scope, budget, timeline, resources. Move from compromise to principled deals that preserve relationships.",
     methodology: "general",
     level: "advanced",
     lessons: [
       lesson("negotiation-basics", "Negotiation basics", true, 8, "BATNA, ZOPA, and the difference between position and interest."),
-      lesson("principled-negotiation", "Principled negotiation", false, 10, "Separating people from the problem — the Harvard method."),
+      lesson("principled-negotiation", "Principled negotiation", false, 10, "Separating people from the problem - the Harvard method."),
       lesson("scope-negotiation", "Scope negotiation", false, 9, "Handling scope creep without burning goodwill."),
       lesson("resource-negotiation", "Resource negotiation", false, 9, "Getting the right people at the right time."),
       lesson("difficult-conversations", "Difficult conversations", false, 9, "Saying no, managing expectations, and preserving trust."),
@@ -452,7 +452,7 @@ export const COURSES: Course[] = [
     slug: "organisational-change",
     title: "Organisational Change Management",
     description:
-      "Projects change organisations — whether you plan for it or not. Lead adoption, manage resistance, and embed lasting change.",
+      "Projects change organisations - whether you plan for it or not. Lead adoption, manage resistance, and embed lasting change.",
     methodology: "general",
     level: "advanced",
     lessons: [
@@ -474,7 +474,7 @@ export const COURSES: Course[] = [
     level: "pmo",
     lessons: [
       lesson("defining-mandate", "Defining the mandate", true, 10, "Sponsorship, charter, and the scope of the PMO's authority."),
-      lesson("pmo-model-selection", "PMO model selection", false, 10, "Supportive, controlling, or directive — which fits your org."),
+      lesson("pmo-model-selection", "PMO model selection", false, 10, "Supportive, controlling, or directive - which fits your org."),
       lesson("pmo-processes", "PMO processes", false, 11, "The essential processes every PMO needs from day one."),
       lesson("staffing-pmo", "Staffing the PMO", false, 9, "Roles, capabilities, and building the right team."),
       lesson("pmo-roi", "Demonstrating PMO value", false, 9, "Metrics and stories that prove the PMO's contribution."),

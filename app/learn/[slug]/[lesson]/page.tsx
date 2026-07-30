@@ -19,7 +19,7 @@ export async function generateMetadata({
   const found = findLesson(slug, lesson)
   if (!found) return { title: "Lesson not found" }
   return {
-    title: `${found.lesson.title} — ${found.course.title}`,
+    title: `${found.lesson.title} - ${found.course.title}`,
     description: found.lesson.summary,
   }
 }

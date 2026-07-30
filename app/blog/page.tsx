@@ -9,7 +9,7 @@ import { PmWisdom } from "@/components/pm-wisdom"
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Practical project management writing — charters, risk, stakeholders, Agile and more from the pm101toPro team.",
+    "Practical project management writing - charters, risk, stakeholders, Agile and more from the pm101toPro team.",
 }
 
 export default function BlogPage() {
@@ -21,7 +21,7 @@ export default function BlogPage() {
         <div className="container py-14">
           <h1 className="text-4xl font-extrabold tracking-tightest text-foreground">The blog</h1>
           <p className="mt-3 max-w-2xl text-pretty leading-relaxed text-muted-foreground">
-            Short, practical reads on running real projects — the stuff between the lessons.
+            Short, practical reads on running real projects - the stuff between the lessons.
           </p>
         </div>
       </section>

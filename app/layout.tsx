@@ -19,7 +19,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "pm101toPro — From your first project to running the room",
+    default: "pm101toPro - From your first project to running the room",
     template: "%s · pm101toPro",
   },
   description:

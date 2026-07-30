@@ -74,7 +74,7 @@ const FAQ = [
   },
   {
     q: "Can I cancel anytime?",
-    a: "Absolutely. Pro is month-to-month and you can cancel from your account settings at any time — you keep access until the end of your billing period.",
+    a: "Absolutely. Pro is month-to-month and you can cancel from your account settings at any time - you keep access until the end of your billing period.",
   },
   {
     q: "What are the AI document tools?",
@@ -82,7 +82,7 @@ const FAQ = [
   },
   {
     q: "Do you offer team or student discounts?",
-    a: "Yes — reach out about Teams pricing for bulk seats, and we offer discounts for verified students and non-profits.",
+    a: "Yes - reach out about Teams pricing for bulk seats, and we offer discounts for verified students and non-profits.",
   },
 ]
 
@@ -91,10 +91,10 @@ export default function PricingPage() {
     <>
       <section className="border-b border-border">
         <div className="container py-16 text-center">
-          <h1 className="text-4xl font-extrabold tracking-tightest text-foreground text-balance">
+          <h1 className="text-4xl font-extrabold tracking-tightest text-foreground text-balance tabular-nums">
             Simple pricing that grows with you
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
+          <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty tabular-nums">
             Start free forever. Upgrade to Pro when you&apos;re ready for the full library and unlimited AI tools.
           </p>
         </div>
@@ -117,9 +117,9 @@ export default function PricingPage() {
                   Most popular
                 </span>
               )}
-              <h2 className="text-lg font-semibold text-foreground">{plan.name}</h2>
+              <h2 className="text-lg font-semibold text-foreground tabular-nums">{plan.name}</h2>
               <div className="mt-3 flex items-baseline gap-1">
-                <span className="text-4xl font-extrabold tracking-tight text-foreground">{plan.price}</span>
+                <span className="text-4xl font-extrabold tracking-tight text-foreground tabular-nums">{plan.price}</span>
                 <span className="text-sm text-muted-foreground">/ {plan.cadence}</span>
               </div>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{plan.blurb}</p>
@@ -146,7 +146,7 @@ export default function PricingPage() {
       </section>
 
       <section className="container pb-20">
-        <h2 className="text-center text-2xl font-bold tracking-tight text-foreground">
+        <h2 className="text-center text-2xl font-bold tracking-tight text-foreground tabular-nums">
           Frequently asked questions
         </h2>
         <div className="mx-auto mt-8 max-w-2xl">

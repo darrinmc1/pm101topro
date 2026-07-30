@@ -7,7 +7,7 @@ import { useState } from "react"
 const PM_WISDOM: string[] = [
   "A project without a charter is like a ship without a rudder. Or a Gantt chart. Both are terrifying.",
   "Scope creep isn't the enemy. Scope creep you didn't see coming is.",
-  "The project sponsor said 'just a small change' — and thus the backlog was born.",
+  "The project sponsor said 'just a small change' - and thus the backlog was born.",
   "There are only two sizes of estimate: too small and 'we need to have a conversation'.",
   "The triple constraint: fast, cheap, good. Pick two. (The sponsor wants all three.)",
   "Stakeholder management: herding cats with PowerPoint.",
@@ -16,7 +16,7 @@ const PM_WISDOM: string[] = [
   "A risk register is just a list of things that will keep you awake at 3 AM.",
   "The daily stand-up: where 5 people spend 15 minutes explaining why they're not blocked.",
   "Best practice: what works until your CEO watches a YouTube video about Spotify.",
-  "The lesson learned: 'We should have done this sooner.' — said after every project.",
+  "The lesson learned: 'We should have done this sooner.' - said after every project.",
   "Waterfall: plan everything, then pretend nothing changes. Agile: change everything, then pretend you planned it.",
   "The PMP exam doesn't test your project management skills. It tests your ability to memorise 49 processes.",
   "A milestone is a deadline dressed up in optimism.",
@@ -53,7 +53,7 @@ export function PmWisdom({ className }: { className?: string }) {
         </div>
         <button
           onClick={refresh}
-          className="shrink-0 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-surface-raised hover:text-foreground"
+          className="shrink-0 rounded-lg p-1.5 text-muted-foreground transition-colors active:scale-[0.96] transition-transform hover:bg-surface-raised hover:text-foreground"
           aria-label="Another quote"
         >
           <RefreshCw className="h-3.5 w-3.5" />

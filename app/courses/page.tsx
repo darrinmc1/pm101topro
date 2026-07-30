@@ -31,7 +31,7 @@ export default async function CoursesPage({
           </h1>
           <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
             Structured, practical project management courses across every major
-            methodology. The first lesson of every course is free — no card
+            methodology. The first lesson of every course is free - no card
             required.
           </p>
         </header>

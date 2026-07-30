@@ -7,7 +7,7 @@ import { PmWisdom } from "@/components/pm-wisdom"
 export const metadata: Metadata = {
   title: "Free PM Templates",
   description:
-    "Download free, professional project management templates — Project Charter, Risk Register, RACI Matrix, Status Report, Business Case, Meeting Minutes, WBS, Budget Tracker, Stakeholder Register, and Project Closure — from pm101toPro.",
+    "Download free, professional project management templates - Project Charter, Risk Register, RACI Matrix, Status Report, Business Case, Meeting Minutes, WBS, Budget Tracker, Stakeholder Register, and Project Closure - from pm101toPro.",
 }
 
 interface Template {
@@ -39,7 +39,7 @@ const templates: Template[] = [
     filename: "risk-register-template.pdf",
     title: "Risk Register",
     description:
-      "Track and manage project risks with ID, description, likelihood (L/M/H), impact (L/M/H), score (1-9), owner, mitigation strategy, and status — plus a built-in risk scoring matrix.",
+      "Track and manage project risks with ID, description, likelihood (L/M/H), impact (L/M/H), score (1-9), owner, mitigation strategy, and status - plus a built-in risk scoring matrix.",
     features: [
       "Pre-numbered 18-row risk log",
       "Likelihood / Impact / Score columns",
@@ -53,7 +53,7 @@ const templates: Template[] = [
     filename: "raci-matrix-template.pdf",
     title: "RACI Matrix",
     description:
-      "Clarify roles and responsibilities with this RACI matrix spanning 13 project activities across Sponsor, PM, Team Lead, Team Member, and Stakeholder roles — complete with color-coded legend.",
+      "Clarify roles and responsibilities with this RACI matrix spanning 13 project activities across Sponsor, PM, Team Lead, Team Member, and Stakeholder roles - complete with color-coded legend.",
     features: [
       "13 pre-filled project tasks",
       "5 role columns (Sponsor, PM, Team Lead, Team Member, Stakeholder)",
@@ -112,7 +112,7 @@ const templates: Template[] = [
     filename: "wbs-template.pdf",
     title: "Work Breakdown Structure",
     description:
-      "Decompose project scope into manageable pieces with this 3-level WBS (Phase → Deliverable → Work Package) including owner assignment and estimated hours — covers 4 phases and 20+ work packages.",
+      "Decompose project scope into manageable pieces with this 3-level WBS (Phase → Deliverable → Work Package) including owner assignment and estimated hours - covers 4 phases and 20+ work packages.",
     features: [
       "3-level hierarchy (Phase / Deliverable / Work Package)",
       "4 project phases (Initiation, Planning, Execution, Closure)",
@@ -143,7 +143,7 @@ const templates: Template[] = [
     filename: "stakeholder-register-template.pdf",
     title: "Stakeholder Register",
     description:
-      "Identify and plan engagement for every stakeholder with name, role, interest and influence levels (L/M/H), engagement strategy, and status tracking — includes 8 pre-filled example entries.",
+      "Identify and plan engagement for every stakeholder with name, role, interest and influence levels (L/M/H), engagement strategy, and status tracking - includes 8 pre-filled example entries.",
     features: [
       "8 pre-filled stakeholder entries",
       "Interest & Influence scoring (Low / Medium / High)",
@@ -182,7 +182,7 @@ function TemplateCard({
       className="overflow-hidden border-border bg-surface transition-colors hover:border-accent/30"
     >
       <div className="flex flex-col gap-0 sm:flex-row">
-        {/* Left — content */}
+        {/* Left - content */}
         <div className="flex flex-1 flex-col gap-4 p-6">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent">
@@ -215,12 +215,12 @@ function TemplateCard({
           </ul>
         </div>
 
-        {/* Right — download CTA */}
+        {/* Right - download CTA */}
         <div className="flex items-center border-t border-border px-6 py-4 sm:border-b-0 sm:border-l sm:px-8">
           <Link
             href={`/downloads/${template.filename}`}
             download
-            className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent/90"
+            className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors active:scale-[0.96] transition-transform hover:bg-accent/90"
           >
             <Download className="h-4 w-4" />
             Download PDF
@@ -245,7 +245,7 @@ export default function DownloadsPage() {
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
             Ten essential project management templates used by professional
-            PMs every day. Each is a fillable PDF — download, print or edit
+            PMs every day. Each is a fillable PDF - download, print or edit
             digitally, and adapt to your project.
           </p>
         </div>
