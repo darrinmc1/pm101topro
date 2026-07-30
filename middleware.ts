@@ -1,5 +1,13 @@
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server"
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
+
+// Routes that require authentication
+const isProtectedRoute = createRouteMatcher([
+  "/dashboard(.*)",
+  "/api/subscribe(.*)",
+  "/api/send-email(.*)",
+])
 
 // Known AI crawlers and scrapers that ignore robots.txt
 const BLOCKED_BOTS = [
@@ -19,7 +27,22 @@ const rateLimit = new Map<string, { count: number; resetAt: number }>()
 const RATE_LIMIT_WINDOW = 60_000 // 1 minute
 const RATE_LIMIT_MAX = 60 // 60 requests per minute per IP
 
-export function middleware(request: NextRequest) {
+export default clerkMiddleware(async (auth, request: NextRequest) => {
+  // === Clerk Auth Protection ===
+  if (isProtectedRoute(request)) {
+    try {
+      await auth.protect()
+    } catch {
+      // Graceful fallback: if Clerk is not configured, allow access anyway
+      const isConfigured =
+        process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
+        process.env.CLERK_SECRET_KEY
+      if (isConfigured) {
+        throw new Error("Authentication required")
+      }
+    }
+  }
+
   const url = request.nextUrl.pathname
   const userAgent = request.headers.get("user-agent") || ""
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
@@ -38,11 +61,9 @@ export function middleware(request: NextRequest) {
   const uaLower = userAgent.toLowerCase()
   for (const bot of BLOCKED_BOTS) {
     if (uaLower.includes(bot.toLowerCase())) {
-      // Return 403 for API/admin paths, otherwise pass through with headers
       if (url.startsWith("/api/") || url.startsWith("/admin/")) {
         return new NextResponse("Forbidden", { status: 403 })
       }
-      // For page routes, just block with the headers set
       response.headers.set("X-Robots-Tag", "noindex, nofollow, noai, noimageai")
     }
   }
@@ -64,7 +85,6 @@ export function middleware(request: NextRequest) {
       }
     }
 
-    // Cleanup old entries every 100 requests to prevent memory leaks
     if (rateLimit.size > 10000) {
       const cutoff = now - RATE_LIMIT_WINDOW
       for (const [key, val] of rateLimit) {
@@ -73,18 +93,8 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // === 4. Honeypot protection ===
-  // If someone is POSTing to a form and has the honeypot field filled (common scraper pattern)
-  if (request.method === "POST") {
-    const contentType = request.headers.get("content-type") || ""
-    if (contentType.includes("application/json")) {
-      // Check for common scraper patterns in POST data
-      response.headers.set("X-Content-Type-Options", "nosniff")
-    }
-  }
-
   return response
-}
+})
 
 export const config = {
   matcher: [

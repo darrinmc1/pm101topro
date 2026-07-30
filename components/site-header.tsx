@@ -8,6 +8,7 @@ import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { BrandMark } from "@/components/brand-mark"
+import { AuthNav } from "@/components/auth-nav"
 
 const NAV_LINKS = [
   { href: "/courses", label: "Courses" },
@@ -49,9 +50,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button asChild variant="ghost" size="sm">
-            <Link href="/dashboard">Sign in</Link>
-          </Button>
+          <AuthNav />
           <Button asChild size="sm">
             <Link href="/courses">Start learning free</Link>
           </Button>
@@ -82,9 +81,7 @@ export function SiteHeader() {
               </Link>
             ))}
             <div className="mt-2 flex flex-col gap-2">
-              <Button asChild variant="outline" onClick={() => setOpen(false)}>
-                <Link href="/dashboard">Sign in</Link>
-              </Button>
+              <AuthNav />
               <Button asChild onClick={() => setOpen(false)}>
                 <Link href="/courses">Start learning free</Link>
               </Button>
