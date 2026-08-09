@@ -4,6 +4,7 @@ import type { Metadata, Viewport } from "next"
 import { Inter, JetBrains_Mono } from "next/font/google"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
+import { FeedbackWidget } from "@/components/feedback-widget"
 import "./globals.css"
 
 const inter = Inter({
@@ -59,6 +60,7 @@ export default function RootLayout({
             <main className="flex-1">{children}</main>
             <SiteFooter />
           </div>
+          <FeedbackWidget />
           {process.env.NODE_ENV === "production" && <Analytics />}
         </body>
       </html>
