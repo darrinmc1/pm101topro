@@ -7,17 +7,21 @@ export type FeedbackResult = { ok: boolean; message: string; id?: string }
 const VALID_CATEGORIES = ['Bug', 'Suggestion', 'Content Request', 'Other']
 const VALID_FEEDBACK_TYPES = ['bug', 'suggestion', 'feature_request', 'content_request', 'general']
 
-// Create Supabase client with service role (server-side only)
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || '',
-  {
+// Lazy Supabase client (server-side only) — created on first call so the build
+// doesn't fail when env vars are absent at build time.
+function getSupabase() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+  if (!url || !key) {
+    throw new Error('Supabase env vars missing (NEXT_PUBLIC_SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY)')
+  }
+  return createClient(url, key, {
     auth: {
       persistSession: false,
       autoRefreshToken: false,
     },
-  }
-)
+  })
+}
 
 /**
  * Submit feedback to Supabase with page-specific context.
@@ -52,6 +56,7 @@ export async function submitFeedbackAction(args: {
 
   try {
     // Insert into Supabase
+    const supabase = getSupabase()
     const { data, error } = await supabase
       .from('feedback')
       .insert([
