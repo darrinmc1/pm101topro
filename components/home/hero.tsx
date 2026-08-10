@@ -36,7 +36,7 @@ export function Hero() {
                          border-border bg-surface px-3 py-1 text-xs font-medium
                          text-muted-foreground">
           <Sparkles className="h-3.5 w-3.5 text-accent-secondary" />
-          Learn PM + generate real project documents
+          Project Management Courses + AI Doc Tools
         </span>
 
         <div ref={headingRef} className="reveal-up mt-6 stagger-1">
