@@ -12,6 +12,7 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden border-b border-border">
+        <div className="absolute inset-0 bg-[url('/images/hero-pm101topro.jpg')] bg-cover bg-center opacity-25" aria-hidden="true" />
       {/* Dot-grid background */}
       <div className="absolute inset-0 bg-dot-grid opacity-60" aria-hidden="true" />
 
@@ -30,7 +31,7 @@ export function Hero() {
         style={{ animation: "orb-drift 11s ease-in-out 2s infinite" }}
       />
 
-      <div className="container relative flex flex-col items-center py-24 text-center md:py-36">
+      <div className="relative z-10 container flex flex-col items-center py-24 text-center md:py-36">
 
         <span className="badge-pop inline-flex items-center gap-2 rounded-full border
                          border-border bg-surface px-3 py-1 text-xs font-medium
