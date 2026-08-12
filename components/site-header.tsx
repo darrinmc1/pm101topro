@@ -9,6 +9,9 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { BrandMark } from "@/components/brand-mark"
 import { AuthNav } from "@/components/auth-nav"
+import { getFirstFreeLessonPath } from "@/lib/content"
+
+const START_LEARNING_HREF = getFirstFreeLessonPath()
 
 const NAV_LINKS = [
   { href: "/courses", label: "Courses" },
@@ -52,7 +55,7 @@ export function SiteHeader() {
         <div className="hidden items-center gap-2 md:flex">
           <AuthNav />
           <Button asChild size="sm">
-            <Link href="/courses">Start learning free</Link>
+            <Link href={START_LEARNING_HREF}>Start learning free</Link>
           </Button>
         </div>
 
@@ -83,7 +86,7 @@ export function SiteHeader() {
             <div className="mt-2 flex flex-col gap-2">
               <AuthNav />
               <Button asChild onClick={() => setOpen(false)}>
-                <Link href="/courses">Start learning free</Link>
+                <Link href={START_LEARNING_HREF}>Start learning free</Link>
               </Button>
             </div>
           </nav>

@@ -1,8 +1,19 @@
 "use client"
 
 import { useState } from "react"
+import { usePathname } from "next/navigation"
+
+/** Marketing / public pages where the internal feedback chrome should stay out of the way. */
+function isMarketingPath(pathname: string) {
+  if (pathname === "/") return true
+  const prefixes = ["/about", "/pricing", "/blog", "/downloads", "/courses"]
+  return prefixes.some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+  )
+}
 
 export function FeedbackWidget() {
+  const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [rating, setRating] = useState(0)
   const [hoveredRating, setHoveredRating] = useState(0)
@@ -55,6 +66,9 @@ export function FeedbackWidget() {
       setResponseMessage("Network error. Please try again.")
     }
   }
+
+  // Soft-launch: hide on public marketing pages; keep available in product flows.
+  if (isMarketingPath(pathname)) return null
 
   return (
     <div className="fixed bottom-6 right-6 z-50">

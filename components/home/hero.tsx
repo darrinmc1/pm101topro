@@ -1,13 +1,19 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRight, Sparkles } from "lucide-react"
+import { ArrowRight, BookOpen, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
+import { COURSES, getFirstFreeLessonPath } from "@/lib/content"
+
+const FIRST_COURSE = COURSES[0]
+const FIRST_LESSON = FIRST_COURSE.lessons.find((l) => l.isFree) ?? FIRST_COURSE.lessons[0]
+const FIRST_LESSON_HREF = getFirstFreeLessonPath()
 
 export function Hero() {
   const headingRef  = useScrollReveal<HTMLDivElement>({ threshold: 0.1 })
   const subtitleRef = useScrollReveal<HTMLParagraphElement>({ threshold: 0.1 })
+  const proofRef    = useScrollReveal<HTMLDivElement>({ threshold: 0.1 })
   const ctaRef      = useScrollReveal<HTMLDivElement>({ threshold: 0.1 })
 
   return (
@@ -37,7 +43,7 @@ export function Hero() {
                          border-border bg-surface px-3 py-1 text-xs font-medium
                          text-muted-foreground">
           <Sparkles className="h-3.5 w-3.5 text-accent-secondary" />
-          Project Management Courses + AI Doc Tools
+          Free courses · No signup required
         </span>
 
         <div ref={headingRef} className="reveal-up mt-6 stagger-1">
@@ -53,22 +59,54 @@ export function Hero() {
           className="reveal-up mt-5 max-w-xl text-pretty text-base
                      leading-relaxed text-muted-foreground md:text-lg stagger-2"
         >
-          Master project management from your first charter to running a PMO.
-          Free courses across every methodology, plus AI-powered document tools.
+          Master project management from your first charter to running a PMO —
+          start with a free lesson, no account needed.
         </p>
+
+        {/* Proof: real first lesson, reachable without signup */}
+        <div
+          ref={proofRef}
+          className="reveal-up mt-8 w-full max-w-md stagger-2"
+        >
+          <Link
+            href={FIRST_LESSON_HREF}
+            className="group flex items-start gap-3 rounded-xl border border-border
+                       bg-surface/80 px-4 py-3.5 text-left transition-colors
+                       hover:border-accent/40 hover:bg-surface-raised"
+          >
+            <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center
+                             justify-center rounded-lg bg-accent/15 text-accent
+                             ring-1 ring-accent/20">
+              <BookOpen className="h-4 w-4" />
+            </span>
+            <span className="min-w-0">
+              <span className="font-mono text-[10px] uppercase tracking-widest
+                               text-accent-secondary">
+                Free lesson · {FIRST_LESSON.durationMins} min
+              </span>
+              <span className="mt-0.5 block text-sm font-semibold text-foreground
+                               group-hover:text-accent">
+                {FIRST_LESSON.title}
+              </span>
+              <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
+                {FIRST_LESSON.summary}
+              </span>
+            </span>
+          </Link>
+        </div>
 
         <div
           ref={ctaRef}
           className="reveal-up mt-8 flex flex-col gap-3 sm:flex-row stagger-3"
         >
           <Button asChild size="lg" className="group">
-            <Link href="/courses">
-              Start learning free
+            <Link href={FIRST_LESSON_HREF}>
+              Start this lesson free
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline">
-            <Link href="/tools">Try the doc generator</Link>
+            <Link href="/tools/project-charter">Try the doc generator</Link>
           </Button>
         </div>
 

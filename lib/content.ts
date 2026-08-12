@@ -497,6 +497,13 @@ export const COURSES: Course[] = [
   },
 ]
 
+/** Canonical cold-traffic entry: first free lesson of the first 101 course. */
+export function getFirstFreeLessonPath(): string {
+  const course = COURSES[0]
+  const lesson = course.lessons.find((l) => l.isFree) ?? course.lessons[0]
+  return `/learn/${course.slug}/${lesson.slug}`
+}
+
 export function getCourse(slug: string): Course | undefined {
   return COURSES.find((c) => c.slug === slug)
 }
