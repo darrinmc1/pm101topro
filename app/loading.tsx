@@ -6,9 +6,7 @@ export default function RootLoading() {
           <div className="absolute inset-0 animate-ping rounded-full bg-accent/20" />
           <div className="absolute inset-1 animate-spin rounded-full border-2 border-transparent border-t-accent" />
         </div>
-        <p className="text-sm text-muted-foreground">
-          Running a status update...
-        </p>
+        <p className="text-sm text-muted-foreground">Loading…</p>
       </div>
     </div>
   )

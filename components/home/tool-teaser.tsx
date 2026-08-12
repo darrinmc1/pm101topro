@@ -70,12 +70,21 @@ export function ToolTeaser() {
             ))}
           </ul>
 
-          <Button asChild className="mt-8 group">
-            <Link href="/pricing">
-              See pricing
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Button asChild className="group">
+              <Link href="/tools/project-charter">
+                Generate a project charter
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+            <Link
+              href="/downloads/project-charter-template.pdf"
+              className="text-sm font-medium text-muted-foreground underline-offset-4
+                         transition-colors hover:text-foreground hover:underline"
+            >
+              Download blank charter template
             </Link>
-          </Button>
+          </div>
         </div>
 
         {/* Right - animated mockup */}
