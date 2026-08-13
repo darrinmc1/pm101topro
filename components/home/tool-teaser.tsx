@@ -42,16 +42,16 @@ export function ToolTeaser() {
         {/* Left - copy */}
         <div ref={textRef} className="reveal-left">
           <span className="font-mono text-xs uppercase tracking-widest text-accent-secondary">
-            AI Document Generator
+            AI tools · one job each
           </span>
           <h2 className="mt-3 text-3xl font-bold tracking-tightest text-foreground">
-            Answer a few questions.{" "}
-            <span className="text-accent text-glow">Get a real document.</span>
+            Paste a messy update.{" "}
+            <span className="text-accent text-glow">Get a status they&apos;ll read.</span>
           </h2>
           <p className="mt-4 text-pretty leading-relaxed text-muted-foreground">
-            Our conversational AI interviews you like a senior PM consultant,
-            then generates a professional, ready-to-use document in clean
-            formatting. Eight document types cover the whole project lifecycle.
+            Status Cleaner turns a dump into RAG, next actions, and citations from the real
+            archive. The document generator still interviews you for charters, registers, and
+            the rest of the lifecycle.
           </p>
 
           <ul className="mt-6 grid grid-cols-2 gap-3">
@@ -72,17 +72,17 @@ export function ToolTeaser() {
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Button asChild className="group">
-              <Link href="/tools/project-charter">
-                Generate a project charter
+              <Link href="/tools/status">
+                Clean a status dump
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
             <Link
-              href="/downloads/project-charter-template.pdf"
+              href="/tools/project-charter"
               className="text-sm font-medium text-muted-foreground underline-offset-4
                          transition-colors hover:text-foreground hover:underline"
             >
-              Download blank charter template
+              Or generate a project charter
             </Link>
           </div>
         </div>
