@@ -36,6 +36,14 @@ export const metadata: Metadata = {
     "project charter",
     "risk register",
   ],
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml", sizes: "any" },
+    ],
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 }
 
 export const viewport: Viewport = {
