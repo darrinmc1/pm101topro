@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import Link from "next/link"
 import {
   ArrowLeft,
@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
+import { hasExhaustedFreeAi, incrementFreeUsage } from "@/lib/ai-usage"
 
 type Phase = "questions" | "generating" | "result" | "error"
 
@@ -24,29 +25,6 @@ export type WizardDoc = {
   name: string
   questions: string[]
 }
-
-/** Check how many free generations the user has used */
-function getFreeUsage(): number {
-  if (typeof window === "undefined") return 0
-  try {
-    return Number(localStorage.getItem("pm101_free_uses") || "0")
-  } catch {
-    return 0
-  }
-}
-
-/** Increment free usage counter */
-function useFreeTrial(): number {
-  try {
-    const next = getFreeUsage() + 1
-    localStorage.setItem("pm101_free_uses", String(next))
-    return next
-  } catch {
-    return 99
-  }
-}
-
-const FREE_LIMIT = 1
 
 export function DocumentWizard({ doc }: { doc: WizardDoc }) {
   const [step, setStep] = useState(0)
@@ -59,7 +37,7 @@ export function DocumentWizard({ doc }: { doc: WizardDoc }) {
 
   // Check if the user has exhausted their free trial
   useEffect(() => {
-    if (getFreeUsage() >= FREE_LIMIT) {
+    if (hasExhaustedFreeAi()) {
       setShowWall(true)
     }
   }, [])
@@ -100,7 +78,7 @@ export function DocumentWizard({ doc }: { doc: WizardDoc }) {
       }
 
       setDraft(data.draft)
-      useFreeTrial()
+      incrementFreeUsage()
       setPhase("result")
     } catch (err) {
       setError("Network error - check your connection and try again.")

@@ -1,4 +1,18 @@
 import type { MetadataRoute } from "next"
+import { SITE_URL } from "@/lib/pricing"
+
+const AEO_ALLOW = [
+  "/",
+  "/llm.txt",
+  "/llms.txt",
+  "/pricing",
+  "/pricing.json",
+  "/faq",
+  "/tools",
+  "/tools/status",
+  "/courses",
+  "/about",
+]
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -10,45 +24,44 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "GPTBot",
-        disallow: "/",
+        allow: AEO_ALLOW,
+        disallow: ["/api/", "/admin/", "/dashboard/"],
       },
       {
-        userAgent: "CCBot",
-        disallow: "/",
+        userAgent: "ChatGPT-User",
+        allow: AEO_ALLOW,
+        disallow: ["/api/", "/admin/", "/dashboard/"],
+      },
+      {
+        userAgent: "PerplexityBot",
+        allow: AEO_ALLOW,
+        disallow: ["/api/", "/admin/", "/dashboard/"],
+      },
+      {
+        userAgent: "ClaudeBot",
+        allow: AEO_ALLOW,
+        disallow: ["/api/", "/admin/", "/dashboard/"],
       },
       {
         userAgent: "anthropic-ai",
-        disallow: "/",
+        allow: AEO_ALLOW,
+        disallow: ["/api/", "/admin/", "/dashboard/"],
       },
       {
-        userAgent: "Claude-Web",
-        disallow: "/",
-      },
-      {
-        userAgent: "Diffbot",
-        disallow: "/",
+        userAgent: "Google-Extended",
+        allow: AEO_ALLOW,
+        disallow: ["/api/", "/admin/", "/dashboard/"],
       },
       {
         userAgent: "Bytespider",
         disallow: "/",
       },
       {
-        userAgent: "FacebookBot",
-        disallow: "/",
-      },
-      {
-        userAgent: "Imagesift",
-        disallow: "/",
-      },
-      {
-        userAgent: "cohere-ai",
-        disallow: "/",
-      },
-      {
-        userAgent: "PerplexityBot",
-        disallow: "/",
+        userAgent: "CCBot",
+        allow: AEO_ALLOW,
+        disallow: ["/api/", "/admin/", "/dashboard/"],
       },
     ],
-    sitemap: "https://pm101topro.com/sitemap.xml",
+    sitemap: `${SITE_URL}/sitemap.xml`,
   }
 }

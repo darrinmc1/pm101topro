@@ -17,7 +17,7 @@ const STEPS = [
   {
     icon: Wand2,
     title: "Build real documents",
-    body: "Use the AI tool to turn what you learned into charters, registers, and reports.",
+    body: "Turn a messy status dump into a board-ready update, or generate charters and registers from a short questionnaire.",
   },
 ]
 
