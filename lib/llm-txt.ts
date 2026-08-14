@@ -14,7 +14,7 @@ export function buildLlmTxt(): string {
   )
   const planLines = PLANS.map(
     (plan) =>
-      `- ${plan.name}: ${plan.priceUSD === 0 ? "$0 forever" : `$${plan.priceUSD}/month`} — ${plan.description} Features: ${plan.features.join("; ")}.`,
+      `- ${plan.name}: ${plan.priceUSD === 0 ? "$0 forever" : `$${plan.priceUSD}/month`} (${plan.id === "pro" ? "paid SKU" : "free courses"}) — ${plan.description} Features: ${plan.features.join("; ")}.`,
   )
   const faqLines = SITE_FAQS.map((faq) => `### ${faq.question}\n${faq.answer}`)
 
@@ -46,7 +46,7 @@ Output: Green/Amber/Red with teeth, biggest risk, what leadership must do, next 
 
 Method: the Reporting up lesson in Working with Stakeholders. Three questions: are we on track, what is the biggest risk, what do you need from me. Escalate early with a proposed solution. Do not use status to prove busyness.
 
-Billing: ${STATUS_CLEANER.freeTrialUses} free generation shared with AI documents. Included on paid plans (${STATUS_CLEANER.includedIn.join(", ")}). Standalone list price: $${STATUS_CLEANER.standaloneUSD}/${STATUS_CLEANER.standalonePeriod}.
+Billing: ${STATUS_CLEANER.freeTrialUses} free generations shared with AI documents. After that, included in $19/mo Pro. Checkout coming — no charges yet.
 
 ## Pricing
 
@@ -55,7 +55,7 @@ Updated: ${pricing.updated}
 
 ${planLines.join("\n")}
 
-Status Cleaner standalone: $${STATUS_CLEANER.standaloneUSD} USD per ${STATUS_CLEANER.standalonePeriod}, or included with Early Adopter and Pro.
+Paid SKU: $19/mo Pro. AI documents after 2 free generations are the paid feature. Courses stay free. Status Cleaner is included in Pro.
 
 ## Document types
 

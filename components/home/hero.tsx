@@ -5,6 +5,7 @@ import { ArrowRight, BookOpen, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { COURSES, getFirstFreeLessonPath } from "@/lib/content"
+import { PRO_PRICE_LABEL } from "@/lib/pricing"
 
 const FIRST_COURSE = COURSES[0]
 const FIRST_LESSON = FIRST_COURSE.lessons.find((l) => l.isFree) ?? FIRST_COURSE.lessons[0]
@@ -43,7 +44,7 @@ export function Hero() {
                          border-border bg-surface px-3 py-1 text-xs font-medium
                          text-muted-foreground">
           <Sparkles className="h-3.5 w-3.5 text-accent-secondary" />
-          Free courses · No signup required
+          Free courses · {PRO_PRICE_LABEL} for AI docs
         </span>
 
         <div ref={headingRef} className="reveal-up mt-6 stagger-1">
@@ -60,7 +61,8 @@ export function Hero() {
                      leading-relaxed text-muted-foreground md:text-lg stagger-2"
         >
           Master project management from your first charter to running a PMO —
-          start with a free lesson, no account needed.
+          four course levels stay free. AI docs after two free generations are{" "}
+          {PRO_PRICE_LABEL}.
         </p>
 
         {/* Proof: real first lesson, reachable without signup */}

@@ -4,6 +4,7 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { DocumentWizard } from "@/components/tools/document-wizard"
 import { DOC_TYPES, getDocType } from "@/lib/documents"
+import { AI_FREE_LIMIT, PRO_PRICE_LABEL } from "@/lib/pricing"
 
 export function generateStaticParams() {
   return DOC_TYPES.map((doc) => ({ doc: doc.id }))
@@ -42,7 +43,10 @@ export default async function ToolPage({ params }: { params: Promise<{ doc: stri
           <Icon className="h-6 w-6" />
         </div>
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-foreground text-balance">{found.name}</h1>
+          <p className="font-mono text-[10px] uppercase tracking-widest text-accent-secondary">
+            Paid · {PRO_PRICE_LABEL} after {AI_FREE_LIMIT} free
+          </p>
+          <h1 className="mt-1 text-3xl font-bold tracking-tight text-foreground text-balance">{found.name}</h1>
           <p className="mt-2 leading-relaxed text-muted-foreground text-pretty">{found.blurb}</p>
         </div>
       </div>

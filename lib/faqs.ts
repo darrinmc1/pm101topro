@@ -33,7 +33,7 @@ export const STATUS_FAQS: FaqItem[] = [
     id: "price",
     question: "How much does Status Cleaner cost?",
     answer:
-      "One free generation is included with the same meter as AI documents. After that it ships with paid plans (Early Adopter $5/mo, Pro $10/mo). Standalone list price is $29/month if you only want the cleaner.",
+      "Two free generations are included with the same meter as AI documents. After that, Status Cleaner is part of $19/mo Pro. Checkout is coming — we are not charging cards yet.",
   },
 ]
 
@@ -43,13 +43,13 @@ export const SITE_FAQS: FaqItem[] = [
     id: "free-courses",
     question: "Are the courses really free?",
     answer:
-      "Yes. The course library is free to browse. The first lesson of every course is free with no account. Paid plans unlock unlimited AI tools, template packs, and early-adopter pricing.",
+      "Yes. All four course levels stay free. The paid SKU is $19/mo Pro, and it is for AI documents after two free generations — not for the course library.",
   },
   {
     id: "ai-docs",
     question: "How do the AI document tools work?",
     answer:
-      "Pick a document type (charter, risk register, RACI, status report, and more), answer a short questionnaire, and get an editable markdown draft. Free accounts get one shared AI generation; paid plans include unlimited drafts.",
+      "Pick a document type (charter, risk register, RACI, status report, and more), answer a short questionnaire, and get an editable markdown draft. Everyone gets two free AI generations. After that, unlimited drafts are $19/mo Pro. Checkout coming.",
   },
   {
     id: "methodologies",

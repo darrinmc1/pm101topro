@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowLeft, ArrowRight, Clock, Lock, Play } from "lucide-react"
+import { ArrowLeft, ArrowRight, Clock, Play } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -60,6 +60,7 @@ export default async function CourseDetailPage({
                 <Badge variant="outline">
                   {METHODOLOGY_LABEL[course.methodology]}
                 </Badge>
+                <Badge variant="success">Free course</Badge>
               </div>
               <h1 className="mt-4 text-4xl font-extrabold tracking-tightest text-foreground">
                 {course.title}
@@ -111,11 +112,7 @@ export default async function CourseDetailPage({
                     <h3 className="truncate font-medium text-foreground">
                       {lesson.title}
                     </h3>
-                    {lesson.isFree ? (
-                      <Badge variant="success">Free</Badge>
-                    ) : (
-                      <Lock className="h-3.5 w-3.5 text-muted-foreground" />
-                    )}
+                    <Badge variant="success">Free</Badge>
                   </div>
                   {lesson.summary && (
                     <p className="mt-0.5 truncate text-sm text-muted-foreground">

@@ -5,6 +5,7 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DOC_TYPES } from "@/lib/documents"
+import { AI_FREE_LIMIT, PRO_PRICE_LABEL } from "@/lib/pricing"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 
 /** Types a string character by character once the component mounts */
@@ -42,7 +43,7 @@ export function ToolTeaser() {
         {/* Left - copy */}
         <div ref={textRef} className="reveal-left">
           <span className="font-mono text-xs uppercase tracking-widest text-accent-secondary">
-            AI tools · one job each
+            Paid feature · {PRO_PRICE_LABEL} after {AI_FREE_LIMIT} free docs
           </span>
           <h2 className="mt-3 text-3xl font-bold tracking-tightest text-foreground">
             Paste a messy update.{" "}
