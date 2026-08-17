@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react"
 import type { LessonBody } from "@/lib/lesson-body"
 import { getDocType } from "@/lib/documents"
 import { Button } from "@/components/ui/button"
+import HumorBreak from "@/components/humor-break"
 
 export function LessonContent({ body }: { body: LessonBody }) {
   const practiceDoc = body.practiceDocId ? getDocType(body.practiceDocId) : undefined
@@ -11,7 +12,7 @@ export function LessonContent({ body }: { body: LessonBody }) {
     <article className="prose-invert max-w-none">
       <p className="text-lg leading-relaxed text-muted-foreground text-pretty">{body.intro}</p>
 
-      {body.sections.map((section) => (
+      {body.sections.map((section, si) => (
         <section key={section.id} id={section.id} className="mt-10 scroll-mt-24">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">{section.title}</h2>
           <div className="mt-3 space-y-4">
@@ -21,6 +22,7 @@ export function LessonContent({ body }: { body: LessonBody }) {
               </p>
             ))}
           </div>
+          {si === 1 && <HumorBreak tag="general" />}
         </section>
       ))}
 

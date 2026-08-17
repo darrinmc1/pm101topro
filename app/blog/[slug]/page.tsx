@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 import { ArrowLeft, Clock } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { BLOG_POSTS, formatDate, getPost } from "@/lib/blog"
+import HumorBreak from "@/components/humor-break"
 
 export function generateStaticParams() {
   return BLOG_POSTS.map((p) => ({ slug: p.slug }))
@@ -56,9 +57,12 @@ export default async function BlogPostPage({
       <div className="mt-8 space-y-5">
         <p className="text-lg leading-relaxed text-muted-foreground text-pretty">{post.excerpt}</p>
         {post.body.map((paragraph, i) => (
-          <p key={i} className="leading-relaxed text-foreground text-pretty">
-            {paragraph}
-          </p>
+          <div key={i}>
+            <p className="leading-relaxed text-foreground text-pretty">
+              {paragraph}
+            </p>
+            {i === 1 && <HumorBreak tag="general" />}
+          </div>
         ))}
       </div>
     </article>
