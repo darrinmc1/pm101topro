@@ -1,109 +1,79 @@
-import Link from "next/link"
-import { CheckCircle, ArrowRight } from "lucide-react"
-
-const plans = [
-  {
-    name: "Free",
-    price: "$0",
-    period: "forever",
-    description: "Get started with courses and basic tools. No credit card needed.",
-    features: [
-      "All courses & lessons",
-      "Basic tools access",
-      "Community access",
-    ],
-    cta: "Get Started Free",
-    href: "/learn",
-    highlighted: false,
-  },
-  {
-    name: "Early Adopter",
-    price: "$5",
-    period: "/month",
-    description: "Lock in early adopter pricing forever — never pay more.",
-    features: [
-      "Everything in Free",
-      "All Pro template packs",
-      "All interactive tools",
-      "30-day refund guarantee",
-      "Price locked forever",
-    ],
-    cta: "Lock in $5/mo",
-    href: "/improvements",
-    highlighted: true,
-  },
-  {
-    name: "Pro",
-    price: "$10",
-    period: "/month",
-    description: "Full access when it launches. More features coming.",
-    features: [
-      "Everything in Early Adopter",
-      "Advanced features & AI tools",
-      "New content priority",
-      "Priority support",
-    ],
-    cta: "Coming Soon",
-    href: "/improvements",
-    highlighted: false,
-  },
-]
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function PricingPage() {
   return (
-    <div className="min-h-screen bg-slate-50">
-      <section className="border-b bg-white py-16 text-center">
-        <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-700 mb-3">Pricing</p>
-          <h1 className="text-4xl font-bold tracking-tight md:text-5xl mb-4">Simple pricing. No surprises.</h1>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Start free. Lock in early adopter pricing. Upgrade when you&apos;re ready.
-          </p>
+    <div className="container mx-auto px-4 py-16">
+      <h1 className="text-5xl font-bold text-center mb-12">Flexible Pricing for Every Team</h1>
+      <p className="text-xl text-center text-gray-600 dark:text-gray-300 mb-16 max-w-3xl mx-auto">
+        Choose the plan that best fits your needs. Start with our free tier and scale as you grow.
+      </p>
+
+      <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+        {/* Free Tier */} 
+        <div className="border rounded-lg p-8 shadow-lg flex flex-col justify-between">
+          <div>
+            <h3 className="text-3xl font-bold mb-4">Free</h3>
+            <p className="text-gray-500 dark:text-gray-400 mb-6">Perfect for individuals and small teams starting out.</p>
+            <p className="text-5xl font-bold mb-6">$0<span className="text-xl font-normal text-gray-500 dark:text-gray-400">/month</span></p>
+            <ul className="space-y-3 text-gray-700 dark:text-gray-300 mb-8">
+              <li className="flex items-center"><span className="w-5 h-5 mr-2">✅</span> Core PM Tools</li>
+              <li className="flex items-center"><span className="w-5 h-5 mr-2">✅</span> Limited Course Access</li>
+              <li className="flex items-center"><span className="w-5 h-5 mr-2">✅</span> Community Support</li>
+            </ul>
+          </div>
+          <Link href="/sign-up">
+            <Button variant="outline" className="w-full">Start for Free</Button>
+          </Link>
         </div>
-      </section>
-      <section className="mx-auto max-w-6xl px-4 md:px-6 py-12">
-        <div className="grid gap-6 md:grid-cols-3 items-start">
-          {plans.map((plan) => (
-            <div key={plan.name} className={`rounded-xl border p-6 md:p-8 ${
-              plan.highlighted
-                ? "border-blue-500 bg-white shadow-lg ring-1 ring-blue-500 scale-105"
-                : "border-slate-200 bg-white"
-            }`}>
-              <h3 className="font-bold text-xl mb-2">{plan.name}</h3>
-              <div className="mb-4">
-                <span className="text-4xl font-bold">{plan.price}</span>
-                <span className="text-sm text-slate-500">{plan.period}</span>
-              </div>
-              <p className="text-sm text-slate-600 mb-6">{plan.description}</p>
-              {plan.name === "Early Adopter" && (
-                <p className="text-xs font-semibold uppercase tracking-wider text-blue-600 mb-4">
-                  🎯 Early Adopter — Lock In Forever
-                </p>
-              )}
-              <Link
-                href={plan.href}
-                className={`flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold transition-colors mb-8 ${
-                  plan.highlighted
-                    ? "bg-blue-600 text-white hover:bg-blue-700"
-                    : "border border-slate-300 text-slate-700 hover:bg-slate-50"
-                }`}
-              >
-                {plan.cta} <ArrowRight className="h-4 w-4" />
-              </Link>
-              <ul className="space-y-3">
-                {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-3 text-sm text-slate-600">
-                    <CheckCircle className={`h-4 w-4 mt-0.5 shrink-0 ${
-                      plan.highlighted ? "text-blue-500" : "text-slate-400"
-                    }`} />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+
+        {/* Pro Tier */} 
+        <div className="border rounded-lg p-8 shadow-xl bg-primary text-white flex flex-col justify-between">
+          <div>
+            <h3 className="text-3xl font-bold mb-4">Pro</h3>
+            <p className="text-gray-200 dark:text-gray-300 mb-6">Unlock advanced features and full course library.</p>
+            <p className="text-5xl font-bold mb-6">$29<span className="text-xl font-normal text-gray-200 dark:text-gray-300">/month</span></p>
+            <ul className="space-y-3 text-white mb-8">
+              <li className="flex items-center"><span className="w-5 h-5 mr-2">✅</span> All Free features</li>
+              <li className="flex items-center"><span className="w-5 h-5 mr-2">✅</span> Full Course Access</li>
+              <li className="flex items-center"><span className="w-5 h-5 mr-2">✅</span> Priority Support</li>
+              <li className="flex items-center"><span className="w-5 h-5 mr-2">✅</span> Advanced Analytics</li>
+            </ul>
+          </div>
+          <Link href="/sign-up">
+            <Button className="w-full">Choose Pro</Button>
+          </Link>
+        </div>
+
+        {/* Enterprise Tier */} 
+        <div className="border rounded-lg p-8 shadow-lg flex flex-col justify-between">
+          <div>
+            <h3 className="text-3xl font-bold mb-4">Enterprise</h3>
+            <p className="text-gray-500 dark:text-gray-400 mb-6">Custom solutions for large organizations.</p>
+            <p className="text-5xl font-bold mb-6">Contact Us<span className="text-xl font-normal text-gray-500 dark:text-gray-400">/month</span></p>
+            <ul className="space-y-3 text-gray-700 dark:text-gray-300 mb-8">
+              <li className="flex items-center"><span className="w-5 h-5 mr-2">✅</span> All Pro features</li>
+              <li className="flex items-center"><span className="w-5 h-5 mr-2">✅</span> Dedicated Account Manager</li>
+              <li className="flex items-center"><span className="w-5 h-5 mr-2">✅</span> Custom Integrations</li>
+              <li className="flex items-center"><span className="w-5 h-5 mr-2">✅</span> SSO & Enhanced Security</li>
+            </ul>
+          </div>
+          <Link href="/contact">
+            <Button variant="outline" className="w-full">Contact Sales</Button>
+          </Link>
+        </div>
+      </div>
+
+      <section className="mt-24 text-center">
+        <h2 className="text-4xl font-bold mb-8">Trusted by Leading Companies</h2>
+        <div className="flex flex-wrap justify-center items-center gap-8">
+          <img src="/logos/logo-1.svg" alt="Company Logo 1" className="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300" />
+          <img src="/logos/logo-2.svg" alt="Company Logo 2" className="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300" />
+          <img src="/logos/logo-3.svg" alt="Company Logo 3" className="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300" />
+          <img src="/logos/logo-4.svg" alt="Company Logo 4" className="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300" />
+          <img src="/logos/logo-5.svg" alt="Company Logo 5" className="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300" />
         </div>
       </section>
     </div>
-  )
+  );
 }
