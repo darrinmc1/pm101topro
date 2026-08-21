@@ -1,6 +1,6 @@
 export const SITE_URL = "https://pm101topro.com"
 
-export type PlanId = "free" | "early-adopter" | "pro"
+export type PlanId = "free" | "pro"
 
 export type Plan = {
   id: PlanId
@@ -16,22 +16,21 @@ export type Plan = {
 }
 
 /** Shared free-generation meter used by document tools and Status Cleaner. */
-export const AI_FREE_LIMIT = 1
+export const AI_FREE_LIMIT = 2
 export const AI_USAGE_STORAGE_KEY = "pm101_free_uses"
 
-/**
- * Status Cleaner is a layer on the existing AI tools — included on paid plans.
- * Standalone list price sits in the $19–$50 band for parseable AEO / offer markup.
- */
+/** Official paid SKU. Checkout is not live — do not charge cards. */
+export const PRO_PRICE_USD = 19
+export const PRO_PRICE_LABEL = "$19/mo Pro"
+export const PRO_SKU_NAME = "Pro"
+
 export const STATUS_CLEANER = {
   id: "status-cleaner",
   name: "Status Cleaner",
   tagline: "Paste a messy update. Get a status executives actually read.",
   path: "/tools/status",
   url: `${SITE_URL}/tools/status`,
-  includedIn: ["early-adopter", "pro"] as PlanId[],
-  standaloneUSD: 29,
-  standalonePeriod: "month" as const,
+  includedIn: ["pro"] as PlanId[],
   freeTrialUses: AI_FREE_LIMIT,
 }
 
@@ -41,56 +40,39 @@ export const PLANS: Plan[] = [
     name: "Free",
     priceUSD: 0,
     period: "forever",
-    description: "Get started with courses and a single AI generation. No credit card needed.",
+    description: "All four course levels stay free. Two AI document generations included.",
     features: [
-      "All courses & lessons",
-      "Basic tools access",
-      `${AI_FREE_LIMIT} AI generation (docs or Status Cleaner)`,
-      "Community access",
+      "All courses & lessons — free",
+      `${AI_FREE_LIMIT} free AI document generations`,
+      "Status Cleaner uses the same free meter",
+      "No credit card needed",
     ],
-    cta: "Get Started Free",
+    cta: "Start learning free",
     href: "/courses",
     highlighted: false,
     availability: "live",
   },
   {
-    id: "early-adopter",
-    name: "Early Adopter",
-    priceUSD: 5,
+    id: "pro",
+    name: PRO_SKU_NAME,
+    priceUSD: PRO_PRICE_USD,
     period: "month",
-    description: "Lock in early adopter pricing forever — never pay more. Includes Status Cleaner.",
+    description:
+      "Unlimited AI documents after your two free generations. Courses stay free.",
     features: [
       "Everything in Free",
-      "Status Cleaner — paste a dump, get a board-ready update",
-      "All Pro template packs",
-      "All interactive tools",
-      "30-day refund guarantee",
-      "Price locked forever",
+      "Unlimited AI document generator (8 doc types)",
+      "Unlimited Status Cleaner",
+      "Checkout coming — no charges yet",
     ],
-    cta: "Lock in $5/mo",
-    href: "/improvements",
+    cta: "Checkout coming",
+    href: "/pricing",
     highlighted: true,
     availability: "coming-soon",
   },
-  {
-    id: "pro",
-    name: "Pro",
-    priceUSD: 10,
-    period: "month",
-    description: "Full access when it launches. Status Cleaner and AI docs included.",
-    features: [
-      "Everything in Early Adopter",
-      "Unlimited Status Cleaner & AI document drafts",
-      "Advanced features & AI tools",
-      "New content priority",
-      "Priority support",
-    ],
-    cta: "Coming Soon",
-    href: "/improvements",
-    highlighted: false,
-    availability: "coming-soon",
-  },
 ]
+
+export const PRO_PLAN = PLANS.find((plan) => plan.id === "pro")!
 
 export function formatPlanPrice(plan: Plan): string {
   if (plan.priceUSD === 0) return "$0"
@@ -114,16 +96,15 @@ export type PricingJson = {
     features: string[]
     availability: Plan["availability"]
     url: string
+    sku?: string
   }>
   products: Array<{
     id: string
     name: string
     description: string
     url: string
-    billing: "included_in_paid_plans"
+    billing: "included_in_pro"
     includedIn: PlanId[]
-    standalonePrice: number
-    standalonePeriod: "month"
     freeTrialUses: number
     currency: "USD"
   }>
@@ -133,7 +114,7 @@ export function getPricingJson(): PricingJson {
   return {
     currency: "USD",
     url: `${SITE_URL}/pricing`,
-    updated: "2026-08-13",
+    updated: "2026-08-14",
     plans: PLANS.map((plan) => ({
       id: plan.id,
       name: plan.name,
@@ -142,7 +123,8 @@ export function getPricingJson(): PricingJson {
       description: plan.description,
       features: plan.features,
       availability: plan.availability,
-      url: `${SITE_URL}${plan.href === "/improvements" ? "/pricing" : plan.href}`,
+      url: `${SITE_URL}${plan.id === "pro" ? "/pricing" : plan.href}`,
+      sku: plan.id === "pro" ? PRO_PRICE_LABEL : undefined,
     })),
     products: [
       {
@@ -150,10 +132,8 @@ export function getPricingJson(): PricingJson {
         name: STATUS_CLEANER.name,
         description: STATUS_CLEANER.tagline,
         url: STATUS_CLEANER.url,
-        billing: "included_in_paid_plans",
+        billing: "included_in_pro",
         includedIn: STATUS_CLEANER.includedIn,
-        standalonePrice: STATUS_CLEANER.standaloneUSD,
-        standalonePeriod: STATUS_CLEANER.standalonePeriod,
         freeTrialUses: STATUS_CLEANER.freeTrialUses,
         currency: "USD",
       },

@@ -9,7 +9,10 @@ import {
 } from "@/components/ui/accordion"
 import { STATUS_FAQS, faqsToJsonLd } from "@/lib/faqs"
 import {
+  AI_FREE_LIMIT,
   PLANS,
+  PRO_PLAN,
+  PRO_PRICE_LABEL,
   STATUS_CLEANER,
   formatPlanPeriod,
   formatPlanPrice,
@@ -18,8 +21,7 @@ import {
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description:
-    "Start free. Lock in early adopter pricing. Status Cleaner is included on paid plans ($29/mo standalone).",
+  description: `Courses stay free. AI documents after ${AI_FREE_LIMIT} free generations are ${PRO_PRICE_LABEL}. Checkout coming — no charges yet.`,
 }
 
 function pricingJsonLd() {
@@ -32,7 +34,7 @@ function pricingJsonLd() {
     itemListElement: data.plans.map((plan, index) => ({
       "@type": "Offer",
       position: index + 1,
-      name: plan.name,
+      name: plan.id === "pro" ? PRO_PRICE_LABEL : plan.name,
       description: plan.description,
       url: plan.url,
       price: plan.price,
@@ -41,17 +43,8 @@ function pricingJsonLd() {
         plan.availability === "live"
           ? "https://schema.org/InStock"
           : "https://schema.org/PreOrder",
-      category: "Subscription",
+      category: plan.id === "pro" ? "Subscription" : "Free",
     })),
-    hasOfferCatalog: {
-      "@type": "Offer",
-      name: STATUS_CLEANER.name,
-      description: STATUS_CLEANER.tagline,
-      url: STATUS_CLEANER.url,
-      price: STATUS_CLEANER.standaloneUSD,
-      priceCurrency: "USD",
-      availability: "https://schema.org/PreOrder",
-    },
   }
 }
 
@@ -71,14 +64,15 @@ export default function PricingPage() {
       />
       <section className="border-b border-border bg-surface py-16 text-center">
         <div className="container">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Pricing</p>
-          <h1 className="mb-4 text-4xl font-bold tracking-tight md:text-5xl">Simple pricing. No surprises.</h1>
+          <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            SKU · {PRO_PRICE_LABEL}
+          </p>
+          <h1 className="mb-4 text-4xl font-bold tracking-tight md:text-5xl">
+            {PRO_PRICE_LABEL}. Courses stay free.
+          </h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Start free. Lock in early adopter pricing.{" "}
-            <Link href="/tools/status" className="text-accent hover:underline">
-              Status Cleaner
-            </Link>{" "}
-            is included on paid plans.
+            Two free AI document generations. After that, Pro is the paid SKU for unlimited
+            drafts. Checkout coming — we are not charging cards yet.
           </p>
           <p className="mt-3 font-mono text-xs text-muted-foreground">
             Machine-readable:{" "}
@@ -93,7 +87,7 @@ export default function PricingPage() {
         </div>
       </section>
       <section className="container py-12">
-        <div className="grid items-start gap-6 md:grid-cols-3">
+        <div className="mx-auto grid max-w-4xl items-start gap-6 md:grid-cols-2">
           {PLANS.map((plan) => (
             <div
               key={plan.id}
@@ -103,27 +97,40 @@ export default function PricingPage() {
                   : "border-border bg-surface"
               }`}
             >
-              <h3 className="mb-2 text-xl font-bold">{plan.name}</h3>
+              <div className="mb-2 flex items-center justify-between gap-3">
+                <h3 className="text-xl font-bold">{plan.name}</h3>
+                <span
+                  className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                    plan.id === "free"
+                      ? "bg-success/15 text-success"
+                      : "bg-accent/15 text-accent"
+                  }`}
+                >
+                  {plan.id === "free" ? "Free" : "Paid"}
+                </span>
+              </div>
               <div className="mb-4">
                 <span className="text-4xl font-bold">{formatPlanPrice(plan)}</span>
                 <span className="text-sm text-muted-foreground">{formatPlanPeriod(plan)}</span>
               </div>
-              <p className="mb-6 text-sm text-muted-foreground">{plan.description}</p>
-              {plan.id === "early-adopter" && (
-                <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-accent">
-                  Early Adopter — lock in forever
+              {plan.id === "pro" && (
+                <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-wider text-accent">
+                  {PRO_PRICE_LABEL}
                 </p>
               )}
-              <Link
-                href={plan.href}
-                className={`mb-8 flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold transition-colors ${
-                  plan.highlighted
-                    ? "bg-accent text-accent-foreground hover:bg-accent-glow"
-                    : "border border-border text-foreground hover:bg-surface-raised"
-                }`}
-              >
-                {plan.cta} <ArrowRight className="h-4 w-4" />
-              </Link>
+              <p className="mb-6 text-sm text-muted-foreground">{plan.description}</p>
+              {plan.id === "pro" ? (
+                <span className="mb-8 flex items-center justify-center gap-2 rounded-lg bg-accent px-4 py-3 text-sm font-semibold text-accent-foreground">
+                  {plan.cta} <ArrowRight className="h-4 w-4" />
+                </span>
+              ) : (
+                <Link
+                  href={plan.href}
+                  className="mb-8 flex items-center justify-center gap-2 rounded-lg border border-border px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-surface-raised"
+                >
+                  {plan.cta} <ArrowRight className="h-4 w-4" />
+                </Link>
+              )}
               <ul className="space-y-3">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -140,27 +147,25 @@ export default function PricingPage() {
           ))}
         </div>
 
-        <div className="mt-12 rounded-xl border border-border bg-surface p-6 md:p-8">
+        <div className="mx-auto mt-12 max-w-4xl rounded-xl border border-border bg-surface p-6 md:p-8">
           <p className="font-mono text-[10px] uppercase tracking-widest text-accent-secondary">
-            Product · {STATUS_CLEANER.id}
+            Included in {PRO_PRICE_LABEL}
           </p>
           <h2 className="mt-2 text-2xl font-bold text-foreground">{STATUS_CLEANER.name}</h2>
           <p className="mt-2 max-w-2xl text-muted-foreground">{STATUS_CLEANER.tagline}</p>
           <dl className="mt-6 grid gap-4 text-sm sm:grid-cols-3">
             <div>
-              <dt className="text-muted-foreground">Standalone list price</dt>
-              <dd className="mt-1 font-semibold tabular-nums text-foreground">
-                ${STATUS_CLEANER.standaloneUSD}/{STATUS_CLEANER.standalonePeriod}
-              </dd>
+              <dt className="text-muted-foreground">Billing</dt>
+              <dd className="mt-1 font-semibold text-foreground">Included in Pro</dd>
             </div>
             <div>
-              <dt className="text-muted-foreground">Included in</dt>
-              <dd className="mt-1 font-semibold text-foreground">Early Adopter, Pro</dd>
+              <dt className="text-muted-foreground">Paid SKU</dt>
+              <dd className="mt-1 font-semibold text-foreground">{PRO_PRICE_LABEL}</dd>
             </div>
             <div>
               <dt className="text-muted-foreground">Free trial</dt>
               <dd className="mt-1 font-semibold text-foreground">
-                {STATUS_CLEANER.freeTrialUses} shared AI generation
+                {STATUS_CLEANER.freeTrialUses} shared AI generations
               </dd>
             </div>
           </dl>
@@ -171,6 +176,10 @@ export default function PricingPage() {
             Try Status Cleaner <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
+
+        <p className="mx-auto mt-8 max-w-4xl text-center text-sm text-muted-foreground">
+          {PRO_PLAN.description} No Stripe checkout on this page.
+        </p>
 
         <section className="mx-auto mt-14 max-w-3xl" aria-labelledby="pricing-faq-heading">
           <h2 id="pricing-faq-heading" className="text-xl font-semibold text-foreground">

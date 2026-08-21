@@ -17,7 +17,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card } from "@/components/ui/card"
 import { SAMPLE_DUMP, type RagStatus, type StatusResult } from "@/lib/status-method"
 import { getFreeUsage, hasExhaustedFreeAi, incrementFreeUsage } from "@/lib/ai-usage"
-import { STATUS_CLEANER } from "@/lib/pricing"
+import { AI_FREE_LIMIT, PRO_PRICE_LABEL } from "@/lib/pricing"
 import { cn } from "@/lib/utils"
 
 type Phase = "input" | "working" | "result" | "error"
@@ -274,16 +274,19 @@ export function StatusCleaner() {
           </ul>
         </Card>
 
-        {source === "ai" && getFreeUsage() >= 1 && (
+        {source === "ai" && (
           <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4 text-center">
-            <p className="text-sm font-semibold text-amber-300">That was your free AI generation.</p>
+            <p className="text-sm font-semibold text-amber-300">
+              {getFreeUsage()} of {AI_FREE_LIMIT} free AI generations used
+            </p>
             <p className="mt-1 text-xs text-amber-400/80">
-              Status Cleaner is included on paid plans (${STATUS_CLEANER.standaloneUSD}/mo standalone).
+              After {AI_FREE_LIMIT} free uses, Status Cleaner is included in {PRO_PRICE_LABEL}.
+              Checkout coming.
             </p>
             <Button asChild className="mt-3" size="sm">
               <Link href="/pricing">
                 <Crown className="mr-1 h-4 w-4" />
-                See pricing
+                Checkout coming
               </Link>
             </Button>
           </div>
@@ -331,16 +334,19 @@ function SubscribeWall() {
       <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/10">
         <Crown className="h-8 w-8 text-accent" />
       </div>
-      <h2 className="mt-6 text-2xl font-bold text-foreground">Status Cleaner is on paid plans</h2>
+      <p className="mt-6 font-mono text-xs uppercase tracking-widest text-accent-secondary">
+        Paid · {PRO_PRICE_LABEL}
+      </p>
+      <h2 className="mt-2 text-2xl font-bold text-foreground">Status Cleaner is on Pro</h2>
       <p className="mx-auto mt-3 max-w-md text-muted-foreground">
-        You&apos;ve used the shared free AI generation. Early Adopter and Pro include Status Cleaner
-        and the document tools. Standalone list price is ${STATUS_CLEANER.standaloneUSD}/month.
+        You&apos;ve used the {AI_FREE_LIMIT} shared free AI generations. Unlimited Status Cleaner
+        and document drafts are {PRO_PRICE_LABEL}. Courses stay free. Checkout coming.
       </p>
       <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
         <Button asChild size="lg">
           <Link href="/pricing">
             <Crown className="mr-2 h-5 w-5" />
-            See pricing
+            Checkout coming
             <ArrowRight className="h-4 w-4" />
           </Link>
         </Button>

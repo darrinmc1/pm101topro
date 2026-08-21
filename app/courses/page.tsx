@@ -31,8 +31,8 @@ export default async function CoursesPage({
           </h1>
           <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
             Structured, practical project management courses across every major
-            methodology. The first lesson of every course is free - no card
-            required.
+            methodology. All four levels stay free. The paid SKU is $19/mo Pro
+            for AI documents after two free generations.
           </p>
         </header>
 

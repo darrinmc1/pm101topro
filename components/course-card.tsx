@@ -7,7 +7,6 @@ import { LevelBadge } from "@/components/level-badge"
 import { METHODOLOGY_LABEL, type Course } from "@/lib/content"
 
 export function CourseCard({ course }: { course: Course }) {
-  const hasFree = course.lessons.some((l) => l.isFree)
   const totalMins = course.lessons.reduce((sum, l) => sum + l.durationMins, 0)
 
   return (
@@ -23,7 +22,7 @@ export function CourseCard({ course }: { course: Course }) {
         <div className="mb-3 flex flex-wrap items-center gap-2">
           <LevelBadge level={course.level} />
           <Badge variant="outline">{METHODOLOGY_LABEL[course.methodology]}</Badge>
-          {hasFree && <Badge variant="success">Free lesson</Badge>}
+          <Badge variant="success">Free</Badge>
         </div>
 
         <h3 className="text-lg font-semibold leading-tight tracking-tight text-foreground">

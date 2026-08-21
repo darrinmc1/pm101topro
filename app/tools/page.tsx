@@ -4,7 +4,7 @@ import { ArrowRight, ClipboardList, Sparkles } from "lucide-react"
 import { DOC_TYPES } from "@/lib/documents"
 import { Card } from "@/components/ui/card"
 import { PmWisdom } from "@/components/pm-wisdom"
-import { STATUS_CLEANER } from "@/lib/pricing"
+import { AI_FREE_LIMIT, PRO_PRICE_LABEL, STATUS_CLEANER } from "@/lib/pricing"
 
 export const metadata: Metadata = {
   title: "AI PM Tools",
@@ -41,7 +41,7 @@ export default function ToolsPage() {
                 </div>
                 <div>
                   <p className="font-mono text-[10px] uppercase tracking-widest text-accent-secondary">
-                    One job · included on paid plans
+                    Paid · {PRO_PRICE_LABEL} after {AI_FREE_LIMIT} free
                   </p>
                   <h2 className="mt-1 text-2xl font-bold text-foreground">{STATUS_CLEANER.name}</h2>
                   <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
@@ -62,7 +62,8 @@ export default function ToolsPage() {
       <section className="container py-14">
         <h2 className="text-xl font-semibold text-foreground">Document generator</h2>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          Pick a type, answer a few questions, get an editable draft.
+          Pick a type, answer a few questions, get an editable draft. {AI_FREE_LIMIT} free
+          generations, then {PRO_PRICE_LABEL}. Courses stay free.
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {DOC_TYPES.map((doc) => {
@@ -73,7 +74,10 @@ export default function ToolsPage() {
                   <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-accent/10 text-accent">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <h2 className="mt-4 text-lg font-semibold text-foreground">{doc.name}</h2>
+                  <p className="mt-4 font-mono text-[10px] uppercase tracking-widest text-accent-secondary">
+                    Pro after {AI_FREE_LIMIT} free
+                  </p>
+                  <h2 className="mt-1 text-lg font-semibold text-foreground">{doc.name}</h2>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{doc.blurb}</p>
                   <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent">
                     Generate
