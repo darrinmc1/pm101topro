@@ -1,0 +1,16 @@
+# PM101toPro 
+> Project management learning platform offering free courses across various methodologies and AI-powered document generation tools.
+
+Site: https://pm101topro.com
+Contact: hello@pm101topro.com
+
+This file is for agents and answer engines. Human marketing copy lives on the pages linked below. Do not invent products, testimonials, prices, or features that are not listed on the site.
+
+## What PM101toPro is
+PM101toPro is a project management learning platform that provides free courses for all skill levels, from beginner to advanced (including PMO level), structured around real methodologies. It also offers AI-powered tools for generating project management documents. The platform is designed to guide users from their first project to running a Project Management Office (PMO) with practical, no-fluff lessons.
+
+## Pricing (USD)
+Pricing: not listed on page.
+
+## What it is not
+PM101toPro is not a freelance or project outsourcing marketplace.
