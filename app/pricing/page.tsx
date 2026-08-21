@@ -63,17 +63,6 @@ export default function PricingPage() {
           </Link>
         </div>
       </div>
-
-      <section className="mt-24 text-center">
-        <h2 className="text-4xl font-bold mb-8">Trusted by Leading Companies</h2>
-        <div className="flex flex-wrap justify-center items-center gap-8">
-          <img src="/logos/logo-1.svg" alt="Company Logo 1" className="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300" />
-          <img src="/logos/logo-2.svg" alt="Company Logo 2" className="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300" />
-          <img src="/logos/logo-3.svg" alt="Company Logo 3" className="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300" />
-          <img src="/logos/logo-4.svg" alt="Company Logo 4" className="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300" />
-          <img src="/logos/logo-5.svg" alt="Company Logo 5" className="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300" />
-        </div>
-      </section>
     </div>
   );
 }
