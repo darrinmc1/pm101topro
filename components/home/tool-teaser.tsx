@@ -1,150 +1,144 @@
-"use client"
-
-import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, FileText, ClipboardList, AlertTriangle, Users, BarChart2, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { DOC_TYPES } from "@/lib/documents"
-import { useScrollReveal } from "@/hooks/use-scroll-reveal"
+import { Card } from "@/components/ui/card"
 
-/** Types a string character by character once the component mounts */
-function useTypewriter(text: string, speed = 32) {
-  const [displayed, setDisplayed] = useState("")
-  const [done, setDone] = useState(false)
-  const idxRef = useRef(0)
-
-  useEffect(() => {
-    setDisplayed("")
-    setDone(false)
-    idxRef.current = 0
-    const interval = setInterval(() => {
-      idxRef.current++
-      setDisplayed(text.slice(0, idxRef.current))
-      if (idxRef.current >= text.length) {
-        clearInterval(interval)
-        setDone(true)
-      }
-    }, speed)
-    return () => clearInterval(interval)
-  }, [text, speed])
-
-  return { displayed, done }
-}
+const AI_TOOLS = [
+  {
+    icon: FileText,
+    title: "Project Charter Generator",
+    description:
+      "Describe your project in plain English and get a professionally structured charter — scope, objectives, stakeholders, and success criteria — ready to share with your sponsor in minutes.",
+  },
+  {
+    icon: AlertTriangle,
+    title: "Risk Register Builder",
+    description:
+      "Input your project context and receive a prioritised risk register with likelihood ratings, impact scores, and mitigation strategies aligned to PMBOK and Agile best practices.",
+  },
+  {
+    icon: ClipboardList,
+    title: "Status Report Writer",
+    description:
+      "Turn your bullet-point updates into a polished executive status report. Choose your audience — sponsor, PMO, or team — and the AI adapts the tone and detail level automatically.",
+  },
+  {
+    icon: Users,
+    title: "Stakeholder Map Creator",
+    description:
+      "Identify and categorise stakeholders by influence and interest. The tool generates a stakeholder register and suggests tailored engagement strategies for each group.",
+  },
+  {
+    icon: BarChart2,
+    title: "Lessons Learned Summariser",
+    description:
+      "Paste in retrospective notes or meeting transcripts and receive a structured lessons-learned document, complete with root-cause analysis and recommendations for future projects.",
+  },
+  {
+    icon: Sparkles,
+    title: "Agile Sprint Planner",
+    description:
+      "Describe your sprint goals and backlog items to generate a sprint plan with story breakdowns, acceptance criteria, and a definition of done — saving your team hours of ceremony prep.",
+  },
+]
 
 export function ToolTeaser() {
-  const textRef   = useScrollReveal<HTMLDivElement>({ threshold: 0.15 })
-  const mockupRef = useScrollReveal<HTMLDivElement>({ threshold: 0.2 })
-
   return (
-    <section className="border-b border-border py-20">
-      <div className="container grid items-center gap-12 lg:grid-cols-2">
-
-        {/* Left - copy */}
-        <div ref={textRef} className="reveal-left">
-          <span className="font-mono text-xs uppercase tracking-widest text-accent-secondary">
-            AI Document Generator
-          </span>
-          <h2 className="mt-3 text-3xl font-bold tracking-tightest text-foreground">
-            Answer a few questions.{" "}
-            <span className="text-accent text-glow">Get a real document.</span>
-          </h2>
-          <p className="mt-4 text-pretty leading-relaxed text-muted-foreground">
-            Our conversational AI interviews you like a senior PM consultant,
-            then generates a professional, ready-to-use document in clean
-            formatting. Eight document types cover the whole project lifecycle.
+    <section className="border-t border-border bg-surface">
+      <div className="container py-20">
+        {/* Header */}
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-sm font-medium uppercase tracking-widest text-accent">
+            AI-Powered Document Tools
           </p>
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tightest text-foreground text-balance">
+            Professional PM documents in minutes, not hours
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-muted-foreground text-pretty">
+            Every pm101toPro plan includes access to our suite of AI document tools. Apply what
+            you've learned immediately — describe your project, and the AI handles the formatting,
+            structure, and PM best-practice language so you can focus on leading.
+          </p>
+        </div>
 
-          <ul className="mt-6 grid grid-cols-2 gap-3">
-            {DOC_TYPES.map((doc, i) => (
-              <li
-                key={doc.id}
-                className={`flex items-center gap-2.5 text-sm text-foreground
-                            reveal-up stagger-${Math.min(i + 1, 5)}`}
-              >
-                <span className="inline-flex h-8 w-8 shrink-0 items-center
-                                 justify-center rounded-lg bg-accent/15 text-accent">
-                  <doc.icon className="h-4 w-4" />
+        {/* Tool Cards */}
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {AI_TOOLS.map((tool) => (
+            <Card
+              key={tool.title}
+              className="flex flex-col gap-4 border-border bg-background p-6"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
+                <tool.icon className="h-5 w-5 text-accent" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-foreground">{tool.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
+                  {tool.description}
+                </p>
+              </div>
+            </Card>
+          ))}
+        </div>
+
+        {/* How it works callout */}
+        <div className="mt-12 rounded-xl border border-accent/30 bg-accent/5 p-8">
+          <div className="mx-auto max-w-3xl">
+            <p className="text-sm font-medium uppercase tracking-widest text-accent">How it works</p>
+            <h3 className="mt-2 text-xl font-bold text-foreground">
+              Three steps from blank page to boardroom-ready document
+            </h3>
+            <ol className="mt-6 space-y-4">
+              <li className="flex gap-4">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent text-xs font-bold text-white">
+                  1
                 </span>
-                {doc.name}
+                <div>
+                  <p className="font-semibold text-foreground">Choose your document type</p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Select from charters, risk registers, status reports, stakeholder maps, and more
+                    — each tool is purpose-built for a specific PM deliverable.
+                  </p>
+                </div>
               </li>
-            ))}
-          </ul>
+              <li className="flex gap-4">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent text-xs font-bold text-white">
+                  2
+                </span>
+                <div>
+                  <p className="font-semibold text-foreground">Describe your project context</p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Answer a short set of guided prompts about your project — no jargon required.
+                    The AI uses your answers to tailor every section to your specific situation.
+                  </p>
+                </div>
+              </li>
+              <li className="flex gap-4">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent text-xs font-bold text-white">
+                  3
+                </span>
+                <div>
+                  <p className="font-semibold text-foreground">Download, edit, and deliver</p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Get a structured, professionally worded document you can copy, export, or refine.
+                    Use it as-is or as a strong first draft — either way you're hours ahead.
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
 
-          <Button asChild className="mt-8 group">
-            <Link href="/pricing">
-              See pricing
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        {/* CTA */}
+        <div className="mt-10 flex justify-center">
+          <Button asChild size="lg">
+            <Link href="/tools">
+              Explore all AI tools
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </div>
-
-        {/* Right - animated mockup */}
-        <div ref={mockupRef} className="reveal-right">
-          <DocMockup />
-        </div>
-
       </div>
     </section>
-  )
-}
-
-function DocMockup() {
-  const USER_MSG = "The project is a mobile banking app redesign."
-  const { displayed, done } = useTypewriter(USER_MSG, 30)
-
-  return (
-    <div className="glass rounded-2xl p-4 shadow-blue-glow">
-      {/* Window chrome */}
-      <div className="flex items-center gap-1.5 border-b border-white/10 pb-3">
-        <span className="h-2.5 w-2.5 rounded-full bg-danger/70" />
-        <span className="h-2.5 w-2.5 rounded-full bg-warning/70" />
-        <span className="h-2.5 w-2.5 rounded-full bg-success/70" />
-        <span className="ml-3 font-mono text-xs text-muted-foreground">
-          project-charter.md
-        </span>
-      </div>
-
-      <div className="space-y-4 py-4">
-        {/* User message - types in */}
-        <div className="flex justify-end">
-          <div className="max-w-[80%] rounded-2xl rounded-br-sm bg-accent
-                          px-4 py-2.5 text-sm text-accent-foreground min-h-[2.5rem]">
-            {displayed}
-            {!done && (
-              <span className="cursor-blink ml-0.5 inline-block h-3.5 w-px
-                               bg-accent-foreground align-middle" />
-            )}
-          </div>
-        </div>
-
-        {/* AI response - fades in after typing finishes */}
-        <div
-          className={`flex justify-start transition-opacity duration-500 ${done ? "opacity-100" : "opacity-0"}`}
-        >
-          <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-surface-raised
-                          px-4 py-2.5 text-sm text-foreground">
-            Great. Who is the project sponsor or key decision-maker?
-          </div>
-        </div>
-
-        {/* Generated doc preview - fades in after AI response */}
-        <div
-          className={`rounded-xl border border-white/10 bg-background/60 p-4
-                      transition-all duration-700 delay-300
-                      ${done ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
-        >
-          <p className="font-mono text-xs uppercase tracking-widest text-accent-secondary">
-            # Project Charter
-          </p>
-          <div className="mt-3 space-y-2">
-            <div className="h-2 w-3/4 rounded bg-surface-raised" />
-            <div className="h-2 w-full rounded bg-surface-raised" />
-            <div className="h-2 w-5/6 rounded bg-surface-raised" />
-            <div className="mt-3 h-2 w-1/2 rounded bg-accent/40" />
-            <div className="h-2 w-full rounded bg-surface-raised" />
-          </div>
-        </div>
-      </div>
-    </div>
   )
 }
