@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { ArrowLeft, ArrowRight, Check, Circle, Lock, PlayCircle } from "lucide-react"
+import { ArrowLeft, ArrowRight, Check, Circle, PlayCircle } from "lucide-react"
 import type { Course, Lesson } from "@/lib/content"
 import { LEVEL_LABEL } from "@/lib/content"
 import type { LessonBody } from "@/lib/lesson-body"
@@ -127,11 +127,9 @@ export function LessonViewer({
           </span>
           <span aria-hidden>·</span>
           <span>{lesson.durationMins} min</span>
-          {lesson.isFree && (
-            <span className="rounded-full bg-accent/10 px-2 py-0.5 text-xs font-medium text-accent">
-              Free preview
-            </span>
-          )}
+          <span className="rounded-full bg-success/15 px-2 py-0.5 text-xs font-medium text-success">
+            Free
+          </span>
         </div>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground text-balance">
           {lesson.title}

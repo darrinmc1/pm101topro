@@ -16,7 +16,8 @@ import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
-import { hasExhaustedFreeAi, incrementFreeUsage } from "@/lib/ai-usage"
+import { getFreeUsage, hasExhaustedFreeAi, incrementFreeUsage } from "@/lib/ai-usage"
+import { AI_FREE_LIMIT, PRO_PRICE_LABEL } from "@/lib/pricing"
 
 type Phase = "questions" | "generating" | "result" | "error"
 
@@ -152,20 +153,7 @@ export function DocumentWizard({ doc }: { doc: WizardDoc }) {
           />
         </Card>
 
-        <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4 text-center">
-          <p className="text-sm text-amber-300 font-semibold">
-            ✨ That was your free generation!
-          </p>
-          <p className="mt-1 text-xs text-amber-400/80">
-            Subscribe to Pro for unlimited AI document generation, full course access, and more.
-          </p>
-          <Button asChild className="mt-3" size="sm">
-            <Link href="/pricing">
-              <Crown className="mr-1 h-4 w-4" />
-              Go Pro
-            </Link>
-          </Button>
-        </div>
+        <FreeMeterBanner used={getFreeUsage()} />
       </div>
     )
   }
@@ -266,32 +254,56 @@ export function DocumentWizard({ doc }: { doc: WizardDoc }) {
   )
 }
 
-/** Subscription wall shown after the free trial is exhausted */
+function FreeMeterBanner({ used }: { used: number }) {
+  const remaining = Math.max(0, AI_FREE_LIMIT - used)
+  return (
+    <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4 text-center">
+      <p className="text-sm font-semibold text-amber-300">
+        {remaining > 0
+          ? `${used} of ${AI_FREE_LIMIT} free AI generations used`
+          : `Those were your ${AI_FREE_LIMIT} free AI generations`}
+      </p>
+      <p className="mt-1 text-xs text-amber-400/80">
+        Further AI documents are {PRO_PRICE_LABEL}. Courses stay free. Checkout coming.
+      </p>
+      <Button asChild className="mt-3" size="sm">
+        <Link href="/pricing">
+          <Crown className="mr-1 h-4 w-4" />
+          Checkout coming
+        </Link>
+      </Button>
+    </div>
+  )
+}
+
+/** Wall shown after the two free AI generations are used. No Stripe. */
 function SubscribeWall() {
   return (
     <Card className="border-border bg-surface p-10 text-center">
       <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/10">
         <Crown className="h-8 w-8 text-accent" />
       </div>
-      <h2 className="mt-6 text-2xl font-bold text-foreground tabular-nums">enable unlimited AI document generation</h2>
+      <p className="mt-6 font-mono text-xs uppercase tracking-widest text-accent-secondary">
+        Paid · {PRO_PRICE_LABEL}
+      </p>
+      <h2 className="mt-2 text-2xl font-bold text-foreground tabular-nums">
+        AI docs after {AI_FREE_LIMIT} free generations are Pro
+      </h2>
       <p className="mx-auto mt-3 max-w-md text-muted-foreground">
-        You&apos;ve used your free generation. Subscribe to Pro for unlimited AI-powered documents,
-        every course at every level, and downloadable templates.
+        You&apos;ve used your {AI_FREE_LIMIT} free AI generations. Unlimited document drafts are{" "}
+        {PRO_PRICE_LABEL}. Courses stay free. Checkout coming — we are not charging cards yet.
       </p>
       <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
         <Button asChild size="lg">
           <Link href="/pricing">
             <Crown className="mr-2 h-5 w-5" />
-            Go Pro &mdash; &pound;12/month
+            Checkout coming
           </Link>
         </Button>
         <Button asChild variant="ghost" size="lg">
           <Link href="/courses">Browse free courses instead</Link>
         </Button>
       </div>
-      <p className="mt-4 text-xs text-muted-foreground">
-        Free tier includes the full 101 Beginner track and the first lesson of every course.
-      </p>
     </Card>
   )
 }

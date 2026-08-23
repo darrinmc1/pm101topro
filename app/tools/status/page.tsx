@@ -9,7 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { STATUS_FAQS, faqsToJsonLd } from "@/lib/faqs"
-import { SITE_URL, STATUS_CLEANER } from "@/lib/pricing"
+import { AI_FREE_LIMIT, PRO_PRICE_LABEL, PRO_PRICE_USD, SITE_URL, STATUS_CLEANER } from "@/lib/pricing"
 
 export const metadata: Metadata = {
   title: "Status Cleaner",
@@ -34,12 +34,12 @@ export default function StatusCleanerPage() {
     },
     offers: {
       "@type": "Offer",
-      price: STATUS_CLEANER.standaloneUSD,
+      name: PRO_PRICE_LABEL,
+      price: PRO_PRICE_USD,
       priceCurrency: "USD",
       availability: "https://schema.org/PreOrder",
       url: `${SITE_URL}/pricing`,
-      description:
-        "Included on Early Adopter and Pro. Standalone list price $29/month. One free generation on the shared AI meter.",
+      description: `Included in ${PRO_PRICE_LABEL}. ${AI_FREE_LIMIT} free generations on the shared AI meter. Checkout coming.`,
     },
   }
 
@@ -69,7 +69,7 @@ export default function StatusCleanerPage() {
           </div>
           <div>
             <p className="font-mono text-[10px] uppercase tracking-widest text-accent-secondary">
-              One job · not a chatbot
+              Paid · {PRO_PRICE_LABEL} after {AI_FREE_LIMIT} free
             </p>
             <h1 className="mt-1 text-3xl font-bold tracking-tight text-foreground text-balance">
               Status Cleaner

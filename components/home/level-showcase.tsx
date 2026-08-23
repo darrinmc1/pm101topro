@@ -25,11 +25,14 @@ export function LevelShowcase() {
       <div className="container">
 
         <div ref={headingRef} className="reveal-up mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tightest text-foreground">
+          <p className="font-mono text-xs uppercase tracking-widest text-success">
+            Free · all four levels
+          </p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tightest text-foreground">
             Four levels. One journey.
           </h2>
           <p className="mt-3 text-muted-foreground">
-            Follow the level rail from 101 all the way to running a PMO.
+            Follow the level rail from 101 all the way to running a PMO. Courses stay free.
           </p>
         </div>
 
