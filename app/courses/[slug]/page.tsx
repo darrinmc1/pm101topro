@@ -1,17 +1,12 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowLeft, ArrowRight, Clock, Lock, Play } from "lucide-react"
-
+import { ArrowLeft, Clock, BookOpen, BarChart2, Tag } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
 import { LevelBadge } from "@/components/level-badge"
-import { LevelRail } from "@/components/level-rail"
-import {
-  COURSES,
-  METHODOLOGY_LABEL,
-  getCourse,
-} from "@/lib/content"
+import { COURSES, getCourse } from "@/lib/courses"
 
 export function generateStaticParams() {
   return COURSES.map((c) => ({ slug: c.slug }))
@@ -25,7 +20,10 @@ export async function generateMetadata({
   const { slug } = await params
   const course = getCourse(slug)
   if (!course) return { title: "Course not found" }
-  return { title: course.title, description: course.description }
+  return {
+    title: course.title,
+    description: course.description,
+  }
 }
 
 export default async function CourseDetailPage({
@@ -37,102 +35,104 @@ export default async function CourseDetailPage({
   const course = getCourse(slug)
   if (!course) notFound()
 
-  const totalMins = course.lessons.reduce((s, l) => s + l.durationMins, 0)
-  const firstLesson = course.lessons[0]
+  const courseSchema = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: course.title,
+    description: course.description,
+    url: `https://pm101topro.com/courses/${course.slug}`,
+    provider: {
+      "@type": "Organization",
+      name: "pm101toPro",
+      sameAs: "https://pm101topro.com",
+    },
+    educationalLevel: course.level,
+    teaches: course.methodology,
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "online",
+      courseWorkload: course.duration ? `PT${course.duration}` : undefined,
+      instructor: {
+        "@type": "Organization",
+        name: "pm101toPro",
+      },
+    },
+    educationalCredentialAwarded: {
+      "@type": "EducationalOccupationalCredential",
+      name: `${course.title} Completion Certificate`,
+      credentialCategory: "certificate",
+    },
+  }
 
   return (
-    <div>
-      <section className="relative border-b border-border">
-        <div className="absolute inset-0 bg-dot-grid opacity-40" aria-hidden="true" />
-        <div className="container relative py-12">
-          <Link
-            href="/courses"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            All courses
-          </Link>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
+      />
+      <article className="container max-w-3xl py-12">
+        <Link
+          href="/courses"
+          className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          All courses
+        </Link>
 
-          <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
-            <div className="max-w-2xl">
-              <div className="flex flex-wrap items-center gap-2">
-                <LevelBadge level={course.level} />
-                <Badge variant="outline">
-                  {METHODOLOGY_LABEL[course.methodology]}
-                </Badge>
-              </div>
-              <h1 className="mt-4 text-4xl font-extrabold tracking-tightest text-foreground">
-                {course.title}
-              </h1>
-              <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">
-                {course.description}
-              </p>
-              <div className="mt-6 flex items-center gap-5 text-sm text-muted-foreground">
-                <span>{course.lessons.length} lessons</span>
-                <span className="flex items-center gap-1.5">
-                  <Clock className="h-4 w-4" />
-                  {totalMins} min total
-                </span>
-              </div>
-              <Button asChild size="lg" className="mt-7">
-                <Link href={`/learn/${course.slug}/${firstLesson.slug}`}>
-                  Start first lesson free
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-
-            <div className="rounded-xl border border-border bg-surface p-5">
-              <p className="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                Your level rail
-              </p>
-              <LevelRail completionPercent={0} currentLevel={course.level} />
-            </div>
+        <div className="mt-6">
+          <div className="flex flex-wrap items-center gap-2">
+            <LevelBadge level={course.level} />
+            <Badge variant="outline">{course.methodology}</Badge>
+          </div>
+          <h1 className="mt-4 text-3xl font-extrabold tracking-tightest text-foreground text-balance sm:text-4xl">
+            {course.title}
+          </h1>
+          <p className="mt-4 text-lg leading-relaxed text-muted-foreground text-pretty">
+            {course.description}
+          </p>
+          <div className="mt-5 flex flex-wrap items-center gap-5 text-sm text-muted-foreground">
+            {course.duration && (
+              <span className="flex items-center gap-1.5">
+                <Clock className="h-4 w-4" />
+                {course.duration}
+              </span>
+            )}
+            {course.lessons && (
+              <span className="flex items-center gap-1.5">
+                <BookOpen className="h-4 w-4" />
+                {course.lessons} lessons
+              </span>
+            )}
+            <span className="flex items-center gap-1.5">
+              <BarChart2 className="h-4 w-4" />
+              {course.level}
+            </span>
           </div>
         </div>
-      </section>
 
-      <section className="container py-12">
-        <h2 className="text-2xl font-bold tracking-tight text-foreground">
-          Lessons
-        </h2>
-        <ol className="mt-6 flex flex-col gap-3">
-          {course.lessons.map((lesson, i) => (
-            <li key={lesson.slug}>
-              <Link
-                href={`/learn/${course.slug}/${lesson.slug}`}
-                className="group flex items-center gap-4 rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent/50"
-              >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface-raised font-mono text-sm text-muted-foreground">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="truncate font-medium text-foreground">
-                      {lesson.title}
-                    </h3>
-                    {lesson.isFree ? (
-                      <Badge variant="success">Free</Badge>
-                    ) : (
-                      <Lock className="h-3.5 w-3.5 text-muted-foreground" />
-                    )}
-                  </div>
-                  {lesson.summary && (
-                    <p className="mt-0.5 truncate text-sm text-muted-foreground">
-                      {lesson.summary}
-                    </p>
-                  )}
-                </div>
-                <span className="hidden shrink-0 items-center gap-1.5 text-xs text-muted-foreground sm:flex">
-                  <Clock className="h-3.5 w-3.5" />
-                  {lesson.durationMins} min
-                </span>
-                <Play className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-accent" />
-              </Link>
-            </li>
-          ))}
-        </ol>
-      </section>
-    </div>
+        {course.topics && course.topics.length > 0 && (
+          <Card className="mt-8 border-border bg-surface p-6">
+            <h2 className="text-lg font-bold text-foreground">What you&apos;ll learn</h2>
+            <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+              {course.topics.map((topic: string) => (
+                <li key={topic} className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <Tag className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent" />
+                  {topic}
+                </li>
+              ))}
+            </ul>
+          </Card>
+        )}
+
+        <div className="mt-8 flex gap-3">
+          <Button asChild>
+            <Link href={`/learn/${course.slug}/1`}>Start learning</Link>
+          </Button>
+          <Button variant="outline" asChild>
+            <Link href="/courses">Browse all courses</Link>
+          </Button>
+        </div>
+      </article>
+    </>
   )
 }
