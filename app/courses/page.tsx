@@ -1,67 +1,69 @@
 import type { Metadata } from "next"
 import { CoursesBrowser } from "@/components/courses-browser"
+import { COURSES } from "@/lib/courses"
 
 export const metadata: Metadata = {
-  title: "Courses – PMP, Agile, Scrum & PMO Training",
+  title: "Courses",
   description:
-    "Browse project management courses covering PMP certification prep, Agile delivery, Scrum framework, and PMO setup. Structured learning from 101 to Pro.",
+    "Browse all pm101toPro project management courses — PMP, Agile, Scrum, and PMO tracks from beginner to advanced.",
 }
 
-const METHODOLOGY_INTROS: Record<string, { heading: string; body: string }> = {
-  pmp: {
-    heading: "PMP Certification Courses",
-    body: "Build the knowledge base required for PMP certification. Our courses follow PMBOK-aligned principles — initiating, planning, executing, monitoring, and closing — so you learn the language and practices that certified project managers use every day.",
-  },
-  agile: {
-    heading: "Agile Project Management Courses",
-    body: "Learn how to deliver value iteratively with Agile. From the Agile Manifesto to real-world adaptive planning, these courses give you the mindset and tools to lead Agile teams confidently.",
-  },
-  scrum: {
-    heading: "Scrum Framework Courses",
-    body: "Master the Scrum framework — sprints, backlogs, ceremonies, and roles. Practical, hands-on content designed for developers, product owners, and anyone working in a Scrum team.",
-  },
-  pmo: {
-    heading: "PMO Setup & Management Courses",
-    body: "Learn how to establish, run, and evolve a Project Management Office. From governance models to executive reporting, these advanced courses prepare you to lead at the organisational level.",
-  },
-}
-
-export default async function CoursesPage({
-  searchParams,
-}: {
-  searchParams?: Promise<{ methodology?: string }>
-}) {
-  const resolved = searchParams ? await searchParams : {}
-  const methodology = resolved?.methodology?.toLowerCase() ?? ""
-  const intro = METHODOLOGY_INTROS[methodology] ?? null
+export default function CoursesPage() {
+  const coursesListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "pm101toPro Project Management Courses",
+    description:
+      "Project management courses covering PMP, Agile, Scrum, and PMO from beginner to advanced level.",
+    url: "https://pm101topro.com/courses",
+    numberOfItems: COURSES.length,
+    itemListElement: COURSES.map((course, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Course",
+        name: course.title,
+        description: course.description,
+        url: `https://pm101topro.com/courses/${course.slug}`,
+        provider: {
+          "@type": "Organization",
+          name: "pm101toPro",
+          sameAs: "https://pm101topro.com",
+        },
+        educationalLevel: course.level,
+        teaches: course.methodology,
+        hasCourseInstance: {
+          "@type": "CourseInstance",
+          courseMode: "online",
+          instructor: {
+            "@type": "Organization",
+            name: "pm101toPro",
+          },
+        },
+        educationalCredentialAwarded: {
+          "@type": "EducationalOccupationalCredential",
+          name: `${course.title} Completion Certificate`,
+          credentialCategory: "certificate",
+        },
+      },
+    })),
+  }
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(coursesListSchema) }}
+      />
       <section className="border-b border-border">
         <div className="container py-14">
-          {intro ? (
-            <>
-              <p className="text-sm font-medium uppercase tracking-widest text-accent">Methodology</p>
-              <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-tightest text-foreground text-balance">
-                {intro.heading}
-              </h1>
-              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
-                {intro.body}
-              </p>
-            </>
-          ) : (
-            <>
-              <h1 className="text-4xl font-extrabold tracking-tightest text-foreground">
-                All courses
-              </h1>
-              <p className="mt-3 max-w-2xl text-pretty leading-relaxed text-muted-foreground">
-                Structured project management training covering PMP, Agile, Scrum, PMO, and general practice — from your first project to running the room.
-              </p>
-            </>
-          )}
+          <h1 className="text-4xl font-extrabold tracking-tightest text-foreground">Courses</h1>
+          <p className="mt-3 max-w-2xl text-pretty leading-relaxed text-muted-foreground">
+            Every course is built around real project work — pick a methodology, choose your level,
+            and start building skills you can use tomorrow.
+          </p>
         </div>
       </section>
-
       <CoursesBrowser />
     </>
   )
