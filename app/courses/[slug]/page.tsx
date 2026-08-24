@@ -1,17 +1,12 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowLeft, ArrowRight, Clock, Lock, Play } from "lucide-react"
-
+import Link from "next/link"
+import { ArrowLeft, BookOpen, Clock, GraduationCap, Lock } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
 import { LevelBadge } from "@/components/level-badge"
-import { LevelRail } from "@/components/level-rail"
-import {
-  COURSES,
-  METHODOLOGY_LABEL,
-  getCourse,
-} from "@/lib/content"
+import { COURSES, getCourse } from "@/lib/courses"
 
 export function generateStaticParams() {
   return COURSES.map((c) => ({ slug: c.slug }))
@@ -25,7 +20,10 @@ export async function generateMetadata({
   const { slug } = await params
   const course = getCourse(slug)
   if (!course) return { title: "Course not found" }
-  return { title: course.title, description: course.description }
+  return {
+    title: course.title,
+    description: course.description,
+  }
 }
 
 export default async function CourseDetailPage({
@@ -37,102 +35,141 @@ export default async function CourseDetailPage({
   const course = getCourse(slug)
   if (!course) notFound()
 
-  const totalMins = course.lessons.reduce((s, l) => s + l.durationMins, 0)
-  const firstLesson = course.lessons[0]
+  const totalMins = course.lessons.reduce((sum, l) => sum + l.durationMins, 0)
+
+  const courseSchema = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: course.title,
+    description: course.description,
+    url: `https://www.pm101topro.com/courses/${course.slug}`,
+    provider: {
+      "@type": "Organization",
+      name: "pm101toPro",
+      url: "https://www.pm101topro.com",
+    },
+    educationalLevel: course.level,
+    timeRequired: `PT${totalMins}M`,
+    numberOfCredits: course.lessons.length,
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "online",
+      instructor: {
+        "@type": "Organization",
+        name: "pm101toPro",
+      },
+    },
+  }
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.pm101topro.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Courses",
+        item: "https://www.pm101topro.com/courses",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: course.title,
+        item: `https://www.pm101topro.com/courses/${course.slug}`,
+      },
+    ],
+  }
 
   return (
-    <div>
-      <section className="relative border-b border-border">
-        <div className="absolute inset-0 bg-dot-grid opacity-40" aria-hidden="true" />
-        <div className="container relative py-12">
-          <Link
-            href="/courses"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            All courses
-          </Link>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <div className="container max-w-3xl py-12">
+        <Link
+          href="/courses"
+          className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          All courses
+        </Link>
 
-          <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
-            <div className="max-w-2xl">
-              <div className="flex flex-wrap items-center gap-2">
-                <LevelBadge level={course.level} />
-                <Badge variant="outline">
-                  {METHODOLOGY_LABEL[course.methodology]}
-                </Badge>
-              </div>
-              <h1 className="mt-4 text-4xl font-extrabold tracking-tightest text-foreground">
-                {course.title}
-              </h1>
-              <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">
-                {course.description}
-              </p>
-              <div className="mt-6 flex items-center gap-5 text-sm text-muted-foreground">
-                <span>{course.lessons.length} lessons</span>
-                <span className="flex items-center gap-1.5">
-                  <Clock className="h-4 w-4" />
-                  {totalMins} min total
-                </span>
-              </div>
-              <Button asChild size="lg" className="mt-7">
-                <Link href={`/learn/${course.slug}/${firstLesson.slug}`}>
-                  Start first lesson free
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-
-            <div className="rounded-xl border border-border bg-surface p-5">
-              <p className="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                Your level rail
-              </p>
-              <LevelRail completionPercent={0} currentLevel={course.level} />
-            </div>
+        <div className="mt-6 space-y-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <LevelBadge level={course.level} />
+            <Badge variant="outline">{course.methodology}</Badge>
+          </div>
+          <h1 className="text-3xl font-extrabold tracking-tightest text-foreground text-balance sm:text-4xl">
+            {course.title}
+          </h1>
+          <p className="text-lg leading-relaxed text-muted-foreground text-pretty">
+            {course.description}
+          </p>
+          <div className="flex flex-wrap items-center gap-5 pt-1 text-sm text-muted-foreground">
+            <span className="flex items-center gap-1.5">
+              <BookOpen className="h-4 w-4" />
+              {course.lessons.length} lessons
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Clock className="h-4 w-4" />
+              {totalMins} min total
+            </span>
           </div>
         </div>
-      </section>
 
-      <section className="container py-12">
-        <h2 className="text-2xl font-bold tracking-tight text-foreground">
-          Lessons
-        </h2>
-        <ol className="mt-6 flex flex-col gap-3">
-          {course.lessons.map((lesson, i) => (
-            <li key={lesson.slug}>
-              <Link
-                href={`/learn/${course.slug}/${lesson.slug}`}
-                className="group flex items-center gap-4 rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent/50"
+        {/* Lessons */}
+        <div className="mt-10 space-y-3">
+          <h2 className="text-lg font-semibold text-foreground">Lessons</h2>
+          {course.lessons.map((lesson, idx) => {
+            const isFree = idx === 0
+            return (
+              <Card
+                key={lesson.slug}
+                className="flex items-center justify-between border-border bg-surface p-4"
               >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface-raised font-mono text-sm text-muted-foreground">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="truncate font-medium text-foreground">
-                      {lesson.title}
-                    </h3>
-                    {lesson.isFree ? (
-                      <Badge variant="success">Free</Badge>
-                    ) : (
-                      <Lock className="h-3.5 w-3.5 text-muted-foreground" />
-                    )}
+                <div className="flex items-center gap-3">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-semibold text-muted-foreground">
+                    {idx + 1}
+                  </span>
+                  <div>
+                    <p className="font-medium text-foreground">{lesson.title}</p>
+                    <p className="text-xs text-muted-foreground">{lesson.durationMins} min</p>
                   </div>
-                  {lesson.summary && (
-                    <p className="mt-0.5 truncate text-sm text-muted-foreground">
-                      {lesson.summary}
-                    </p>
-                  )}
                 </div>
-                <span className="hidden shrink-0 items-center gap-1.5 text-xs text-muted-foreground sm:flex">
-                  <Clock className="h-3.5 w-3.5" />
-                  {lesson.durationMins} min
-                </span>
-                <Play className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-accent" />
-              </Link>
-            </li>
-          ))}
-        </ol>
-      </section>
-    </div>
+                {isFree ? (
+                  <Button asChild size="sm" variant="outline">
+                    <Link href={`/learn/${course.slug}/${lesson.slug}`}>
+                      <GraduationCap className="mr-1.5 h-3.5 w-3.5" />
+                      Start
+                    </Link>
+                  </Button>
+                ) : (
+                  <Lock className="h-4 w-4 text-muted-foreground" />
+                )}
+              </Card>
+            )
+          })}
+        </div>
+
+        <div className="mt-8">
+          <Button asChild>
+            <Link href={`/learn/${course.slug}/${course.lessons[0].slug}`}>
+              Start first lesson
+            </Link>
+          </Button>
+        </div>
+      </div>
+    </>
   )
 }

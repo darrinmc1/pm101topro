@@ -29,38 +29,96 @@ export default async function BlogPostPage({
   const post = getPost(slug)
   if (!post) notFound()
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    author: {
+      "@type": "Organization",
+      name: "pm101toPro",
+      url: "https://www.pm101topro.com",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "pm101toPro",
+      url: "https://www.pm101topro.com",
+    },
+    url: `https://www.pm101topro.com/blog/${post.slug}`,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://www.pm101topro.com/blog/${post.slug}`,
+    },
+  }
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.pm101topro.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: "https://www.pm101topro.com/blog",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: `https://www.pm101topro.com/blog/${post.slug}`,
+      },
+    ],
+  }
+
   return (
-    <article className="container max-w-2xl py-12">
-      <Link
-        href="/blog"
-        className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-      >
-        <ArrowLeft className="h-4 w-4" />
-        All posts
-      </Link>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <article className="container max-w-2xl py-12">
+        <Link
+          href="/blog"
+          className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          All posts
+        </Link>
 
-      <div className="mt-6">
-        <Badge variant="outline">{post.category}</Badge>
-        <h1 className="mt-4 text-3xl font-extrabold tracking-tightest text-foreground text-balance sm:text-4xl">
-          {post.title}
-        </h1>
-        <div className="mt-4 flex items-center gap-4 text-sm text-muted-foreground">
-          <span>{formatDate(post.date)}</span>
-          <span className="flex items-center gap-1.5">
-            <Clock className="h-3.5 w-3.5" />
-            {post.readMins} min read
-          </span>
+        <div className="mt-6">
+          <Badge variant="outline">{post.category}</Badge>
+          <h1 className="mt-4 text-3xl font-extrabold tracking-tightest text-foreground text-balance sm:text-4xl">
+            {post.title}
+          </h1>
+          <div className="mt-4 flex items-center gap-4 text-sm text-muted-foreground">
+            <span>{formatDate(post.date)}</span>
+            <span className="flex items-center gap-1.5">
+              <Clock className="h-3.5 w-3.5" />
+              {post.readMins} min read
+            </span>
+          </div>
         </div>
-      </div>
 
-      <div className="mt-8 space-y-5">
-        <p className="text-lg leading-relaxed text-muted-foreground text-pretty">{post.excerpt}</p>
-        {post.body.map((paragraph, i) => (
-          <p key={i} className="leading-relaxed text-foreground text-pretty">
-            {paragraph}
-          </p>
-        ))}
-      </div>
-    </article>
+        <div className="mt-8 space-y-5">
+          <p className="text-lg leading-relaxed text-muted-foreground text-pretty">{post.excerpt}</p>
+          {post.body.map((paragraph, i) => (
+            <p key={i} className="leading-relaxed text-foreground text-pretty">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      </article>
+    </>
   )
 }

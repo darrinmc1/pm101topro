@@ -2,66 +2,76 @@ import type { Metadata } from "next"
 import { CoursesBrowser } from "@/components/courses-browser"
 
 export const metadata: Metadata = {
-  title: "Courses – PMP, Agile, Scrum & PMO Training",
+  title: "Courses",
   description:
-    "Browse project management courses covering PMP certification prep, Agile delivery, Scrum framework, and PMO setup. Structured learning from 101 to Pro.",
+    "Browse all project management courses — PMP, Agile, Scrum, and PMO tracks. Structured learning from beginner to advanced.",
 }
 
-const METHODOLOGY_INTROS: Record<string, { heading: string; body: string }> = {
-  pmp: {
-    heading: "PMP Certification Courses",
-    body: "Build the knowledge base required for PMP certification. Our courses follow PMBOK-aligned principles — initiating, planning, executing, monitoring, and closing — so you learn the language and practices that certified project managers use every day.",
-  },
-  agile: {
-    heading: "Agile Project Management Courses",
-    body: "Learn how to deliver value iteratively with Agile. From the Agile Manifesto to real-world adaptive planning, these courses give you the mindset and tools to lead Agile teams confidently.",
-  },
-  scrum: {
-    heading: "Scrum Framework Courses",
-    body: "Master the Scrum framework — sprints, backlogs, ceremonies, and roles. Practical, hands-on content designed for developers, product owners, and anyone working in a Scrum team.",
-  },
-  pmo: {
-    heading: "PMO Setup & Management Courses",
-    body: "Learn how to establish, run, and evolve a Project Management Office. From governance models to executive reporting, these advanced courses prepare you to lead at the organisational level.",
-  },
-}
+export default function CoursesPage() {
+  const courseCatalogSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "pm101toPro Course Catalog",
+    description:
+      "Browse all project management courses — PMP, Agile, Scrum, and PMO tracks.",
+    url: "https://www.pm101topro.com/courses",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "PMP Certification Courses",
+        url: "https://www.pm101topro.com/courses?methodology=pmp",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Agile Courses",
+        url: "https://www.pm101topro.com/courses?methodology=agile",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Scrum Courses",
+        url: "https://www.pm101topro.com/courses?methodology=scrum",
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: "PMO Courses",
+        url: "https://www.pm101topro.com/courses?methodology=pmo",
+      },
+    ],
+  }
 
-export default async function CoursesPage({
-  searchParams,
-}: {
-  searchParams?: Promise<{ methodology?: string }>
-}) {
-  const resolved = searchParams ? await searchParams : {}
-  const methodology = resolved?.methodology?.toLowerCase() ?? ""
-  const intro = METHODOLOGY_INTROS[methodology] ?? null
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.pm101topro.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Courses",
+        item: "https://www.pm101topro.com/courses",
+      },
+    ],
+  }
 
   return (
     <>
-      <section className="border-b border-border">
-        <div className="container py-14">
-          {intro ? (
-            <>
-              <p className="text-sm font-medium uppercase tracking-widest text-accent">Methodology</p>
-              <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-tightest text-foreground text-balance">
-                {intro.heading}
-              </h1>
-              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
-                {intro.body}
-              </p>
-            </>
-          ) : (
-            <>
-              <h1 className="text-4xl font-extrabold tracking-tightest text-foreground">
-                All courses
-              </h1>
-              <p className="mt-3 max-w-2xl text-pretty leading-relaxed text-muted-foreground">
-                Structured project management training covering PMP, Agile, Scrum, PMO, and general practice — from your first project to running the room.
-              </p>
-            </>
-          )}
-        </div>
-      </section>
-
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseCatalogSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <CoursesBrowser />
     </>
   )
