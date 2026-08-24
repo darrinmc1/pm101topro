@@ -1,69 +1,75 @@
-import { ClerkProviderWrapper } from "@/components/clerk-wrapper"
-import { Analytics } from "@vercel/analytics/next"
-import type { Metadata, Viewport } from "next"
-import { Inter, JetBrains_Mono } from "next/font/google"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { FeedbackWidget } from "@/components/feedback-widget"
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
 import "./globals.css"
+import { ClerkWrapper } from "@/components/clerk-wrapper"
+import { Analytics } from "@vercel/analytics/react"
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-  display: "swap",
-})
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: {
-    default: "pm101toPro - From your first project to running the room",
-    template: "%s · pm101toPro",
+    default: "pm101toPro – Project Management Training",
+    template: "%s | pm101toPro",
   },
   description:
-    "Master project management from your first charter to running a PMO. Free courses across every methodology, plus AI-powered document tools.",
-  generator: "v0.app",
-  keywords: [
-    "project management",
-    "PMP",
-    "Agile",
-    "Scrum",
-    "PMO",
-    "project charter",
-    "risk register",
-  ],
-}
-
-export const viewport: Viewport = {
-  colorScheme: "dark",
-  themeColor: "#0A0F1E",
+    "Practical project management training covering PMP, Agile, Scrum, and PMO — from your first project to running the room.",
+  metadataBase: new URL("https://www.pm101topro.com"),
+  openGraph: {
+    siteName: "pm101toPro",
+    type: "website",
+    locale: "en_US",
+  },
 }
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "pm101toPro",
+    url: "https://www.pm101topro.com",
+    logo: "https://www.pm101topro.com/logo.png",
+    description:
+      "Practical project management training covering PMP, Agile, Scrum, and PMO — from your first project to running the room.",
+    sameAs: [],
+  }
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "pm101toPro",
+    url: "https://www.pm101topro.com",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: "https://www.pm101topro.com/courses?q={search_term_string}",
+      },
+      "query-input": "required name=search_term_string",
+    },
+  }
+
   return (
-    <ClerkProviderWrapper>
-      <html
-        lang="en"
-        className={`dark bg-background ${inter.variable} ${jetbrainsMono.variable}`}
-      >
-        <body className="font-sans">
-          <div className="flex min-h-screen flex-col">
-            <SiteHeader />
-            <main className="flex-1">{children}</main>
-            <SiteFooter />
-          </div>
-          <FeedbackWidget />
-          {process.env.NODE_ENV === "production" && <Analytics />}
-        </body>
-      </html>
-    </ClerkProviderWrapper>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+      </head>
+      <body className={inter.className}>
+        <ClerkWrapper>
+          {children}
+        </ClerkWrapper>
+        <Analytics />
+      </body>
+    </html>
   )
 }
