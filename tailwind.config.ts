@@ -56,8 +56,6 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
         mono: ["var(--font-jetbrains-mono)", "monospace"],
-        "kickoff-serif": ["var(--font-kickoff-serif)", "Georgia", "serif"],
-        "kickoff-mono": ["var(--font-kickoff-mono)", "ui-monospace", "monospace"],
       },
       letterSpacing: {
         tightest: "-0.03em",

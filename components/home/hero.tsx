@@ -2,6 +2,7 @@
 
 import { FormEvent, useId, useState } from "react"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
 import { COURSES } from "@/lib/content"
 import { countWrittenLessonRoutes } from "@/lib/lesson-body"
 import { HeroLessonStill } from "@/components/home/hero-lesson-still"
@@ -11,32 +12,32 @@ const WEEK_ONE_LESSON_TITLE = "Your first week as a PM"
 
 const CHECKLIST = [
   {
-    day: "Mon",
+    n: "01",
     title: "Write the date they already set",
     detail: "The date is real. The charter is not. Put the date at the top of a blank page.",
   },
   {
-    day: "Tue",
+    n: "02",
     title: "Name the person who can say no",
     detail: "If that person is “the group,” you do not have a sponsor. You have a group chat.",
   },
   {
-    day: "Wed",
+    n: "03",
     title: "One page: in / out",
     detail: "Ugly is fine. A Slack thread is not a scope statement.",
   },
   {
-    day: "Thu",
+    n: "04",
     title: "Call the people who get angry if you don’t",
     detail: "Three names. This week. Silence is how surprises get a head start.",
   },
   {
-    day: "Fri",
+    n: "05",
     title: "Send a status before they ask",
     detail: "“Writing the charter” is a status. Saying nothing lets them write the story.",
   },
   {
-    day: "Now",
+    n: "06",
     title: "Read a written lesson. Then stop decorating the Gantt.",
     detail: "Kickoff first. Software second. The chart can wait until you know the job.",
   },
@@ -76,57 +77,39 @@ export function Hero() {
   }
 
   return (
-    <section className="hero-kickoff relative overflow-hidden border-b border-[#c9b888]">
-      <div className="relative mx-auto grid max-w-6xl gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(18rem,24rem)] lg:items-start lg:gap-8 lg:py-8">
+    <section className="relative overflow-hidden border-b border-border bg-background">
+      <div className="container grid items-start gap-10 py-12 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,34rem)] lg:gap-12 lg:py-16">
         <div className="min-w-0">
-          <p className="font-kickoff-mono text-[11px] font-medium uppercase tracking-[0.18em] text-[#9a3412]">
-            Week-one kickoff · accidental PM desk
+          <p className="text-sm font-medium text-accent-secondary">
+            Accidental PM · week-one kickoff
           </p>
-          <h1 className="font-kickoff-serif mt-2 max-w-[18ch] text-[2rem] font-medium leading-[1.12] tracking-[-0.02em] text-[#1b1610] sm:text-[2.6rem]">
+          <h1 className="mt-3 max-w-[16ch] text-balance text-4xl font-extrabold tracking-tightest text-foreground sm:text-5xl">
             They handed you a project, a date, and no charter.
           </h1>
-          <p className="font-kickoff-serif mt-3 max-w-xl text-[1.02rem] leading-relaxed text-[#3a3226]">
+          <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
             Here is kickoff. Not a slogan. Not a PMI mill — this is not a PMI
             certification. {writtenCount} written lessons are live. We will not
             count the blanks in the catalog.
           </p>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
+            Burndown not included. Neither is a sponsor who answers Slack.
+          </p>
 
-          {/* Required fold imagery: real charter-lesson still, not a strip below the fold */}
-          <figure
-            id="charter-lesson-still"
-            className="mt-4 overflow-hidden border border-[#1b1610] bg-[#0A0F1E]"
-          >
-            <figcaption className="border-b border-[#1b1610] bg-[#e4d4a8] px-3 py-1.5 font-kickoff-mono text-[10px] uppercase tracking-[0.16em] text-[#5c5344]">
-              Product still · Your first project charter
-            </figcaption>
-            <div className="relative h-44 overflow-hidden sm:h-52">
-              <div className="kickoff-pan origin-top-left">
-                <HeroLessonStill />
-              </div>
-            </div>
-          </figure>
-
-          <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-            <Link
-              href={WEEK_ONE_LESSON_HREF}
-              className="inline-flex h-11 items-center justify-center border border-[#1b1610] bg-[#1b1610] px-4 font-kickoff-mono text-xs font-medium uppercase tracking-[0.12em] text-[#efe4c4] hover:bg-[#3a2418]"
-            >
-              Start free written lesson
-            </Link>
-            <Link
-              href="/courses"
-              className="inline-flex h-11 items-center justify-center border border-[#1b1610] bg-transparent px-4 font-kickoff-mono text-xs font-medium uppercase tracking-[0.12em] text-[#1b1610] hover:bg-[#e4d4a8]"
-            >
-              Browse topics
-            </Link>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Button asChild size="lg">
+              <Link href={WEEK_ONE_LESSON_HREF}>Start free written lesson</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <Link href="/courses">Browse topics</Link>
+            </Button>
           </div>
-          <p className="font-kickoff-mono mt-2 text-[11px] text-[#5c5344]">
+          <p className="mt-2 text-xs text-muted-foreground">
             Free written lesson: {WEEK_ONE_LESSON_TITLE}
           </p>
 
-          <form onSubmit={onWaitlist} className="mt-4 max-w-md">
-            <label htmlFor={`${checkId}-waitlist`} className="font-kickoff-mono text-[11px] uppercase tracking-[0.14em] text-[#5c5344]">
-              Waitlist — new written lessons, no pitch deck
+          <form onSubmit={onWaitlist} className="mt-8 max-w-md">
+            <label htmlFor={`${checkId}-waitlist`} className="text-sm font-medium text-foreground">
+              Waitlist for new written lessons
             </label>
             <div className="mt-2 flex flex-col gap-2 sm:flex-row">
               <input
@@ -137,81 +120,80 @@ export function Hero() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@work-email.com"
-                className="h-11 flex-1 border border-[#1b1610] bg-[#f6eed6] px-3 font-kickoff-mono text-sm text-[#1b1610] placeholder:text-[#8a7f68] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9a3412]"
+                className="h-11 flex-1 rounded-lg border border-border bg-surface px-3 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
-              <button
-                type="submit"
-                disabled={waitlist === "loading"}
-                className="h-11 border border-[#1b1610] bg-[#9a3412] px-4 font-kickoff-mono text-xs font-medium uppercase tracking-[0.12em] text-[#f6eed6] hover:bg-[#7a2910] disabled:opacity-60"
-              >
+              <Button type="submit" disabled={waitlist === "loading"} className="h-11">
                 {waitlist === "loading" ? "Sending…" : "Join waitlist"}
-              </button>
+              </Button>
             </div>
             {waitlistNote ? (
-              <p
-                className="mt-2 font-kickoff-mono text-xs"
-                role="status"
-                data-state={waitlist}
-              >
+              <p className="mt-2 text-xs text-muted-foreground" role="status" data-state={waitlist}>
                 {waitlistNote}
               </p>
             ) : null}
           </form>
         </div>
 
-        <div className="border border-[#1b1610] bg-[#f6eed6] shadow-[6px_6px_0_#1b1610]">
-          <div className="flex items-baseline justify-between border-b border-[#1b1610] px-4 py-2.5">
-            <h2 className="font-kickoff-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#9a3412]">
-              Week-one kickoff checklist
-            </h2>
-            <span className="font-kickoff-mono text-[10px] uppercase tracking-wider text-[#5c5344]">
-              Tick as you go
-            </span>
+        <div className="min-w-0">
+          <figure
+            id="charter-lesson-still"
+            className="overflow-hidden rounded-xl border border-border bg-surface shadow-blue-glow"
+          >
+            <figcaption className="border-b border-border px-4 py-2 text-xs text-muted-foreground">
+              Lesson · Your first project charter
+            </figcaption>
+            <div className="relative h-56 overflow-hidden sm:h-64">
+              <div className="kickoff-pan origin-top-left">
+                <HeroLessonStill />
+              </div>
+            </div>
+          </figure>
+
+          <div className="mt-4 rounded-xl border border-border bg-surface">
+            <div className="flex items-baseline justify-between border-b border-border px-4 py-3">
+              <h2 className="text-sm font-semibold text-foreground">This week</h2>
+              <span className="text-xs text-muted-foreground">Tick as you go</span>
+            </div>
+            <ol>
+              {CHECKLIST.map((item, index) => {
+                const id = `${checkId}-item-${index}`
+                return (
+                  <li key={item.n} className="border-b border-border last:border-b-0">
+                    <label htmlFor={id} className="flex cursor-pointer gap-3 px-4 py-2.5 hover:bg-surface-raised">
+                      <input
+                        id={id}
+                        type="checkbox"
+                        checked={checked[index]}
+                        onChange={() =>
+                          setChecked((prev) => {
+                            const next = [...prev]
+                            next[index] = !next[index]
+                            return next
+                          })
+                        }
+                        className="mt-1 h-4 w-4 shrink-0 accent-[hsl(var(--accent))]"
+                      />
+                      <span className="min-w-0">
+                        <span className="flex items-baseline gap-2">
+                          <span className="text-xs tabular-nums text-accent-secondary">{item.n}</span>
+                          <span
+                            className={`text-sm font-medium leading-snug ${
+                              checked[index] ? "text-muted-foreground line-through" : "text-foreground"
+                            }`}
+                          >
+                            {item.title}
+                          </span>
+                        </span>
+                        <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
+                          {item.detail}
+                        </span>
+                      </span>
+                    </label>
+                  </li>
+                )
+              })}
+            </ol>
           </div>
-          <ol className="divide-y divide-[#d4c49a]">
-            {CHECKLIST.map((item, index) => {
-              const id = `${checkId}-item-${index}`
-              return (
-                <li key={item.day}>
-                  <label
-                    htmlFor={id}
-                    className="flex cursor-pointer gap-3 px-4 py-2.5 hover:bg-[#efe4c4]"
-                  >
-                    <input
-                      id={id}
-                      type="checkbox"
-                      checked={checked[index]}
-                      onChange={() =>
-                        setChecked((prev) => {
-                          const next = [...prev]
-                          next[index] = !next[index]
-                          return next
-                        })
-                      }
-                      className="mt-1 h-4 w-4 shrink-0 accent-[#3d4f34]"
-                    />
-                    <span className="min-w-0">
-                      <span className="flex items-baseline gap-2">
-                        <span className="font-kickoff-mono text-[10px] uppercase tracking-[0.14em] text-[#9a3412]">
-                          {item.day}
-                        </span>
-                        <span
-                          className={`font-kickoff-serif text-[0.98rem] leading-snug ${
-                            checked[index] ? "text-[#6b6354] line-through" : "text-[#1b1610]"
-                          }`}
-                        >
-                          {item.title}
-                        </span>
-                      </span>
-                      <span className="mt-0.5 block font-kickoff-serif text-[13px] leading-relaxed text-[#4a4134]">
-                        {item.detail}
-                      </span>
-                    </span>
-                  </label>
-                </li>
-              )
-            })}
-          </ol>
         </div>
       </div>
     </section>
