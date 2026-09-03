@@ -1,117 +1,217 @@
 "use client"
 
+import { FormEvent, useId, useState } from "react"
 import Link from "next/link"
-import { ArrowRight, BookOpen, Sparkles } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useScrollReveal } from "@/hooks/use-scroll-reveal"
-import { COURSES, getFirstFreeLessonPath } from "@/lib/content"
-import { PRO_PRICE_LABEL } from "@/lib/pricing"
+import { COURSES } from "@/lib/content"
+import { countWrittenLessonRoutes } from "@/lib/lesson-body"
+import { HeroLessonStill } from "@/components/home/hero-lesson-still"
 
-const FIRST_COURSE = COURSES[0]
-const FIRST_LESSON = FIRST_COURSE.lessons.find((l) => l.isFree) ?? FIRST_COURSE.lessons[0]
-const FIRST_LESSON_HREF = getFirstFreeLessonPath()
+const WEEK_ONE_LESSON_HREF = "/learn/getting-started-as-a-pm/your-first-week"
+const WEEK_ONE_LESSON_TITLE = "Your first week as a PM"
+
+const CHECKLIST = [
+  {
+    day: "Mon",
+    title: "Write the date they already set",
+    detail: "The date is real. The charter is not. Put the date at the top of a blank page.",
+  },
+  {
+    day: "Tue",
+    title: "Name the person who can say no",
+    detail: "If that person is “the group,” you do not have a sponsor. You have a group chat.",
+  },
+  {
+    day: "Wed",
+    title: "One page: in / out",
+    detail: "Ugly is fine. A Slack thread is not a scope statement.",
+  },
+  {
+    day: "Thu",
+    title: "Call the people who get angry if you don’t",
+    detail: "Three names. This week. Silence is how surprises get a head start.",
+  },
+  {
+    day: "Fri",
+    title: "Send a status before they ask",
+    detail: "“Writing the charter” is a status. Saying nothing lets them write the story.",
+  },
+  {
+    day: "Now",
+    title: "Read a written lesson. Then stop decorating the Gantt.",
+    detail: "Kickoff first. Software second. The chart can wait until you know the job.",
+  },
+] as const
 
 export function Hero() {
-  const headingRef  = useScrollReveal<HTMLDivElement>({ threshold: 0.1 })
-  const subtitleRef = useScrollReveal<HTMLParagraphElement>({ threshold: 0.1 })
-  const proofRef    = useScrollReveal<HTMLDivElement>({ threshold: 0.1 })
-  const ctaRef      = useScrollReveal<HTMLDivElement>({ threshold: 0.1 })
+  const writtenCount = countWrittenLessonRoutes(COURSES)
+  const checkId = useId()
+  const [checked, setChecked] = useState<boolean[]>(() => CHECKLIST.map(() => false))
+  const [email, setEmail] = useState("")
+  const [waitlist, setWaitlist] = useState<"idle" | "loading" | "ok" | "err">("idle")
+  const [waitlistNote, setWaitlistNote] = useState("")
+
+  async function onWaitlist(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setWaitlist("loading")
+    setWaitlistNote("")
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      })
+      const data = (await res.json()) as { message?: string; error?: string }
+      if (!res.ok) {
+        setWaitlist("err")
+        setWaitlistNote(data.error || "Could not join the waitlist. Try again.")
+        return
+      }
+      setWaitlist("ok")
+      setWaitlistNote(data.message || "You’re on the list.")
+      setEmail("")
+    } catch {
+      setWaitlist("err")
+      setWaitlistNote("Network hiccup. The waitlist can wait one more minute.")
+    }
+  }
 
   return (
-    <section className="relative overflow-hidden border-b border-border">
-        <div className="absolute inset-0 bg-[url('/images/hero-pm101topro.jpg')] bg-cover bg-center opacity-25" aria-hidden="true" />
-      {/* Dot-grid background */}
-      <div className="absolute inset-0 bg-dot-grid opacity-60" aria-hidden="true" />
-
-      {/* Animated orb */}
-      <div
-        className="orb-animate pointer-events-none absolute left-1/2 top-0
-                   h-80 w-[48rem] -translate-x-1/2 rounded-full
-                   bg-gradient-to-br from-accent/30 via-accent-glow/20 to-accent-secondary/10
-                   blur-[100px]"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute right-1/4 top-24 h-48 w-64
-                   rounded-full bg-accent-secondary/10 blur-[80px]"
-        aria-hidden="true"
-        style={{ animation: "orb-drift 11s ease-in-out 2s infinite" }}
-      />
-
-      <div className="relative z-10 container flex flex-col items-center py-24 text-center md:py-36">
-
-        <span className="badge-pop inline-flex items-center gap-2 rounded-full border
-                         border-border bg-surface px-3 py-1 text-xs font-medium
-                         text-muted-foreground">
-          <Sparkles className="h-3.5 w-3.5 text-accent-secondary" />
-          Free courses · {PRO_PRICE_LABEL} for AI docs
-        </span>
-
-        <div ref={headingRef} className="reveal-up mt-6 stagger-1">
-          <h1 className="max-w-3xl text-balance text-4xl font-extrabold
-                         tracking-tightest text-foreground sm:text-5xl md:text-6xl">
-            From <span className="text-accent text-glow">PM101</span> to{" "}
-            <span className="text-accent-secondary">Pro.</span>
+    <section className="hero-kickoff relative overflow-hidden border-b border-[#c9b888]">
+      <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,26rem)] lg:items-start lg:py-14">
+        <div className="min-w-0">
+          <p className="font-kickoff-mono text-[11px] font-medium uppercase tracking-[0.18em] text-[#9a3412]">
+            Week-one kickoff · accidental PM desk
+          </p>
+          <h1 className="font-kickoff-serif mt-3 max-w-[18ch] text-[2.15rem] font-medium leading-[1.12] tracking-[-0.02em] text-[#1b1610] sm:text-5xl">
+            They handed you a project, a date, and no charter.
           </h1>
-        </div>
+          <p className="font-kickoff-serif mt-4 max-w-xl text-[1.05rem] leading-relaxed text-[#3a3226]">
+            Here is kickoff. Not a slogan. Not a PMI mill — this is not a PMI
+            certification. {writtenCount} written lessons are live. We will not
+            count the blanks in the catalog.
+          </p>
+          <p className="font-kickoff-serif mt-3 max-w-xl text-[1.05rem] leading-relaxed text-[#3a3226]">
+            Burndown not included. Neither is a sponsor who answers Slack.
+          </p>
 
-        <p
-          ref={subtitleRef}
-          className="reveal-up mt-5 max-w-xl text-pretty text-base
-                     leading-relaxed text-muted-foreground md:text-lg stagger-2"
-        >
-          Master project management from your first charter to running a PMO —
-          four course levels stay free. AI docs after two free generations are{" "}
-          {PRO_PRICE_LABEL}.
-        </p>
-
-        {/* Proof: real first lesson, reachable without signup */}
-        <div
-          ref={proofRef}
-          className="reveal-up mt-8 w-full max-w-md stagger-2"
-        >
-          <Link
-            href={FIRST_LESSON_HREF}
-            className="group flex items-start gap-3 rounded-xl border border-border
-                       bg-surface/80 px-4 py-3.5 text-left transition-colors
-                       hover:border-accent/40 hover:bg-surface-raised"
-          >
-            <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center
-                             justify-center rounded-lg bg-accent/15 text-accent
-                             ring-1 ring-accent/20">
-              <BookOpen className="h-4 w-4" />
-            </span>
-            <span className="min-w-0">
-              <span className="font-mono text-[10px] uppercase tracking-widest
-                               text-accent-secondary">
-                Free lesson · {FIRST_LESSON.durationMins} min
-              </span>
-              <span className="mt-0.5 block text-sm font-semibold text-foreground
-                               group-hover:text-accent">
-                {FIRST_LESSON.title}
-              </span>
-              <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
-                {FIRST_LESSON.summary}
-              </span>
-            </span>
-          </Link>
-        </div>
-
-        <div
-          ref={ctaRef}
-          className="reveal-up mt-8 flex flex-col gap-3 sm:flex-row stagger-3"
-        >
-          <Button asChild size="lg" className="group">
-            <Link href={FIRST_LESSON_HREF}>
-              Start this lesson free
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <Link
+              href={WEEK_ONE_LESSON_HREF}
+              className="inline-flex h-11 items-center justify-center border border-[#1b1610] bg-[#1b1610] px-4 font-kickoff-mono text-xs font-medium uppercase tracking-[0.12em] text-[#efe4c4] hover:bg-[#3a2418]"
+            >
+              Start free written lesson
             </Link>
-          </Button>
-          <Button asChild size="lg" variant="outline">
-            <Link href="/tools/project-charter">Try the doc generator</Link>
-          </Button>
+            <Link
+              href="/courses"
+              className="inline-flex h-11 items-center justify-center border border-[#1b1610] bg-transparent px-4 font-kickoff-mono text-xs font-medium uppercase tracking-[0.12em] text-[#1b1610] hover:bg-[#e4d4a8]"
+            >
+              Browse topics
+            </Link>
+          </div>
+          <p className="font-kickoff-mono mt-2 text-[11px] text-[#5c5344]">
+            Free written lesson: {WEEK_ONE_LESSON_TITLE}
+          </p>
+
+          <form onSubmit={onWaitlist} className="mt-6 max-w-md border-t border-[#c9b888] pt-5">
+            <label htmlFor={`${checkId}-waitlist`} className="font-kickoff-mono text-[11px] uppercase tracking-[0.14em] text-[#5c5344]">
+              Waitlist — new written lessons, no pitch deck
+            </label>
+            <div className="mt-2 flex flex-col gap-2 sm:flex-row">
+              <input
+                id={`${checkId}-waitlist`}
+                type="email"
+                required
+                autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@work-email.com"
+                className="h-11 flex-1 border border-[#1b1610] bg-[#f6eed6] px-3 font-kickoff-mono text-sm text-[#1b1610] placeholder:text-[#8a7f68] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9a3412]"
+              />
+              <button
+                type="submit"
+                disabled={waitlist === "loading"}
+                className="h-11 border border-[#1b1610] bg-[#9a3412] px-4 font-kickoff-mono text-xs font-medium uppercase tracking-[0.12em] text-[#f6eed6] hover:bg-[#7a2910] disabled:opacity-60"
+              >
+                {waitlist === "loading" ? "Sending…" : "Join waitlist"}
+              </button>
+            </div>
+            {waitlistNote ? (
+              <p
+                className="mt-2 font-kickoff-mono text-xs"
+                role="status"
+                data-state={waitlist}
+              >
+                {waitlistNote}
+              </p>
+            ) : null}
+          </form>
         </div>
 
+        <div className="border border-[#1b1610] bg-[#f6eed6] shadow-[6px_6px_0_#1b1610]">
+          <div className="flex items-baseline justify-between border-b border-[#1b1610] px-4 py-3">
+            <h2 className="font-kickoff-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#9a3412]">
+              Week-one kickoff checklist
+            </h2>
+            <span className="font-kickoff-mono text-[10px] uppercase tracking-wider text-[#5c5344]">
+              Tick as you go
+            </span>
+          </div>
+          <ol className="divide-y divide-[#d4c49a]">
+            {CHECKLIST.map((item, index) => {
+              const id = `${checkId}-item-${index}`
+              return (
+                <li key={item.day}>
+                  <label
+                    htmlFor={id}
+                    className="flex cursor-pointer gap-3 px-4 py-3 hover:bg-[#efe4c4]"
+                  >
+                    <input
+                      id={id}
+                      type="checkbox"
+                      checked={checked[index]}
+                      onChange={() =>
+                        setChecked((prev) => {
+                          const next = [...prev]
+                          next[index] = !next[index]
+                          return next
+                        })
+                      }
+                      className="mt-1 h-4 w-4 shrink-0 accent-[#3d4f34]"
+                    />
+                    <span className="min-w-0">
+                      <span className="flex items-baseline gap-2">
+                        <span className="font-kickoff-mono text-[10px] uppercase tracking-[0.14em] text-[#9a3412]">
+                          {item.day}
+                        </span>
+                        <span
+                          className={`font-kickoff-serif text-[1.02rem] leading-snug ${
+                            checked[index] ? "text-[#6b6354] line-through" : "text-[#1b1610]"
+                          }`}
+                        >
+                          {item.title}
+                        </span>
+                      </span>
+                      <span className="mt-1 block font-kickoff-serif text-sm leading-relaxed text-[#4a4134]">
+                        {item.detail}
+                      </span>
+                    </span>
+                  </label>
+                </li>
+              )
+            })}
+          </ol>
+        </div>
+      </div>
+
+      <div className="border-t border-[#c9b888] bg-[#e4d4a8]">
+        <p className="mx-auto max-w-6xl px-4 pt-3 font-kickoff-mono text-[10px] uppercase tracking-[0.16em] text-[#5c5344] sm:px-6">
+          Product still · written lesson excerpt · Your first project charter
+        </p>
+        <div className="relative mx-auto mt-2 h-48 max-w-6xl overflow-hidden border-y border-[#1b1610] sm:h-56 md:h-64">
+          <div className="kickoff-pan origin-top-left">
+            <HeroLessonStill />
+          </div>
+        </div>
       </div>
     </section>
   )

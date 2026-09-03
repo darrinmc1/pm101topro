@@ -154,3 +154,41 @@
     border-color: hsl(var(--accent) / 0.35);
   }
 }
+
+/* Week-one kickoff fold — paper/ink, not the site navy glass */
+.hero-kickoff {
+  --kickoff-paper: #efe4c4;
+  --kickoff-paper-deep: #e4d4a8;
+  --kickoff-ink: #1b1610;
+  --kickoff-rule: #c9b888;
+  --kickoff-stamp: #9a3412;
+  --kickoff-check: #3d4f34;
+  background: var(--kickoff-paper);
+  color: var(--kickoff-ink);
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 31px,
+      color-mix(in srgb, var(--kickoff-rule) 55%, transparent) 31px,
+      color-mix(in srgb, var(--kickoff-rule) 55%, transparent) 32px
+    );
+}
+
+@keyframes kickoff-pan {
+  0% { transform: scale(1.12) translate(2.4%, 1.6%); }
+  100% { transform: scale(1.12) translate(-3.2%, -2.4%); }
+}
+
+.kickoff-pan {
+  animation: kickoff-pan 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kickoff-pan {
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
+}

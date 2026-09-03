@@ -1,15 +1,27 @@
+import { Newsreader, IBM_Plex_Mono } from "next/font/google"
 import { Hero } from "@/components/home/hero"
-import { HowItWorks } from "@/components/home/how-it-works"
 import { LevelShowcase } from "@/components/home/level-showcase"
 import { ProSku } from "@/components/home/pro-sku"
 import { ToolTeaser } from "@/components/home/tool-teaser"
 import { PmWisdom } from "@/components/pm-wisdom"
 
+const kickoffSerif = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-kickoff-serif",
+  display: "swap",
+})
+
+const kickoffMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-kickoff-mono",
+  display: "swap",
+})
+
 export default function HomePage() {
   return (
-    <>
+    <div className={`${kickoffSerif.variable} ${kickoffMono.variable}`}>
       <Hero />
-      <HowItWorks />
       <LevelShowcase />
       <ToolTeaser />
       <ProSku />
@@ -18,6 +30,6 @@ export default function HomePage() {
           <PmWisdom />
         </div>
       </section>
-    </>
+    </div>
   )
 }
