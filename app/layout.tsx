@@ -68,6 +68,7 @@ export default function RootLayout({
             <main className="flex-1">{children}</main>
             <SiteFooter />
           </div>
+          {/* Feedback chat bubble stays off marketing/home folds. */}
           <FeedbackWidget />
           {process.env.NODE_ENV === "production" && <Analytics />}
         </body>

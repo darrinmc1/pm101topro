@@ -77,24 +77,36 @@ export function Hero() {
 
   return (
     <section className="hero-kickoff relative overflow-hidden border-b border-[#c9b888]">
-      <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,26rem)] lg:items-start lg:py-14">
+      <div className="relative mx-auto grid max-w-6xl gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(18rem,24rem)] lg:items-start lg:gap-8 lg:py-8">
         <div className="min-w-0">
           <p className="font-kickoff-mono text-[11px] font-medium uppercase tracking-[0.18em] text-[#9a3412]">
             Week-one kickoff · accidental PM desk
           </p>
-          <h1 className="font-kickoff-serif mt-3 max-w-[18ch] text-[2.15rem] font-medium leading-[1.12] tracking-[-0.02em] text-[#1b1610] sm:text-5xl">
+          <h1 className="font-kickoff-serif mt-2 max-w-[18ch] text-[2rem] font-medium leading-[1.12] tracking-[-0.02em] text-[#1b1610] sm:text-[2.6rem]">
             They handed you a project, a date, and no charter.
           </h1>
-          <p className="font-kickoff-serif mt-4 max-w-xl text-[1.05rem] leading-relaxed text-[#3a3226]">
+          <p className="font-kickoff-serif mt-3 max-w-xl text-[1.02rem] leading-relaxed text-[#3a3226]">
             Here is kickoff. Not a slogan. Not a PMI mill — this is not a PMI
             certification. {writtenCount} written lessons are live. We will not
             count the blanks in the catalog.
           </p>
-          <p className="font-kickoff-serif mt-3 max-w-xl text-[1.05rem] leading-relaxed text-[#3a3226]">
-            Burndown not included. Neither is a sponsor who answers Slack.
-          </p>
 
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+          {/* Required fold imagery: real charter-lesson still, not a strip below the fold */}
+          <figure
+            id="charter-lesson-still"
+            className="mt-4 overflow-hidden border border-[#1b1610] bg-[#0A0F1E]"
+          >
+            <figcaption className="border-b border-[#1b1610] bg-[#e4d4a8] px-3 py-1.5 font-kickoff-mono text-[10px] uppercase tracking-[0.16em] text-[#5c5344]">
+              Product still · Your first project charter
+            </figcaption>
+            <div className="relative h-44 overflow-hidden sm:h-52">
+              <div className="kickoff-pan origin-top-left">
+                <HeroLessonStill />
+              </div>
+            </div>
+          </figure>
+
+          <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <Link
               href={WEEK_ONE_LESSON_HREF}
               className="inline-flex h-11 items-center justify-center border border-[#1b1610] bg-[#1b1610] px-4 font-kickoff-mono text-xs font-medium uppercase tracking-[0.12em] text-[#efe4c4] hover:bg-[#3a2418]"
@@ -112,7 +124,7 @@ export function Hero() {
             Free written lesson: {WEEK_ONE_LESSON_TITLE}
           </p>
 
-          <form onSubmit={onWaitlist} className="mt-6 max-w-md border-t border-[#c9b888] pt-5">
+          <form onSubmit={onWaitlist} className="mt-4 max-w-md">
             <label htmlFor={`${checkId}-waitlist`} className="font-kickoff-mono text-[11px] uppercase tracking-[0.14em] text-[#5c5344]">
               Waitlist — new written lessons, no pitch deck
             </label>
@@ -148,7 +160,7 @@ export function Hero() {
         </div>
 
         <div className="border border-[#1b1610] bg-[#f6eed6] shadow-[6px_6px_0_#1b1610]">
-          <div className="flex items-baseline justify-between border-b border-[#1b1610] px-4 py-3">
+          <div className="flex items-baseline justify-between border-b border-[#1b1610] px-4 py-2.5">
             <h2 className="font-kickoff-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#9a3412]">
               Week-one kickoff checklist
             </h2>
@@ -163,7 +175,7 @@ export function Hero() {
                 <li key={item.day}>
                   <label
                     htmlFor={id}
-                    className="flex cursor-pointer gap-3 px-4 py-3 hover:bg-[#efe4c4]"
+                    className="flex cursor-pointer gap-3 px-4 py-2.5 hover:bg-[#efe4c4]"
                   >
                     <input
                       id={id}
@@ -184,14 +196,14 @@ export function Hero() {
                           {item.day}
                         </span>
                         <span
-                          className={`font-kickoff-serif text-[1.02rem] leading-snug ${
+                          className={`font-kickoff-serif text-[0.98rem] leading-snug ${
                             checked[index] ? "text-[#6b6354] line-through" : "text-[#1b1610]"
                           }`}
                         >
                           {item.title}
                         </span>
                       </span>
-                      <span className="mt-1 block font-kickoff-serif text-sm leading-relaxed text-[#4a4134]">
+                      <span className="mt-0.5 block font-kickoff-serif text-[13px] leading-relaxed text-[#4a4134]">
                         {item.detail}
                       </span>
                     </span>
@@ -200,17 +212,6 @@ export function Hero() {
               )
             })}
           </ol>
-        </div>
-      </div>
-
-      <div className="border-t border-[#c9b888] bg-[#e4d4a8]">
-        <p className="mx-auto max-w-6xl px-4 pt-3 font-kickoff-mono text-[10px] uppercase tracking-[0.16em] text-[#5c5344] sm:px-6">
-          Product still · written lesson excerpt · Your first project charter
-        </p>
-        <div className="relative mx-auto mt-2 h-48 max-w-6xl overflow-hidden border-y border-[#1b1610] sm:h-56 md:h-64">
-          <div className="kickoff-pan origin-top-left">
-            <HeroLessonStill />
-          </div>
         </div>
       </div>
     </section>
