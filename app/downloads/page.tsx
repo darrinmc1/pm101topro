@@ -1,13 +1,13 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Download, FileText } from "lucide-react"
+import { ArrowRight, Clock, FileText } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { PmWisdom } from "@/components/pm-wisdom"
 
 export const metadata: Metadata = {
-  title: "Free PM Templates",
+  title: "PM Templates — Coming Soon",
   description:
-    "Download free, professional project management templates - Project Charter, Risk Register, RACI Matrix, Status Report, Business Case, Meeting Minutes, WBS, Budget Tracker, Stakeholder Register, and Project Closure - from pm101toPro.",
+    "Fillable PDF templates are Coming Soon. Draft a charter, risk register, RACI, status report, and more with the existing document generators.",
 }
 
 interface Template {
@@ -16,6 +16,7 @@ interface Template {
   title: string
   description: string
   features: string[]
+  toolId?: string
 }
 
 const templates: Template[] = [
@@ -33,6 +34,7 @@ const templates: Template[] = [
       "Stakeholder & risk identification",
       "Approval signatures",
     ],
+    toolId: "project-charter",
   },
   {
     id: "risk-register",
@@ -47,6 +49,7 @@ const templates: Template[] = [
       "Status tracking per risk",
       "Risk Scoring Matrix reference table",
     ],
+    toolId: "risk-register",
   },
   {
     id: "raci-matrix",
@@ -61,6 +64,7 @@ const templates: Template[] = [
       "Legend with role descriptions",
       "Ready to customize",
     ],
+    toolId: "raci-matrix",
   },
   {
     id: "status-report",
@@ -75,6 +79,7 @@ const templates: Template[] = [
       "Budget tracking with variance",
       "Decisions-needed register",
     ],
+    toolId: "status-report",
   },
   {
     id: "business-case",
@@ -91,6 +96,7 @@ const templates: Template[] = [
       "Risk register & mitigation",
       "Approval signatures",
     ],
+    toolId: "business-case",
   },
   {
     id: "meeting-minutes",
@@ -106,6 +112,7 @@ const templates: Template[] = [
       "Action items with owner & due date",
       "Next meeting placeholder",
     ],
+    toolId: "meeting-agenda-minutes",
   },
   {
     id: "wbs",
@@ -122,6 +129,7 @@ const templates: Template[] = [
       "Pre-filled example entries",
       "WBS Dictionary notes section",
     ],
+    toolId: "wbs-schedule",
   },
   {
     id: "budget-tracker",
@@ -151,6 +159,7 @@ const templates: Template[] = [
       "Status column (Active / Watch / Monitor)",
       "Legend with scoring definitions",
     ],
+    toolId: "stakeholder-register",
   },
   {
     id: "project-closure",
@@ -171,10 +180,8 @@ const templates: Template[] = [
 
 function TemplateCard({
   template,
-  index,
 }: {
   template: Template
-  index: number
 }) {
   return (
     <Card
@@ -215,16 +222,25 @@ function TemplateCard({
           </ul>
         </div>
 
-        {/* Right - download CTA */}
-        <div className="flex items-center border-t border-border px-6 py-4 sm:border-b-0 sm:border-l sm:px-8">
-          <Link
-            href={`/downloads/${template.filename}`}
-            download
-            className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors active:scale-[0.96] transition-transform hover:bg-accent/90"
-          >
-            <Download className="h-4 w-4" />
-            Download PDF
-          </Link>
+        {/* Right - honest availability */}
+        <div className="flex flex-col items-start justify-center gap-3 border-t border-border px-6 py-4 sm:border-b-0 sm:border-l sm:px-8">
+          <span className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface-raised px-5 py-2.5 text-sm font-semibold text-muted-foreground">
+            <Clock className="h-4 w-4" />
+            Coming Soon
+          </span>
+          {template.toolId ? (
+            <Link
+              href={`/tools/${template.toolId}`}
+              className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline"
+            >
+              Draft with the generator
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          ) : (
+            <p className="max-w-[12rem] text-xs leading-relaxed text-muted-foreground">
+              No PDF yet. No generator for this type either — listed so we do not pretend otherwise.
+            </p>
+          )}
         </div>
       </div>
     </Card>
@@ -237,27 +253,28 @@ export default function DownloadsPage() {
       <section className="border-b border-border bg-surface">
         <div className="container py-16">
           <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1 text-sm text-accent">
-            <Download className="h-4 w-4" />
-            Free Templates
+            <Clock className="h-4 w-4" />
+            Templates · Coming Soon
           </div>
           <h1 className="mt-4 max-w-2xl text-4xl font-extrabold tracking-tightest text-foreground text-balance">
-            Professional PM templates, ready to download
+            Fillable PDFs are Coming Soon
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
-            Ten essential project management templates used by professional
-            PMs every day. Each is a fillable PDF - download, print or edit
-            digitally, and adapt to your project.
+            We listed ten template types so you can see the set. The PDFs are
+            not available yet — a download button that 404s is not a template.
+            Where a document generator already exists, use that to draft the
+            same artefact. Budget Tracker and Project Closure have no generator
+            yet either.
           </p>
         </div>
       </section>
 
       <section className="container py-14">
         <div className="mx-auto grid max-w-4xl gap-6">
-          {templates.map((template, index) => (
+          {templates.map((template) => (
             <TemplateCard
               key={template.id}
               template={template}
-              index={index}
             />
           ))}
         </div>
