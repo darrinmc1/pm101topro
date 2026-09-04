@@ -84,7 +84,7 @@ export function Hero() {
         </svg>
       </div>
 
-      <div className="relative z-10 container grid items-start gap-10 py-12 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,34rem)] lg:gap-12 lg:py-16">
+      <div className="relative z-10 container grid items-start gap-8 py-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,34rem)] lg:gap-12 lg:py-16">
         {/* Plane 4 — foreground copy */}
         <div className="min-w-0">
           <p className="text-sm font-medium text-accent-secondary">
@@ -101,8 +101,14 @@ export function Hero() {
             From accidental PM to competent. Week-one kickoff lives on its own
             path if you were handed a date and no plan.
           </p>
+        </div>
 
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <div ref={stillRef} className="min-w-0 will-change-transform lg:row-span-2">
+          <CharterLessonStillFrame />
+        </div>
+
+        <div className="min-w-0">
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Button asChild size="lg">
               <Link href={WEEK_ONE_LESSON_HREF}>Start free written lesson</Link>
             </Button>
@@ -142,10 +148,6 @@ export function Hero() {
               </p>
             ) : null}
           </form>
-        </div>
-
-        <div ref={stillRef} className="min-w-0 will-change-transform">
-          <CharterLessonStillFrame />
         </div>
       </div>
     </section>
