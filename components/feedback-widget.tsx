@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 /** Marketing / public pages where the internal feedback chrome should stay out of the way. */
 function isMarketingPath(pathname: string) {
   if (pathname === "/") return true
-  const prefixes = ["/about", "/pricing", "/blog", "/downloads", "/courses"]
+  const prefixes = ["/about", "/pricing", "/blog", "/downloads", "/courses", "/start"]
   return prefixes.some(
     (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
   )
