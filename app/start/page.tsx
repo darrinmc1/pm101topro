@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { CharterLessonStillFrame } from "@/components/home/charter-lesson-still-frame"
 import { WeekOneChecklist } from "@/components/start/week-one-checklist"
+import { StartBackdrop } from "@/components/start/start-backdrop"
 
 const WEEK_ONE_LESSON_HREF = "/learn/getting-started-as-a-pm/your-first-week"
 
@@ -15,8 +16,9 @@ export const metadata: Metadata = {
 export default function StartPage() {
   return (
     <>
-      <section className="border-b border-border bg-background">
-        <div className="container grid items-start gap-10 py-12 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,32rem)] lg:gap-12 lg:py-16">
+      <section className="relative overflow-hidden border-b border-border bg-background">
+        <StartBackdrop />
+        <div className="relative z-10 container grid items-start gap-10 py-12 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,32rem)] lg:gap-12 lg:py-16">
           <div className="min-w-0">
             <p className="text-sm font-medium text-accent-secondary">
               Path · given a project

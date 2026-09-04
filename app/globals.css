@@ -101,6 +101,14 @@
   }
 
   /* Stagger delays for child elements */
+  .reveal-group[data-visible="true"] .reveal-up,
+  .reveal-group[data-visible="true"] .reveal-left,
+  .reveal-group[data-visible="true"] .reveal-right,
+  .reveal-group[data-visible="true"] .reveal-scale {
+    opacity: 1;
+    transform: none;
+  }
+
   .stagger-1 { transition-delay: 0ms; }
   .stagger-2 { transition-delay: 80ms; }
   .stagger-3 { transition-delay: 160ms; }
@@ -152,6 +160,31 @@
     transform: translateY(-3px);
     box-shadow: 0 16px 40px -12px hsl(var(--accent) / 0.2);
     border-color: hsl(var(--accent) / 0.35);
+  }
+}
+
+.stack-slot {
+  min-height: auto;
+}
+.stack-card {
+  position: relative;
+}
+@media (min-width: 768px) {
+  .stack-slot {
+    min-height: 58vh;
+  }
+  .stack-card {
+    position: sticky;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stack-card {
+    position: relative;
+    top: auto !important;
+  }
+  .stack-slot {
+    min-height: auto;
   }
 }
 
