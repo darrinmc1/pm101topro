@@ -3,8 +3,6 @@
 import { FormEvent, useId, useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { COURSES } from "@/lib/content"
-import { countWrittenLessonRoutes } from "@/lib/lesson-body"
 import { CharterLessonStillFrame } from "@/components/home/charter-lesson-still-frame"
 import { useParallax } from "@/hooks/use-parallax"
 
@@ -12,7 +10,6 @@ const WEEK_ONE_LESSON_HREF = "/learn/getting-started-as-a-pm/your-first-week"
 const WEEK_ONE_LESSON_TITLE = "Your first week as a PM"
 
 export function Hero() {
-  const writtenCount = countWrittenLessonRoutes(COURSES)
   const waitlistId = useId()
   const [email, setEmail] = useState("")
   const [waitlist, setWaitlist] = useState<"idle" | "loading" | "ok" | "err">("idle")
@@ -91,11 +88,10 @@ export function Hero() {
             Project management training
           </p>
           <h1 className="mt-3 max-w-[18ch] text-balance text-4xl font-extrabold tracking-tightest text-foreground sm:text-5xl">
-            Learn project management without the PMI theatre
+            Given a project — don’t know where to start
           </h1>
           <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-            {writtenCount} written lessons. Traditional and Agile paths. Not a
-            cert mill — this is not a PMI certification.
+            They handed you a date and no charter.
           </p>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
             From accidental PM to competent. Week-one kickoff lives on its own
