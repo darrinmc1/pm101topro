@@ -38,7 +38,7 @@ export function LevelShowcase() {
 
         <div
           ref={gridRef}
-          className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+          className="reveal-group mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
         >
           {LEVEL_ORDER.map((level, i) => {
             const courses     = getCoursesByLevel(level)

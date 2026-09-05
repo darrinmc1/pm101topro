@@ -1,5 +1,6 @@
 import { Hero } from "@/components/home/hero"
-import { HowItWorks } from "@/components/home/how-it-works"
+import { PathRail } from "@/components/home/path-rail"
+import { WhatYouGet } from "@/components/home/what-you-get"
 import { LevelShowcase } from "@/components/home/level-showcase"
 import { ProSku } from "@/components/home/pro-sku"
 import { ToolTeaser } from "@/components/home/tool-teaser"
@@ -9,7 +10,8 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <HowItWorks />
+      <PathRail />
+      <WhatYouGet />
       <LevelShowcase />
       <ToolTeaser />
       <ProSku />
