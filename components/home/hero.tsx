@@ -93,18 +93,18 @@ export function Hero() {
       <div className="relative z-10 container grid items-start gap-8 py-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,34rem)] lg:gap-12 lg:py-16">
         <div className="min-w-0">
           <p className="text-sm font-medium text-accent-secondary">
-            Project management training
+            Written project management lessons
           </p>
           <h1 className="mt-3 max-w-[18ch] text-balance text-4xl font-extrabold tracking-tightest text-foreground sm:text-5xl">
             From first charter to running the room
           </h1>
           <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-            Written lessons for people already in the job. You leave able to
-            write the charter — not laminate a process poster.
+            You learn the PM job in writing. Accidental to competent — not a
+            laminated process poster.
           </p>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            From accidental PM to competent. If they handed you a date and no
-            plan, week-one kickoff lives on its own path.
+            If they handed you a date and no plan, week-one kickoff lives on
+            its own path.
           </p>
         </div>
 
@@ -121,7 +121,7 @@ export function Hero() {
               <Link href="/start">Given a project — don’t know where to start</Link>
             </Button>
             <Button asChild size="lg" variant="ghost">
-              <Link href="/courses">Browse topics</Link>
+              <Link href="/courses">Browse written lessons</Link>
             </Button>
           </div>
           <p className="mt-2 text-xs text-muted-foreground">
