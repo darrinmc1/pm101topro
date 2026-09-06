@@ -96,14 +96,15 @@ export function Hero() {
             Project management training
           </p>
           <h1 className="mt-3 max-w-[18ch] text-balance text-4xl font-extrabold tracking-tightest text-foreground sm:text-5xl">
-            Given a project — don’t know where to start
+            From first charter to running the room
           </h1>
           <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-            They handed you a date and no charter.
+            Written lessons for people already in the job. You leave able to
+            write the charter — not laminate a process poster.
           </p>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            From accidental PM to competent. Week-one kickoff lives on its own
-            path if you were handed a date and no plan.
+            From accidental PM to competent. If they handed you a date and no
+            plan, week-one kickoff lives on its own path.
           </p>
         </div>
 
