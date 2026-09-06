@@ -1018,6 +1018,21 @@ const LESSON_CONTENT: Record<string, Omit<LessonBody, "practiceDocId">> = {
 // ---------------------------------------------------------------------------
 // Public API
 // ---------------------------------------------------------------------------
+export function isWrittenLesson(slug: string): boolean {
+  return Object.prototype.hasOwnProperty.call(LESSON_CONTENT, slug)
+}
+
+/** Count lesson routes that have a real written body — not catalog stubs. */
+export function countWrittenLessonRoutes(
+  courses: Array<{ lessons: Array<{ slug: string }> }>,
+): number {
+  return courses.reduce(
+    (total, course) =>
+      total + course.lessons.filter((lesson) => isWrittenLesson(lesson.slug)).length,
+    0,
+  )
+}
+
 export function getLessonBody(course: Course, lesson: Lesson): LessonBody {
   const content = LESSON_CONTENT[lesson.slug]
 

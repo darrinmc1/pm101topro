@@ -101,6 +101,14 @@
   }
 
   /* Stagger delays for child elements */
+  .reveal-group[data-visible="true"] .reveal-up,
+  .reveal-group[data-visible="true"] .reveal-left,
+  .reveal-group[data-visible="true"] .reveal-right,
+  .reveal-group[data-visible="true"] .reveal-scale {
+    opacity: 1;
+    transform: none;
+  }
+
   .stagger-1 { transition-delay: 0ms; }
   .stagger-2 { transition-delay: 80ms; }
   .stagger-3 { transition-delay: 160ms; }
@@ -152,5 +160,78 @@
     transform: translateY(-3px);
     box-shadow: 0 16px 40px -12px hsl(var(--accent) / 0.2);
     border-color: hsl(var(--accent) / 0.35);
+  }
+}
+
+.stack-slot {
+  min-height: auto;
+}
+.stack-card {
+  position: relative;
+}
+@media (min-width: 768px) {
+  .stack-slot {
+    min-height: 58vh;
+  }
+  .stack-card {
+    position: sticky;
+  }
+}
+
+/* Kickoff packet: sheets sit at slight charter-page tilts, not a generic stack */
+.kickoff-sheet-face {
+  transform: rotate(var(--sheet-tilt, 0deg));
+  transform-origin: 50% 0%;
+  border-left: 4px solid hsl(var(--accent) / 0.72);
+}
+
+@keyframes charter-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-0.28deg); }
+  50% { transform: translate3d(0, -6px, 0) rotate(0.32deg); }
+}
+
+.charter-float {
+  animation: charter-float 7s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes charter-tick {
+  0% { transform: scale(0.35); opacity: 0; }
+  55% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.charter-tick {
+  animation: charter-tick 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.charter-tick-0 { animation-delay: 0.45s; }
+.charter-tick-1 { animation-delay: 0.9s; }
+.charter-tick-2 { animation-delay: 1.35s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stack-card {
+    position: relative;
+    top: auto !important;
+  }
+  .stack-slot {
+    min-height: auto;
+  }
+  .kickoff-sheet-face {
+    transform: none;
+    border-left-color: hsl(var(--border));
+  }
+  .charter-float {
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
+  .charter-tick {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .charter-glass-lift {
+    transform: none !important;
+    filter: none !important;
   }
 }

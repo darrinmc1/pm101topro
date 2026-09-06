@@ -2,6 +2,7 @@ import Link from "next/link"
 import { BrandMark } from "@/components/brand-mark"
 
 const FOOTER_LINKS = [
+  { href: "/start", label: "Week one" },
   { href: "/courses", label: "Courses" },
   { href: "/tools", label: "Tools" },
   { href: "/tools/status", label: "Status Cleaner" },
