@@ -178,6 +178,36 @@
   }
 }
 
+/* Kickoff packet: sheets sit at slight charter-page tilts, not a generic stack */
+.kickoff-sheet-face {
+  transform: rotate(var(--sheet-tilt, 0deg));
+  transform-origin: 50% 0%;
+  border-left: 3px solid hsl(var(--accent-glow) / 0.45);
+}
+
+@keyframes charter-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-0.28deg); }
+  50% { transform: translate3d(0, -6px, 0) rotate(0.32deg); }
+}
+
+.charter-float {
+  animation: charter-float 7s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes charter-tick {
+  0% { transform: scale(0.35); opacity: 0; }
+  55% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.charter-tick {
+  animation: charter-tick 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.charter-tick-0 { animation-delay: 0.45s; }
+.charter-tick-1 { animation-delay: 0.9s; }
+.charter-tick-2 { animation-delay: 1.35s; }
+
 @media (prefers-reduced-motion: reduce) {
   .stack-card {
     position: relative;
@@ -186,22 +216,22 @@
   .stack-slot {
     min-height: auto;
   }
-}
-
-@keyframes kickoff-pan {
-  0% { transform: scale(1.12) translate(2.4%, 1.6%); }
-  100% { transform: scale(1.12) translate(-3.2%, -2.4%); }
-}
-
-.kickoff-pan {
-  animation: kickoff-pan 28s ease-in-out infinite alternate;
-  will-change: transform;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .kickoff-pan {
+  .kickoff-sheet-face {
+    transform: none;
+    border-left-color: hsl(var(--border));
+  }
+  .charter-float {
     animation: none;
     transform: none;
     will-change: auto;
+  }
+  .charter-tick {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .charter-glass-lift {
+    transform: none !important;
+    filter: none !important;
   }
 }

@@ -26,7 +26,7 @@ export function HeroLessonStill() {
           </p>
           <p className="mt-1 text-xs font-medium">60% complete</p>
           <ol className="mt-4 space-y-1">
-            {SIDEBAR.map((item) => (
+            {SIDEBAR.map((item, index) => (
               <li
                 key={item.title}
                 className={
@@ -36,7 +36,9 @@ export function HeroLessonStill() {
                 }
               >
                 {item.done ? (
-                  <Check className="h-3.5 w-3.5 shrink-0 text-[#5B8DEF]" />
+                  <Check
+                    className={`charter-tick charter-tick-${index} h-3.5 w-3.5 shrink-0 text-[#5B8DEF]`}
+                  />
                 ) : item.current ? (
                   <PlayCircle className="h-3.5 w-3.5 shrink-0 text-[#5B8DEF]" />
                 ) : (

@@ -1,5 +1,6 @@
 "use client"
 
+import type { CSSProperties } from "react"
 import Link from "next/link"
 import { Reveal } from "@/components/home/reveal"
 
@@ -43,10 +44,14 @@ export function WhatYouGet() {
         {CARDS.map((card, index) => (
           <div key={card.kicker} className="stack-slot">
           <article
-            className="stack-card mx-auto w-full max-w-3xl px-6"
-            style={{ top: `calc(5.5rem + ${index * 0.75}rem)`, zIndex: index + 1 }}
+            className="stack-card kickoff-sheet mx-auto w-full max-w-3xl px-6"
+            style={{
+              top: `calc(5.5rem + ${index * 0.75}rem)`,
+              zIndex: index + 1,
+              "--sheet-tilt": `${(index - 1) * 0.55}deg`,
+            } as CSSProperties}
           >
-            <div className="rounded-xl border border-border bg-surface p-6 shadow-[0_24px_60px_-28px_rgba(0,0,0,0.65)] md:p-8">
+            <div className="kickoff-sheet-face rounded-xl border border-border bg-surface p-6 shadow-[0_24px_60px_-28px_rgba(0,0,0,0.65)] md:p-8">
               <p className="text-xs tabular-nums text-accent-secondary">{card.kicker}</p>
               <h3 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
                 {card.title}

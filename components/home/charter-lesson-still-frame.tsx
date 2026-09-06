@@ -10,13 +10,13 @@ export function CharterLessonStillFrame({
   return (
     <figure
       id="charter-lesson-still"
-      className="overflow-hidden rounded-xl border border-border bg-surface shadow-blue-glow"
+      className="charter-float overflow-hidden rounded-xl border border-accent/25 bg-surface/80 shadow-blue-glow backdrop-blur-sm"
     >
       <figcaption className="border-b border-border px-4 py-2 text-xs text-muted-foreground">
         {caption}
       </figcaption>
       <div className={`relative overflow-hidden ${tall ? "h-64 sm:h-72" : "h-52 sm:h-60"}`}>
-        <div className="kickoff-pan origin-top-left">
+        <div className="origin-top-left">
           <HeroLessonStill />
         </div>
       </div>

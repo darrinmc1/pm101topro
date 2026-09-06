@@ -4,6 +4,7 @@ import { FormEvent, useId, useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { CharterLessonStillFrame } from "@/components/home/charter-lesson-still-frame"
+import { useCharterGlassLift } from "@/hooks/use-charter-glass-lift"
 import { useParallax } from "@/hooks/use-parallax"
 
 const WEEK_ONE_LESSON_HREF = "/learn/getting-started-as-a-pm/your-first-week"
@@ -14,10 +15,12 @@ export function Hero() {
   const [email, setEmail] = useState("")
   const [waitlist, setWaitlist] = useState<"idle" | "loading" | "ok" | "err">("idle")
   const [waitlistNote, setWaitlistNote] = useState("")
-  const washRef = useParallax<HTMLDivElement>(0.16)
-  const gridRef = useParallax<HTMLDivElement>(0.09)
-  const artefactRef = useParallax<HTMLDivElement>(0.06)
-  const stillRef = useParallax<HTMLDivElement>(0.03)
+  // PM navy planes — uneven rates, not a 0.16 / 0.09 / 0.06 / 0.03 kit
+  const navyFieldRef = useParallax<HTMLDivElement>(0.27)
+  const washRef = useParallax<HTMLDivElement>(0.085)
+  const gridRef = useParallax<HTMLDivElement>(0.038)
+  const artefactRef = useParallax<HTMLDivElement>(0.19, -0.055)
+  const stillRef = useCharterGlassLift<HTMLDivElement>()
 
   async function onWaitlist(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -46,22 +49,28 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden border-b border-border bg-background">
-      {/* Plane 1 — navy wash */}
+      {/* Deep navy field — slower desk / room, not a generic wash */}
+      <div
+        ref={navyFieldRef}
+        className="pointer-events-none absolute -inset-x-16 -bottom-32 h-[160%] bg-[radial-gradient(75%_70%_at_18%_92%,hsl(224_58%_5%/0.92),transparent_64%)]"
+        aria-hidden="true"
+      />
+      {/* Navy wash — independent spotlight rate */}
       <div
         ref={washRef}
-        className="pointer-events-none absolute -inset-x-10 -top-24 h-[140%] bg-[radial-gradient(80%_60%_at_70%_10%,hsl(var(--accent)/0.14),transparent_58%)]"
+        className="pointer-events-none absolute -inset-x-10 -top-24 h-[140%] bg-[radial-gradient(88%_52%_at_78%_0%,hsl(var(--accent-glow)/0.26),transparent_54%)]"
         aria-hidden="true"
       />
-      {/* Plane 2 — soft site grid */}
+      {/* Desk grid — almost pinned, like paper on the table */}
       <div
         ref={gridRef}
-        className="pointer-events-none absolute inset-0 bg-dot-grid opacity-50"
+        className="pointer-events-none absolute inset-0 bg-dot-grid opacity-35"
         aria-hidden="true"
       />
-      {/* Plane 3 — abstract charter artefact, not stock */}
+      {/* Ghost charter artefact — slides on its own axis */}
       <div
         ref={artefactRef}
-        className="pointer-events-none absolute right-[4%] top-16 hidden w-[22rem] opacity-[0.14] lg:block"
+        className="pointer-events-none absolute right-[4%] top-16 hidden w-[22rem] opacity-[0.16] lg:block"
         aria-hidden="true"
       >
         <svg viewBox="0 0 280 360" className="h-auto w-full text-accent">
@@ -82,7 +91,6 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 container grid items-start gap-8 py-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,34rem)] lg:gap-12 lg:py-16">
-        {/* Plane 4 — foreground copy */}
         <div className="min-w-0">
           <p className="text-sm font-medium text-accent-secondary">
             Project management training
@@ -99,7 +107,7 @@ export function Hero() {
           </p>
         </div>
 
-        <div ref={stillRef} className="min-w-0 will-change-transform lg:row-span-2">
+        <div ref={stillRef} className="charter-glass-lift min-w-0 will-change-transform lg:row-span-2">
           <CharterLessonStillFrame />
         </div>
 
