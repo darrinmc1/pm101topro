@@ -182,7 +182,7 @@
 .kickoff-sheet-face {
   transform: rotate(var(--sheet-tilt, 0deg));
   transform-origin: 50% 0%;
-  border-left: 3px solid hsl(var(--accent-glow) / 0.45);
+  border-left: 4px solid hsl(var(--accent) / 0.72);
 }
 
 @keyframes charter-float {
