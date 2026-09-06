@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { FeedbackWidget } from "@/components/feedback-widget"
 import "./globals.css"
+import GAAnalytics from "./components/Analytics"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -70,6 +71,7 @@ export default function RootLayout({
           </div>
           <FeedbackWidget />
           {process.env.NODE_ENV === "production" && <Analytics />}
+          <GAAnalytics />
         </body>
       </html>
     </ClerkProviderWrapper>
