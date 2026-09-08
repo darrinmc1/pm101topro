@@ -9,39 +9,32 @@ import { LevelShowcase } from "@/components/home/level-showcase"
 import { ToolTeaser } from "@/components/home/tool-teaser"
 
 export const metadata: Metadata = {
-  title: "pm101toPro – Project Management Training for Every Methodology",
+  title: "pm101toPro – Project Management Training from Beginner to Pro",
   description:
-    "Master PMP, Agile, Scrum, and PMO best practices with structured courses, AI-powered tools, and a clear path from beginner to pro.",
+    "Structured project management courses covering PMP, Agile, Scrum, and PMO — plus AI-powered tools to turn learning into real deliverables.",
 }
 
-const METHODOLOGIES = [
+const TESTIMONIALS = [
   {
-    label: "PMP Certification",
-    href: "/courses?methodology=pmp",
-    description:
-      "Structured learning aligned with the PMBOK framework. Build the knowledge and vocabulary you need to lead projects and pursue PMP certification.",
-    tag: "High-demand",
+    quote:
+      "I went from zero PM experience to confidently running a cross-functional product launch in under three months. The level structure made it obvious what to learn next.",
+    name: "Sarah K.",
+    credential: "Associate PM, SaaS startup",
+    initials: "SK",
   },
   {
-    label: "Agile Project Management",
-    href: "/courses?methodology=agile",
-    description:
-      "Iterative delivery, adaptive planning, and continuous improvement. Learn how Agile principles apply to real teams and real projects.",
-    tag: "Most popular",
+    quote:
+      "The AI document tools alone are worth it. I generated a full project charter in minutes and my sponsor was genuinely impressed. Saved me hours of blank-page panic.",
+    name: "Marcus T.",
+    credential: "IT Project Manager, Financial Services",
+    initials: "MT",
   },
   {
-    label: "Scrum Framework",
-    href: "/courses?methodology=scrum",
-    description:
-      "Sprints, standups, retrospectives, and backlogs. Get hands-on with the Scrum roles and ceremonies used by software and product teams worldwide.",
-    tag: "Practical",
-  },
-  {
-    label: "PMO Setup & Management",
-    href: "/courses?methodology=pmo",
-    description:
-      "From establishing governance to reporting to the board. Learn how to build and run a Project Management Office that actually adds value.",
-    tag: "Advanced",
+    quote:
+      "Finally a PM course that covers Agile AND traditional methods without pretending one is always better. Real-world nuance that I could apply immediately.",
+    name: "Priya R.",
+    credential: "Scrum Master & PMP Candidate",
+    initials: "PR",
   },
 ]
 
@@ -51,42 +44,53 @@ export default function HomePage() {
       <Hero />
       <HowItWorks />
       <LevelShowcase />
+      <ToolTeaser />
 
-      {/* Methodology spotlight */}
-      <section className="border-t border-border">
+      {/* Testimonials */}
+      <section className="border-t border-border bg-surface">
         <div className="container py-16">
-          <p className="text-sm font-medium uppercase tracking-widest text-accent">Methodologies</p>
+          <p className="text-sm font-medium uppercase tracking-widest text-accent">
+            What learners say
+          </p>
           <h2 className="mt-3 max-w-2xl text-3xl font-extrabold tracking-tightest text-foreground text-balance">
-            One platform. Every methodology.
+            Real results from real project managers
           </h2>
-          <p className="mt-4 max-w-2xl text-pretty leading-relaxed text-muted-foreground">
-            Whether you're preparing for PMP certification, adopting Agile, running Scrum sprints, or standing up a PMO
-            — pm101toPro has a structured path for you.
+          <p className="mt-4 max-w-xl text-pretty leading-relaxed text-muted-foreground">
+            From first-time PMs to seasoned practitioners — here's how pm101toPro has made a difference.
           </p>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {METHODOLOGIES.map((m) => (
-              <Link key={m.label} href={m.href} className="group">
-                <Card className="flex h-full flex-col border-border bg-surface p-6 transition-colors hover:border-accent/50">
-                  <span className="inline-block rounded-full bg-accent/10 px-2.5 py-0.5 text-xs font-semibold text-accent">
-                    {m.tag}
-                  </span>
-                  <h3 className="mt-3 text-base font-bold text-foreground">{m.label}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
-                    {m.description}
-                  </p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent">
-                    Explore courses
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                  </span>
-                </Card>
-              </Link>
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {TESTIMONIALS.map((t) => (
+              <Card
+                key={t.name}
+                className="flex flex-col gap-5 border-border bg-background p-6"
+              >
+                <p className="flex-1 text-pretty leading-relaxed text-foreground">
+                  &ldquo;{t.quote}&rdquo;
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/10 text-sm font-bold text-accent">
+                    {t.initials}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">{t.name}</p>
+                    <p className="text-xs text-muted-foreground">{t.credential}</p>
+                  </div>
+                </div>
+              </Card>
             ))}
+          </div>
+
+          <div className="mt-10 flex justify-center">
+            <Button asChild size="lg">
+              <Link href="/courses">
+                Start learning free
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
-
-      <ToolTeaser />
     </>
   )
 }
