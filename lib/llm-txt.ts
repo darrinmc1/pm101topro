@@ -1,6 +1,6 @@
 import { COURSES, LEVEL_LABEL, METHODOLOGY_LABEL } from "@/lib/content"
 import { DOC_TYPES } from "@/lib/documents"
-import { PLANS, SITE_URL, STATUS_CLEANER, getPricingJson } from "@/lib/pricing"
+import { PLANS, PRO_BILLING_NOTE, SITE_URL, STATUS_CLEANER, getPricingJson } from "@/lib/pricing"
 import { SITE_FAQS } from "@/lib/faqs"
 
 export function buildLlmTxt(): string {
@@ -46,7 +46,7 @@ Output: Green/Amber/Red with teeth, biggest risk, what leadership must do, next 
 
 Method: the Reporting up lesson in Working with Stakeholders. Three questions: are we on track, what is the biggest risk, what do you need from me. Escalate early with a proposed solution. Do not use status to prove busyness.
 
-Billing: ${STATUS_CLEANER.freeTrialUses} free generations shared with AI documents. After that, included in $19/mo Pro. Checkout coming — no charges yet.
+Billing: ${STATUS_CLEANER.freeTrialUses} free generations shared with AI documents. After that, included in $19/mo Pro. ${PRO_BILLING_NOTE}
 
 ## Pricing
 
@@ -55,7 +55,7 @@ Updated: ${pricing.updated}
 
 ${planLines.join("\n")}
 
-Paid SKU: $19/mo Pro. AI documents after 2 free generations are the paid feature. Courses stay free. Status Cleaner is included in Pro.
+Paid SKU: $19/mo Pro. AI documents after 2 free generations are the paid feature. Courses stay free. Status Cleaner is included in Pro. ${PRO_BILLING_NOTE}
 
 ## Document types
 

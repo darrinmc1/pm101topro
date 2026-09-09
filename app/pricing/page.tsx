@@ -8,9 +8,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { STATUS_FAQS, faqsToJsonLd } from "@/lib/faqs"
+import { ParkedCheckoutCta } from "@/components/payments/parked-checkout-cta"
 import {
   AI_FREE_LIMIT,
   PLANS,
+  PRO_BILLING_NOTE,
   PRO_PLAN,
   PRO_PRICE_LABEL,
   STATUS_CLEANER,
@@ -21,7 +23,7 @@ import {
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description: `Courses stay free. AI documents after ${AI_FREE_LIMIT} free generations are ${PRO_PRICE_LABEL}. Checkout coming — no charges yet.`,
+  description: `Courses stay free. AI documents after ${AI_FREE_LIMIT} free generations are ${PRO_PRICE_LABEL}. ${PRO_BILLING_NOTE}`,
 }
 
 function pricingJsonLd() {
@@ -72,7 +74,7 @@ export default function PricingPage() {
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             Two free AI document generations. After that, Pro is the paid SKU for unlimited
-            drafts. Checkout coming — we are not charging cards yet.
+            drafts. {PRO_BILLING_NOTE}
           </p>
           <p className="mt-3 font-mono text-xs text-muted-foreground">
             Machine-readable:{" "}
@@ -120,9 +122,15 @@ export default function PricingPage() {
               )}
               <p className="mb-6 text-sm text-muted-foreground">{plan.description}</p>
               {plan.id === "pro" ? (
-                <span className="mb-8 flex items-center justify-center gap-2 rounded-lg bg-accent px-4 py-3 text-sm font-semibold text-accent-foreground">
-                  {plan.cta} <ArrowRight className="h-4 w-4" />
-                </span>
+                <div className="mb-8">
+                  <ParkedCheckoutCta
+                    checkout={
+                      <span className="flex items-center justify-center gap-2 rounded-lg bg-accent px-4 py-3 text-sm font-semibold text-accent-foreground">
+                        Checkout coming <ArrowRight className="h-4 w-4" />
+                      </span>
+                    }
+                  />
+                </div>
               ) : (
                 <Link
                   href={plan.href}
@@ -178,7 +186,7 @@ export default function PricingPage() {
         </div>
 
         <p className="mx-auto mt-8 max-w-4xl text-center text-sm text-muted-foreground">
-          {PRO_PLAN.description} No Stripe checkout on this page.
+          {PRO_PLAN.description} {PRO_BILLING_NOTE} Parked Stripe/Buy is gated — no charges on this page.
         </p>
 
         <section className="mx-auto mt-14 max-w-3xl" aria-labelledby="pricing-faq-heading">

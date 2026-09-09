@@ -1,3 +1,5 @@
+import { PAYMENTS_ENABLED } from "@/lib/payments"
+
 export const SITE_URL = "https://pm101topro.com"
 
 export type PlanId = "free" | "pro"
@@ -19,10 +21,15 @@ export type Plan = {
 export const AI_FREE_LIMIT = 2
 export const AI_USAGE_STORAGE_KEY = "pm101_free_uses"
 
-/** Official paid SKU. Checkout is not live — do not charge cards. */
+/** Official paid SKU. Checkout is parked — waitlist now, do not charge cards. */
 export const PRO_PRICE_USD = 19
 export const PRO_PRICE_LABEL = "$19/mo Pro"
 export const PRO_SKU_NAME = "Pro"
+
+export const PRO_CHECKOUT_CTA = PAYMENTS_ENABLED ? "Checkout coming" : "Join Pro waitlist"
+export const PRO_BILLING_NOTE = PAYMENTS_ENABLED
+  ? "Checkout coming — we are not charging cards yet."
+  : "Pro waitlist is open. Checkout is parked — we are not charging cards."
 
 export const STATUS_CLEANER = {
   id: "status-cleaner",
@@ -63,9 +70,11 @@ export const PLANS: Plan[] = [
       "Everything in Free",
       "Unlimited AI document generator (8 doc types)",
       "Unlimited Status Cleaner",
-      "Checkout coming — no charges yet",
+      PAYMENTS_ENABLED
+        ? "Checkout coming — no charges yet"
+        : "Waitlist open — checkout parked, no charges",
     ],
-    cta: "Checkout coming",
+    cta: PRO_CHECKOUT_CTA,
     href: "/pricing",
     highlighted: true,
     availability: "coming-soon",
@@ -114,7 +123,7 @@ export function getPricingJson(): PricingJson {
   return {
     currency: "USD",
     url: `${SITE_URL}/pricing`,
-    updated: "2026-08-14",
+    updated: "2026-09-09",
     plans: PLANS.map((plan) => ({
       id: plan.id,
       name: plan.name,

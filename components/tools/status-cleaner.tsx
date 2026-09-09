@@ -17,7 +17,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card } from "@/components/ui/card"
 import { SAMPLE_DUMP, type RagStatus, type StatusResult } from "@/lib/status-method"
 import { getFreeUsage, hasExhaustedFreeAi, incrementFreeUsage } from "@/lib/ai-usage"
-import { AI_FREE_LIMIT, PRO_PRICE_LABEL } from "@/lib/pricing"
+import { ParkedCheckoutCta } from "@/components/payments/parked-checkout-cta"
+import { AI_FREE_LIMIT, PRO_BILLING_NOTE, PRO_PRICE_LABEL } from "@/lib/pricing"
 import { cn } from "@/lib/utils"
 
 type Phase = "input" | "working" | "result" | "error"
@@ -280,15 +281,21 @@ export function StatusCleaner() {
               {getFreeUsage()} of {AI_FREE_LIMIT} free AI generations used
             </p>
             <p className="mt-1 text-xs text-amber-400/80">
-              After {AI_FREE_LIMIT} free uses, Status Cleaner is included in {PRO_PRICE_LABEL}.
-              Checkout coming.
+              After {AI_FREE_LIMIT} free uses, Status Cleaner is included in {PRO_PRICE_LABEL}.{" "}
+              {PRO_BILLING_NOTE}
             </p>
-            <Button asChild className="mt-3" size="sm">
-              <Link href="/pricing">
-                <Crown className="mr-1 h-4 w-4" />
-                Checkout coming
-              </Link>
-            </Button>
+            <div className="mx-auto mt-3 max-w-md">
+              <ParkedCheckoutCta
+                checkout={
+                  <Button asChild className="mt-1" size="sm">
+                    <Link href="/pricing">
+                      <Crown className="mr-1 h-4 w-4" />
+                      Checkout coming
+                    </Link>
+                  </Button>
+                }
+              />
+            </div>
           </div>
         )}
       </div>
@@ -340,16 +347,20 @@ function SubscribeWall() {
       <h2 className="mt-2 text-2xl font-bold text-foreground">Status Cleaner is on Pro</h2>
       <p className="mx-auto mt-3 max-w-md text-muted-foreground">
         You&apos;ve used the {AI_FREE_LIMIT} shared free AI generations. Unlimited Status Cleaner
-        and document drafts are {PRO_PRICE_LABEL}. Courses stay free. Checkout coming.
+        and document drafts are {PRO_PRICE_LABEL}. Courses stay free. {PRO_BILLING_NOTE}
       </p>
-      <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-        <Button asChild size="lg">
-          <Link href="/pricing">
-            <Crown className="mr-2 h-5 w-5" />
-            Checkout coming
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </Button>
+      <div className="mx-auto mt-8 flex w-full max-w-md flex-col items-stretch gap-3">
+        <ParkedCheckoutCta
+          checkout={
+            <Button asChild size="lg" className="w-full">
+              <Link href="/pricing">
+                <Crown className="mr-2 h-5 w-5" />
+                Checkout coming
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
+          }
+        />
         <Button asChild variant="ghost" size="lg">
           <Link href="/courses">Browse free courses instead</Link>
         </Button>

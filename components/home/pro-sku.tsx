@@ -1,9 +1,11 @@
 import Link from "next/link"
 import { ArrowRight, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { ParkedCheckoutCta } from "@/components/payments/parked-checkout-cta"
 import {
   AI_FREE_LIMIT,
   PLANS,
+  PRO_BILLING_NOTE,
   PRO_PRICE_LABEL,
   formatPlanPeriod,
   formatPlanPrice,
@@ -22,7 +24,7 @@ export function ProSku() {
           </h2>
           <p className="mt-3 text-muted-foreground">
             Two free document generations. After that, {PRO_PRICE_LABEL} unlocks unlimited AI
-            drafts. Checkout is not live yet.
+            drafts. {PRO_BILLING_NOTE}
           </p>
         </div>
 
@@ -59,12 +61,18 @@ export function ProSku() {
               )}
               <p className="mt-4 text-sm text-muted-foreground">{plan.description}</p>
               {plan.id === "pro" ? (
-                <Button asChild className="mt-6 w-full" size="lg">
-                  <Link href="/pricing">
-                    {plan.cta}
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </Button>
+                <div className="mt-6">
+                  <ParkedCheckoutCta
+                    checkout={
+                      <Button asChild className="w-full" size="lg">
+                        <Link href="/pricing">
+                          Checkout coming
+                          <ArrowRight className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                    }
+                  />
+                </div>
               ) : (
                 <Button asChild variant="outline" className="mt-6 w-full" size="lg">
                   <Link href={plan.href}>
@@ -90,8 +98,8 @@ export function ProSku() {
         </div>
 
         <p className="mx-auto mt-8 max-w-2xl text-center text-xs text-muted-foreground">
-          AI document generator and Status Cleaner share the {AI_FREE_LIMIT} free generations.
-          No Stripe and no card charges on this page.
+          AI document generator and Status Cleaner share the {AI_FREE_LIMIT} free generations.{" "}
+          {PRO_BILLING_NOTE} Parked Stripe/Buy stays gated.
         </p>
       </div>
     </section>
