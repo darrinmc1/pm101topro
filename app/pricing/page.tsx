@@ -126,7 +126,7 @@ export default function PricingPage() {
                   <ParkedCheckoutCta
                     checkout={
                       <span className="flex items-center justify-center gap-2 rounded-lg bg-accent px-4 py-3 text-sm font-semibold text-accent-foreground">
-                        {plan.cta} <ArrowRight className="h-4 w-4" />
+                        Checkout coming <ArrowRight className="h-4 w-4" />
                       </span>
                     }
                   />

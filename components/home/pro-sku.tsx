@@ -66,7 +66,7 @@ export function ProSku() {
                     checkout={
                       <Button asChild className="w-full" size="lg">
                         <Link href="/pricing">
-                          {plan.cta}
+                          Checkout coming
                           <ArrowRight className="h-4 w-4" />
                         </Link>
                       </Button>
