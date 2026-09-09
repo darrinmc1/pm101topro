@@ -1,13 +1,12 @@
-"use client"
-
 import Link from "next/link"
-import { ArrowRight, CheckCircle } from "lucide-react"
+import { ArrowRight, CheckCircle2, PlayCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-const PROOF_POINTS = [
-  "Structured path from PM beginner to pro",
-  "Covers Traditional, Agile & PMP methodologies",
-  "AI tools that generate real project documents",
+const BENEFITS = [
+  "Free starter lessons — no credit card required",
+  "PMP, Agile, Scrum & PMO all in one place",
+  "AI tools that build real project documents",
+  "Clear path from beginner to PMO leader",
 ]
 
 export function Hero() {
@@ -15,35 +14,49 @@ export function Hero() {
     <section className="border-b border-border bg-surface">
       <div className="container py-20 md:py-28">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-medium uppercase tracking-widest text-accent mb-4">
-            Project Management Mastery
+          <p className="inline-block rounded-full border border-accent/30 bg-accent/10 px-4 py-1 text-sm font-medium text-accent">
+            Practical project management training
           </p>
-          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl mb-6">
-            Master Project Management{" "}
-            <span className="text-accent">From Day One</span>
+
+          <h1 className="mt-5 text-4xl font-extrabold tracking-tightest text-foreground text-balance sm:text-5xl md:text-6xl">
+            Go from your first project to{" "}
+            <span className="text-accent">running the room</span>
           </h1>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            The complete learning platform for aspiring and practicing project managers. Build real skills, earn recognized credentials, and advance your career with confidence.
+
+          <p className="mt-6 text-lg leading-relaxed text-muted-foreground text-pretty max-w-2xl mx-auto">
+            Step-by-step courses in PMP, Agile, Scrum, and PMO — built for people who learn by doing, not by memorising slides.
           </p>
-          <ul className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
-            {PROOF_POINTS.map((point) => (
-              <li key={point} className="flex items-center gap-2 text-sm text-muted-foreground">
-                <CheckCircle className="h-4 w-4 shrink-0 text-accent" />
-                {point}
+
+          <ul className="mt-8 flex flex-col items-center gap-2 sm:flex-row sm:flex-wrap sm:justify-center">
+            {BENEFITS.map((benefit) => (
+              <li
+                key={benefit}
+                className="flex items-center gap-2 text-sm text-muted-foreground"
+              >
+                <CheckCircle2 className="h-4 w-4 shrink-0 text-accent" />
+                {benefit}
               </li>
             ))}
           </ul>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button asChild size="lg" className="w-full sm:w-auto">
+
+          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <Button asChild size="lg" className="gap-2 px-8 text-base font-semibold">
               <Link href="/courses">
-                Start Learning Free
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <PlayCircle className="h-5 w-5" />
+                Start Free Course
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
-              <Link href="/about">See How It Works</Link>
+            <Button asChild size="lg" variant="outline" className="gap-2 px-8 text-base font-semibold">
+              <Link href="/pricing">
+                View Pricing
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </Button>
           </div>
+
+          <p className="mt-4 text-xs text-muted-foreground">
+            Join thousands of project managers levelling up their careers
+          </p>
         </div>
       </div>
     </section>
