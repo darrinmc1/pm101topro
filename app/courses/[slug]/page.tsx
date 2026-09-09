@@ -1,21 +1,13 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowLeft, ArrowRight, Clock, Lock, Play } from "lucide-react"
-
+import { ArrowLeft, BookOpen, Clock, GraduationCap, Lock } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
 import { LevelBadge } from "@/components/level-badge"
-import { LevelRail } from "@/components/level-rail"
-import {
-  COURSES,
-  METHODOLOGY_LABEL,
-  getCourse,
-} from "@/lib/content"
-
-export function generateStaticParams() {
-  return COURSES.map((c) => ({ slug: c.slug }))
-}
+import { createClient } from "@/lib/supabase/server"
+import { auth } from "@clerk/nextjs/server"
 
 export async function generateMetadata({
   params,
@@ -23,9 +15,17 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  const course = getCourse(slug)
+  const supabase = await createClient()
+  const { data: course } = await supabase
+    .from("courses")
+    .select("title, description")
+    .eq("slug", slug)
+    .single()
   if (!course) return { title: "Course not found" }
-  return { title: course.title, description: course.description }
+  return {
+    title: course.title,
+    description: course.description,
+  }
 }
 
 export default async function CourseDetailPage({
@@ -34,105 +34,153 @@ export default async function CourseDetailPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const course = getCourse(slug)
+  const supabase = await createClient()
+  const { userId } = await auth()
+
+  const { data: course } = await supabase
+    .from("courses")
+    .select("*")
+    .eq("slug", slug)
+    .single()
+
   if (!course) notFound()
 
-  const totalMins = course.lessons.reduce((s, l) => s + l.durationMins, 0)
-  const firstLesson = course.lessons[0]
+  const { data: lessons } = await supabase
+    .from("lessons")
+    .select("id, title, slug, order_index, is_free")
+    .eq("course_id", course.id)
+    .order("order_index", { ascending: true })
+
+  const courseSchema = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: course.title,
+    description: course.description,
+    url: `https://pm101topro.com/courses/${course.slug}`,
+    provider: {
+      "@type": "Organization",
+      name: "pm101toPro",
+      url: "https://pm101topro.com",
+    },
+    educationalLevel: course.level ?? "Beginner",
+    teaches: course.methodology ?? "Project Management",
+    numberOfCredits: lessons?.length ?? 0,
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "online",
+      instructor: {
+        "@type": "Organization",
+        name: "pm101toPro",
+      },
+    },
+    isAccessibleForFree: course.is_free ?? false,
+    inLanguage: "en",
+  }
 
   return (
-    <div>
-      <section className="relative border-b border-border">
-        <div className="absolute inset-0 bg-dot-grid opacity-40" aria-hidden="true" />
-        <div className="container relative py-12">
-          <Link
-            href="/courses"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            All courses
-          </Link>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(courseSchema),
+        }}
+      />
+      <div className="container max-w-3xl py-12">
+        <Link
+          href="/courses"
+          className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          All courses
+        </Link>
 
-          <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
-            <div className="max-w-2xl">
-              <div className="flex flex-wrap items-center gap-2">
-                <LevelBadge level={course.level} />
-                <Badge variant="outline">
-                  {METHODOLOGY_LABEL[course.methodology]}
-                </Badge>
-              </div>
-              <h1 className="mt-4 text-4xl font-extrabold tracking-tightest text-foreground">
-                {course.title}
-              </h1>
-              <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">
-                {course.description}
-              </p>
-              <div className="mt-6 flex items-center gap-5 text-sm text-muted-foreground">
-                <span>{course.lessons.length} lessons</span>
-                <span className="flex items-center gap-1.5">
-                  <Clock className="h-4 w-4" />
-                  {totalMins} min total
-                </span>
-              </div>
-              <Button asChild size="lg" className="mt-7">
-                <Link href={`/learn/${course.slug}/${firstLesson.slug}`}>
-                  Start first lesson free
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
+        <div className="mt-6">
+          <div className="flex flex-wrap items-center gap-2">
+            <LevelBadge level={course.level} />
+            {course.methodology && (
+              <Badge variant="outline" className="capitalize">
+                {course.methodology}
+              </Badge>
+            )}
+            {course.is_free && (
+              <Badge className="bg-accent/10 text-accent hover:bg-accent/20">Free</Badge>
+            )}
+          </div>
 
-            <div className="rounded-xl border border-border bg-surface p-5">
-              <p className="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                Your level rail
-              </p>
-              <LevelRail completionPercent={0} currentLevel={course.level} />
-            </div>
+          <h1 className="mt-4 text-3xl font-extrabold tracking-tightest text-foreground text-balance sm:text-4xl">
+            {course.title}
+          </h1>
+          <p className="mt-4 text-lg leading-relaxed text-muted-foreground text-pretty">
+            {course.description}
+          </p>
+
+          <div className="mt-6 flex flex-wrap gap-6 text-sm text-muted-foreground">
+            {lessons && (
+              <span className="flex items-center gap-1.5">
+                <BookOpen className="h-4 w-4" />
+                {lessons.length} lesson{lessons.length !== 1 ? "s" : ""}
+              </span>
+            )}
+            {course.estimated_hours && (
+              <span className="flex items-center gap-1.5">
+                <Clock className="h-4 w-4" />
+                {course.estimated_hours}h estimated
+              </span>
+            )}
+            <span className="flex items-center gap-1.5">
+              <GraduationCap className="h-4 w-4" />
+              {course.level ?? "All levels"}
+            </span>
           </div>
         </div>
-      </section>
 
-      <section className="container py-12">
-        <h2 className="text-2xl font-bold tracking-tight text-foreground">
-          Lessons
-        </h2>
-        <ol className="mt-6 flex flex-col gap-3">
-          {course.lessons.map((lesson, i) => (
-            <li key={lesson.slug}>
-              <Link
-                href={`/learn/${course.slug}/${lesson.slug}`}
-                className="group flex items-center gap-4 rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent/50"
-              >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface-raised font-mono text-sm text-muted-foreground">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="truncate font-medium text-foreground">
-                      {lesson.title}
-                    </h3>
-                    {lesson.isFree ? (
-                      <Badge variant="success">Free</Badge>
+        {lessons && lessons.length > 0 && (
+          <div className="mt-10">
+            <h2 className="text-xl font-bold text-foreground">Lessons</h2>
+            <div className="mt-4 space-y-2">
+              {lessons.map((lesson, index) => {
+                const isAccessible = course.is_free || lesson.is_free || !!userId
+                return (
+                  <Card
+                    key={lesson.id}
+                    className="flex items-center justify-between border-border bg-surface p-4"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-medium text-muted-foreground">
+                        {index + 1}
+                      </span>
+                      <span className="font-medium text-foreground">{lesson.title}</span>
+                    </div>
+                    {isAccessible ? (
+                      <Button asChild size="sm" variant="ghost">
+                        <Link href={`/learn/${course.slug}/${lesson.slug}`}>Start</Link>
+                      </Button>
                     ) : (
-                      <Lock className="h-3.5 w-3.5 text-muted-foreground" />
+                      <Lock className="h-4 w-4 text-muted-foreground" />
                     )}
-                  </div>
-                  {lesson.summary && (
-                    <p className="mt-0.5 truncate text-sm text-muted-foreground">
-                      {lesson.summary}
-                    </p>
-                  )}
-                </div>
-                <span className="hidden shrink-0 items-center gap-1.5 text-xs text-muted-foreground sm:flex">
-                  <Clock className="h-3.5 w-3.5" />
-                  {lesson.durationMins} min
-                </span>
-                <Play className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-accent" />
-              </Link>
-            </li>
-          ))}
-        </ol>
-      </section>
-    </div>
+                  </Card>
+                )
+              })}
+            </div>
+          </div>
+        )}
+
+        <div className="mt-10">
+          {userId ? (
+            lessons && lessons.length > 0 ? (
+              <Button asChild size="lg">
+                <Link href={`/learn/${course.slug}/${lessons[0].slug}`}>
+                  Start course
+                </Link>
+              </Button>
+            ) : null
+          ) : (
+            <Button asChild size="lg">
+              <Link href="/sign-up">Sign up to start</Link>
+            </Button>
+          )}
+        </div>
+      </div>
+    </>
   )
 }
