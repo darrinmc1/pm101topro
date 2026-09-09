@@ -1,3 +1,5 @@
+import { PRO_BILLING_NOTE, PRO_PRICE_LABEL } from "@/lib/pricing"
+
 export type FaqItem = {
   id: string
   question: string
@@ -33,7 +35,7 @@ export const STATUS_FAQS: FaqItem[] = [
     id: "price",
     question: "How much does Status Cleaner cost?",
     answer:
-      "Two free generations are included with the same meter as AI documents. After that, Status Cleaner is part of $19/mo Pro. Checkout is coming — we are not charging cards yet.",
+      `Two free generations are included with the same meter as AI documents. After that, Status Cleaner is part of ${PRO_PRICE_LABEL}. ${PRO_BILLING_NOTE}`,
   },
 ]
 
@@ -43,13 +45,13 @@ export const SITE_FAQS: FaqItem[] = [
     id: "free-courses",
     question: "Are the courses really free?",
     answer:
-      "Yes. All four course levels stay free. The paid SKU is $19/mo Pro, and it is for AI documents after two free generations — not for the course library.",
+      `Yes. All four course levels stay free. The paid SKU is ${PRO_PRICE_LABEL}, and it is for AI documents after two free generations — not for the course library.`,
   },
   {
     id: "ai-docs",
     question: "How do the AI document tools work?",
     answer:
-      "Pick a document type (charter, risk register, RACI, status report, and more), answer a short questionnaire, and get an editable markdown draft. Everyone gets two free AI generations. After that, unlimited drafts are $19/mo Pro. Checkout coming.",
+      `Pick a document type (charter, risk register, RACI, status report, and more), answer a short questionnaire, and get an editable markdown draft. Everyone gets two free AI generations. After that, unlimited drafts are ${PRO_PRICE_LABEL}. ${PRO_BILLING_NOTE}`,
   },
   {
     id: "methodologies",

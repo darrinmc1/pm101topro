@@ -9,7 +9,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { STATUS_FAQS, faqsToJsonLd } from "@/lib/faqs"
-import { AI_FREE_LIMIT, PRO_PRICE_LABEL, PRO_PRICE_USD, SITE_URL, STATUS_CLEANER } from "@/lib/pricing"
+import {
+  AI_FREE_LIMIT,
+  PRO_BILLING_NOTE,
+  PRO_PRICE_LABEL,
+  PRO_PRICE_USD,
+  SITE_URL,
+  STATUS_CLEANER,
+} from "@/lib/pricing"
 
 export const metadata: Metadata = {
   title: "Status Cleaner",
@@ -39,7 +46,7 @@ export default function StatusCleanerPage() {
       priceCurrency: "USD",
       availability: "https://schema.org/PreOrder",
       url: `${SITE_URL}/pricing`,
-      description: `Included in ${PRO_PRICE_LABEL}. ${AI_FREE_LIMIT} free generations on the shared AI meter. Checkout coming.`,
+      description: `Included in ${PRO_PRICE_LABEL}. ${AI_FREE_LIMIT} free generations on the shared AI meter. ${PRO_BILLING_NOTE}`,
     },
   }
 

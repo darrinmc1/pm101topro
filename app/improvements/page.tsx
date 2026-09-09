@@ -13,7 +13,7 @@ export default function ImprovementsPage() {
           </div>
           <h1 className="text-3xl font-bold tracking-tight mb-3">We&apos;re Building Something Better</h1>
           <p className="text-slate-600 max-w-lg mx-auto mb-8 text-lg">
-            Checkout coming — we are not charging cards yet. The paid SKU is{" "}
+            Pro waitlist is open. Checkout is parked — we are not charging cards. The paid SKU is{" "}
             <strong className="text-blue-600">$19/mo Pro</strong> for AI documents after two
             free generations. Courses stay free.
           </p>

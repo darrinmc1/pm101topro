@@ -3,7 +3,8 @@ import { NextResponse } from "next/server"
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { email } = body
+    const { email, source } = body as { email?: string; source?: string }
+    const isProWaitlist = source === "pro-waitlist"
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json(
@@ -16,12 +17,14 @@ export async function POST(request: Request) {
     const apiKey = process.env.RESEND_API_KEY
     if (!apiKey) {
       console.warn(
-        "[subscribe] Resend not configured — subscription stored in log only"
+        "[subscribe] Resend not configured — subscription stored in log only",
+        { email, source: source || "unspecified" }
       )
       return NextResponse.json({
         success: true,
-        message:
-          "You're subscribed! (Email delivery will be configured soon.)",
+        message: isProWaitlist
+          ? "You’re on the Pro waitlist. (Email delivery will be configured soon.)"
+          : "You're subscribed! (Email delivery will be configured soon.)",
       })
     }
 
@@ -62,8 +65,23 @@ export async function POST(request: Request) {
       body: JSON.stringify({
         from: process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev",
         to: email,
-        subject: "Welcome to pm101toPro!",
-        html: `
+        subject: isProWaitlist
+          ? "You’re on the pm101toPro Pro waitlist"
+          : "Welcome to pm101toPro!",
+        html: isProWaitlist
+          ? `
+          <div style="font-family: system-ui, sans-serif; max-width: 480px; margin: 0 auto;">
+            <h1 style="color: #0A0F1E;">You’re on the Pro waitlist</h1>
+            <p style="color: #525866;">
+              Checkout is parked — we are not charging cards. We’ll email you
+              when $19/mo Pro is ready to enable.
+            </p>
+            <p style="color: #525866;">
+              — The pm101toPro Team
+            </p>
+          </div>
+        `
+          : `
           <div style="font-family: system-ui, sans-serif; max-width: 480px; margin: 0 auto;">
             <h1 style="color: #0A0F1E;">Welcome to pm101toPro!</h1>
             <p style="color: #525866;">
@@ -81,7 +99,9 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "Welcome! Check your inbox for a confirmation.",
+      message: isProWaitlist
+        ? "You’re on the Pro waitlist. We’ll email you when checkout is ready."
+        : "Welcome! Check your inbox for a confirmation.",
     })
   } catch (error) {
     console.error("Subscribe error:", error)
