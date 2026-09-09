@@ -1,49 +1,38 @@
-"use client"
-
 import Link from "next/link"
-import { ArrowRight, CheckCircle } from "lucide-react"
+import { ArrowRight, PlayCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
-const PROOF_POINTS = [
-  "Structured path from PM beginner to pro",
-  "Covers Traditional, Agile & PMP methodologies",
-  "AI tools that generate real project documents",
-]
 
 export function Hero() {
   return (
-    <section className="border-b border-border bg-surface">
+    <section className="relative overflow-hidden border-b border-border bg-background">
       <div className="container py-20 md:py-28">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-medium uppercase tracking-widest text-accent mb-4">
-            Project Management Mastery
+          <p className="inline-block rounded-full border border-accent/30 bg-accent/10 px-4 py-1 text-sm font-medium text-accent">
+            From first project to running the room
           </p>
-          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl mb-6">
-            Master Project Management{" "}
-            <span className="text-accent">From Day One</span>
+          <h1 className="mt-5 text-4xl font-extrabold tracking-tightest text-foreground text-balance sm:text-5xl md:text-6xl">
+            Master Project Management — Step by Step
           </h1>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            The complete learning platform for aspiring and practicing project managers. Build real skills, earn recognized credentials, and advance your career with confidence.
+          <p className="mt-6 text-lg leading-relaxed text-muted-foreground text-pretty max-w-2xl mx-auto">
+            Practical PMP, Agile, Scrum, and PMO training with AI-powered tools that turn your learning into real deliverables.
           </p>
-          <ul className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
-            {PROOF_POINTS.map((point) => (
-              <li key={point} className="flex items-center gap-2 text-sm text-muted-foreground">
-                <CheckCircle className="h-4 w-4 shrink-0 text-accent" />
-                {point}
-              </li>
-            ))}
-          </ul>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button asChild size="lg" className="w-full sm:w-auto">
+          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <Button asChild size="lg" className="w-full sm:w-auto gap-2 text-base px-8 py-6">
               <Link href="/courses">
-                Start Learning Free
-                <ArrowRight className="ml-2 h-4 w-4" />
+                Browse Courses
+                <ArrowRight className="h-5 w-5" />
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
-              <Link href="/about">See How It Works</Link>
+            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto gap-2 text-base px-8 py-6">
+              <Link href="/tools">
+                <PlayCircle className="h-5 w-5" />
+                Try Free AI Tools
+              </Link>
             </Button>
           </div>
+          <p className="mt-4 text-sm text-muted-foreground">
+            No credit card required &middot; Free courses available
+          </p>
         </div>
       </div>
     </section>
