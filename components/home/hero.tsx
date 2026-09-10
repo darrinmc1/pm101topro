@@ -1,49 +1,72 @@
-"use client"
-
 import Link from "next/link"
-import { ArrowRight, CheckCircle } from "lucide-react"
+import { ArrowRight, Brain, Award, Infinity, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-const PROOF_POINTS = [
-  "Structured path from PM beginner to pro",
-  "Covers Traditional, Agile & PMP methodologies",
-  "AI tools that generate real project documents",
+const BENEFITS = [
+  {
+    icon: Brain,
+    title: "AI-Powered Learning",
+    body: "Generate professional PM documents instantly and reinforce concepts with AI-guided practice.",
+  },
+  {
+    icon: Award,
+    title: "Industry-Recognised Certifications",
+    body: "Courses aligned to PMP, Agile, Scrum, and PMO standards — credentials employers trust.",
+  },
+  {
+    icon: Infinity,
+    title: "Lifetime Access",
+    body: "Buy once, revisit anytime. Content updates are included so your skills stay current.",
+  },
+  {
+    icon: Zap,
+    title: "Practical, Not Theoretical",
+    body: "Every lesson links to a real deliverable. Learn by doing, not by memorising slides.",
+  },
 ]
 
 export function Hero() {
   return (
-    <section className="border-b border-border bg-surface">
+    <section className="border-b border-border bg-background">
       <div className="container py-20 md:py-28">
+        {/* Headline block */}
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-medium uppercase tracking-widest text-accent mb-4">
-            Project Management Mastery
+          <p className="text-sm font-medium uppercase tracking-widest text-accent">
+            Project management training
           </p>
-          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl mb-6">
-            Master Project Management{" "}
-            <span className="text-accent">From Day One</span>
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tightest text-foreground text-balance sm:text-5xl md:text-6xl">
+            From your first project to running the room
           </h1>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            The complete learning platform for aspiring and practicing project managers. Build real skills, earn recognized credentials, and advance your career with confidence.
+          <p className="mt-5 text-lg leading-relaxed text-muted-foreground text-pretty">
+            Structured courses, AI-powered tools, and a clear progression path — everything you need
+            to go from PM beginner to confident professional.
           </p>
-          <ul className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
-            {PROOF_POINTS.map((point) => (
-              <li key={point} className="flex items-center gap-2 text-sm text-muted-foreground">
-                <CheckCircle className="h-4 w-4 shrink-0 text-accent" />
-                {point}
-              </li>
-            ))}
-          </ul>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button asChild size="lg" className="w-full sm:w-auto">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <Button asChild size="lg">
               <Link href="/courses">
-                Start Learning Free
-                <ArrowRight className="ml-2 h-4 w-4" />
+                Browse courses <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
-              <Link href="/about">See How It Works</Link>
+            <Button asChild variant="outline" size="lg">
+              <Link href="/about">How it works</Link>
             </Button>
           </div>
+        </div>
+
+        {/* Benefits grid */}
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {BENEFITS.map(({ icon: Icon, title, body }) => (
+            <div
+              key={title}
+              className="rounded-lg border border-border bg-surface p-6 flex flex-col gap-3"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-md bg-accent/10">
+                <Icon className="h-5 w-5 text-accent" />
+              </div>
+              <h3 className="font-semibold text-foreground">{title}</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">{body}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
