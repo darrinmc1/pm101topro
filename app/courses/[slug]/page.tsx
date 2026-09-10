@@ -9,6 +9,7 @@ import { LevelBadge } from "@/components/level-badge"
 import { LevelRail } from "@/components/level-rail"
 import {
   COURSES,
+  LEVEL_LABEL,
   METHODOLOGY_LABEL,
   getCourse,
 } from "@/lib/content"
@@ -39,100 +40,135 @@ export default async function CourseDetailPage({
 
   const totalMins = course.lessons.reduce((s, l) => s + l.durationMins, 0)
   const firstLesson = course.lessons[0]
+  const hasFreeLesson = course.lessons.some((l) => l.isFree)
+
+  const courseSchema = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: course.title,
+    description: course.description,
+    url: `https://pm101topro.com/courses/${course.slug}`,
+    provider: {
+      "@type": "Organization",
+      name: "pm101toPro",
+      url: "https://pm101topro.com",
+    },
+    educationalLevel: LEVEL_LABEL[course.level],
+    teaches: METHODOLOGY_LABEL[course.methodology],
+    numberOfCredits: course.lessons.length,
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "online",
+      instructor: {
+        "@type": "Organization",
+        name: "pm101toPro",
+      },
+    },
+    isAccessibleForFree: hasFreeLesson,
+    inLanguage: "en",
+  }
 
   return (
-    <div>
-      <section className="relative border-b border-border">
-        <div className="absolute inset-0 bg-dot-grid opacity-40" aria-hidden="true" />
-        <div className="container relative py-12">
-          <Link
-            href="/courses"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            All courses
-          </Link>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(courseSchema),
+        }}
+      />
+      <div>
+        <section className="relative border-b border-border">
+          <div className="absolute inset-0 bg-dot-grid opacity-40" aria-hidden="true" />
+          <div className="container relative py-12">
+            <Link
+              href="/courses"
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              All courses
+            </Link>
 
-          <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
-            <div className="max-w-2xl">
-              <div className="flex flex-wrap items-center gap-2">
-                <LevelBadge level={course.level} />
-                <Badge variant="outline">
-                  {METHODOLOGY_LABEL[course.methodology]}
-                </Badge>
+            <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+              <div className="max-w-2xl">
+                <div className="flex flex-wrap items-center gap-2">
+                  <LevelBadge level={course.level} />
+                  <Badge variant="outline">
+                    {METHODOLOGY_LABEL[course.methodology]}
+                  </Badge>
+                </div>
+                <h1 className="mt-4 text-4xl font-extrabold tracking-tightest text-foreground">
+                  {course.title}
+                </h1>
+                <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">
+                  {course.description}
+                </p>
+                <div className="mt-6 flex items-center gap-5 text-sm text-muted-foreground">
+                  <span>{course.lessons.length} lessons</span>
+                  <span className="flex items-center gap-1.5">
+                    <Clock className="h-4 w-4" />
+                    {totalMins} min total
+                  </span>
+                </div>
+                <Button asChild size="lg" className="mt-7">
+                  <Link href={`/learn/${course.slug}/${firstLesson.slug}`}>
+                    Start first lesson free
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
               </div>
-              <h1 className="mt-4 text-4xl font-extrabold tracking-tightest text-foreground">
-                {course.title}
-              </h1>
-              <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">
-                {course.description}
-              </p>
-              <div className="mt-6 flex items-center gap-5 text-sm text-muted-foreground">
-                <span>{course.lessons.length} lessons</span>
-                <span className="flex items-center gap-1.5">
-                  <Clock className="h-4 w-4" />
-                  {totalMins} min total
-                </span>
-              </div>
-              <Button asChild size="lg" className="mt-7">
-                <Link href={`/learn/${course.slug}/${firstLesson.slug}`}>
-                  Start first lesson free
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
 
-            <div className="rounded-xl border border-border bg-surface p-5">
-              <p className="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                Your level rail
-              </p>
-              <LevelRail completionPercent={0} currentLevel={course.level} />
+              <div className="rounded-xl border border-border bg-surface p-5">
+                <p className="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">
+                  Your level rail
+                </p>
+                <LevelRail completionPercent={0} currentLevel={course.level} />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="container py-12">
-        <h2 className="text-2xl font-bold tracking-tight text-foreground">
-          Lessons
-        </h2>
-        <ol className="mt-6 flex flex-col gap-3">
-          {course.lessons.map((lesson, i) => (
-            <li key={lesson.slug}>
-              <Link
-                href={`/learn/${course.slug}/${lesson.slug}`}
-                className="group flex items-center gap-4 rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent/50"
-              >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface-raised font-mono text-sm text-muted-foreground">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="truncate font-medium text-foreground">
-                      {lesson.title}
-                    </h3>
-                    {lesson.isFree ? (
-                      <Badge variant="success">Free</Badge>
-                    ) : (
-                      <Lock className="h-3.5 w-3.5 text-muted-foreground" />
+        <section className="container py-12">
+          <h2 className="text-2xl font-bold tracking-tight text-foreground">
+            Lessons
+          </h2>
+          <ol className="mt-6 flex flex-col gap-3">
+            {course.lessons.map((lesson, i) => (
+              <li key={lesson.slug}>
+                <Link
+                  href={`/learn/${course.slug}/${lesson.slug}`}
+                  className="group flex items-center gap-4 rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent/50"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface-raised font-mono text-sm text-muted-foreground">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <h3 className="truncate font-medium text-foreground">
+                        {lesson.title}
+                      </h3>
+                      {lesson.isFree ? (
+                        <Badge variant="success">Free</Badge>
+                      ) : (
+                        <Lock className="h-3.5 w-3.5 text-muted-foreground" />
+                      )}
+                    </div>
+                    {lesson.summary && (
+                      <p className="mt-0.5 truncate text-sm text-muted-foreground">
+                        {lesson.summary}
+                      </p>
                     )}
                   </div>
-                  {lesson.summary && (
-                    <p className="mt-0.5 truncate text-sm text-muted-foreground">
-                      {lesson.summary}
-                    </p>
-                  )}
-                </div>
-                <span className="hidden shrink-0 items-center gap-1.5 text-xs text-muted-foreground sm:flex">
-                  <Clock className="h-3.5 w-3.5" />
-                  {lesson.durationMins} min
-                </span>
-                <Play className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-accent" />
-              </Link>
-            </li>
-          ))}
-        </ol>
-      </section>
-    </div>
+                  <span className="hidden shrink-0 items-center gap-1.5 text-xs text-muted-foreground sm:flex">
+                    <Clock className="h-3.5 w-3.5" />
+                    {lesson.durationMins} min
+                  </span>
+                  <Play className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-accent" />
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </section>
+      </div>
+    </>
   )
 }

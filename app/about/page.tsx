@@ -10,6 +10,29 @@ export const metadata: Metadata = {
     "pm101toPro exists to take anyone from their first project to running the room — practical project management training for PMP, Agile, Scrum, and PMO.",
 }
 
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: "About pm101toPro",
+  url: "https://pm101topro.com/about",
+  description:
+    "pm101toPro exists to take anyone from their first project to running the room — practical project management training for PMP, Agile, Scrum, and PMO.",
+  mainEntity: {
+    "@type": "Organization",
+    name: "pm101toPro",
+    url: "https://pm101topro.com",
+    description:
+      "Practical project management training covering PMP, Agile, Scrum, and PMO — from your first project to running the room.",
+    knowsAbout: [
+      "Project Management",
+      "PMP Certification",
+      "Agile Methodology",
+      "Scrum Framework",
+      "PMO Governance",
+    ],
+  },
+}
+
 const VALUES = [
   {
     icon: Compass,
@@ -43,6 +66,12 @@ const METHODOLOGIES = [
 export default function AboutPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(aboutSchema),
+        }}
+      />
       <section className="border-b border-border">
         <div className="container py-16">
           <p className="text-sm font-medium uppercase tracking-widest text-accent">About us</p>
@@ -50,67 +79,63 @@ export default function AboutPage() {
             From your first project to running the room
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
-            Most people fall into project management sideways — handed a project, a nervous sponsor, and no roadmap.
-            pm101toPro is the roadmap. We turn scattered, jargon-heavy PM knowledge into a structured path anyone can
-            follow, backed by AI tools that produce the documents real projects demand.
+            Most people fall into project management sideways — handed a project, a nervous sponsor,
+            and no roadmap. pm101toPro is the roadmap.
           </p>
         </div>
       </section>
 
-      <section className="container py-14">
-        <div className="grid gap-6 sm:grid-cols-2">
-          {VALUES.map((value) => {
-            const Icon = value.icon
-            return (
-              <Card key={value.title} className="border-border bg-surface p-6">
-                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-accent/10 text-accent">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <h2 className="mt-4 text-lg font-bold text-foreground">{value.title}</h2>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">{value.body}</p>
-              </Card>
-            )
-          })}
+      <section className="container py-16">
+        <h2 className="text-2xl font-bold tracking-tight text-foreground">What we believe</h2>
+        <div className="mt-8 grid gap-6 sm:grid-cols-2">
+          {VALUES.map(({ icon: Icon, title, body }) => (
+            <Card key={title} className="border-border bg-surface p-6">
+              <Icon className="h-6 w-6 text-accent" />
+              <h3 className="mt-4 font-semibold text-foreground">{title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{body}</p>
+            </Card>
+          ))}
         </div>
       </section>
 
       <section className="border-t border-border">
-        <div className="container py-14">
-          <p className="text-sm font-medium uppercase tracking-widest text-accent">Methodologies we cover</p>
-          <h2 className="mt-3 max-w-2xl text-3xl font-extrabold tracking-tightest text-foreground text-balance">
-            PMP, Agile, Scrum, PMO — and everything in between
-          </h2>
-          <p className="mt-4 max-w-2xl text-pretty leading-relaxed text-muted-foreground">
-            Real projects blend methodologies. Our curriculum is built to reflect that, giving you fluency across
-            frameworks so you can adapt to any team or organisation.
+        <div className="container py-16">
+          <h2 className="text-2xl font-bold tracking-tight text-foreground">What we cover</h2>
+          <p className="mt-3 max-w-2xl text-pretty leading-relaxed text-muted-foreground">
+            Every major project management methodology, taught practically.
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {METHODOLOGIES.map((m) => (
-              <Link key={m.label} href={m.href} className="group">
-                <Card className="flex h-full flex-col border-border bg-surface p-5 transition-colors hover:border-accent/50">
-                  <h3 className="text-base font-bold text-foreground">{m.label}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">{m.description}</p>
-                  <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-accent">
-                    View courses <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                  </span>
-                </Card>
+              <Link
+                key={m.label}
+                href={m.href}
+                className="group rounded-lg border border-border bg-surface p-5 transition-colors hover:border-accent/50"
+              >
+                <p className="font-semibold text-foreground">{m.label}</p>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{m.description}</p>
+                <ArrowRight className="mt-3 h-4 w-4 text-accent transition-transform group-hover:translate-x-0.5" />
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-t border-border">
-        <div className="container py-14 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h2 className="text-2xl font-extrabold tracking-tightest text-foreground">Ready to start?</h2>
-            <p className="mt-2 text-muted-foreground text-pretty">Pick a methodology and take your first lesson free.</p>
+      <section className="border-t border-border bg-surface">
+        <div className="container py-16 text-center">
+          <h2 className="text-2xl font-bold tracking-tight text-foreground">
+            Ready to level up?
+          </h2>
+          <p className="mt-3 text-muted-foreground">
+            Start with a free course and see how far the path goes.
+          </p>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <Button asChild size="lg">
+              <Link href="/courses">Browse courses</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <Link href="/sign-up">Create free account</Link>
+            </Button>
           </div>
-          <Button asChild size="lg">
-            <Link href="/courses">
-              Browse all courses <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
         </div>
       </section>
     </>
