@@ -1,47 +1,47 @@
 import type { Metadata } from "next"
-import Link from "next/link"
-import { ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
 import { Hero } from "@/components/home/hero"
 import { HowItWorks } from "@/components/home/how-it-works"
 import { LevelShowcase } from "@/components/home/level-showcase"
 import { ToolTeaser } from "@/components/home/tool-teaser"
+import { Zap, BookOpen, Brain, BarChart3, Shield, Users } from "lucide-react"
+import { Card } from "@/components/ui/card"
 
 export const metadata: Metadata = {
-  title: "pm101toPro – Project Management Training for Every Methodology",
+  title: "pm101toPro – Project Management Training & AI Tools",
   description:
-    "Master PMP, Agile, Scrum, and PMO best practices with structured courses, AI-powered tools, and a clear path from beginner to pro.",
+    "Structured courses and AI-powered tools to take you from your first project to running the room. PMP, Agile, Scrum, and PMO training.",
 }
 
-const METHODOLOGIES = [
+const FEATURES = [
   {
-    label: "PMP Certification",
-    href: "/courses?methodology=pmp",
-    description:
-      "Structured learning aligned with the PMBOK framework. Build the knowledge and vocabulary you need to lead projects and pursue PMP certification.",
-    tag: "High-demand",
+    icon: Brain,
+    title: "AI-Powered Document Generation",
+    body: "Turn course concepts into professional project charters, risk registers, and status reports in minutes — not hours.",
   },
   {
-    label: "Agile Project Management",
-    href: "/courses?methodology=agile",
-    description:
-      "Iterative delivery, adaptive planning, and continuous improvement. Learn how Agile principles apply to real teams and real projects.",
-    tag: "Most popular",
+    icon: BookOpen,
+    title: "Structured Learning Paths",
+    body: "Every course follows a clear 101-to-Pro progression so you always know what to learn next and why it matters.",
   },
   {
-    label: "Scrum Framework",
-    href: "/courses?methodology=scrum",
-    description:
-      "Sprints, standups, retrospectives, and backlogs. Get hands-on with the Scrum roles and ceremonies used by software and product teams worldwide.",
-    tag: "Practical",
+    icon: BarChart3,
+    title: "PMP, Agile & Scrum Coverage",
+    body: "One platform covers every major methodology — PMBOK-aligned PMP prep, Agile delivery, Scrum ceremonies, and PMO governance.",
   },
   {
-    label: "PMO Setup & Management",
-    href: "/courses?methodology=pmo",
-    description:
-      "From establishing governance to reporting to the board. Learn how to build and run a Project Management Office that actually adds value.",
-    tag: "Advanced",
+    icon: Zap,
+    title: "Practical Over Theoretical",
+    body: "Every lesson links directly to a real deliverable. You finish each module with something you can use on a live project today.",
+  },
+  {
+    icon: Shield,
+    title: "Exam-Ready Confidence",
+    body: "Quizzes, knowledge checks, and scenario-based questions mirror real PMP and Agile exam formats to build genuine confidence.",
+  },
+  {
+    icon: Users,
+    title: "Built for Busy Professionals",
+    body: "Bite-sized lessons you can complete in 10–15 minutes fit around your project schedule, not the other way around.",
   },
 ]
 
@@ -50,42 +50,35 @@ export default function HomePage() {
     <>
       <Hero />
       <HowItWorks />
-      <LevelShowcase />
 
-      {/* Methodology spotlight */}
-      <section className="border-t border-border">
-        <div className="container py-16">
-          <p className="text-sm font-medium uppercase tracking-widest text-accent">Methodologies</p>
-          <h2 className="mt-3 max-w-2xl text-3xl font-extrabold tracking-tightest text-foreground text-balance">
-            One platform. Every methodology.
-          </h2>
-          <p className="mt-4 max-w-2xl text-pretty leading-relaxed text-muted-foreground">
-            Whether you're preparing for PMP certification, adopting Agile, running Scrum sprints, or standing up a PMO
-            — pm101toPro has a structured path for you.
-          </p>
+      {/* Features / Benefits Section */}
+      <section className="border-b border-border bg-surface">
+        <div className="container py-20">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-sm font-medium uppercase tracking-widest text-accent">Why pm101toPro</p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tightest text-foreground text-balance">
+              Everything you need to lead projects with confidence
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground text-pretty">
+              We combine structured courses with AI tools so you spend less time on paperwork and more time actually managing your project.
+            </p>
+          </div>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {METHODOLOGIES.map((m) => (
-              <Link key={m.label} href={m.href} className="group">
-                <Card className="flex h-full flex-col border-border bg-surface p-6 transition-colors hover:border-accent/50">
-                  <span className="inline-block rounded-full bg-accent/10 px-2.5 py-0.5 text-xs font-semibold text-accent">
-                    {m.tag}
-                  </span>
-                  <h3 className="mt-3 text-base font-bold text-foreground">{m.label}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
-                    {m.description}
-                  </p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent">
-                    Explore courses
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                  </span>
-                </Card>
-              </Link>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {FEATURES.map(({ icon: Icon, title, body }) => (
+              <Card key={title} className="border-border bg-background p-6">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
+                  <Icon className="h-5 w-5 text-accent" />
+                </div>
+                <h3 className="mt-4 text-base font-bold text-foreground">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">{body}</p>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
+      <LevelShowcase />
       <ToolTeaser />
     </>
   )
