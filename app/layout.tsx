@@ -1,10 +1,23 @@
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { ClerkProviderWrapper } from "@/components/clerk-wrapper"
+import { Analytics } from "@vercel/analytics/next"
+import type { Metadata, Viewport } from "next"
+import { Inter, JetBrains_Mono } from "next/font/google"
+import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
+import { FeedbackWidget } from "@/components/feedback-widget"
 import "./globals.css"
-import { ClerkWrapper } from "@/components/clerk-wrapper"
-import { Analytics } from "@vercel/analytics/react"
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: {
@@ -18,6 +31,20 @@ export const metadata: Metadata = {
     siteName: "pm101toPro",
     type: "website",
   },
+  keywords: [
+    "project management",
+    "PMP",
+    "Agile",
+    "Scrum",
+    "PMO",
+    "project charter",
+    "risk register",
+  ],
+}
+
+export const viewport: Viewport = {
+  colorScheme: "dark",
+  themeColor: "#0A0F1E",
 }
 
 const organizationSchema = {
@@ -55,29 +82,39 @@ const websiteSchema = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteSchema),
-          }}
-        />
-      </head>
-      <body className={inter.className}>
-        <ClerkWrapper>{children}</ClerkWrapper>
-        <Analytics />
-      </body>
-    </html>
+    <ClerkProviderWrapper>
+      <html
+        lang="en"
+        className={`dark bg-background ${inter.variable} ${jetbrainsMono.variable}`}
+      >
+        <head>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(organizationSchema),
+            }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(websiteSchema),
+            }}
+          />
+        </head>
+        <body className="font-sans">
+          <div className="flex min-h-screen flex-col">
+            <SiteHeader />
+            <main className="flex-1">{children}</main>
+            <SiteFooter />
+          </div>
+          <FeedbackWidget />
+          {process.env.NODE_ENV === "production" && <Analytics />}
+        </body>
+      </html>
+    </ClerkProviderWrapper>
   )
 }

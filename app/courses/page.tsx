@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { createClient } from "@/lib/supabase/server"
 import { CoursesBrowser } from "@/components/courses-browser"
 
 export const metadata: Metadata = {
@@ -44,12 +43,6 @@ const coursesPageSchema = {
 }
 
 export default async function CoursesPage() {
-  const supabase = await createClient()
-  const { data: courses } = await supabase
-    .from("courses")
-    .select("id, title, slug, description, level, methodology, lesson_count, is_free")
-    .order("created_at", { ascending: false })
-
   return (
     <>
       <script
@@ -69,7 +62,7 @@ export default async function CoursesPage() {
           </p>
         </div>
       </section>
-      <CoursesBrowser courses={courses ?? []} />
+      <CoursesBrowser />
     </>
   )
 }
