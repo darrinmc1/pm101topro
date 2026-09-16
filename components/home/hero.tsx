@@ -5,7 +5,6 @@ import { ArrowRight, BookOpen, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { COURSES, getFirstFreeLessonPath } from "@/lib/content"
-import { PRO_PRICE_LABEL } from "@/lib/pricing"
 
 const FIRST_COURSE = COURSES[0]
 const FIRST_LESSON = FIRST_COURSE.lessons.find((l) => l.isFree) ?? FIRST_COURSE.lessons[0]
@@ -19,99 +18,48 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden border-b border-border">
-        <div className="absolute inset-0 bg-[url('/images/hero-pm101topro.jpg')] bg-cover bg-center opacity-25" aria-hidden="true" />
-      {/* Dot-grid background */}
+      <div className="absolute inset-0 bg-[url('/images/hero-pm101topro.jpg')] bg-cover bg-center opacity-25" aria-hidden="true" />
       <div className="absolute inset-0 bg-dot-grid opacity-60" aria-hidden="true" />
-
-      {/* Animated orb */}
-      <div
-        className="orb-animate pointer-events-none absolute left-1/2 top-0
-                   h-80 w-[48rem] -translate-x-1/2 rounded-full
-                   bg-gradient-to-br from-accent/30 via-accent-glow/20 to-accent-secondary/10
-                   blur-[100px]"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute right-1/4 top-24 h-48 w-64
-                   rounded-full bg-accent-secondary/10 blur-[80px]"
-        aria-hidden="true"
-        style={{ animation: "orb-drift 11s ease-in-out 2s infinite" }}
-      />
+      <div className="orb-animate pointer-events-none absolute left-1/2 top-0 h-80 w-[48rem] -translate-x-1/2 rounded-full bg-gradient-to-br from-accent/30 via-accent-glow/20 to-accent-secondary/10 blur-[100px]" aria-hidden="true" />
+      <div className="pointer-events-none absolute right-1/4 top-24 h-48 w-64 rounded-full bg-accent-secondary/10 blur-[80px]" aria-hidden="true" style={{ animation: "orb-drift 11s ease-in-out 2s infinite" }} />
 
       <div className="relative z-10 container flex flex-col items-center py-24 text-center md:py-36">
-
-        <span className="badge-pop inline-flex items-center gap-2 rounded-full border
-                         border-border bg-surface px-3 py-1 text-xs font-medium
-                         text-muted-foreground">
+        <span className="badge-pop inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted-foreground">
           <Sparkles className="h-3.5 w-3.5 text-accent-secondary" />
-          Free courses · {PRO_PRICE_LABEL} for AI docs
+          Free project management courses · AI tools in early access
         </span>
 
         <div ref={headingRef} className="reveal-up mt-6 stagger-1">
-          <h1 className="max-w-3xl text-balance text-4xl font-extrabold
-                         tracking-tightest text-foreground sm:text-5xl md:text-6xl">
-            From <span className="text-accent text-glow">PM101</span> to{" "}
-            <span className="text-accent-secondary">Pro.</span>
+          <h1 className="max-w-3xl text-balance text-4xl font-extrabold tracking-tightest text-foreground sm:text-5xl md:text-6xl">
+            From <span className="text-accent text-glow">PM101</span> to{" "}<span className="text-accent-secondary">Pro.</span>
           </h1>
         </div>
 
-        <p
-          ref={subtitleRef}
-          className="reveal-up mt-5 max-w-xl text-pretty text-base
-                     leading-relaxed text-muted-foreground md:text-lg stagger-2"
-        >
-          Master project management from your first charter to running a PMO —
-          four course levels stay free. AI docs after two free generations are{" "}
-          {PRO_PRICE_LABEL}.
+        <p ref={subtitleRef} className="reveal-up mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg stagger-2">
+          Master project management from your first charter to running a PMO. All four course levels stay free, and the AI document tools include limited early-access use while billing is still being built.
         </p>
 
-        {/* Proof: real first lesson, reachable without signup */}
-        <div
-          ref={proofRef}
-          className="reveal-up mt-8 w-full max-w-md stagger-2"
-        >
-          <Link
-            href={FIRST_LESSON_HREF}
-            className="group flex items-start gap-3 rounded-xl border border-border
-                       bg-surface/80 px-4 py-3.5 text-left transition-colors
-                       hover:border-accent/40 hover:bg-surface-raised"
-          >
-            <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center
-                             justify-center rounded-lg bg-accent/15 text-accent
-                             ring-1 ring-accent/20">
+        <div ref={proofRef} className="reveal-up mt-8 w-full max-w-md stagger-2">
+          <Link href={FIRST_LESSON_HREF} className="group flex items-start gap-3 rounded-xl border border-border bg-surface/80 px-4 py-3.5 text-left transition-colors hover:border-accent/40 hover:bg-surface-raised">
+            <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent ring-1 ring-accent/20">
               <BookOpen className="h-4 w-4" />
             </span>
             <span className="min-w-0">
-              <span className="font-mono text-[10px] uppercase tracking-widest
-                               text-accent-secondary">
-                Free lesson · {FIRST_LESSON.durationMins} min
-              </span>
-              <span className="mt-0.5 block text-sm font-semibold text-foreground
-                               group-hover:text-accent">
-                {FIRST_LESSON.title}
-              </span>
-              <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
-                {FIRST_LESSON.summary}
-              </span>
+              <span className="font-mono text-[10px] uppercase tracking-widest text-accent-secondary">Free lesson · {FIRST_LESSON.durationMins} min</span>
+              <span className="mt-0.5 block text-sm font-semibold text-foreground group-hover:text-accent">{FIRST_LESSON.title}</span>
+              <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">{FIRST_LESSON.summary}</span>
             </span>
           </Link>
         </div>
 
-        <div
-          ref={ctaRef}
-          className="reveal-up mt-8 flex flex-col gap-3 sm:flex-row stagger-3"
-        >
+        <div ref={ctaRef} className="reveal-up mt-8 flex flex-col gap-3 sm:flex-row stagger-3">
           <Button asChild size="lg" className="group">
-            <Link href={FIRST_LESSON_HREF}>
-              Start this lesson free
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
+            <Link href={FIRST_LESSON_HREF}>Start this lesson free <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></Link>
           </Button>
           <Button asChild size="lg" variant="outline">
             <Link href="/tools/project-charter">Try the doc generator</Link>
           </Button>
         </div>
-
       </div>
     </section>
   )
