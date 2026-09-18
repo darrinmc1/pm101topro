@@ -1,14 +1,14 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Check, X, Zap, BookOpen, Sparkles, ArrowRight } from "lucide-react"
+import { Check, X, ArrowRight, Zap, BookOpen, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
 export const metadata: Metadata = {
-  title: "Pricing",
+  title: "Pricing – pm101toPro",
   description:
-    "Start free with full access to all PM courses. Upgrade to Pro for unlimited AI-powered document generation, templates, and priority support.",
+    "Simple, transparent pricing. Start free and upgrade when you're ready for AI-powered document generation and full course access.",
 }
 
 const TIERS = [
@@ -16,73 +16,97 @@ const TIERS = [
     name: "Free",
     price: "$0",
     period: "forever",
-    description: "Everything you need to learn project management from 101 to advanced.",
+    description: "Everything you need to start your PM journey — no credit card required.",
     cta: "Get started free",
     ctaHref: "/sign-up",
     highlight: false,
     badge: null,
+    icon: BookOpen,
     features: [
-      { label: "All PM courses (Traditional, Agile, PMP)", included: true },
-      { label: "Structured learning path with level rail", included: true },
-      { label: "Progress tracking & lesson completion", included: true },
-      { label: "Blog articles & PM wisdom", included: true },
-      { label: "3 AI document generations per month", included: true },
-      { label: "Basic document templates", included: true },
-      { label: "Unlimited AI document generation", included: false },
-      { label: "All premium document templates", included: false },
-      { label: "Export to PDF & Word", included: false },
-      { label: "Priority email support", included: false },
+      { label: "Access to all 101-level courses", included: true },
+      { label: "Core PM frameworks & methodology guides", included: true },
+      { label: "Level progress tracking", included: true },
+      { label: "PM blog & practical articles", included: true },
+      { label: "Community Q&A access", included: true },
+      { label: "Intermediate & advanced courses", included: false },
+      { label: "AI document generator (unlimited)", included: false },
+      { label: "Downloadable templates & checklists", included: false },
+      { label: "PMO governance toolkit", included: false },
+      { label: "Priority support", included: false },
     ],
   },
   {
     name: "Pro",
-    price: "$12",
+    price: "$19",
     period: "per month",
-    description: "Unlimited AI tools to turn your PM knowledge into polished, professional deliverables.",
-    cta: "Start Pro free for 7 days",
+    description: "Unlock every course, AI tools, and professional templates to accelerate your career.",
+    cta: "Start Pro — 7 days free",
     ctaHref: "/sign-up?plan=pro",
     highlight: true,
     badge: "Most popular",
+    icon: Zap,
     features: [
-      { label: "All PM courses (Traditional, Agile, PMP)", included: true },
-      { label: "Structured learning path with level rail", included: true },
-      { label: "Progress tracking & lesson completion", included: true },
-      { label: "Blog articles & PM wisdom", included: true },
-      { label: "3 AI document generations per month", included: true },
-      { label: "Basic document templates", included: true },
-      { label: "Unlimited AI document generation", included: true },
-      { label: "All premium document templates", included: true },
-      { label: "Export to PDF & Word", included: true },
-      { label: "Priority email support", included: true },
+      { label: "Access to all 101-level courses", included: true },
+      { label: "Core PM frameworks & methodology guides", included: true },
+      { label: "Level progress tracking", included: true },
+      { label: "PM blog & practical articles", included: true },
+      { label: "Community Q&A access", included: true },
+      { label: "Intermediate & advanced courses", included: true },
+      { label: "AI document generator (unlimited)", included: true },
+      { label: "Downloadable templates & checklists", included: true },
+      { label: "PMO governance toolkit", included: true },
+      { label: "Priority support", included: true },
+    ],
+  },
+  {
+    name: "Team",
+    price: "$49",
+    period: "per month",
+    description: "For PMOs and teams who need shared progress tracking and volume access.",
+    cta: "Contact us",
+    ctaHref: "/about",
+    highlight: false,
+    badge: null,
+    icon: Sparkles,
+    features: [
+      { label: "Everything in Pro", included: true },
+      { label: "Up to 5 team seats included", included: true },
+      { label: "Team progress dashboard", included: true },
+      { label: "Shared template library", included: true },
+      { label: "Bulk AI document generation", included: true },
+      { label: "Custom onboarding session", included: true },
+      { label: "Dedicated account manager", included: true },
+      { label: "SSO / SAML (enterprise add-on)", included: false },
+      { label: "Custom course paths", included: false },
+      { label: "SLA & invoiced billing", included: false },
     ],
   },
 ]
 
-const COMPARISON_ROWS = [
-  { category: "Learning", feature: "All courses — Traditional, Agile & PMP", free: true, pro: true },
-  { category: "Learning", feature: "Level rail & structured learning path", free: true, pro: true },
-  { category: "Learning", feature: "Progress tracking", free: true, pro: true },
-  { category: "AI Tools", feature: "AI document generation", free: "3 / month", pro: "Unlimited" },
-  { category: "AI Tools", feature: "Project charter generator", free: true, pro: true },
-  { category: "AI Tools", feature: "Risk register builder", free: true, pro: true },
-  { category: "AI Tools", feature: "Stakeholder map generator", free: false, pro: true },
-  { category: "AI Tools", feature: "Agile sprint planner", free: false, pro: true },
-  { category: "Templates", feature: "Basic document templates", free: true, pro: true },
-  { category: "Templates", feature: "Premium templates library", free: false, pro: true },
-  { category: "Templates", feature: "Export to PDF & Word", free: false, pro: true },
-  { category: "Support", feature: "Community access", free: true, pro: true },
-  { category: "Support", feature: "Priority email support", free: false, pro: true },
+const FAQ = [
+  {
+    q: "Can I really start for free?",
+    a: "Yes. The Free tier never expires and gives you full access to all 101-level courses, methodology guides, and the PM blog. No credit card needed.",
+  },
+  {
+    q: "What's included in the 7-day Pro trial?",
+    a: "You get full Pro access — every course, unlimited AI document generation, and all downloadable templates — for 7 days at no charge. Cancel any time before the trial ends and you won't be billed.",
+  },
+  {
+    q: "What does the AI document generator actually produce?",
+    a: "It turns your project details into professional PM deliverables: project charters, risk registers, stakeholder maps, status reports, and more — ready to use in minutes.",
+  },
+  {
+    q: "Can I switch plans later?",
+    a: "Absolutely. Upgrade, downgrade, or cancel at any time from your dashboard. Billing is monthly with no lock-in contracts.",
+  },
+  {
+    q: "Do you offer discounts for students or non-profits?",
+    a: "Yes — reach out via the About page and we'll sort you out with a discounted rate.",
+  },
 ]
 
-function FeatureValue({ value }: { value: boolean | string }) {
-  if (value === true) return <Check className="mx-auto h-5 w-5 text-accent" />
-  if (value === false) return <X className="mx-auto h-5 w-5 text-muted-foreground/40" />
-  return <span className="text-sm font-medium text-accent">{value}</span>
-}
-
 export default function PricingPage() {
-  const categories = [...new Set(COMPARISON_ROWS.map((r) => r.category))]
-
   return (
     <>
       {/* Hero */}
@@ -90,185 +114,174 @@ export default function PricingPage() {
         <div className="container py-16 text-center">
           <p className="text-sm font-medium uppercase tracking-widest text-accent">Pricing</p>
           <h1 className="mt-3 text-4xl font-extrabold tracking-tightest text-foreground text-balance">
-            Learn free. Build faster with Pro.
+            Start free. Go Pro when you're ready.
           </h1>
           <p className="mt-5 mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
-            Every course on pm101toPro is free — no credit card required. Upgrade to Pro when you're ready to turn
-            your knowledge into professional project documents in minutes with unlimited AI generation.
+            Every PM deserves a clear path from beginner to expert. Free gets you started — Pro gets you there faster with AI tools, advanced courses, and professional templates.
           </p>
         </div>
       </section>
 
-      {/* Tier cards */}
+      {/* Pricing cards */}
       <section className="container py-14">
-        <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-2">
-          {TIERS.map((tier) => (
-            <Card
-              key={tier.name}
-              className={`relative flex flex-col border-border p-8 ${
-                tier.highlight ? "border-accent bg-accent/5 shadow-lg" : "bg-surface"
-              }`}
-            >
-              {tier.badge && (
-                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-accent-foreground">
-                  {tier.badge}
-                </Badge>
-              )}
-              <div className="flex items-center gap-2">
-                {tier.highlight ? (
-                  <Sparkles className="h-5 w-5 text-accent" />
-                ) : (
-                  <BookOpen className="h-5 w-5 text-muted-foreground" />
-                )}
-                <span className="text-lg font-bold text-foreground">{tier.name}</span>
-              </div>
-              <div className="mt-4">
-                <span className="text-4xl font-extrabold text-foreground">{tier.price}</span>
-                <span className="ml-2 text-sm text-muted-foreground">{tier.period}</span>
-              </div>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{tier.description}</p>
-              <ul className="mt-6 flex-1 space-y-3">
-                {tier.features.map((f) => (
-                  <li key={f.label} className="flex items-start gap-2.5 text-sm">
-                    {f.included ? (
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                    ) : (
-                      <X className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground/40" />
-                    )}
-                    <span className={f.included ? "text-foreground" : "text-muted-foreground/60"}>
-                      {f.label}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-8">
-                <Button
-                  asChild
-                  className={`w-full ${
-                    tier.highlight
-                      ? "bg-accent text-accent-foreground hover:bg-accent/90"
-                      : "variant-outline"
-                  }`}
-                  variant={tier.highlight ? "default" : "outline"}
-                >
-                  <Link href={tier.ctaHref}>
-                    {tier.cta}
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* Value proposition callout */}
-      <section className="border-y border-border bg-surface">
-        <div className="container py-12">
-          <div className="mx-auto grid max-w-4xl gap-8 sm:grid-cols-3">
-            <div className="text-center">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
-                <BookOpen className="h-6 w-6" />
-              </div>
-              <h3 className="mt-4 font-bold text-foreground">All courses, always free</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Traditional, Agile, and PMP-aligned content — structured from 101 to Pro with zero paywalls on
-                learning.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
-                <Zap className="h-6 w-6" />
-              </div>
-              <h3 className="mt-4 font-bold text-foreground">AI that does the busywork</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Pro members generate unlimited charters, risk registers, stakeholder maps and more — in minutes, not
-                hours.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
-                <Sparkles className="h-6 w-6" />
-              </div>
-              <h3 className="mt-4 font-bold text-foreground">Cancel any time</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                No long-term contracts. Start with a 7-day free trial and upgrade, downgrade, or cancel whenever you
-                like.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Full comparison table */}
-      <section className="container py-14">
-        <h2 className="text-center text-2xl font-extrabold tracking-tight text-foreground">
-          Full feature comparison
-        </h2>
-        <p className="mt-2 text-center text-sm text-muted-foreground">
-          Everything side-by-side so you can choose with confidence.
-        </p>
-
-        <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-xl border border-border">
-          {/* Table header */}
-          <div className="grid grid-cols-3 border-b border-border bg-surface px-6 py-4">
-            <div className="text-sm font-semibold text-muted-foreground">Feature</div>
-            <div className="text-center text-sm font-bold text-foreground">Free</div>
-            <div className="text-center text-sm font-bold text-accent">Pro</div>
-          </div>
-
-          {categories.map((cat) => {
-            const rows = COMPARISON_ROWS.filter((r) => r.category === cat)
+        <div className="grid gap-8 md:grid-cols-3">
+          {TIERS.map((tier) => {
+            const Icon = tier.icon
             return (
-              <div key={cat}>
-                <div className="border-b border-border bg-muted/30 px-6 py-2">
-                  <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                    {cat}
-                  </span>
-                </div>
-                {rows.map((row, i) => (
+              <Card
+                key={tier.name}
+                className={`relative flex flex-col border p-8 ${
+                  tier.highlight
+                    ? "border-accent bg-accent/5 shadow-lg shadow-accent/10"
+                    : "border-border bg-surface"
+                }`}
+              >
+                {tier.badge && (
+                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-accent-foreground">
+                    {tier.badge}
+                  </Badge>
+                )}
+
+                <div className="flex items-center gap-3">
                   <div
-                    key={row.feature}
-                    className={`grid grid-cols-3 items-center px-6 py-3.5 ${
-                      i < rows.length - 1 ? "border-b border-border/50" : ""
+                    className={`flex h-10 w-10 items-center justify-center rounded-lg ${
+                      tier.highlight ? "bg-accent text-accent-foreground" : "bg-muted text-muted-foreground"
                     }`}
                   >
-                    <span className="text-sm text-foreground">{row.feature}</span>
-                    <div className="text-center">
-                      <FeatureValue value={row.free} />
-                    </div>
-                    <div className="text-center">
-                      <FeatureValue value={row.pro} />
-                    </div>
+                    <Icon className="h-5 w-5" />
                   </div>
-                ))}
-              </div>
+                  <h2 className="text-xl font-bold text-foreground">{tier.name}</h2>
+                </div>
+
+                <div className="mt-5">
+                  <span className="text-4xl font-extrabold text-foreground">{tier.price}</span>
+                  <span className="ml-1.5 text-sm text-muted-foreground">{tier.period}</span>
+                </div>
+
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">
+                  {tier.description}
+                </p>
+
+                <Link href={tier.ctaHref} className="mt-6">
+                  <Button
+                    className={`w-full ${
+                      tier.highlight ? "bg-accent text-accent-foreground hover:bg-accent/90" : ""
+                    }`}
+                    variant={tier.highlight ? "default" : "outline"}
+                  >
+                    {tier.cta}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+
+                <ul className="mt-8 space-y-3">
+                  {tier.features.map((f) => (
+                    <li key={f.label} className="flex items-start gap-3 text-sm">
+                      {f.included ? (
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                      ) : (
+                        <X className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground/40" />
+                      )}
+                      <span
+                        className={f.included ? "text-foreground" : "text-muted-foreground/50"}
+                      >
+                        {f.label}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </Card>
             )
           })}
         </div>
       </section>
 
-      {/* Bottom CTA */}
+      {/* Feature comparison table */}
+      <section className="border-t border-border">
+        <div className="container py-14">
+          <h2 className="text-2xl font-extrabold tracking-tight text-foreground">Full feature comparison</h2>
+          <p className="mt-2 text-muted-foreground">See exactly what's included at every tier.</p>
+
+          <div className="mt-8 overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border">
+                  <th className="py-3 pr-6 text-left font-semibold text-foreground">Feature</th>
+                  <th className="px-4 py-3 text-center font-semibold text-foreground">Free</th>
+                  <th className="px-4 py-3 text-center font-semibold text-accent">Pro</th>
+                  <th className="px-4 py-3 text-center font-semibold text-foreground">Team</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["101-level courses", true, true, true],
+                  ["Intermediate & advanced courses", false, true, true],
+                  ["Level progress tracking", true, true, true],
+                  ["PM blog & articles", true, true, true],
+                  ["AI document generator", false, true, true],
+                  ["Downloadable templates", false, true, true],
+                  ["PMO governance toolkit", false, true, true],
+                  ["Team progress dashboard", false, false, true],
+                  ["Up to 5 team seats", false, false, true],
+                  ["Custom onboarding session", false, false, true],
+                  ["Priority support", false, true, true],
+                ].map(([label, free, pro, team]) => (
+                  <tr key={String(label)} className="border-b border-border/50 hover:bg-muted/30">
+                    <td className="py-3 pr-6 text-foreground">{label}</td>
+                    <td className="px-4 py-3 text-center">
+                      {free ? <Check className="mx-auto h-4 w-4 text-accent" /> : <X className="mx-auto h-4 w-4 text-muted-foreground/30" />}
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      {pro ? <Check className="mx-auto h-4 w-4 text-accent" /> : <X className="mx-auto h-4 w-4 text-muted-foreground/30" />}
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      {team ? <Check className="mx-auto h-4 w-4 text-accent" /> : <X className="mx-auto h-4 w-4 text-muted-foreground/30" />}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="border-t border-border">
+        <div className="container py-14">
+          <h2 className="text-2xl font-extrabold tracking-tight text-foreground">Frequently asked questions</h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            {FAQ.map((item) => (
+              <Card key={item.q} className="border-border bg-surface p-6">
+                <h3 className="font-semibold text-foreground">{item.q}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">{item.a}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
       <section className="border-t border-border">
         <div className="container py-16 text-center">
-          <h2 className="text-3xl font-extrabold tracking-tightest text-foreground">
-            Ready to run the room?
+          <h2 className="text-3xl font-extrabold tracking-tight text-foreground text-balance">
+            Ready to level up your PM career?
           </h2>
           <p className="mt-4 mx-auto max-w-xl text-muted-foreground text-pretty">
-            Start learning for free today. When you're ready to ship professional documents at speed, Pro is waiting.
+            Join thousands of project managers building real skills. Start free today — no credit card required.
           </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-              <Link href="/sign-up?plan=pro">
-                Start Pro free — 7 days
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Link href="/sign-up">
+              <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
+                Get started free
                 <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href="/courses">Browse free courses</Link>
-            </Button>
+              </Button>
+            </Link>
+            <Link href="/courses">
+              <Button size="lg" variant="outline">
+                Browse courses
+              </Button>
+            </Link>
           </div>
-          <p className="mt-4 text-xs text-muted-foreground">No credit card required for free plan. Cancel Pro any time.</p>
         </div>
       </section>
     </>
