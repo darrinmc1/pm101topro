@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { BrandMark } from "@/components/brand-mark"
+import { MerchantOfRecordDisclosure } from "@/components/merchant-of-record-disclosure"
 
 const FOOTER_LINKS = [
   { href: "/courses", label: "Courses" },
@@ -40,7 +41,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-border">
-        <div className="container flex flex-col gap-2 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+        <div className="container flex flex-col gap-3 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 pm101toPro.com</p>
           <div className="flex gap-4">
             <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
@@ -59,6 +60,9 @@ export function SiteFooter() {
               ][Math.floor(Math.random() * 5)]
             }
           </p>
+        </div>
+        <div className="container pb-6">
+          <MerchantOfRecordDisclosure className="max-w-2xl" />
         </div>
       </div>
     </footer>

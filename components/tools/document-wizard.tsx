@@ -15,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Card } from "@/components/ui/card"
+import { MerchantOfRecordDisclosure } from "@/components/merchant-of-record-disclosure"
 import { cn } from "@/lib/utils"
 import { getFreeUsage, hasExhaustedFreeAi, incrementFreeUsage } from "@/lib/ai-usage"
 import { AI_FREE_LIMIT, PRO_PRICE_LABEL } from "@/lib/pricing"
@@ -272,6 +273,7 @@ function FreeMeterBanner({ used }: { used: number }) {
           Checkout coming
         </Link>
       </Button>
+      <MerchantOfRecordDisclosure compact className="mt-3" />
     </div>
   )
 }
@@ -304,6 +306,7 @@ function SubscribeWall() {
           <Link href="/courses">Browse free courses instead</Link>
         </Button>
       </div>
+      <MerchantOfRecordDisclosure compact className="mx-auto mt-4 max-w-md" />
     </Card>
   )
 }

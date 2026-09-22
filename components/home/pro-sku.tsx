@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { ArrowRight, CheckCircle } from "lucide-react"
+import { MerchantOfRecordDisclosure } from "@/components/merchant-of-record-disclosure"
 import { Button } from "@/components/ui/button"
 import {
   AI_FREE_LIMIT,
@@ -59,12 +60,15 @@ export function ProSku() {
               )}
               <p className="mt-4 text-sm text-muted-foreground">{plan.description}</p>
               {plan.id === "pro" ? (
-                <Button asChild className="mt-6 w-full" size="lg">
-                  <Link href="/pricing">
-                    {plan.cta}
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </Button>
+                <>
+                  <Button asChild className="mt-6 w-full" size="lg">
+                    <Link href="/pricing">
+                      {plan.cta}
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <MerchantOfRecordDisclosure compact className="mt-3 text-center" />
+                </>
               ) : (
                 <Button asChild variant="outline" className="mt-6 w-full" size="lg">
                   <Link href={plan.href}>
