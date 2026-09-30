@@ -1,4 +1,12 @@
 import type { Course, Lesson } from "@/lib/content"
+import { agileToolsCertsBodies } from "@/lib/lesson-bodies/agile-tools-certs"
+import { changePmoResourcesBodies } from "@/lib/lesson-bodies/change-pmo-resources"
+import { domainsPortfolioTransformBodies } from "@/lib/lesson-bodies/domains-portfolio-transform"
+import { pmoExamCommsBodies } from "@/lib/lesson-bodies/pmo-exam-comms"
+import { processEvmKanbanBodies } from "@/lib/lesson-bodies/process-evm-kanban"
+import { riskManagementBodies } from "@/lib/lesson-bodies/risk-management"
+import { scrumScheduleVendorBodies } from "@/lib/lesson-bodies/scrum-schedule-vendor"
+import { starterMeetingsQualityNegoBodies } from "@/lib/lesson-bodies/starter-meetings-quality-nego"
 
 export type LessonSection = {
   id: string
@@ -11,6 +19,9 @@ export type LessonBody = {
   sections: LessonSection[]
   practiceDocId?: string
 }
+
+/** Written lesson copy without the practice-tool CTA (wired in getLessonBody). */
+export type { WrittenLesson } from "@/lib/lesson-bodies/types"
 
 // Maps certain lessons to a relevant AI document type for the "Practice this" CTA.
 const PRACTICE_MAP: Record<string, string> = {
@@ -41,6 +52,14 @@ const PRACTICE_MAP: Record<string, string> = {
 // Real lesson content keyed by lesson slug
 // ---------------------------------------------------------------------------
 const LESSON_CONTENT: Record<string, Omit<LessonBody, "practiceDocId">> = {
+  ...riskManagementBodies,
+  ...agileToolsCertsBodies,
+  ...pmoExamCommsBodies,
+  ...scrumScheduleVendorBodies,
+  ...processEvmKanbanBodies,
+  ...domainsPortfolioTransformBodies,
+  ...starterMeetingsQualityNegoBodies,
+  ...changePmoResourcesBodies,
 
   // ── COURSE: What is Project Management? ────────────────────────────────────
 
@@ -616,6 +635,14 @@ const LESSON_CONTENT: Record<string, Omit<LessonBody, "practiceDocId">> = {
           "Finally: don't hide bad news. If you discover something's off track in your first week, surface it immediately. New PMs worry this makes them look incompetent. In reality, discovering and escalating an issue on day two demonstrates competence. Discovering it and saying nothing until week four is what erodes trust.",
         ],
       },
+      {
+        id: "summary",
+        title: "Summary & next steps",
+        body: [
+          "Read before you arrive. Meet people to learn what they need, not to perform competence. Take one small frustration off the table, and surface bad news the day you find it. Curiosity beats a perfect Gantt in week one.",
+          "Next: reading the room — culture, politics, and the unspoken rules that will not be in the charter.",
+        ],
+      },
     ],
   },
 
@@ -643,6 +670,23 @@ const LESSON_CONTENT: Record<string, Omit<LessonBody, "practiceDocId">> = {
           "In a PM context: your BATNA for a scope negotiation might be 'delay Feature X to a phase 2, freeing capacity for the stakeholder's request.' Theirs might be 'take it to the steering committee.' The ZOPA is somewhere between those two outcomes - your job is to find it.",
         ],
       },
+      {
+        id: "prepare-before-you-talk",
+        title: "Prepare before you talk",
+        body: [
+          "Write down your interest, your BATNA, your walk-away, and the one question you still need answered. A negotiation you enter 'to see how it goes' will be decided by whoever prepared. That is usually not the tired PM who has been in meetings since 8am.",
+          "Estimate their BATNA with humility. You rarely know it. You can guess: they can escalate, delay, or do the work themselves at a cost. The guess is a hypothesis. Update it when they reveal a constraint you did not have.",
+          "Decide what you can trade that is cheap for you and valuable for them — information, sequence, a pilot, a named owner — before you trade the expensive things: date, budget, and scope. Most PM negotiations fail because the only chips on the table are the three everyone already fights about.",
+        ],
+      },
+      {
+        id: "summary",
+        title: "Summary & next steps",
+        body: [
+          "Positions are demands. Interests are why. BATNA is your alternative if you walk. ZOPA is the overlap, if any. Prepare those four, then talk. Curiosity is cheaper than a deadlock.",
+          "Next: principled negotiation — separating people from the problem so the deal does not cost you the relationship.",
+        ],
+      },
     ],
   },
 
@@ -668,6 +712,23 @@ const LESSON_CONTENT: Record<string, Omit<LessonBody, "practiceDocId">> = {
           "Once you know the outcome, work backwards to design the agenda. Each agenda item should be a verb - Decide, Approve, Review, Generate, Align - followed by the time allocated and the preparation required. 'Decide vendor selection (15m, pre-read: scorecards in shared drive)' is a usable agenda item. 'Vendor update' is not.",
           "Timebox ruthlessly. Parkinson's Law says work expands to fill the time available. If you allocate 30 minutes for a decision, it will take 30 minutes. If you allocate 10, people will find a way to decide in 10. Start with the shortest reasonable time and extend only if the discussion demands it.",
           "Send the agenda 24 hours in advance. A meeting where attendees see the agenda for the first time when they arrive is not a meeting - it's a performance. People need time to form thoughts, check data, and prepare questions. Respect that time and you'll get better decisions.",
+        ],
+      },
+      {
+        id: "who-comes-and-who-doesnt",
+        title: "Who comes — and who gets the notes instead",
+        body: [
+          "Invite the people who must decide, inform, or do the work that follows. Optional attendees are how a 30-minute decision becomes a 60-minute briefing. If someone only needs the outcome, send them the decision log. Attendance is not a status symbol. It is a cost.",
+          "Name a facilitator and a note-taker before the invite goes out. If that is you for both, the meeting will drift the moment you start defending a point. Facilitation and advocacy are different jobs. Combining them is how you 'win' the room and lose the decision quality.",
+          "Put the required pre-read in the invite, not in a Slack message ten minutes prior. If people cannot do the reading, shorten the meeting to a decision on whether to reschedule. Sitting through slides they were supposed to have read is how organisations train people not to read.",
+        ],
+      },
+      {
+        id: "summary",
+        title: "Summary & next steps",
+        body: [
+          "Purpose and outcome in the invite. Verb-led, timeboxed agenda sent a day ahead. Only the people who must be there. Facilitation and notes assigned. If you cannot name the outcome, do not book the room.",
+          "Next: facilitation techniques — keeping the discussion on the outcome once the humans arrive with their own agendas.",
         ],
       },
     ],
