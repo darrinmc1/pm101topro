@@ -1,37 +1,38 @@
-// Shared Empire contact sink.
-// Messages from /contact are relayed to the HQ contact webhook so they land
-// in one place. Returns true only when HQ confirms the save.
+// Relays /contact to HQ, which emails Darrin with Reply-To set to the visitor.
+// Returns true only when that endpoint accepts the message.
 const HQ_CONTACT_URL =
-  process.env.HQ_CONTACT_URL || "https://n8n.peelboss.com/webhook/hq-contact"
+  process.env.HQ_CONTACT_URL || "https://hq.peelboss.com/api/send-email"
+
+const SITE = "pm101topro"
 
 export type HqContactInput = {
-  site: string
   name?: string | null
   email: string
-  subject?: string | null
   message: string
-  source?: string | null
+  subject?: string | null
 }
 
 export async function saveContactToHq(input: HqContactInput): Promise<boolean> {
+  const name = input.name?.trim() || "Visitor"
+  const subject = input.subject?.trim()
+  const message = subject
+    ? `[${SITE} contact form]\nSubject: ${subject}\n\n${input.message.trim()}`
+    : `[${SITE} contact form]\n\n${input.message.trim()}`
+
   try {
     const res = await fetch(HQ_CONTACT_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        site: input.site,
-        name: input.name?.trim() || null,
+        name: `${name} (${SITE})`,
         email: input.email.trim(),
-        subject: input.subject?.trim() || null,
-        message: input.message.trim(),
-        source: input.source || "contact",
+        message,
       }),
       signal: AbortSignal.timeout(8000),
       cache: "no-store",
     })
-    const data = (await res.json().catch(() => null)) as { ok?: boolean } | null
-    if (!res.ok || !data?.ok) {
-      console.error("[hq-contact] message not saved", res.status)
+    if (!res.ok) {
+      console.error("[hq-contact] message not sent", res.status)
       return false
     }
     return true

@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { saveContactToHq } from "@/lib/hq-contact"
 
-const SITE = "pm101topro"
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const rateLimit = new Map<string, { count: number; reset: number }>()
@@ -73,12 +72,10 @@ export async function POST(req: NextRequest) {
   }
 
   const saved = await saveContactToHq({
-    site: SITE,
     name: body.name,
     email,
     subject: body.subject,
     message,
-    source: "contact",
   })
 
   if (!saved) {

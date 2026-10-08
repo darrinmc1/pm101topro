@@ -103,7 +103,7 @@ export function ContactForm() {
       />
       {status === "error" && (
         <p className="text-sm text-danger" role="alert">
-          That didn&apos;t send. Try again, or email admin@pm101topro.com.
+          That didn&apos;t send. Try again in a minute.
         </p>
       )}
       <Button type="submit" disabled={status === "sending"}>

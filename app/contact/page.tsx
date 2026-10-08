@@ -24,7 +24,7 @@ export default function ContactPage() {
           <ContactForm />
         </div>
         <p className="mt-8 text-sm text-muted-foreground">
-          Prefer email? admin@pm101topro.com still works. Forms make some people suspicious. Fair.
+          Forms make some people suspicious. Fair. This one still reaches a person.
         </p>
       </div>
     </section>
