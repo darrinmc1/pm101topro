@@ -1,4 +1,9 @@
+import type { Metadata } from "next"
 import { PrivacyPage } from "@/components/legal/privacy-content"
+
+export const metadata: Metadata = {
+  title: "Privacy – pm101toPro",
+}
 
 export default function Page() {
   return (

@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
-import { saveToHq } from "@/lib/hq-subscribe"
+import { saveContactToHq } from "@/lib/hq-contact"
 
-const SITE = "pm101topro"
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const rateLimit = new Map<string, { count: number; reset: number }>()
@@ -52,25 +51,36 @@ export async function POST(req: NextRequest) {
   }
 
   const body = (await req.json().catch(() => ({}))) as {
+    name?: string
     email?: string
-    source?: string
+    subject?: string
+    message?: string
     website?: string
   }
 
-  // Honeypot. Bots get a quiet ok so they don't retry. Nothing is saved.
   if (body.website && body.website !== "") {
     return NextResponse.json({ ok: true })
   }
 
   const email = body.email?.trim() ?? ""
-  if (!email || !emailRe.test(email)) {
-    return NextResponse.json({ error: "Invalid email" }, { status: 400 })
+  const message = body.message?.trim() ?? ""
+  if (!email || !emailRe.test(email) || message.length < 8) {
+    return NextResponse.json(
+      { error: "Please add your email and a short message." },
+      { status: 400 },
+    )
   }
 
-  const saved = await saveToHq(SITE, email, body.source)
+  const saved = await saveContactToHq({
+    name: body.name,
+    email,
+    subject: body.subject,
+    message,
+  })
+
   if (!saved) {
     return NextResponse.json(
-      { error: "We couldn't save your email just now. Please try again." },
+      { error: "We couldn't send that just now. Please try again." },
       { status: 502 },
     )
   }

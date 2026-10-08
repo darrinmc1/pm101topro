@@ -20,12 +20,24 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.pm101topro.com"),
+  alternates: { canonical: "./" },
   title: {
     default: "pm101toPro - From your first project to running the room",
-    template: "%s · pm101toPro",
+    // Page titles already name the site where they need to. Do not append
+    // another " · pm101toPro" or About becomes "About – pm101toPro · pm101toPro".
+    template: "%s",
   },
   description:
     "Master project management from your first charter to running a PMO. Free courses across every methodology, plus AI-powered document tools.",
+  openGraph: {
+    type: "website",
+    siteName: "pm101toPro",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
   generator: "v0.app",
   keywords: [
     "project management",

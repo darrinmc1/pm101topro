@@ -1,13 +1,12 @@
 "use client"
 
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useState } from "react"
 import Link from "next/link"
 import {
   ArrowLeft,
   ArrowRight,
   Check,
   Copy,
-  Crown,
   Loader2,
   RefreshCw,
   Sparkles,
@@ -25,29 +24,6 @@ export type WizardDoc = {
   questions: string[]
 }
 
-/** Check how many free generations the user has used */
-function getFreeUsage(): number {
-  if (typeof window === "undefined") return 0
-  try {
-    return Number(localStorage.getItem("pm101_free_uses") || "0")
-  } catch {
-    return 0
-  }
-}
-
-/** Increment free usage counter */
-function useFreeTrial(): number {
-  try {
-    const next = getFreeUsage() + 1
-    localStorage.setItem("pm101_free_uses", String(next))
-    return next
-  } catch {
-    return 99
-  }
-}
-
-const FREE_LIMIT = 1
-
 export function DocumentWizard({ doc }: { doc: WizardDoc }) {
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<string[]>(() => doc.questions.map(() => ""))
@@ -55,14 +31,6 @@ export function DocumentWizard({ doc }: { doc: WizardDoc }) {
   const [draft, setDraft] = useState("")
   const [error, setError] = useState("")
   const [copied, setCopied] = useState(false)
-  const [showWall, setShowWall] = useState(false)
-
-  // Check if the user has exhausted their free trial
-  useEffect(() => {
-    if (getFreeUsage() >= FREE_LIMIT) {
-      setShowWall(true)
-    }
-  }, [])
 
   const total = doc.questions.length
   const isLast = step === total - 1
@@ -100,7 +68,6 @@ export function DocumentWizard({ doc }: { doc: WizardDoc }) {
       }
 
       setDraft(data.draft)
-      useFreeTrial()
       setPhase("result")
     } catch (err) {
       setError("Network error - check your connection and try again.")
@@ -116,11 +83,6 @@ export function DocumentWizard({ doc }: { doc: WizardDoc }) {
     } catch {
       /* clipboard unavailable */
     }
-  }
-
-  // --- Show the subscription wall if over the free limit ---
-  if (showWall) {
-    return <SubscribeWall />
   }
 
   if (phase === "generating") {
@@ -173,21 +135,6 @@ export function DocumentWizard({ doc }: { doc: WizardDoc }) {
             aria-label={`Generated ${doc.name}`}
           />
         </Card>
-
-        <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4 text-center">
-          <p className="text-sm text-amber-300 font-semibold">
-            ✨ That was your free generation!
-          </p>
-          <p className="mt-1 text-xs text-amber-400/80">
-            Subscribe to Pro for unlimited AI document generation, full course access, and more.
-          </p>
-          <Button asChild className="mt-3" size="sm">
-            <Link href="/pricing">
-              <Crown className="mr-1 h-4 w-4" />
-              Go Pro
-            </Link>
-          </Button>
-        </div>
       </div>
     )
   }
@@ -284,36 +231,6 @@ export function DocumentWizard({ doc }: { doc: WizardDoc }) {
           Choose a different document
         </Link>
       </div>
-    </Card>
-  )
-}
-
-/** Subscription wall shown after the free trial is exhausted */
-function SubscribeWall() {
-  return (
-    <Card className="border-border bg-surface p-10 text-center">
-      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/10">
-        <Crown className="h-8 w-8 text-accent" />
-      </div>
-      <h2 className="mt-6 text-2xl font-bold text-foreground tabular-nums">enable unlimited AI document generation</h2>
-      <p className="mx-auto mt-3 max-w-md text-muted-foreground">
-        You&apos;ve used your free generation. Subscribe to Pro for unlimited AI-powered documents,
-        every course at every level, and downloadable templates.
-      </p>
-      <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-        <Button asChild size="lg">
-          <Link href="/pricing">
-            <Crown className="mr-2 h-5 w-5" />
-            Go Pro &mdash; &pound;12/month
-          </Link>
-        </Button>
-        <Button asChild variant="ghost" size="lg">
-          <Link href="/courses">Browse free courses instead</Link>
-        </Button>
-      </div>
-      <p className="mt-4 text-xs text-muted-foreground">
-        Free tier includes the full 101 Beginner track and the first lesson of every course.
-      </p>
     </Card>
   )
 }

@@ -7,6 +7,7 @@ import { Hero } from "@/components/home/hero"
 import { HowItWorks } from "@/components/home/how-it-works"
 import { LevelShowcase } from "@/components/home/level-showcase"
 import { ToolTeaser } from "@/components/home/tool-teaser"
+import { EmailSignup } from "@/components/email-signup"
 
 export const metadata: Metadata = {
   title: "pm101toPro – Project Management Training for Every Methodology",
@@ -87,6 +88,7 @@ export default function HomePage() {
       </section>
 
       <ToolTeaser />
+      <EmailSignup source="homepage" />
     </>
   )
 }
