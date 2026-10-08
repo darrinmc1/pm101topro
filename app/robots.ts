@@ -49,6 +49,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: "/",
       },
     ],
-    sitemap: "https://pm101topro.com/sitemap.xml",
+    sitemap: "https://www.pm101topro.com/sitemap.xml",
   }
 }

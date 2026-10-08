@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { CoursesBrowser } from "@/components/courses-browser"
+import { EmailSignup } from "@/components/email-signup"
 
 export const metadata: Metadata = {
   title: "Courses – PMP, Agile, Scrum & PMO Training",
@@ -63,6 +64,7 @@ export default async function CoursesPage({
       </section>
 
       <CoursesBrowser />
+      <EmailSignup source="courses" />
     </>
   )
 }

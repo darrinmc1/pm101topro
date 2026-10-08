@@ -5,7 +5,6 @@ import type { NextRequest } from "next/server"
 // Routes that require authentication
 const isProtectedRoute = createRouteMatcher([
   "/dashboard(.*)",
-  "/api/subscribe(.*)",
   "/api/send-email(.*)",
 ])
 
