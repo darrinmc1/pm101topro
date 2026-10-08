@@ -4,7 +4,7 @@ import { BrandMark } from "@/components/brand-mark"
 const FOOTER_LINKS = [
   { href: "/courses", label: "Courses" },
   { href: "/tools", label: "Tools" },
-  { href: "/pricing", label: "Pricing" },
+  { href: "/pricing", label: "Coming soon" },
   { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },

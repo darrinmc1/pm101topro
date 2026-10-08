@@ -4,7 +4,23 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
-export function EmailSignup({ source }: { source: string }) {
+export function EmailSignup({
+  source,
+  eyebrow = "Occasional notes",
+  heading = "A note when a new course ships",
+  body = "New lessons, and the odd PM joke. No countdown timer, no certificate with your name on it.",
+  savedMessage = "Saved. We'll write when there's something worth opening.",
+  buttonLabel = "Send it",
+  headingLevel = "h2",
+}: {
+  source: string
+  eyebrow?: string
+  heading?: string
+  body?: string
+  savedMessage?: string
+  buttonLabel?: string
+  headingLevel?: "h1" | "h2"
+}) {
   const [email, setEmail] = useState("")
   const [website, setWebsite] = useState("")
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle")
@@ -38,18 +54,23 @@ export function EmailSignup({ source }: { source: string }) {
       <div className="container py-16">
         <div className="mx-auto max-w-xl">
           <p className="text-sm font-medium uppercase tracking-widest text-accent">
-            Occasional notes
+            {eyebrow}
           </p>
-          <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground">
-            A note when a new course ships
-          </h2>
+          {headingLevel === "h1" ? (
+            <h1 className="mt-3 text-2xl font-bold tracking-tight text-foreground">
+              {heading}
+            </h1>
+          ) : (
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground">
+              {heading}
+            </h2>
+          )}
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            New lessons, and the odd PM joke. No countdown timer, no certificate
-            with your name on it.
+            {body}
           </p>
           {status === "saved" ? (
             <p className="mt-6 text-sm text-foreground" role="status">
-              Saved. We&apos;ll write when there&apos;s something worth opening.
+              {savedMessage}
             </p>
           ) : (
             <form onSubmit={onSubmit} className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -78,7 +99,7 @@ export function EmailSignup({ source }: { source: string }) {
                 className="hidden"
               />
               <Button type="submit" disabled={status === "saving"}>
-                {status === "saving" ? "Saving…" : "Send it"}
+                {status === "saving" ? "Saving…" : buttonLabel}
               </Button>
             </form>
           )}
