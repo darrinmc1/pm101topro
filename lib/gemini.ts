@@ -25,6 +25,27 @@ export function geminiGenerateContentUrl(model = geminiModel()): string {
   return `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`
 }
 
+/**
+ * Calendar date in Australia/Brisbane, e.g. "18 October 2026".
+ * Computed when the prompt is built, not at module load.
+ */
+export function brisbaneDocumentDate(now: Date = new Date()): string {
+  return new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Australia/Brisbane",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(now)
+}
+
+/** Tell the model which date the document is, and not to invent others. */
+export function withDocumentDate(prompt: string, now: Date = new Date()): string {
+  const today = brisbaneDocumentDate(now)
+  return `Today's date is ${today} (Australia/Brisbane). Use ${today} as the document date and include that exact date in the document. Write placeholders like [Date] rather than inventing other specific dates unless the user supplied them.
+
+${prompt}`
+}
+
 type GeminiGenerationConfig = {
   temperature: number
   maxOutputTokens: number
