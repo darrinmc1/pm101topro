@@ -15,6 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: "https://pm101topro.com/tools/status",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
       url: "https://pm101topro.com/pricing",
       lastModified: new Date(),
       changeFrequency: "monthly",
