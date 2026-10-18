@@ -4,6 +4,7 @@ import {
   geminiCandidateText,
   geminiGenerateContentUrl,
   geminiGenerationConfig,
+  withDocumentDate,
 } from "@/lib/gemini"
 
 const N8N_WEBHOOK = process.env.N8N_AI_WEBHOOK_URL
@@ -31,11 +32,11 @@ export async function POST(req: NextRequest) {
     .map((q: string, i: number) => `Q: ${q}\nA: ${answers[i] || "(not provided)"}`)
     .join("\n\n")
 
-  const prompt = `You are an expert project management document writer. Generate a professional ${docName} based on the following answers from a project manager. Use clear sections, professional language, and practical detail. Fill in reasonable defaults for anything left blank.
+  const prompt = withDocumentDate(`You are an expert project management document writer. Generate a professional ${docName} based on the following answers from a project manager. Use clear sections, professional language, and practical detail. Fill in reasonable defaults for anything left blank.
 
 ${qaPairs}
 
-Format the output as clean markdown. Start with a title "# ${docName}".`
+Format the output as clean markdown. Start with a title "# ${docName}".`)
 
   try {
     // Route through n8n AI gateway if configured

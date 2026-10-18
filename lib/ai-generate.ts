@@ -1,3 +1,5 @@
+import { withDocumentDate } from "@/lib/gemini"
+
 const GEMINI_API_KEY = process.env.GOOGLE_API_KEY
 const N8N_WEBHOOK = process.env.N8N_AI_WEBHOOK_URL
 const GEMINI_MODEL = process.env.GEMINI_MODEL?.trim() || "gemini-2.5-flash"
@@ -8,6 +10,8 @@ export function isAiConfigured(): boolean {
 }
 
 export async function generateAiText(prompt: string, tag = "status-cleaner"): Promise<string> {
+  const datedPrompt = withDocumentDate(prompt)
+
   if (N8N_WEBHOOK) {
     const res = await fetch(N8N_WEBHOOK, {
       method: "POST",
@@ -15,7 +19,7 @@ export async function generateAiText(prompt: string, tag = "status-cleaner"): Pr
       body: JSON.stringify({
         model: "free",
         geminiModel: GEMINI_MODEL,
-        prompt,
+        prompt: datedPrompt,
         tag,
       }),
     })
@@ -39,7 +43,7 @@ export async function generateAiText(prompt: string, tag = "status-cleaner"): Pr
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }],
+      contents: [{ parts: [{ text: datedPrompt }] }],
       generationConfig: {
         temperature: 0.4,
         maxOutputTokens: 4096,
