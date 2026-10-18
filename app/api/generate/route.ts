@@ -1,14 +1,21 @@
 import { NextRequest, NextResponse } from "next/server"
+import {
+  geminiApiKey,
+  geminiCandidateText,
+  geminiGenerateContentUrl,
+  geminiGenerationConfig,
+} from "@/lib/gemini"
 
-const GEMINI_API_KEY = process.env.GOOGLE_API_KEY
 const N8N_WEBHOOK = process.env.N8N_AI_WEBHOOK_URL
-const GEMINI_URL =
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
 
 export async function POST(req: NextRequest) {
-  if (!GEMINI_API_KEY) {
+  const apiKey = geminiApiKey()
+  if (!apiKey) {
     return NextResponse.json(
-      { error: "AI generation is not configured yet. Drop a Gemini API key in GOOGLE_API_KEY to enable it." },
+      {
+        error:
+          "AI generation is not configured yet. Set GOOGLE_API_KEY, GEMINI_API_KEY, or GOOGLE_GEMINI_API_KEY.",
+      },
       { status: 500 },
     )
   }
@@ -37,8 +44,8 @@ Format the output as clean markdown. Start with a title "# ${docName}".`
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: 'free',
-          docName: doc?.name,
+          model: "free",
+          docName,
           prompt,
           questions,
           answers,
@@ -67,16 +74,18 @@ Format the output as clean markdown. Start with a title "# ${docName}".`
       return NextResponse.json({ draft: text })
     }
 
-    // Fallback: call Gemini directly
-    const res = await fetch(`${GEMINI_URL}?key=${GEMINI_API_KEY}`, {
+    // Fallback: call Gemini directly. Markdown, not JSON — thinking is off so
+    // the output budget is spent on the document.
+    const res = await fetch(`${geminiGenerateContentUrl()}?key=${apiKey}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: {
+        generationConfig: geminiGenerationConfig({
           temperature: 0.7,
-          maxOutputTokens: 4096,
-        },
+          maxOutputTokens: 8192,
+          thinkingBudget: 0,
+        }),
       }),
     })
 
@@ -90,7 +99,7 @@ Format the output as clean markdown. Start with a title "# ${docName}".`
     }
 
     const data = await res.json()
-    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text
+    const text = geminiCandidateText(data)
 
     if (!text) {
       return NextResponse.json(
