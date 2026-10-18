@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Construction, ArrowLeft } from "lucide-react"
+import { PRO_PRICE_LABEL } from "@/lib/pricing"
 
 export default function ImprovementsPage() {
   return (
@@ -13,8 +14,8 @@ export default function ImprovementsPage() {
           </div>
           <h1 className="text-3xl font-bold tracking-tight mb-3">We&apos;re Building Something Better</h1>
           <p className="text-slate-600 max-w-lg mx-auto mb-8 text-lg">
-            Checkout coming — we are not charging cards yet. The paid SKU is{" "}
-            <strong className="text-blue-600">$19/mo Pro</strong> for AI documents after two
+            Checkout is not enabled yet, so no card is charged. The paid SKU is{" "}
+            <strong className="text-blue-600">{PRO_PRICE_LABEL}</strong> for AI documents after two
             free generations. Courses stay free.
           </p>
           <div className="flex items-center justify-center gap-4">

@@ -39,7 +39,7 @@ export default function StatusCleanerPage() {
       priceCurrency: "USD",
       availability: "https://schema.org/PreOrder",
       url: `${SITE_URL}/pricing`,
-      description: `Included in ${PRO_PRICE_LABEL}. ${AI_FREE_LIMIT} free generations on the shared AI meter. Checkout coming.`,
+      description: `Included in ${PRO_PRICE_LABEL}. ${AI_FREE_LIMIT} free generations on the shared AI meter. Checkout is not enabled yet.`,
     },
   }
 

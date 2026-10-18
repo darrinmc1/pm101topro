@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { ArrowRight, CheckCircle } from "lucide-react"
+import { BuyButton } from "@/components/buy-button"
 import { Button } from "@/components/ui/button"
 import {
   AI_FREE_LIMIT,
@@ -22,7 +23,7 @@ export function ProSku() {
           </h2>
           <p className="mt-3 text-muted-foreground">
             Two free document generations. After that, {PRO_PRICE_LABEL} unlocks unlimited AI
-            drafts. Checkout is not live yet.
+            drafts. Checkout stays closed until payments are enabled.
           </p>
         </div>
 
@@ -59,12 +60,9 @@ export function ProSku() {
               )}
               <p className="mt-4 text-sm text-muted-foreground">{plan.description}</p>
               {plan.id === "pro" ? (
-                <Button asChild className="mt-6 w-full" size="lg">
-                  <Link href="/pricing">
-                    {plan.cta}
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </Button>
+                <div className="mt-6">
+                  <BuyButton sku="pro" fullWidth />
+                </div>
               ) : (
                 <Button asChild variant="outline" className="mt-6 w-full" size="lg">
                   <Link href={plan.href}>
@@ -91,7 +89,7 @@ export function ProSku() {
 
         <p className="mx-auto mt-8 max-w-2xl text-center text-xs text-muted-foreground">
           AI document generator and Status Cleaner share the {AI_FREE_LIMIT} free generations.
-          No Stripe and no card charges on this page.
+          No card is charged while the Pro button says Coming soon.
         </p>
       </div>
     </section>

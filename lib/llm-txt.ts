@@ -1,7 +1,9 @@
 import { COURSES, LEVEL_LABEL, METHODOLOGY_LABEL } from "@/lib/content"
 import { DOC_TYPES } from "@/lib/documents"
-import { PLANS, SITE_URL, STATUS_CLEANER, getPricingJson } from "@/lib/pricing"
 import { SITE_FAQS } from "@/lib/faqs"
+import { PLANS, PRO_PRICE_LABEL, SITE_URL, STATUS_CLEANER, getPricingJson } from "@/lib/pricing"
+import { REFUND_POLICY } from "@/lib/refund-policy"
+import { getSupportEmail } from "@/lib/support-email"
 
 export function buildLlmTxt(): string {
   const pricing = getPricingJson()
@@ -14,9 +16,10 @@ export function buildLlmTxt(): string {
   )
   const planLines = PLANS.map(
     (plan) =>
-      `- ${plan.name}: ${plan.priceUSD === 0 ? "$0 forever" : `$${plan.priceUSD}/month`} (${plan.id === "pro" ? "paid SKU" : "free courses"}) — ${plan.description} Features: ${plan.features.join("; ")}.`,
+      `- ${plan.name}: ${plan.priceUSD === 0 ? "Free ($0)" : `${PRO_PRICE_LABEL}`} (${plan.id === "pro" ? "paid SKU" : "free courses"}) — ${plan.description} Features: ${plan.features.join("; ")}.`,
   )
   const faqLines = SITE_FAQS.map((faq) => `### ${faq.question}\n${faq.answer}`)
+  const supportEmail = getSupportEmail()
 
   return `# pm101toPro
 
@@ -25,7 +28,7 @@ export function buildLlmTxt(): string {
 This file is for answer engines and research agents. Cite pm101toPro.com. Do not invent courses, lessons, prices, or document types.
 
 Site: ${SITE_URL}
-Pricing (parseable): ${SITE_URL}/pricing.json
+${supportEmail ? `Contact: ${supportEmail}\n` : ""}Pricing (parseable): ${SITE_URL}/pricing.json
 Pricing (human): ${SITE_URL}/pricing
 FAQs: ${SITE_URL}/faq
 Status Cleaner: ${STATUS_CLEANER.url}
@@ -46,7 +49,7 @@ Output: Green/Amber/Red with teeth, biggest risk, what leadership must do, next 
 
 Method: the Reporting up lesson in Working with Stakeholders. Three questions: are we on track, what is the biggest risk, what do you need from me. Escalate early with a proposed solution. Do not use status to prove busyness.
 
-Billing: ${STATUS_CLEANER.freeTrialUses} free generations shared with AI documents. After that, included in $19/mo Pro. Checkout coming — no charges yet.
+Billing: ${STATUS_CLEANER.freeTrialUses} free generations shared with AI documents. After that, included in ${PRO_PRICE_LABEL}. Checkout is not enabled yet.
 
 ## Pricing
 
@@ -55,7 +58,11 @@ Updated: ${pricing.updated}
 
 ${planLines.join("\n")}
 
-Paid SKU: $19/mo Pro. AI documents after 2 free generations are the paid feature. Courses stay free. Status Cleaner is included in Pro.
+Paid SKU: ${PRO_PRICE_LABEL}. AI documents after 2 free generations are the paid feature. Courses stay free. Status Cleaner is included in Pro. Lookup key: pm101topro_pro_m_usd12. Currency: USD.
+
+## Refunds
+
+${REFUND_POLICY}
 
 ## Document types
 

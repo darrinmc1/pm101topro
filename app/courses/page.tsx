@@ -1,8 +1,9 @@
 import type { Metadata } from "next"
 
 import { CoursesBrowser } from "@/components/courses-browser"
-import { LEVEL_ORDER, type Level } from "@/lib/content"
 import { PmWisdom } from "@/components/pm-wisdom"
+import { LEVEL_ORDER, type Level } from "@/lib/content"
+import { PRO_PRICE_LABEL } from "@/lib/pricing"
 
 export const metadata: Metadata = {
   title: "Courses",
@@ -31,7 +32,7 @@ export default async function CoursesPage({
           </h1>
           <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
             Structured, practical project management courses across every major
-            methodology. All four levels stay free. The paid SKU is $19/mo Pro
+            methodology. All four levels stay free. The paid SKU is {PRO_PRICE_LABEL}{" "}
             for AI documents after two free generations.
           </p>
         </header>

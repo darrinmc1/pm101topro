@@ -1,8 +1,10 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { Download, FileText } from "lucide-react"
+import { LegalExampleNotice } from "@/components/legal-example-notice"
 import { Card } from "@/components/ui/card"
 import { PmWisdom } from "@/components/pm-wisdom"
+import { isLegalDocument } from "@/lib/legal-notice"
 
 export const metadata: Metadata = {
   title: "Free PM Templates",
@@ -201,6 +203,8 @@ function TemplateCard({
           <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
             {template.description}
           </p>
+
+          {isLegalDocument(template.id) ? <LegalExampleNotice /> : null}
 
           <ul className="flex flex-wrap gap-x-4 gap-y-1.5">
             {template.features.map((feature) => (

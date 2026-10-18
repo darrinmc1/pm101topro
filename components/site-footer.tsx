@@ -1,5 +1,7 @@
 import Link from "next/link"
 import { BrandMark } from "@/components/brand-mark"
+import { MerchantOfRecordDisclosure } from "@/components/merchant-of-record-disclosure"
+import { getSupportEmail } from "@/lib/support-email"
 
 const FOOTER_LINKS = [
   { href: "/courses", label: "Courses" },
@@ -12,6 +14,8 @@ const FOOTER_LINKS = [
 ]
 
 export function SiteFooter() {
+  const supportEmail = getSupportEmail()
+
   return (
     <footer className="border-t border-border bg-surface">
       <div className="container flex flex-col gap-8 py-12 md:flex-row md:items-start md:justify-between">
@@ -40,12 +44,17 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-border">
-        <div className="container flex flex-col gap-2 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+        <div className="container flex flex-col gap-3 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 pm101toPro.com</p>
           <div className="flex gap-4">
             <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
             <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
             <Link href="/cookies" className="hover:text-foreground transition-colors">Cookies</Link>
+            {supportEmail ? (
+              <a href={`mailto:${supportEmail}`} className="hover:text-foreground transition-colors">
+                {supportEmail}
+              </a>
+            ) : null}
           </div>
           <p className="font-mono text-muted-foreground/50">
             {/* Footer easter egg - cycles through PM jokes on each visit */}
@@ -59,6 +68,9 @@ export function SiteFooter() {
               ][Math.floor(Math.random() * 5)]
             }
           </p>
+        </div>
+        <div className="container pb-6">
+          <MerchantOfRecordDisclosure className="max-w-2xl" />
         </div>
       </div>
     </footer>

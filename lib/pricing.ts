@@ -6,7 +6,7 @@ export type Plan = {
   id: PlanId
   name: string
   priceUSD: number
-  period: "forever" | "month"
+  period: "free" | "month"
   description: string
   features: string[]
   cta: string
@@ -19,9 +19,9 @@ export type Plan = {
 export const AI_FREE_LIMIT = 2
 export const AI_USAGE_STORAGE_KEY = "pm101_free_uses"
 
-/** Official paid SKU. Checkout is not live — do not charge cards. */
-export const PRO_PRICE_USD = 19
-export const PRO_PRICE_LABEL = "$19/mo Pro"
+/** Official paid SKU. Checkout stays off until both Stripe flags are "true". */
+export const PRO_PRICE_USD = 12
+export const PRO_PRICE_LABEL = "$12/mo Pro"
 export const PRO_SKU_NAME = "Pro"
 
 export const STATUS_CLEANER = {
@@ -39,7 +39,7 @@ export const PLANS: Plan[] = [
     id: "free",
     name: "Free",
     priceUSD: 0,
-    period: "forever",
+    period: "free",
     description: "All four course levels stay free. Two AI document generations included.",
     features: [
       "All courses & lessons — free",
@@ -63,9 +63,9 @@ export const PLANS: Plan[] = [
       "Everything in Free",
       "Unlimited AI document generator (8 doc types)",
       "Unlimited Status Cleaner",
-      "Checkout coming — no charges yet",
+      "Checkout opens when payments are enabled",
     ],
-    cta: "Checkout coming",
+    cta: "Coming soon",
     href: "/pricing",
     highlighted: true,
     availability: "coming-soon",
@@ -80,7 +80,7 @@ export function formatPlanPrice(plan: Plan): string {
 }
 
 export function formatPlanPeriod(plan: Plan): string {
-  return plan.period === "forever" ? "forever" : "/month"
+  return plan.period === "month" ? "/month" : ""
 }
 
 export type PricingJson = {
@@ -114,7 +114,7 @@ export function getPricingJson(): PricingJson {
   return {
     currency: "USD",
     url: `${SITE_URL}/pricing`,
-    updated: "2026-08-14",
+    updated: "2026-10-18",
     plans: PLANS.map((plan) => ({
       id: plan.id,
       name: plan.name,

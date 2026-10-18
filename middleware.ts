@@ -95,17 +95,26 @@ function applySecurity(request: NextRequest) {
   return response
 }
 
+function isStripeWebhook(request: NextRequest) {
+  return request.nextUrl.pathname.startsWith("/api/stripe/webhook")
+}
+
 export default clerkConfigured
   ? clerkMiddleware(async (auth, request: NextRequest) => {
+      // Stripe must reach the webhook without Clerk, bot blocks, or rate limits.
+      if (isStripeWebhook(request)) return NextResponse.next()
       if (isProtectedRoute(request)) {
         await auth.protect()
       }
       return applySecurity(request)
     })
-  : (request: NextRequest) => applySecurity(request)
+  : (request: NextRequest) => {
+      if (isStripeWebhook(request)) return NextResponse.next()
+      return applySecurity(request)
+    }
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|images/|favicon.ico).*)",
+    "/((?!_next/static|_next/image|images/|favicon.ico|api/stripe/webhook).*)",
   ],
 }

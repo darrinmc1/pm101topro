@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react"
 import Link from "next/link"
 import {
   AlertTriangle,
-  ArrowRight,
   Check,
   Copy,
   Crown,
@@ -12,9 +11,11 @@ import {
   RefreshCw,
   Sparkles,
 } from "lucide-react"
+import { BuyButton } from "@/components/buy-button"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Card } from "@/components/ui/card"
+import { useProAccess } from "@/hooks/use-pro-access"
 import { SAMPLE_DUMP, type RagStatus, type StatusResult } from "@/lib/status-method"
 import { getFreeUsage, hasExhaustedFreeAi, incrementFreeUsage } from "@/lib/ai-usage"
 import { AI_FREE_LIMIT, PRO_PRICE_LABEL } from "@/lib/pricing"
@@ -44,10 +45,16 @@ export function StatusCleaner() {
   const [error, setError] = useState("")
   const [copied, setCopied] = useState(false)
   const [showWall, setShowWall] = useState(false)
+  const { pro: hasPro, checked: accessChecked } = useProAccess()
 
   useEffect(() => {
+    if (!accessChecked) return
+    if (hasPro) {
+      setShowWall(false)
+      return
+    }
     if (hasExhaustedFreeAi()) setShowWall(true)
-  }, [])
+  }, [accessChecked, hasPro])
 
   const clean = useCallback(async () => {
     setPhase("working")
@@ -69,13 +76,13 @@ export function StatusCleaner() {
       setMarkdown(data.markdown || "")
       setNotice(data.notice || "")
       setSource(data.source === "ai" || data.source === "method" ? data.source : "")
-      if (data.source === "ai") incrementFreeUsage()
+      if (data.source === "ai" && !hasPro) incrementFreeUsage()
       setPhase("result")
     } catch {
       setError("Network error — check your connection and try again.")
       setPhase("error")
     }
-  }, [dump])
+  }, [dump, hasPro])
 
   async function copyMarkdown() {
     try {
@@ -281,14 +288,12 @@ export function StatusCleaner() {
             </p>
             <p className="mt-1 text-xs text-amber-400/80">
               After {AI_FREE_LIMIT} free uses, Status Cleaner is included in {PRO_PRICE_LABEL}.
-              Checkout coming.
             </p>
-            <Button asChild className="mt-3" size="sm">
-              <Link href="/pricing">
-                <Crown className="mr-1 h-4 w-4" />
-                Checkout coming
-              </Link>
-            </Button>
+            {hasPro ? null : (
+              <div className="mx-auto mt-3 max-w-md text-left">
+                <BuyButton sku="pro" fullWidth size="sm" />
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -340,16 +345,13 @@ function SubscribeWall() {
       <h2 className="mt-2 text-2xl font-bold text-foreground">Status Cleaner is on Pro</h2>
       <p className="mx-auto mt-3 max-w-md text-muted-foreground">
         You&apos;ve used the {AI_FREE_LIMIT} shared free AI generations. Unlimited Status Cleaner
-        and document drafts are {PRO_PRICE_LABEL}. Courses stay free. Checkout coming.
+        and document drafts are {PRO_PRICE_LABEL}. Courses stay free. Checkout stays closed until
+        payments are enabled.
       </p>
-      <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-        <Button asChild size="lg">
-          <Link href="/pricing">
-            <Crown className="mr-2 h-5 w-5" />
-            Checkout coming
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </Button>
+      <div className="mx-auto mt-8 max-w-md text-left">
+        <BuyButton sku="pro" fullWidth />
+      </div>
+      <div className="mt-4">
         <Button asChild variant="ghost" size="lg">
           <Link href="/courses">Browse free courses instead</Link>
         </Button>
