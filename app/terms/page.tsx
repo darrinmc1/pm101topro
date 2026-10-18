@@ -6,7 +6,7 @@ export default function Page() {
     <TermsPage
       siteName="PM101toPro"
       domain="pm101topro.com"
-      supportEmail={getSupportEmail() ?? "admin@pm101topro.com"}
+      supportEmail={getSupportEmail() ?? undefined}
     />
   )
 }
