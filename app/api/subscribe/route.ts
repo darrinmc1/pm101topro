@@ -1,93 +1,79 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
+import { saveToHq } from "@/lib/hq-subscribe"
 
-export async function POST(request: Request) {
-  try {
-    const body = await request.json()
-    const { email } = body
+const SITE = "pm101topro"
+const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return NextResponse.json(
-        { error: "A valid email address is required" },
-        { status: 400 }
-      )
-    }
+const rateLimit = new Map<string, { count: number; reset: number }>()
+const WINDOW_MS = 60_000
+const MAX_PER_WINDOW = 5
 
-    // Lazy init Resend to add contact to audience
-    const apiKey = process.env.RESEND_API_KEY
-    if (!apiKey) {
-      console.warn(
-        "[subscribe] Resend not configured — subscription stored in log only"
-      )
-      return NextResponse.json({
-        success: true,
-        message:
-          "You're subscribed! (Email delivery will be configured soon.)",
-      })
-    }
+function rateLimited(ip: string) {
+  const now = Date.now()
+  const entry = rateLimit.get(ip)
+  if (!entry || now > entry.reset) {
+    rateLimit.set(ip, { count: 1, reset: now + WINDOW_MS })
+    return false
+  }
+  entry.count += 1
+  return entry.count > MAX_PER_WINDOW
+}
 
-    // Add contact via Resend Audiences API
-    const res = await fetch("https://api.resend.com/audiences", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-      },
-    })
+function methodNotAllowed() {
+  return new NextResponse(null, {
+    status: 405,
+    headers: { Allow: "POST" },
+  })
+}
 
-    const audiences = await res.json()
-    let audienceId: string | null = null
+export function GET() {
+  return methodNotAllowed()
+}
 
-    // Use existing "Subscribers" audience or create one
-    if (audiences?.data?.length > 0) {
-      audienceId = audiences.data[0].id
-    }
+export function PUT() {
+  return methodNotAllowed()
+}
 
-    if (audienceId) {
-      await fetch(`https://api.resend.com/audiences/${audienceId}/contacts`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      })
-    }
+export function PATCH() {
+  return methodNotAllowed()
+}
 
-    // Send a welcome email
-    await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev",
-        to: email,
-        subject: "Welcome to pm101toPro!",
-        html: `
-          <div style="font-family: system-ui, sans-serif; max-width: 480px; margin: 0 auto;">
-            <h1 style="color: #0A0F1E;">Welcome to pm101toPro!</h1>
-            <p style="color: #525866;">
-              You're now subscribed to updates from pm101toPro. We'll send you
-              tips, course announcements, and new tools to help you master
-              project management.
-            </p>
-            <p style="color: #525866;">
-              — The pm101toPro Team
-            </p>
-          </div>
-        `,
-      }),
-    })
+export function DELETE() {
+  return methodNotAllowed()
+}
 
-    return NextResponse.json({
-      success: true,
-      message: "Welcome! Check your inbox for a confirmation.",
-    })
-  } catch (error) {
-    console.error("Subscribe error:", error)
+export async function POST(req: NextRequest) {
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+    req.headers.get("x-real-ip") ??
+    "unknown"
+  if (rateLimited(ip)) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 })
+  }
+
+  const body = (await req.json().catch(() => ({}))) as {
+    email?: string
+    source?: string
+    website?: string
+  }
+
+  // Honeypot. Bots get a quiet ok so they don't retry. Nothing is saved.
+  if (body.website && body.website !== "") {
+    return NextResponse.json({ ok: true })
+  }
+
+  const email = body.email?.trim() ?? ""
+  if (!email || !emailRe.test(email)) {
+    return NextResponse.json({ error: "Invalid email" }, { status: 400 })
+  }
+
+  const saved = await saveToHq(SITE, email, body.source)
+  if (!saved) {
     return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
+      { error: "We couldn't save your email just now. Please try again." },
+      { status: 502 },
     )
   }
+
+  return NextResponse.json({ ok: true })
 }

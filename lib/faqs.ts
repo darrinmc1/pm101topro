@@ -1,5 +1,3 @@
-import { PRO_PRICE_LABEL } from "@/lib/pricing"
-
 export type FaqItem = {
   id: string
   question: string
@@ -33,8 +31,8 @@ export const STATUS_FAQS: FaqItem[] = [
   },
   {
     id: "price",
-    question: "How much does Status Cleaner cost?",
-    answer: `Two free generations are included. After that, Status Cleaner is part of ${PRO_PRICE_LABEL}.`,
+    question: "Is Status Cleaner free?",
+    answer: "Two free generations are included. After that, Status Cleaner moves to Pro, which is not open yet. Join the list on the pricing page to hear when it is.",
   },
 ]
 

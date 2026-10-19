@@ -62,18 +62,12 @@ export function TermsPage({ siteName, domain, supportEmail = "admin@" + domain, 
               {siteName} offers a selection of free courses, tools, templates, and resources. Free content is provided
               &ldquo;as is&rdquo; without warranty, and we may modify or discontinue any free offering at any time without notice.
             </p>
-            <h3 className="text-lg font-semibold mb-2">2.2 Paid Content &amp; Subscriptions</h3>
+            <h3 className="text-lg font-semibold mb-2">2.2 Paid Content</h3>
             <p className="text-slate-700 mb-3">
-              Certain content, features, courses, and tools require payment. Paid offerings include:
+              Courses that are offered free stay free. Paid access is not available yet, and this site does not list a cost.
             </p>
-            <ul className="list-disc pl-6 mb-4 text-slate-700 space-y-1">
-              <li><strong>One-time purchases</strong> — individual courses, templates, or tools</li>
-              <li><strong>Subscription plans</strong> — recurring access to premium content, billed monthly or annually</li>
-              <li><strong>Professional services</strong> — consulting, coaching, or custom work (governed by separate agreement)</li>
-            </ul>
             <p className="text-slate-700">
-              All prices are listed in US Dollars (USD) unless otherwise stated. We reserve the right to change prices
-              at any time, but changes will not affect active subscriptions until the next billing period.
+              When payments are set up, any charge will be shown before you confirm it. Nothing on the site today asks for a card.
             </p>
           </section>
 

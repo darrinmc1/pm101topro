@@ -12,6 +12,9 @@ import {
   METHODOLOGY_LABEL,
   getCourse,
 } from "@/lib/content"
+import { EmailSignup } from "@/components/email-signup"
+
+export const dynamicParams = false
 
 export function generateStaticParams() {
   return COURSES.map((c) => ({ slug: c.slug }))
@@ -133,6 +136,8 @@ export default async function CourseDetailPage({
           ))}
         </ol>
       </section>
+
+      <EmailSignup source={`course:${course.slug}`} />
     </div>
   )
 }

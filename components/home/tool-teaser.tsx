@@ -71,8 +71,8 @@ export function ToolTeaser() {
           </ul>
 
           <Button asChild className="mt-8 group">
-            <Link href="/pricing">
-              See pricing
+            <Link href="/tools">
+              Try a document
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>

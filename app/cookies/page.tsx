@@ -1,4 +1,9 @@
+import type { Metadata } from "next"
 import { CookiesPage } from "@/components/legal/cookies-content"
+
+export const metadata: Metadata = {
+  title: "Cookies – pm101toPro",
+}
 
 export default function Page() {
   return (
