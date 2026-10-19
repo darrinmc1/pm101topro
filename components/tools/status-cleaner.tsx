@@ -17,7 +17,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card } from "@/components/ui/card"
 import { SAMPLE_DUMP, type RagStatus, type StatusResult } from "@/lib/status-method"
 import { getFreeUsage, hasExhaustedFreeAi, incrementFreeUsage } from "@/lib/ai-usage"
-import { AI_FREE_LIMIT, PRO_PRICE_LABEL } from "@/lib/pricing"
+import { AI_FREE_LIMIT } from "@/lib/pricing"
 import { cn } from "@/lib/utils"
 
 type Phase = "input" | "working" | "result" | "error"
@@ -280,12 +280,12 @@ export function StatusCleaner() {
               {getFreeUsage()} of {AI_FREE_LIMIT} free AI generations used
             </p>
             <p className="mt-1 text-xs text-amber-400/80">
-              After {AI_FREE_LIMIT} free uses, Status Cleaner is included in {PRO_PRICE_LABEL}.
+              After {AI_FREE_LIMIT} free uses, Status Cleaner moves to Pro, which is coming soon.
             </p>
             <Button asChild className="mt-3" size="sm">
               <Link href="/pricing">
                 <Crown className="mr-1 h-4 w-4" />
-                See Pro pricing
+                Join the Pro list
               </Link>
             </Button>
           </div>
@@ -334,18 +334,18 @@ function SubscribeWall() {
         <Crown className="h-8 w-8 text-accent" />
       </div>
       <p className="mt-6 font-mono text-xs uppercase tracking-widest text-accent-secondary">
-        Paid · {PRO_PRICE_LABEL}
+        Pro · coming soon
       </p>
       <h2 className="mt-2 text-2xl font-bold text-foreground">Status Cleaner is on Pro</h2>
       <p className="mx-auto mt-3 max-w-md text-muted-foreground">
         You&apos;ve used the {AI_FREE_LIMIT} free AI generations. Unlimited Status Cleaner
-        is {PRO_PRICE_LABEL}.
+        will be part of Pro. Join the list and we will write when it is available.
       </p>
       <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
         <Button asChild size="lg">
           <Link href="/pricing">
             <Crown className="mr-2 h-5 w-5" />
-            See Pro pricing
+            Join the Pro list
             <ArrowRight className="h-4 w-4" />
           </Link>
         </Button>
