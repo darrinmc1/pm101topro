@@ -15,7 +15,7 @@ const TIERS = [
   {
     name: "Free",
     price: "$0",
-    period: "forever",
+    period: "",
     description: "Everything you need to learn project management from 101 to advanced.",
     cta: "Get started free",
     ctaHref: "/sign-up",
