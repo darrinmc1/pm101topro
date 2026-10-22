@@ -365,7 +365,7 @@ export const scrumScheduleVendorBodies: LessonBodies = {
         body: [
           "Every compression trades against quality, cost, or residual risk. Crashing can dilute review, split ownership, and create 'who changed that' defects. Fast-tracking can build on a design that will move. Neither is immoral. Pretending the trade is free is. Put the residual risk in the register with a trigger: defect rate, interface churn, overtime hours.",
           "Do not compress a path that is not critical, and do not compress to hide a scope conversation. If the date is sacred, something else is not — usually scope. A thinner Increment on the original date is often cheaper than a fully fantasised scope delivered by crash and prayer. Offer both options. Let the sponsor spend the money or the features.",
-          "Record the decision. When someone later asks why quality dipped or why the second path is now critical, 'we had to hit the date' is not an answer. 'We crashed activities 14 and 22 at £X per day, accepted rework risk on the API overlap, and rejected a scope cut on 3 May' is an answer. Compression without a paper trail is just a rumour that the plan got tighter.",
+          "Record the decision. When someone later asks why quality dipped or why the second path is now critical, 'we had to hit the date' is not an answer. 'We crashed activities 14 and 22 at $X per day, accepted rework risk on the API overlap, and rejected a scope cut on 3 May' is an answer. Compression without a paper trail is just a rumour that the plan got tighter.",
         ],
       },
       {

@@ -11,7 +11,7 @@ export const domainsPortfolioTransformBodies: LessonBodies = {
         body: [
           "PMI's current exam content is organised by domains, not by the old process-group map. People is the first domain because delivery fails more often in relationships than in Gantt arithmetic. Treat it as a set of jobs you must be able to do: manage conflict, lead a team, support performance, empower others, train, build the team, remove impediments, negotiate, collaborate, create shared understanding, run virtual teams, set ground rules, mentor, and apply emotional intelligence.",
           "That list is not a vibe. Each item is a task you can practise. 'Be a servant leader' is useless until you can name the next action: remove the blocker the team cannot reach, protect a retrospective from becoming a status meeting, or refuse to assign work the person has not been trained to do.",
-          "Organisations still call this 'the soft stuff' while missing another deadline caused by an unowned conflict. Peel Boss energy, not a hug: the People domain is operations. If you cannot run a difficult conversation, you do not have a process problem. You have a People-task gap wearing a RAID log.",
+          "Organisations still call this 'the soft stuff' while missing another deadline caused by an unowned conflict. Plainly put, the People domain is operations. If you cannot run a difficult conversation, you do not have a process problem. You have a People-task gap wearing a RAID log.",
         ],
       },
       {
@@ -62,7 +62,7 @@ export const domainsPortfolioTransformBodies: LessonBodies = {
         body: [
           "Integration is the unglamorous centre. Someone has to notice that the schedule assumes a vendor date the procurement task has not secured, and that the quality plan assumes testers the resource plan does not have. That someone is you. Integration is not a phase. It is the habit of making the parts talk.",
           "Change control is how Process stays honest. A change that is absorbed with a smile and no baseline update is how you invent a new project in secret. A change board that rejects everything is how the business goes around you. The task is to evaluate impact — scope, time, cost, risk, benefits — and get a decision from the person who actually owns the constraint.",
-          "Value and urgency belong in Process, not only in the business-case appendix. If a workstream no longer serves the outcome, stopping it is a Process decision. Shipping a thin slice that a customer can use beats polishing a component nobody will see until December. Intel Academy rule: activity is not progress, and a green RAG on the wrong work is still a miss.",
+          "Value and urgency belong in Process, not only in the business-case appendix. If a workstream no longer serves the outcome, stopping it is a Process decision. Shipping a thin slice that a customer can use beats polishing a component nobody will see until December. Rule of thumb: activity is not progress, and a green RAG on the wrong work is still a miss.",
         ],
       },
       {
@@ -263,7 +263,7 @@ export const domainsPortfolioTransformBodies: LessonBodies = {
         body: [
           "You create a program when the value lives in the relationships: a shared customer journey across three products, a regulatory outcome that needs technology, process, and training to land together, or a capability that only exists when several outputs interlock. If the projects do not share a benefit or a critical dependency, you do not have a program. You have a folder.",
           "The program manager's scarce resource is attention at the seams. Shared vendors, shared architects, a launch window that only opens once, a benefit measure that no single project owns. Dive into every workstream's backlog and you will become an expensive status clerk. Stay only at strategy and the seams will tear without you noticing.",
-          "Peel Boss test: if your weekly meeting is a parade of project RAGs with no decision about sequence, scope trade-offs, or benefit risk, you are running a status salon. A program board exists to resolve conflicts the projects cannot resolve alone.",
+          "A quick test: if your weekly meeting is a parade of project RAGs with no decision about sequence, scope trade-offs, or benefit risk, you are running a status salon. A program board exists to resolve conflicts the projects cannot resolve alone.",
         ],
       },
       {
@@ -347,7 +347,7 @@ export const domainsPortfolioTransformBodies: LessonBodies = {
         body: [
           "A new platform is an output. Fewer hours spent on rework, a shorter cycle time, a revenue change, a risk reduced — those are outcomes. Benefits realisation is the discipline of defining those outcomes early, assigning an owner who outlives the project, and tracking them until they appear or until you admit they will not.",
           "Write benefits as cause → change → measure. 'Improve customer experience' is a mood. 'Reduce average handle time from 9 minutes to 6 within two quarters of go-live, owned by the contact-centre director' is a benefit you can manage. The second version tells you what to instrument and who to bother when the number does not move.",
-          "The PM often facilitates the definition. The owner is almost never the PM in year two. If you cannot name the operational leader, you do not have a benefit. You have a slide. Intel Academy standard: a slide is not a receiver.",
+          "The PM often facilitates the definition. The owner is almost never the PM in year two. If you cannot name the operational leader, you do not have a benefit. You have a slide. A slide cannot receive a benefit. A person can.",
         ],
       },
       {
@@ -398,7 +398,7 @@ export const domainsPortfolioTransformBodies: LessonBodies = {
         body: [
           "Strategy becomes portfolio themes, themes become programs and stand-alone projects, projects become outputs, outputs become operational change, change becomes benefits. Each translation loses information. Your job at each altitude is to keep the measure and the owner intact, not to invent a new purpose that is easier to status-report.",
           "Project charters that copy the corporate mission statement and then list a local IT output are how alignment becomes fiction. Write the local contribution. 'This project retires system A so that program B can offer a single client view, which is how we reduce onboarding time — the measure on the strategy map.' Specific or silent. Pick one.",
-          "PMO reporting should show the map: objective → investment → status of benefits, not only a wall of project RAGs. A wall of green projects that do not move a strategic measure is a well-run distraction. Peel Boss will not clap for the wall.",
+          "PMO reporting should show the map: objective → investment → status of benefits, not only a wall of project RAGs. A wall of green projects that do not move a strategic measure is a well-run distraction. Nobody should applaud the wall.",
         ],
       },
       {
@@ -608,7 +608,7 @@ export const domainsPortfolioTransformBodies: LessonBodies = {
         body: [
           "Measure the old system first. If you do not know last quarter's lead time, you cannot claim this quarter improved it. 'It feels faster' is how coaches keep contracts and how cynics stockpile jokes. Instrument the path. Ugly data is still data.",
           "Separate team-level flow metrics from enterprise transformation metrics. A team can improve its cycle time inside a system that still takes nine months to fund the next slice. Both views are useful. Only one of them tells you whether the company changed. Do not let local improvement launder a global stall.",
-          "Targets that punish honesty will recreate the old RAG fiction. If amber is a career event, everything will be green until it is a press incident. Prefer ranges, trends, and narrative about what you are trying next. Peel Boss does not need a fake 17% agility uplift. Peel Boss needs to know whether the constraint moved.",
+          "Targets that punish honesty will recreate the old RAG fiction. If amber is a career event, everything will be green until it is a press incident. Prefer ranges, trends, and narrative about what you are trying next. Leadership does not need a made-up agility percentage. Leadership needs to know whether the constraint moved.",
         ],
       },
       {
@@ -692,7 +692,7 @@ export const domainsPortfolioTransformBodies: LessonBodies = {
         body: [
           "Predictive work runs on a baseline clock: critical path, float, earned value if you are in that world. Adaptive work runs on a flow clock: increment, review, reorder. The program or project manager's job is to translate. 'The interface is late two weeks on the vendor path; the backlog must drop the dependent slice or we miss the campaign.' That sentence is hybrid management. Two status dialects with no translation is how executives hear noise.",
           "Integration events are sacred. Joint reviews, joint risk, a single definition of what 'ready for the other side' means. Do not let the adaptive team say 'done' when the predictive side cannot consume the output. Done at the seam is done for the other clock, not done for your board.",
-          "Risk belongs on both clocks. A vendor slip is a predictive risk with a date trigger. A discovery that the user does not want the feature is an adaptive risk that should stop spend. Putting both only on the Gantt, or only on the board, hides one of them. Intel Academy note: hidden risk does not become smaller because your tool cannot display it.",
+          "Risk belongs on both clocks. A vendor slip is a predictive risk with a date trigger. A discovery that the user does not want the feature is an adaptive risk that should stop spend. Putting both only on the Gantt, or only on the board, hides one of them. Hidden risk does not become smaller because your tool cannot display it.",
         ],
       },
       {
@@ -725,7 +725,7 @@ export const domainsPortfolioTransformBodies: LessonBodies = {
         body: [
           "Marketing wants the date. Engineering wants the defect fixed. Finance wants the spend stopped. Operations wants a handover they can staff. If you keep those conversations in separate rooms, you become the translator who accidentally picks a winner. Put the interests on one page: what each party needs, what they fear, and the constraint that is actually locked.",
           "Interests are not positions. 'We must have all the features' may be 'we already sold it' or 'we are scared of looking incomplete at a conference.' The second version has options. The first version is a wall. Your People-domain task is to get to the interest before you run a Process weapon.",
-          "Do not fake consensus. If the disagreement is the finding, record both views and take a decision to the person with authority. Fake alignment in the minutes is how dilemmas return as incidents. Peel Boss would rather have an honest split than a warm lie.",
+          "Do not fake consensus. If the disagreement is the finding, record both views and take a decision to the person with authority. Fake alignment in the minutes is how dilemmas return as incidents. An honest split beats a warm lie.",
         ],
       },
       {

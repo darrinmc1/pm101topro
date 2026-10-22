@@ -219,7 +219,7 @@ export const processEvmKanbanBodies: LessonBodies = {
         id: "planned-value",
         title: "Planned value: the authorised work you meant to have finished",
         body: [
-          "Planned value (PV) is the budgeted value of the work scheduled to be completed by the status date. If the performance measurement baseline said four of ten equal packages should be done by now, and the budget at completion (BAC) is £100,000, PV is £40,000. PV is a statement about the plan, not about reality.",
+          "Planned value (PV) is the budgeted value of the work scheduled to be completed by the status date. If the performance measurement baseline said four of ten equal packages should be done by now, and the budget at completion (BAC) is $100,000, PV is $40,000. PV is a statement about the plan, not about reality.",
           "You cannot invent PV in the meeting. It comes from a baselined schedule with a budget spread across the work — often a time-phased cost baseline. If you have no baseline, you do not have earned value. You have a conversation and a spreadsheet that agrees with whoever last edited it.",
           "PV moves only when the baseline moves through change control, or when the calendar reaches the next planned chunk of work. It does not move because the team feels busy. Feelings do not have a BAC.",
         ],
@@ -228,8 +228,8 @@ export const processEvmKanbanBodies: LessonBodies = {
         id: "ev-and-ac",
         title: "Earned value and actual cost: progress versus the receipt",
         body: [
-          "Earned value (EV) is the budgeted value of the work actually completed. If those ten packages are £10,000 each and three are done to the agreed definition of done, EV is £30,000 — even if you are in week four, even if people worked weekends. EV is about product, measured in the same money units as the baseline. It is not hours. It is not optimism.",
-          "Actual cost (AC) is what you spent to achieve that EV. Labour, vendors, licences — the real outflow. If you have spent £35,000 to complete those three packages, AC is £35,000. AC does not care what you planned to spend. Receipts are stubborn like that.",
+          "Earned value (EV) is the budgeted value of the work actually completed. If those ten packages are $10,000 each and three are done to the agreed definition of done, EV is $30,000 — even if you are in week four, even if people worked weekends. EV is about product, measured in the same money units as the baseline. It is not hours. It is not optimism.",
+          "Actual cost (AC) is what you spent to achieve that EV. Labour, vendors, licences — the real outflow. If you have spent $35,000 to complete those three packages, AC is $35,000. AC does not care what you planned to spend. Receipts are stubborn like that.",
           "The usual smear is reporting '% complete' without saying of what. Percent of calendar, percent of budget spent, and percent of scope done are three different stories. EV forces you to pick the third and price it at budgeted rates. That is the whole trick. It is not mysticism. It is refusing to let spend impersonate progress.",
         ],
       },
@@ -237,7 +237,7 @@ export const processEvmKanbanBodies: LessonBodies = {
         id: "walkthrough",
         title: "A small walkthrough you can reuse",
         body: [
-          "Take a project with BAC = £100,000, ten equal work packages, ten weeks. At the end of week five the plan said five packages done, so PV = £50,000. The team has finished four packages to the definition of done, so EV = £40,000. Finance shows £50,000 spent, so AC = £50,000.",
+          "Take a project with BAC = $100,000, ten equal work packages, ten weeks. At the end of week five the plan said five packages done, so PV = $50,000. The team has finished four packages to the definition of done, so EV = $40,000. Finance shows $50,000 spent, so AC = $50,000.",
           "In English: you are halfway through the calendar and halfway through the budget, but only 40% of the authorised work is done. You have spent the money of five packages to buy four. Anyone who reports 'we are at 50%' without those three letters is choosing a comforting denominator.",
           "Hold these three figures still. The next lessons will subtract and divide them. If you cannot explain PV, EV, and AC on a whiteboard with round numbers, do not proceed to indexes. An index built on a muddled EV is a confident error.",
         ],
@@ -246,7 +246,7 @@ export const processEvmKanbanBodies: LessonBodies = {
         id: "summary",
         title: "Summary & next steps",
         body: [
-          "PV is the budgeted value of work scheduled by now. EV is the budgeted value of work actually finished. AC is what you spent. Same units, three meanings. Our running example: PV £50,000, EV £40,000, AC £50,000, BAC £100,000.",
+          "PV is the budgeted value of work scheduled by now. EV is the budgeted value of work actually finished. AC is what you spent. Same units, three meanings. Our running example: PV $50,000, EV $40,000, AC $50,000, BAC $100,000.",
           "Next: cost and schedule variance — subtraction that tells you whether the gap is money, time, or both.",
         ],
       },
@@ -261,7 +261,7 @@ export const processEvmKanbanBodies: LessonBodies = {
         id: "cost-variance",
         title: "Cost variance: EV minus AC",
         body: [
-          "Cost variance (CV) = EV − AC. Using the running figures: £40,000 − £50,000 = −£10,000. You have earned ten thousand less than you spent. That is over budget on the work done, not 'the budget is half gone so we are fine.' Half gone with 40% earned is the opposite of fine.",
+          "Cost variance (CV) = EV − AC. Using the running figures: $40,000 − $50,000 = −$10,000. You have earned ten thousand less than you spent. That is over budget on the work done, not 'the budget is half gone so we are fine.' Half gone with 40% earned is the opposite of fine.",
           "Positive CV means you delivered that work for less than its budgeted value. Enjoy it briefly, then ask why — cheaper vendor, skipped test, or a definition of done that quietly shrank. A pretty CV that was bought by undeclared scope cut is a fraud with a green cell.",
           "CV is about the work completed, not the work remaining. A healthy CV on a thin slice of the project can still hide a disaster in the next package. Report it with the percentage complete so nobody thinks a small sample is the whole novel.",
         ],
@@ -270,7 +270,7 @@ export const processEvmKanbanBodies: LessonBodies = {
         id: "schedule-variance",
         title: "Schedule variance: EV minus PV",
         body: [
-          "Schedule variance (SV) = EV − PV. Here: £40,000 − £50,000 = −£10,000. You have earned ten thousand less than the plan said you would have earned by this date. That is behind schedule in money units, which offends people who wanted days. It is still the standard measure because it uses the same currency as the baseline.",
+          "Schedule variance (SV) = EV − PV. Here: $40,000 − $50,000 = −$10,000. You have earned ten thousand less than the plan said you would have earned by this date. That is behind schedule in money units, which offends people who wanted days. It is still the standard measure because it uses the same currency as the baseline.",
           "SV does not tell you whether the critical path is late. A team can earn value on fat, easy packages while the one task that gates go-live sits untouched. Use SV as a portfolio health number, then look at the network. Treating SV as a substitute for the critical path is how late projects have cheerful charts.",
           "Positive SV means more budgeted work is done than was scheduled by now — ahead. Same scepticism applies: did you sequence the valuable work, or the work that was easy to tick? Earned value rewards completion. It does not automatically reward completion of the right thing.",
         ],
@@ -281,14 +281,14 @@ export const processEvmKanbanBodies: LessonBodies = {
         body: [
           "Both negative: over budget and behind — our example. You are late and expensive on what you have finished. That is a delivery problem, not a reporting problem. Both positive: ahead and under — rare, and worth checking you have not forgotten a chunk of scope.",
           "Negative CV, positive SV: you bought speed with money — overtime, extra vendors, crashing. That can be a conscious trade. Say so. Positive CV, negative SV: you are cheap and late, which often means the team is under-resourced or blocked, not 'efficient.' Cheap delay is still delay.",
-          "Zero is on plan, not a moral victory. And a variance without a date is a rumour. Always pair the numbers with the status date and the BAC so a sponsor can see the scale. −£10,000 on a £100,000 project is not the same conversation as −£10,000 on a £4 million programme. The formula does not know that. You do.",
+          "Zero is on plan, not a moral victory. And a variance without a date is a rumour. Always pair the numbers with the status date and the BAC so a sponsor can see the scale. −$10,000 on a $100,000 project is not the same conversation as −$10,000 on a $4 million programme. The formula does not know that. You do.",
         ],
       },
       {
         id: "summary",
         title: "Summary & next steps",
         body: [
-          "CV = EV − AC. SV = EV − PV. Negative is unfavourable. Our example is −£10,000 on both: overspent on the work done, and behind the plan. Read them together, then check the critical path before you celebrate or panic.",
+          "CV = EV − AC. SV = EV − PV. Negative is unfavourable. Our example is −$10,000 on both: overspent on the work done, and behind the plan. Read them together, then check the critical path before you celebrate or panic.",
           "Next: performance indexes — the same figures as ratios, which is how you talk about efficiency instead of a one-off gap.",
         ],
       },
@@ -301,10 +301,10 @@ export const processEvmKanbanBodies: LessonBodies = {
     sections: [
       {
         id: "cpi",
-        title: "CPI: value earned per pound spent",
+        title: "CPI: value earned per dollar spent",
         body: [
-          "Cost performance index (CPI) = EV / AC. In the example: £40,000 / £50,000 = 0.80. You are getting 80 pence of budgeted value for every pound you spend. A CPI of 1.00 is on plan. Above 1 is better cost efficiency; below 1 is worse. This is not a vibe. It is a ratio.",
-          "Sponsors understand 'we get eighty pence in the pound' faster than they understand −£10,000 CV, because the ratio scales. The same CPI on the next £50,000 of spend is a forecast, which is why the next lesson exists. Do not call 0.80 'broadly on track' unless you enjoy being asked to define 'broadly' in a steering pack.",
+          "Cost performance index (CPI) = EV / AC. In the example: $40,000 / $50,000 = 0.80. You are getting 80 cents of budgeted value for every dollar you spend. A CPI of 1.00 is on plan. Above 1 is better cost efficiency; below 1 is worse. This is not a vibe. It is a ratio.",
+          "Sponsors understand 'we get eighty cents on the dollar' faster than they understand −$10,000 CV, because the ratio scales. The same CPI on the next $50,000 of spend is a forecast, which is why the next lesson exists. Do not call 0.80 'broadly on track' unless you enjoy being asked to define 'broadly' in a steering pack.",
           "CPI can lie if EV is inflated — percent-complete guesses, partial credit for work that is not done, or a baseline that already hid contingency in every package. Garbage EV divided by honest AC is still garbage. Protect the definition of done or the index becomes interior decoration.",
         ],
       },
@@ -312,7 +312,7 @@ export const processEvmKanbanBodies: LessonBodies = {
         id: "spi",
         title: "SPI: value earned versus value planned",
         body: [
-          "Schedule performance index (SPI) = EV / PV. Here: £40,000 / £50,000 = 0.80. You are earning value at 80% of the planned rate. Same rule: 1.00 on plan, above 1 ahead of the plan's earning rate, below 1 behind.",
+          "Schedule performance index (SPI) = EV / PV. Here: $40,000 / $50,000 = 0.80. You are earning value at 80% of the planned rate. Same rule: 1.00 on plan, above 1 ahead of the plan's earning rate, below 1 behind.",
           "SPI shares SV's blind spot. You can have a respectable SPI while the critical path is dead. You can have a weak SPI because you scheduled a mountain of work in a month the team was never going to swallow — a planning error wearing a performance costume. Read SPI, then read the network.",
           "Near the end of a project SPI tends to crawl toward 1.00 because almost everything planned has either been done or re-baselined. That late-project hug is not a recovery miracle. If you need schedule insight in the last stretch, look at remaining duration on the critical path, not at an index that is running out of unfinished planned value to compare against.",
         ],
@@ -321,7 +321,7 @@ export const processEvmKanbanBodies: LessonBodies = {
         id: "using-indexes",
         title: "Use the indexes; do not worship them",
         body: [
-          "A useful pair: CPI for money efficiency, SPI for earning rate, both dated. 'CPI 0.80, SPI 0.80 at week five of ten, BAC £100,000' is a status sentence. 'Indexes are a bit soft' is a weather report. Add the trend if you have two or three status dates — a CPI falling from 0.95 to 0.80 is a different story from a stable 0.80 you already funded.",
+          "A useful pair: CPI for money efficiency, SPI for earning rate, both dated. 'CPI 0.80, SPI 0.80 at week five of ten, BAC $100,000' is a status sentence. 'Indexes are a bit soft' is a weather report. Add the trend if you have two or three status dates — a CPI falling from 0.95 to 0.80 is a different story from a stable 0.80 you already funded.",
           "Do not average your way to comfort. A workstream at 1.20 and another at 0.50 is not 'about 0.85, so nearly fine.' The second workstream is a project. Report the aggregate and the offender.",
           "Indexes below 1 are not a moral failing and indexes above 1 are not a personality. They are prompts: why, is it typical, and what will we change? If nothing will change, you are collecting decimals. The next lesson is what you do with them when someone asks what the project will cost.",
         ],
@@ -330,7 +330,7 @@ export const processEvmKanbanBodies: LessonBodies = {
         id: "summary",
         title: "Summary & next steps",
         body: [
-          "CPI = EV / AC. SPI = EV / PV. Our example is 0.80 and 0.80: eighty pence in the pound, and 80% of the planned earning rate. One is not 'on track.' Protect EV quality or the ratios are theatre.",
+          "CPI = EV / AC. SPI = EV / PV. Our example is 0.80 and 0.80: eighty cents on the dollar, and 80% of the planned earning rate. One is not 'on track.' Protect EV quality or the ratios are theatre.",
           "Next: forecasting EAC — three formulae, three assumptions, and the damage done when you pick the cheerful one by habit.",
         ],
       },
@@ -345,16 +345,16 @@ export const processEvmKanbanBodies: LessonBodies = {
         id: "eac-atypical",
         title: "EAC = AC + BAC − EV — when the variance was a one-off",
         body: [
-          "This formula says: keep the money already spent, then finish the remaining work at the original budgeted rate. Remaining work is BAC − EV. Add AC. In the example: £50,000 + £100,000 − £40,000 = £110,000. You overran by £10,000 on the work done; you claim you will not do that again.",
+          "This formula says: keep the money already spent, then finish the remaining work at the original budgeted rate. Remaining work is BAC − EV. Add AC. In the example: $50,000 + $100,000 − $40,000 = $110,000. You overran by $10,000 on the work done; you claim you will not do that again.",
           "Use it when the overrun had a cause that is finished — a one-off vendor bill, a storm, a mistaken purchase — and the remaining work looks like the original estimate. That is a strong claim. Write the cause down. If you cannot name why the past will not repeat, you are not using this formula. You are hoping with algebra.",
-          "Estimate to complete (ETC) under this assumption is BAC − EV = £60,000. EAC is just AC + ETC. If finance asks 'how much more will you need,' answer with ETC and the assumption, not with a shrug and a contingency shaped like a guess.",
+          "Estimate to complete (ETC) under this assumption is BAC − EV = $60,000. EAC is just AC + ETC. If finance asks 'how much more will you need,' answer with ETC and the assumption, not with a shrug and a contingency shaped like a guess.",
         ],
       },
       {
         id: "eac-typical",
         title: "EAC = BAC / CPI — when this efficiency is the new normal",
         body: [
-          "If the cost efficiency you have demonstrated is typical of the remaining work, the whole job will cost BAC / CPI. Here: £100,000 / 0.80 = £125,000. You will keep getting 80 pence in the pound until the end. ETC is then EAC − AC = £75,000, not the original remaining £60,000.",
+          "If the cost efficiency you have demonstrated is typical of the remaining work, the whole job will cost BAC / CPI. Here: $100,000 / 0.80 = $125,000. You will keep getting 80 cents on the dollar until the end. ETC is then EAC − AC = $75,000, not the original remaining $60,000.",
           "This is the default when nobody can point to a structural change — no new team, no de-risked design, no removed scope. Past performance is the evidence. Teams dislike this formula because it is rude. That is a feature. A CPI of 0.80 that you 'expect to improve' without a named change is a novel, not a forecast.",
           "If CPI is still unstable — week two of a ten-week project, or a single ugly invoice — do not treat this EAC as destiny. Say the sample is thin. A ratio from a small EV is a weather vane in a cupboard.",
         ],
@@ -363,16 +363,16 @@ export const processEvmKanbanBodies: LessonBodies = {
         id: "eac-both",
         title: "EAC = AC + (BAC − EV) / (CPI × SPI) — when time is costing money too",
         body: [
-          "When cost inefficiency and schedule inefficiency will both persist — late work that also burns money, overtime, extended vendor retainers — divide the remaining budgeted work by the product of the indexes. CPI × SPI here is 0.80 × 0.80 = 0.64. Remaining £60,000 / 0.64 = £93,750. Add AC: EAC = £50,000 + £93,750 = £143,750.",
+          "When cost inefficiency and schedule inefficiency will both persist — late work that also burns money, overtime, extended vendor retainers — divide the remaining budgeted work by the product of the indexes. CPI × SPI here is 0.80 × 0.80 = 0.64. Remaining $60,000 / 0.64 = $93,750. Add AC: EAC = $50,000 + $93,750 = $143,750.",
           "Use this when being late makes the remaining work more expensive, not merely later. A delayed go-live that keeps a contractor team on the clock is the usual suspect. If schedule delay does not change cost (a fixed-price package already paid), this formula over-punishes. Do not use it to look 'rigorous.' Use it when the assumption is true.",
-          "Variance at completion (VAC) = BAC − EAC. Under the three assumptions you get −£10,000, −£25,000, and −£43,750. Put the assumption in the sentence: 'If the one-off overrun does not repeat, EAC is £110k. If current cost efficiency persists, £125k. If late-and-expensive persists, about £144k.' Then ask the sponsor which future they are funding. That is a decision. A single EAC with no label is a magic trick.",
+          "Variance at completion (VAC) = BAC − EAC. Under the three assumptions you get −$10,000, −$25,000, and −$43,750. Put the assumption in the sentence: 'If the one-off overrun does not repeat, EAC is $110k. If current cost efficiency persists, $125k. If late-and-expensive persists, about $144k.' Then ask the sponsor which future they are funding. That is a decision. A single EAC with no label is a magic trick.",
         ],
       },
       {
         id: "summary",
         title: "Summary & next steps",
         body: [
-          "AC + BAC − EV assumes remaining work at the original rate. BAC / CPI assumes current cost efficiency continues. AC + (BAC − EV) / (CPI × SPI) assumes cost and schedule inefficiency both keep biting. Our example forecasts £110k, £125k, and £143,750. Name the assumption.",
+          "AC + BAC − EV assumes remaining work at the original rate. BAC / CPI assumes current cost efficiency continues. AC + (BAC − EV) / (CPI × SPI) assumes cost and schedule inefficiency both keep biting. Our example forecasts $110k, $125k, and $143,750. Name the assumption.",
           "Next: reporting EVM — the same numbers in English a sponsor can use, without a formula sheet for a security blanket.",
         ],
       },
@@ -387,9 +387,9 @@ export const processEvmKanbanBodies: LessonBodies = {
         id: "english-first",
         title: "Lead with English, park the algebra",
         body: [
-          "Start with the story: 'At week five of ten we have completed 40% of the authorised work, spent 50% of the budget, and planned to be at 50% complete. We are behind and overspent on the work done. CPI is 0.80 — eighty pence in the pound. SPI is 0.80.' Then, if anyone asks, show PV, EV, and AC. Most people will not ask. They will ask what happens next.",
-          "Name the forecast with its assumption in the same breath. 'If this cost rate continues, we finish at about £125,000 against a £100,000 BAC — a £25,000 overrun. If the £10,000 overrun was a one-off and we return to plan rates, £110,000. If being late keeps costing us, closer to £144,000.' Three futures beat one fake-precise number.",
-          "Put the decision on the page. 'I need you to choose: recover schedule with overtime (that will worsen CPI), descope two packages, or accept a later date and the £125k forecast.' A report that ends with 'we are monitoring' has told them nothing they could not have guessed from your face.",
+          "Start with the story: 'At week five of ten we have completed 40% of the authorised work, spent 50% of the budget, and planned to be at 50% complete. We are behind and overspent on the work done. CPI is 0.80 — eighty cents on the dollar. SPI is 0.80.' Then, if anyone asks, show PV, EV, and AC. Most people will not ask. They will ask what happens next.",
+          "Name the forecast with its assumption in the same breath. 'If this cost rate continues, we finish at about $125,000 against a $100,000 BAC — a $25,000 overrun. If the $10,000 overrun was a one-off and we return to plan rates, $110,000. If being late keeps costing us, closer to $144,000.' Three futures beat one fake-precise number.",
+          "Put the decision on the page. 'I need you to choose: recover schedule with overtime (that will worsen CPI), descope two packages, or accept a later date and the $125k forecast.' A report that ends with 'we are monitoring' has told them nothing they could not have guessed from your face.",
         ],
       },
       {
@@ -414,7 +414,7 @@ export const processEvmKanbanBodies: LessonBodies = {
         id: "summary",
         title: "Course complete — what's next",
         body: [
-          "Tell the sponsor what is done, what was planned, what was spent, what that means in pence per pound and earning rate, which EAC assumption you are using, and what decision you need. Park the formulae below the fold. Never paint a 0.80 as green.",
+          "Tell the sponsor what is done, what was planned, what was spent, what that means in cents per dollar and earning rate, which EAC assumption you are using, and what decision you need. Park the formulae below the fold. Never paint a 0.80 as green.",
           "You now have a working EVM practice: PV, EV, AC, variances, indexes, forecasts, and a report in English. Run the walkthrough on a live workstream this week — even a small one. Four honest numbers beat a status adjective.",
         ],
       },

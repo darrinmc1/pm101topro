@@ -398,7 +398,7 @@ export const changePmoResourcesBodies: LessonBodies = {
         body: [
           "An operating model deck is a delay tactic with typography. It feels like progress because it photographs well. It does not change Tuesday. If someone demands the model, give them the charter, the five processes, and the ninety-day triple. That is the operating model. The rest is furniture you can design after the furniture is being used.",
           "Vanity metrics will try to join the story: templates downloaded, training seats filled, number of projects 'touched.' Count them privately if you must. Do not lead with them. A sponsor who is still being surprised does not care how many templates you have. Leading with activity is how PMOs sound busy and optional at the same time.",
-          "Tell the story in the organisation's units: weeks of surprise avoided, pounds not spent on the rejected duplicate, hours returned when status stopped being a scavenger hunt. If you cannot find units yet, you are not ready to claim value. You are ready to keep working. Claiming early with fog is how you get a reputation for spin, which is fatal in a function that sells honesty.",
+          "Tell the story in the organisation's units: weeks of surprise avoided, money not spent on the rejected duplicate, hours returned when status stopped being a scavenger hunt. If you cannot find units yet, you are not ready to claim value. You are ready to keep working. Claiming early with fog is how you get a reputation for spin, which is fatal in a function that sells honesty.",
         ],
       },
       {
@@ -523,7 +523,7 @@ export const changePmoResourcesBodies: LessonBodies = {
         title: "Escalate with options, or do not bother",
         body: [
           "Take two or three options to the person who can change demand — usually a sponsor or portfolio head, not 'the PMO' as a vibe. Option A: delay B by four weeks. Option B: cut scope on A to release ten days. Option C: buy a contractor at this cost and this ramp risk. Add a recommendation. An escalation without a recommendation is a complaint with a meeting invite.",
-          "Put costs in the organisation's units: missed regulatory date, extra month of dual running, pounds, a customer commitment already made. Do not put costs in PMO units ('process non-compliance'). Nobody funds those. If you cannot yet cost an option, say the range and the unknown. A honest range beats a fake precise number that will be remembered when it is wrong.",
+          "Put costs in the organisation's units: missed regulatory date, extra month of dual running, dollars, a customer commitment already made. Do not put costs in PMO units ('process non-compliance'). Nobody funds those. If you cannot yet cost an option, say the range and the unknown. A honest range beats a fake precise number that will be remembered when it is wrong.",
           "Timebox the decision. 'Need a call by Thursday or we default to Option A because the vendor window will not move.' Defaults are kind. Open-ended escalations are how both projects keep spending as if they won. While you wait for courage, the scarce person is already doing neither job well. That cost does not appear on either status until it is too late to look competent.",
         ],
       },

@@ -60,7 +60,7 @@ export const riskManagementBodies: LessonBodies = {
         id: "when-to-quantify",
         title: "When quantitative analysis is worth the hours",
         body: [
-          "Quantitative analysis puts units on the uncertainty: days of delay, pounds or dollars of cost, or expected monetary value (EMV). EMV is probability × impact. A 30% chance of a £100k hit is a £30k exposure. Ugly, simple, and suddenly comparable across risks.",
+          "Quantitative analysis puts units on the uncertainty: days of delay, dollars of cost, or expected monetary value (EMV). EMV is probability × impact. A 30% chance of a $100k hit is a $30k exposure. Ugly, simple, and suddenly comparable across risks.",
           "Use it when the decision cost is high: contingency sizing, go/no-go, or a change that trades one expensive risk for another. Do not use it to decorate a steerco pack. A three-decimal EMV built from a guess is still a guess. It just looks like it went to university.",
           "If you lack data, say so. Analogous figures from the last similar project beat invented percentages. 'We do not know' is a professional sentence. 'Likelihood is 37%' when nobody measured anything is how PMs lose the room.",
         ],
@@ -69,7 +69,7 @@ export const riskManagementBodies: LessonBodies = {
         id: "dont-mix-the-signals",
         title: "Do not mix the signals",
         body: [
-          "Keep qualitative scores for triage and quantitative figures for the few risks that change a decision. Mixing them on one slide — red boxes next to fake-precise pounds — teaches executives to distrust both.",
+          "Keep qualitative scores for triage and quantitative figures for the few risks that change a decision. Mixing them on one slide — red boxes next to fake-precise dollar figures — teaches executives to distrust both.",
           "Re-score when the world changes. A risk that was Low/Low before the vendor went into administration is not still Low/Low because the spreadsheet cell has not been edited. Analysis is a timestamp, not a personality trait.",
           "Watch for false comfort. A beautiful heatmap can coexist with zero responses. Scoring is not mitigation. If the highest-scoring risk has no owner and no action, you have produced art.",
         ],
