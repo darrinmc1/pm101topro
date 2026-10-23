@@ -49,8 +49,9 @@ export function ToolTeaser() {
             <span className="text-accent text-glow">Get a real document.</span>
           </h2>
           <p className="mt-4 text-pretty leading-relaxed text-muted-foreground">
-            Eight document types. Each one is a short questionnaire, then a
-            draft you can edit. It does not join the meeting or interview you.
+            Our conversational AI interviews you like a senior PM consultant,
+            then generates a professional, ready-to-use document in clean
+            formatting. Eight document types cover the whole project lifecycle.
           </p>
 
           <ul className="mt-6 grid grid-cols-2 gap-3">

@@ -26,7 +26,7 @@ export function LevelShowcase() {
 
         <div ref={headingRef} className="reveal-up mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tightest text-foreground">
-            Four levels, from 101 to a PMO.
+            Four levels. One journey.
           </h2>
           <p className="mt-3 text-muted-foreground">
             Follow the level rail from 101 all the way to running a PMO.
