@@ -3,7 +3,6 @@ import Link from "next/link"
 interface PrivacyPageProps {
   siteName: string
   domain: string
-  supportEmail?: string
   companyName?: string
   address?: string
 }
@@ -11,11 +10,10 @@ interface PrivacyPageProps {
 export function PrivacyPage({
   siteName,
   domain,
-  supportEmail = "admin@" + domain,
   companyName = siteName,
   address = "",
 }: PrivacyPageProps) {
-  const lastUpdated = "July 29, 2026"
+  const lastUpdated = "24 October 2026"
 
   return (
     <div className="min-h-screen bg-white">
@@ -45,13 +43,12 @@ export function PrivacyPage({
 
             <h3 className="text-lg font-semibold mb-2">1.1 Information You Provide</h3>
             <p className="text-slate-700 mb-3">
-              When you create an account, purchase a course, or contact us, we collect:
+              We collect information only when you give it to us:
             </p>
             <ul className="list-disc pl-6 mb-4 text-slate-700 space-y-1">
-              <li>Name and email address</li>
-              <li>Account credentials (password — stored as a salted hash)</li>
-              <li>Billing information (processed securely by Stripe — we never store full card numbers)</li>
-              <li>Any content you submit via contact forms, topic requests, or feedback</li>
+              <li>Name and email address, if you create a sign-in account, join a list, or use the contact form</li>
+              <li>The message you type in the contact form or the feedback box, and a rating if you choose one there</li>
+              <li>Sign-in credentials, which are handled by Clerk. We do not take a card, and we do not store card numbers.</li>
             </ul>
 
             <h3 className="text-lg font-semibold mb-2">1.2 Information Collected Automatically</h3>
@@ -70,12 +67,10 @@ export function PrivacyPage({
             <h2 className="text-2xl font-bold mb-4">2. How We Use Your Information</h2>
             <p className="text-slate-700 mb-3">We use collected information for the following purposes:</p>
             <ul className="list-disc pl-6 mb-4 text-slate-700 space-y-1">
-              <li>To provide and maintain the Service — deliver courses, templates, and tools</li>
-              <li>To process payments and manage subscriptions</li>
-              <li>To communicate with you — send course updates, account notifications, and support responses</li>
-              <li>To improve the Service — analyze usage patterns and fix issues</li>
-              <li>To detect and prevent fraud, abuse, or security incidents</li>
-              <li>To comply with legal obligations</li>
+              <li>To run the site, including the courses, templates, and document tools</li>
+              <li>To read a contact message or a list signup, and to reply when we can</li>
+              <li>To understand which pages are used, and to fix problems</li>
+              <li>To detect abuse and to meet legal obligations</li>
             </ul>
           </section>
 
@@ -96,29 +91,24 @@ export function PrivacyPage({
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   <tr>
-                    <td className="py-2 pr-4 text-slate-700">Stripe</td>
-                    <td className="py-2 pr-4 text-slate-700">Payment processing</td>
-                    <td className="py-2 text-slate-700">Name, email, billing address, card details (tokenized)</td>
-                  </tr>
-                  <tr>
                     <td className="py-2 pr-4 text-slate-700">Clerk</td>
-                    <td className="py-2 pr-4 text-slate-700">Authentication</td>
+                    <td className="py-2 pr-4 text-slate-700">Sign-in</td>
                     <td className="py-2 text-slate-700">Email, name, account credentials, login metadata</td>
                   </tr>
                   <tr>
-                    <td className="py-2 pr-4 text-slate-700">Supabase</td>
-                    <td className="py-2 pr-4 text-slate-700">Database & storage</td>
-                    <td className="py-2 text-slate-700">Account data, course progress, user content</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2 pr-4 text-slate-700">Resend</td>
-                    <td className="py-2 pr-4 text-slate-700">Email delivery</td>
-                    <td className="py-2 text-slate-700">Email address, message content</td>
-                  </tr>
-                  <tr>
                     <td className="py-2 pr-4 text-slate-700">Vercel</td>
-                    <td className="py-2 pr-4 text-slate-700">Hosting & analytics</td>
+                    <td className="py-2 pr-4 text-slate-700">Hosting and analytics</td>
                     <td className="py-2 text-slate-700">IP address, page views, performance data</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 pr-4 text-slate-700">Site operator</td>
+                    <td className="py-2 pr-4 text-slate-700">Contact form and list signups</td>
+                    <td className="py-2 text-slate-700">Name, email, message, and which form you used</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 pr-4 text-slate-700">Supabase</td>
+                    <td className="py-2 pr-4 text-slate-700">Feedback notes</td>
+                    <td className="py-2 text-slate-700">Message, category, page, and email if you add one</td>
                   </tr>
                 </tbody>
               </table>
@@ -136,9 +126,8 @@ export function PrivacyPage({
               <strong>Types of cookies we use:</strong>
             </p>
             <ul className="list-disc pl-6 mb-4 text-slate-700 space-y-1">
-              <li><strong>Essential cookies</strong> — required for authentication and site functionality (Clerk session cookies)</li>
-              <li><strong>Preference cookies</strong> — remember your settings and course progress</li>
-              <li><strong>Analytics cookies</strong> — help us understand how visitors use the site (Vercel Analytics)</li>
+              <li><strong>Essential cookies</strong> for sign-in, when you use an account (Clerk)</li>
+              <li><strong>Analytics</strong> so we can see which pages are used (Vercel Analytics)</li>
             </ul>
             <p className="text-slate-700">
               You can control cookies through your browser settings. Disabling essential cookies may prevent the
@@ -150,16 +139,15 @@ export function PrivacyPage({
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-4">5. Data Storage &amp; Security</h2>
             <p className="text-slate-700 mb-3">
-              Your data is stored securely on Supabase (database) and Vercel (hosting infrastructure), both of which
-              maintain industry-standard physical and digital security measures including encryption at rest and in transit.
+              The site is hosted on Vercel. Sign-in credentials are held by Clerk. Feedback notes may be stored in Supabase. Lesson completion stays in your browser and is not copied to an account.
             </p>
             <p className="text-slate-700 mb-3">
               We implement commercially reasonable security practices to protect your data, including:
             </p>
             <ul className="list-disc pl-6 mb-4 text-slate-700 space-y-1">
               <li>SSL/TLS encryption for all data in transit</li>
-              <li>Password hashing (bcrypt or similar)</li>
-              <li>API keys and secrets stored as environment variables, never in code</li>
+              <li>Sign-in credentials held by the authentication provider, not in this site&apos;s pages</li>
+              <li>API keys and secrets stored as environment variables, not in the pages</li>
               <li>Regular security updates and dependency audits</li>
             </ul>
             <p className="text-slate-700">
@@ -171,12 +159,11 @@ export function PrivacyPage({
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-4">6. Data Retention</h2>
             <p className="text-slate-700 mb-3">
-              We retain your personal information for as long as your account is active or as needed to provide the Service.
-              When you delete your account, we delete or anonymize your personal data within 30 days, unless we are
-              required to retain it for legal, tax, or fraud-prevention purposes.
+              We keep contact messages, list signups, and feedback for as long as we need them to reply, to run the site, or to meet a legal duty.
+              There are no payment records, because the site does not take payment.
             </p>
             <p className="text-slate-700">
-              Payment records may be retained longer to comply with financial regulations and tax obligations.
+              To ask for deletion, use the <Link href="/contact" className="text-blue-600 underline">contact form</Link>. We will respond within 30 days, unless a legal duty requires us to keep something.
             </p>
           </section>
 
@@ -195,7 +182,8 @@ export function PrivacyPage({
               <li><strong>Withdrawal of consent</strong> — withdraw consent at any time where processing is based on consent</li>
             </ul>
             <p className="text-slate-700">
-              To exercise any of these rights, contact us at <a href={`mailto:${supportEmail}`} className="text-blue-600 underline">{supportEmail}</a>.
+              To exercise any of these rights, use the{" "}
+              <Link href="/contact" className="text-blue-600 underline">contact form</Link>.
               We will respond within 30 days.
             </p>
           </section>
@@ -230,8 +218,7 @@ export function PrivacyPage({
               If you have questions about this Privacy Policy, please contact us:
             </p>
             <ul className="list-disc pl-6 text-slate-700 space-y-1">
-              <li>Email: <a href={`mailto:${supportEmail}`} className="text-blue-600 underline">{supportEmail}</a></li>
-              <li>Website: <Link href={`https://${domain}/contact`} className="text-blue-600 underline">{domain}/contact</Link></li>
+              <li>Contact form: <Link href="/contact" className="text-blue-600 underline">{domain}/contact</Link></li>
               {address && <li>Address: {address}</li>}
             </ul>
           </section>

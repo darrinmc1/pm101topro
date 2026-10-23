@@ -3,12 +3,11 @@ import Link from "next/link"
 interface TermsPageProps {
   siteName: string
   domain: string
-  supportEmail?: string
   companyName?: string
 }
 
-export function TermsPage({ siteName, domain, supportEmail = "admin@" + domain, companyName = siteName }: TermsPageProps) {
-  const lastUpdated = "July 29, 2026"
+export function TermsPage({ siteName, domain, companyName = siteName }: TermsPageProps) {
+  const lastUpdated = "24 October 2026"
 
   return (
     <div className="min-h-screen bg-white">
@@ -49,65 +48,25 @@ export function TermsPage({ siteName, domain, supportEmail = "admin@" + domain, 
               You must notify us immediately upon becoming aware of any breach of security or unauthorized use of your account.
             </p>
             <p className="text-slate-700">
-              We reserve the right to refuse service, terminate accounts, remove or edit content, or cancel orders at our
-              sole discretion.
+              We may refuse service, close an account, or remove content.
             </p>
           </section>
 
           {/* Section 2 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">2. Free vs. Paid Content</h2>
-            <h3 className="text-lg font-semibold mb-2">2.1 Free Content</h3>
+            <h2 className="text-2xl font-bold mb-4">2. Use of the site</h2>
             <p className="text-slate-700 mb-3">
-              {siteName} offers a selection of free courses, tools, templates, and resources. Free content is provided
-              &ldquo;as is&rdquo; without warranty, and we may modify or discontinue any free offering at any time without notice.
-            </p>
-            <h3 className="text-lg font-semibold mb-2">2.2 Paid Content</h3>
-            <p className="text-slate-700 mb-3">
-              Courses that are offered free stay free. Paid access is not available yet, and this site does not list a cost.
+              The courses, document tools, and templates on {siteName} can be read and used without a purchase.
+              They are provided as is. We may change or remove a page.
             </p>
             <p className="text-slate-700">
-              When payments are set up, any charge will be shown before you confirm it. Nothing on the site today asks for a card.
+              This site does not sell a subscription, take a card, or run a checkout. There is no charge, and so there is nothing to refund. If that changes, these Terms will say so before a page asks you to pay.
             </p>
           </section>
 
           {/* Section 3 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">3. Payments &amp; Billing</h2>
-            <p className="text-slate-700 mb-3">
-              Payments are processed securely through third-party payment processors (e.g., Stripe). We do not store
-              full credit card numbers on our servers. By providing payment information, you represent that you are
-              authorized to use the payment method and authorize us to charge the applicable fees.
-            </p>
-            <p className="text-slate-700 mb-3">
-              <strong>Subscription billing:</strong> Your subscription will auto-renew at the end of each billing cycle
-              unless you cancel before the renewal date. You may cancel at any time from your account dashboard. Upon
-              cancellation, you retain access to paid content until the end of the current billing period.
-            </p>
-            <p className="text-slate-700">
-              We reserve the right to suspend or terminate access if payment is not received on time.
-            </p>
-          </section>
-
-          {/* Section 4 */}
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">4. Refund Policy</h2>
-            <p className="text-slate-700 mb-3">
-              We want you to be satisfied with your purchase. Our refund policy is as follows:
-            </p>
-            <ul className="list-disc pl-6 mb-4 text-slate-700 space-y-1">
-              <li><strong>Digital courses &amp; templates:</strong> Due to the digital nature of our products, all sales are final. If you experience technical issues preventing access, contact us and we will resolve the issue or issue a refund at our discretion.</li>
-              <li><strong>Subscription plans:</strong> You may cancel at any time. Refunds are provided on a case-by-case basis. If you cancel within 14 days of signing up and have consumed minimal content, we may issue a prorated refund.</li>
-              <li><strong>Billing errors:</strong> Duplicate or incorrect charges will be refunded in full upon verification.</li>
-            </ul>
-            <p className="text-slate-700">
-              To request a refund, contact <a href={`mailto:${supportEmail}`} className="text-blue-600 underline">{supportEmail}</a>.
-            </p>
-          </section>
-
-          {/* Section 5 */}
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">5. Intellectual Property</h2>
+            <h2 className="text-2xl font-bold mb-4">3. Intellectual Property</h2>
             <p className="text-slate-700 mb-3">
               All content on {siteName} — including courses, lessons, templates, tools, articles, graphics, logos,
               and code — is the property of {companyName} or its content creators and is protected by applicable
@@ -131,13 +90,13 @@ export function TermsPage({ siteName, domain, supportEmail = "admin@" + domain, 
               <li>Use our content to train AI models or for similar machine-learning purposes</li>
             </ul>
             <p className="text-slate-700">
-              If you believe your intellectual property has been infringed, contact us at {supportEmail}.
+              If you believe your intellectual property has been infringed, use the <Link href="/contact" className="text-blue-600 underline">contact form</Link>.
             </p>
           </section>
 
           {/* Section 6 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">6. User Conduct</h2>
+            <h2 className="text-2xl font-bold mb-4">4. User Conduct</h2>
             <p className="text-slate-700 mb-3">
               You agree not to use the Service for any unlawful purpose or in violation of these Terms. Prohibited
               behavior includes:
@@ -153,21 +112,20 @@ export function TermsPage({ siteName, domain, supportEmail = "admin@" + domain, 
 
           {/* Section 7 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">7. Third-Party Services</h2>
+            <h2 className="text-2xl font-bold mb-4">5. Third-Party Services</h2>
             <p className="text-slate-700 mb-3">
               The Service may contain links to third-party websites or services that are not owned or controlled by us.
               We have no control over and assume no responsibility for the content, privacy policies, or practices of
               any third-party websites.
             </p>
             <p className="text-slate-700">
-              We use third-party services for payment processing (Stripe), authentication (Clerk), analytics (Vercel),
-              and email delivery. These services have their own terms and privacy policies governing their use of your data.
+              Sign-in is provided by Clerk. The site is hosted on Vercel, which also provides analytics. Contact-form messages and list signups are sent to the operator of this site. Those services have their own terms.
             </p>
           </section>
 
           {/* Section 8 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">8. Limitation of Liability</h2>
+            <h2 className="text-2xl font-bold mb-4">6. Limitation of Liability</h2>
             <p className="text-slate-700 mb-3">
               To the fullest extent permitted by applicable law, {companyName} shall not be liable for any indirect,
               incidental, special, consequential, or punitive damages arising out of or related to your use of the
@@ -181,21 +139,19 @@ export function TermsPage({ siteName, domain, supportEmail = "admin@" + domain, 
 
           {/* Section 9 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">9. Termination</h2>
+            <h2 className="text-2xl font-bold mb-4">7. Termination</h2>
             <p className="text-slate-700 mb-3">
               We may terminate or suspend your account immediately, without prior notice or liability, for any reason,
               including breach of these Terms. Upon termination, your right to use the Service ceases immediately.
             </p>
             <p className="text-slate-700">
-              If you wish to terminate your account, you may simply discontinue using the Service or delete your account
-              from your account settings. Sections 5 (Intellectual Property), 8 (Limitation of Liability), and 11
-              (Governing Law) survive termination.
+              You can stop using the Service at any time. To ask about an account or about data we hold, use the <Link href="/contact" className="text-blue-600 underline">contact form</Link>. Intellectual property, limitation of liability, and governing law survive termination.
             </p>
           </section>
 
           {/* Section 10 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">10. Changes to Terms</h2>
+            <h2 className="text-2xl font-bold mb-4">8. Changes to Terms</h2>
             <p className="text-slate-700 mb-3">
               We reserve the right to modify or replace these Terms at any time. Material changes will be notified
               via email (if you have an account) or by posting a notice on the Service. Your continued use of the
@@ -209,23 +165,22 @@ export function TermsPage({ siteName, domain, supportEmail = "admin@" + domain, 
 
           {/* Section 11 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">11. Governing Law</h2>
+            <h2 className="text-2xl font-bold mb-4">9. Governing Law</h2>
             <p className="text-slate-700">
-              These Terms shall be governed and construed in accordance with the laws of the State of Delaware, United
-              States, without regard to its conflict of law provisions. Our failure to enforce any right or provision
+              These Terms shall be governed and construed in accordance with the laws of Queensland, Australia.
+              The courts of Queensland, Australia have jurisdiction. Our failure to enforce any right or provision
               of these Terms will not be considered a waiver of those rights.
             </p>
           </section>
 
           {/* Section 12 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">12. Contact</h2>
+            <h2 className="text-2xl font-bold mb-4">10. Contact</h2>
             <p className="text-slate-700">
               If you have any questions about these Terms, please contact us:
             </p>
             <ul className="list-disc pl-6 mt-2 text-slate-700 space-y-1">
-              <li>Email: <a href={`mailto:${supportEmail}`} className="text-blue-600 underline">{supportEmail}</a></li>
-              <li>Website: <Link href={`https://${domain}/contact`} className="text-blue-600 underline">{domain}/contact</Link></li>
+              <li>Contact form: <Link href="/contact" className="text-blue-600 underline">{domain}/contact</Link></li>
             </ul>
           </section>
         </div>

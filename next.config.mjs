@@ -14,6 +14,8 @@ const nextConfig = {
       { source: "/plans", destination: "/pricing", permanent: false },
       { source: "/products", destination: "/pricing", permanent: false },
       { source: "/products/:path*", destination: "/pricing", permanent: false },
+      { source: "/learn", destination: "/courses", permanent: false },
+      { source: "/faq", destination: "/courses", permanent: false },
     ]
   },
 }
