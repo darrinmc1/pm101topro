@@ -10,6 +10,7 @@ export default function Page() {
     <CookiesPage
       siteName="PM101toPro"
       domain="pm101topro.com"
+      supportEmail="admin@pm101topro.com"
     />
   )
 }

@@ -29,14 +29,16 @@ const RATE_LIMIT_MAX = 60 // 60 requests per minute per IP
 export default clerkMiddleware(async (auth, request: NextRequest) => {
   // === Clerk Auth Protection ===
   if (isProtectedRoute(request)) {
-    const isConfigured = Boolean(
-      process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
-        process.env.CLERK_SECRET_KEY,
-    )
-    // protect() redirects signed-out visitors to sign-in. Catching that
-    // redirect and throwing a new Error turned /dashboard into a 500.
-    if (isConfigured) {
+    try {
       await auth.protect()
+    } catch {
+      // Graceful fallback: if Clerk is not configured, allow access anyway
+      const isConfigured =
+        process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
+        process.env.CLERK_SECRET_KEY
+      if (isConfigured) {
+        throw new Error("Authentication required")
+      }
     }
   }
 

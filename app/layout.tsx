@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description:
-    "Project management from the first charter to a PMO. Written courses, plus tools that draft the documents.",
+    "Master project management from your first charter to running a PMO. Free courses across every methodology, plus AI-powered document tools.",
   openGraph: {
     type: "website",
     siteName: "pm101toPro",

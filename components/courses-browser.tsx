@@ -6,52 +6,29 @@ import { cn } from "@/lib/utils"
 import {
   COURSES,
   LEVELS,
-  PMO_SETUP_SLUGS,
-  SCRUM_COURSE_SLUGS,
+  METHODOLOGIES,
   type Level,
   type Methodology,
 } from "@/lib/content"
 import { CourseCard } from "@/components/course-card"
 
 type LevelFilter = Level | "all"
-type MethodologyFilter = Methodology | "scrum" | "pmo" | "all"
-
-const TRACK_PILLS: { value: MethodologyFilter; label: string }[] = [
-  { value: "traditional", label: "Traditional" },
-  { value: "agile", label: "Agile" },
-  { value: "scrum", label: "Scrum" },
-  { value: "pmp", label: "PMP / PMI" },
-  { value: "pmo", label: "PMO" },
-  { value: "general", label: "General" },
-]
-
-function matchesMethodology(course: (typeof COURSES)[number], methodology: MethodologyFilter) {
-  if (methodology === "all") return true
-  if (methodology === "scrum") {
-    return (SCRUM_COURSE_SLUGS as readonly string[]).includes(course.slug)
-  }
-  if (methodology === "pmo") {
-    return (PMO_SETUP_SLUGS as readonly string[]).includes(course.slug)
-  }
-  return course.methodology === methodology
-}
+type MethodologyFilter = Methodology | "all"
 
 export function CoursesBrowser({
   initialLevel = "all",
-  initialMethodology = "all",
 }: {
   initialLevel?: LevelFilter
-  initialMethodology?: MethodologyFilter
 }) {
   const [level, setLevel] = useState<LevelFilter>(initialLevel)
-  const [methodology, setMethodology] = useState<MethodologyFilter>(initialMethodology)
+  const [methodology, setMethodology] = useState<MethodologyFilter>("all")
 
   const filtered = useMemo(
     () =>
       COURSES.filter(
         (c) =>
           (level === "all" || c.level === level) &&
-          matchesMethodology(c, methodology),
+          (methodology === "all" || c.methodology === methodology),
       ),
     [level, methodology],
   )
@@ -81,7 +58,7 @@ export function CoursesBrowser({
           >
             All
           </FilterPill>
-          {TRACK_PILLS.map((m) => (
+          {METHODOLOGIES.map((m) => (
             <FilterPill
               key={m.value}
               active={methodology === m.value}
