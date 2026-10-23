@@ -9,7 +9,7 @@ export function CookiesPage({
   siteName,
   domain,
 }: CookiesPageProps) {
-  const lastUpdated = "July 29, 2026"
+  const lastUpdated = "24 October 2026"
 
   return (
     <div className="min-h-screen bg-white">
@@ -110,8 +110,8 @@ export function CookiesPage({
 
             <h3 className="text-lg font-semibold mb-2">2.3 Preference Cookies</h3>
             <p className="text-slate-700 mb-3">
-              Remember your settings and preferences, such as course progress, collapsed sections, or UI state.
-              These are first-party cookies specific to {siteName}.
+              Remember settings in this browser, such as collapsed sections or other interface state.
+              Lesson completion is stored in this browser. It is not sent to an account.
             </p>
           </section>
 
@@ -128,8 +128,7 @@ export function CookiesPage({
               <li><strong>Edge:</strong> Settings → Site permissions → Cookies and site data</li>
             </ul>
             <p className="text-slate-700">
-              Blocking essential cookies may prevent the Service from working correctly (e.g., you won&apos;t
-              be able to log in or access paid content).
+              Blocking essential cookies may prevent the Service from working correctly (for example, sign-in).
             </p>
           </section>
 
@@ -140,9 +139,8 @@ export function CookiesPage({
               Some third-party services we use may set their own cookies:
             </p>
             <ul className="list-disc pl-6 mb-4 text-slate-700 space-y-1">
-              <li><strong>Clerk</strong> — authentication cookies (essential)</li>
-              <li><strong>Vercel Analytics</strong> — performance and usage analytics</li>
-              <li><strong>Stripe</strong> — may set payment-processor cookies for fraud detection if a payment flow is used later</li>
+              <li><strong>Clerk</strong>: sign-in cookies, when you use an account</li>
+              <li><strong>Vercel Analytics</strong>: page view and performance cookies</li>
             </ul>
             <p className="text-slate-700">
               We do not control these third-party cookies. Refer to each provider&apos;s cookie policy for more
