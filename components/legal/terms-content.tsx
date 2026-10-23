@@ -167,8 +167,8 @@ export function TermsPage({ siteName, domain, companyName = siteName }: TermsPag
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-4">9. Governing Law</h2>
             <p className="text-slate-700">
-              These Terms shall be governed and construed in accordance with the laws of the State of Delaware, United
-              States, without regard to its conflict of law provisions. Our failure to enforce any right or provision
+              These Terms shall be governed and construed in accordance with the laws of Queensland, Australia.
+              The courts of Queensland, Australia have jurisdiction. Our failure to enforce any right or provision
               of these Terms will not be considered a waiver of those rights.
             </p>
           </section>
