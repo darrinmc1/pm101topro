@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { ArrowLeft, ArrowRight, Check, Circle, Lock, PlayCircle } from "lucide-react"
+import { ArrowLeft, ArrowRight, Check, Circle, PlayCircle } from "lucide-react"
 import type { Course, Lesson } from "@/lib/content"
 import { LEVEL_LABEL } from "@/lib/content"
 import type { LessonBody } from "@/lib/lesson-body"
@@ -35,33 +35,28 @@ export function LessonViewer({
   body: LessonBody
 }) {
   const [completed, setCompleted] = useState(false)
+  const [doneCount, setDoneCount] = useState(0)
   const total = course.lessons.length
   const prev = index > 0 ? course.lessons[index - 1] : null
   const next = index < total - 1 ? course.lessons[index + 1] : null
 
   useEffect(() => {
     const prog = readProgress()
-    const doneCount = prog[course.slug] ?? 0
-    setCompleted(doneCount > index)
+    const stored = prog[course.slug] ?? 0
+    setDoneCount(stored)
+    setCompleted(stored > index)
   }, [course.slug, index])
 
   const handleToggle = () => {
-    setCompleted((c) => {
-      const prog = readProgress()
-      const current = prog[course.slug] ?? 0
-      if (!c) {
-        // Mark complete: update to at least this lesson
-        prog[course.slug] = Math.max(current, index + 1)
-      } else {
-        // Unmark: set back to previous lesson
-        prog[course.slug] = Math.min(current, index)
-      }
-      writeProgress(prog)
-      return !c
-    })
+    const prog = readProgress()
+    const current = prog[course.slug] ?? 0
+    const nextCount = completed ? Math.min(current, index) : Math.max(current, index + 1)
+    prog[course.slug] = nextCount
+    writeProgress(prog)
+    setDoneCount(nextCount)
+    setCompleted(!completed)
   }
 
-  const doneCount = index + (completed ? 1 : 0)
   const coursePercent = Math.round((doneCount / total) * 100)
 
   return (
@@ -91,7 +86,7 @@ export function LessonViewer({
           <ol className="mt-6 space-y-1">
             {course.lessons.map((l, i) => {
               const isCurrent = l.slug === lesson.slug
-              const isDone = i <= index || (isCurrent && completed)
+              const isDone = i < doneCount
               return (
                 <li key={l.slug}>
                   <Link
@@ -127,11 +122,6 @@ export function LessonViewer({
           </span>
           <span aria-hidden>·</span>
           <span>{lesson.durationMins} min</span>
-          {lesson.isFree && (
-            <span className="rounded-full bg-accent/10 px-2 py-0.5 text-xs font-medium text-accent">
-              Free preview
-            </span>
-          )}
         </div>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground text-balance">
           {lesson.title}

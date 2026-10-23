@@ -48,6 +48,17 @@ export const METHODOLOGY_LABEL: Record<Methodology, string> = {
   general: "General",
 }
 
+/** Courses the Scrum landing filter should list. Agile Fundamentals teaches the ceremonies; Scrum Master Essentials teaches the role. */
+export const SCRUM_COURSE_SLUGS = ["agile-fundamentals", "scrum-master-essentials"] as const
+
+/** PMO setup and running the office. Exam-prep courses sit at PMO level but are not this list. */
+export const PMO_SETUP_SLUGS = [
+  "building-a-pmo",
+  "pmo-setup-playbook",
+  "portfolio-and-program-management",
+  "resource-management",
+] as const
+
 function lesson(
   slug: string,
   title: string,

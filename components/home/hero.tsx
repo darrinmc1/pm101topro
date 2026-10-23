@@ -41,7 +41,7 @@ export function Hero() {
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
-              <Link href="/about">See How It Works</Link>
+              <Link href="/#how-it-works">See how it works</Link>
             </Button>
           </div>
         </div>

@@ -7,17 +7,17 @@ const STEPS = [
   {
     icon: Layers,
     title: "Choose your level",
-    body: "Start anywhere from 101 through to Pro. Every path is mapped to real methodologies.",
+    body: "Start at 101, intermediate, advanced, or PMO. The level on the card is the filter.",
   },
   {
     icon: GraduationCap,
     title: "Learn by doing",
-    body: "Structured, practical lessons - no fluff, no 40-minute videos. Just what you need.",
+    body: "Written lessons. No video. Mark one complete and the count sticks in this browser.",
   },
   {
     icon: Wand2,
     title: "Build real documents",
-    body: "Use the AI tool to turn what you learned into charters, registers, and reports.",
+    body: "A short questionnaire drafts a charter, register, or report. You still have to edit it.",
   },
 ]
 
@@ -29,7 +29,7 @@ export function HowItWorks() {
   const lineRef    = useScrollReveal<HTMLDivElement>({ threshold: 0.2 })
 
   return (
-    <section className="border-b border-border py-20">
+    <section id="how-it-works" className="scroll-mt-20 border-b border-border py-20">
       <div className="container">
 
         {/* Section header */}
