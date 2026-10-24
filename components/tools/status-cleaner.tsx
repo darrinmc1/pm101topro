@@ -1,13 +1,11 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useState } from "react"
 import Link from "next/link"
 import {
   AlertTriangle,
-  ArrowRight,
   Check,
   Copy,
-  Crown,
   Loader2,
   RefreshCw,
   Sparkles,
@@ -16,8 +14,6 @@ import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Card } from "@/components/ui/card"
 import { SAMPLE_DUMP, type RagStatus, type StatusResult } from "@/lib/status-method"
-import { getFreeUsage, hasExhaustedFreeAi, incrementFreeUsage } from "@/lib/ai-usage"
-import { AI_FREE_LIMIT } from "@/lib/pricing"
 import { cn } from "@/lib/utils"
 
 type Phase = "input" | "working" | "result" | "error"
@@ -43,11 +39,6 @@ export function StatusCleaner() {
   const [source, setSource] = useState<"ai" | "method" | "">("")
   const [error, setError] = useState("")
   const [copied, setCopied] = useState(false)
-  const [showWall, setShowWall] = useState(false)
-
-  useEffect(() => {
-    if (hasExhaustedFreeAi()) setShowWall(true)
-  }, [])
 
   const clean = useCallback(async () => {
     setPhase("working")
@@ -69,7 +60,6 @@ export function StatusCleaner() {
       setMarkdown(data.markdown || "")
       setNotice(data.notice || "")
       setSource(data.source === "ai" || data.source === "method" ? data.source : "")
-      if (data.source === "ai") incrementFreeUsage()
       setPhase("result")
     } catch {
       setError("Network error — check your connection and try again.")
@@ -85,10 +75,6 @@ export function StatusCleaner() {
     } catch {
       /* clipboard unavailable */
     }
-  }
-
-  if (showWall) {
-    return <SubscribeWall />
   }
 
   if (phase === "working") {
@@ -274,22 +260,6 @@ export function StatusCleaner() {
           </ul>
         </Card>
 
-        {source === "ai" && (
-          <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4 text-center">
-            <p className="text-sm font-semibold text-amber-300">
-              {getFreeUsage()} of {AI_FREE_LIMIT} free AI generations used
-            </p>
-            <p className="mt-1 text-xs text-amber-400/80">
-              After {AI_FREE_LIMIT} free uses, Status Cleaner moves to Pro, which is coming soon.
-            </p>
-            <Button asChild className="mt-3" size="sm">
-              <Link href="/pricing">
-                <Crown className="mr-1 h-4 w-4" />
-                Join the Pro list
-              </Link>
-            </Button>
-          </div>
-        )}
       </div>
     )
   }
@@ -321,36 +291,6 @@ export function StatusCleaner() {
         <Button onClick={clean} disabled={dump.trim().length < 40}>
           <Sparkles className="mr-1 h-4 w-4" />
           Clean this status
-        </Button>
-      </div>
-    </Card>
-  )
-}
-
-function SubscribeWall() {
-  return (
-    <Card className="border-border bg-surface p-10 text-center">
-      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/10">
-        <Crown className="h-8 w-8 text-accent" />
-      </div>
-      <p className="mt-6 font-mono text-xs uppercase tracking-widest text-accent-secondary">
-        Pro · coming soon
-      </p>
-      <h2 className="mt-2 text-2xl font-bold text-foreground">Status Cleaner is on Pro</h2>
-      <p className="mx-auto mt-3 max-w-md text-muted-foreground">
-        You&apos;ve used the {AI_FREE_LIMIT} free AI generations. Unlimited Status Cleaner
-        will be part of Pro. Join the list and we will write when it is available.
-      </p>
-      <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-        <Button asChild size="lg">
-          <Link href="/pricing">
-            <Crown className="mr-2 h-5 w-5" />
-            Join the Pro list
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </Button>
-        <Button asChild variant="ghost" size="lg">
-          <Link href="/courses">Browse free courses instead</Link>
         </Button>
       </div>
     </Card>
