@@ -1,9 +1,11 @@
 import Link from "next/link"
 import { BrandMark } from "@/components/brand-mark"
+import { MerchantOfRecordDisclosure } from "@/components/merchant-of-record-disclosure"
 
 const FOOTER_LINKS = [
   { href: "/courses", label: "Courses" },
   { href: "/tools", label: "Tools" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
@@ -57,6 +59,9 @@ export function SiteFooter() {
               ][Math.floor(Math.random() * 5)]
             }
           </p>
+        </div>
+        <div className="container pb-6">
+          <MerchantOfRecordDisclosure className="max-w-2xl" />
         </div>
       </div>
     </footer>

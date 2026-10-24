@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 const SUGGESTIONS = [
   { href: "/courses", label: "Browse courses" },
   { href: "/tools", label: "AI document tools" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
 ]

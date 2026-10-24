@@ -13,6 +13,7 @@ import { AuthNav } from "@/components/auth-nav"
 const NAV_LINKS = [
   { href: "/courses", label: "Courses" },
   { href: "/tools", label: "AI Tools" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
 ]

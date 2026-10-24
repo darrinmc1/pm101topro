@@ -2,8 +2,10 @@ import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
+import { LegalExampleNotice } from "@/components/legal-example-notice"
 import { DocumentWizard } from "@/components/tools/document-wizard"
 import { DOC_TYPES, getDocType } from "@/lib/documents"
+import { isLegalDocument } from "@/lib/legal-notice"
 
 export function generateStaticParams() {
   return DOC_TYPES.map((doc) => ({ doc: doc.id }))
@@ -44,6 +46,7 @@ export default async function ToolPage({ params }: { params: Promise<{ doc: stri
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-foreground text-balance">{found.name}</h1>
           <p className="mt-2 leading-relaxed text-muted-foreground text-pretty">{found.blurb}</p>
+          {isLegalDocument(found.id) ? <LegalExampleNotice className="mt-3 max-w-xl" /> : null}
         </div>
       </div>
 
