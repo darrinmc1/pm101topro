@@ -9,7 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { STATUS_FAQS, faqsToJsonLd } from "@/lib/faqs"
-import { SITE_URL, STATUS_CLEANER } from "@/lib/pricing"
+import { AI_FREE_LIMIT, SITE_URL, STATUS_CLEANER } from "@/lib/pricing"
 
 export const metadata: Metadata = {
   title: "Status Cleaner",
@@ -59,7 +59,10 @@ export default function StatusCleanerPage() {
             <ClipboardList className="h-6 w-6" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-foreground text-balance">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-accent-secondary">
+              {AI_FREE_LIMIT} free generations · Pro $12/mo
+            </p>
+            <h1 className="mt-1 text-3xl font-bold tracking-tight text-foreground text-balance">
               Status Cleaner
             </h1>
             <p className="mt-2 leading-relaxed text-muted-foreground text-pretty">

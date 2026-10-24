@@ -8,12 +8,12 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      { source: "/buy", destination: "/", permanent: false },
-      { source: "/checkout", destination: "/", permanent: false },
-      { source: "/upgrade", destination: "/", permanent: false },
-      { source: "/plans", destination: "/", permanent: false },
-      { source: "/products", destination: "/", permanent: false },
-      { source: "/products/:path*", destination: "/", permanent: false },
+      { source: "/buy", destination: "/pricing", permanent: false },
+      { source: "/checkout", destination: "/pricing", permanent: false },
+      { source: "/upgrade", destination: "/pricing", permanent: false },
+      { source: "/plans", destination: "/pricing", permanent: false },
+      { source: "/products", destination: "/pricing", permanent: false },
+      { source: "/products/:path*", destination: "/pricing", permanent: false },
     ]
   },
 }

@@ -129,7 +129,7 @@ export function CookiesPage({
             </ul>
             <p className="text-slate-700">
               Blocking essential cookies may prevent the Service from working correctly (e.g., you won&apos;t
-              be able to log in).
+              be able to log in or access paid content).
             </p>
           </section>
 
@@ -142,6 +142,7 @@ export function CookiesPage({
             <ul className="list-disc pl-6 mb-4 text-slate-700 space-y-1">
               <li><strong>Clerk</strong> — authentication cookies (essential)</li>
               <li><strong>Vercel Analytics</strong> — performance and usage analytics</li>
+              <li><strong>Stripe</strong> — may set cookies during checkout for fraud detection</li>
             </ul>
             <p className="text-slate-700">
               We do not control these third-party cookies. Refer to each provider&apos;s cookie policy for more

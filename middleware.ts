@@ -26,7 +26,14 @@ const rateLimit = new Map<string, { count: number; resetAt: number }>()
 const RATE_LIMIT_WINDOW = 60_000 // 1 minute
 const RATE_LIMIT_MAX = 60 // 60 requests per minute per IP
 
+function isStripeWebhook(request: NextRequest) {
+  return request.nextUrl.pathname.startsWith("/api/stripe/webhook")
+}
+
 export default clerkMiddleware(async (auth, request: NextRequest) => {
+  // Stripe posts here with no Clerk session. Skip auth, bot blocks, and rate limits.
+  if (isStripeWebhook(request)) return NextResponse.next()
+
   // === Clerk Auth Protection ===
   if (isProtectedRoute(request)) {
     try {
@@ -98,6 +105,6 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
 export const config = {
   matcher: [
     // Match all routes except _next static files, images, etc.
-    "/((?!_next/static|_next/image|images/|favicon.ico).*)",
+    "/((?!_next/static|_next/image|images/|favicon.ico|api/stripe/webhook).*)",
   ],
 }
