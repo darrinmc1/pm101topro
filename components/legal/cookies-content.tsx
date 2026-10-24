@@ -3,13 +3,11 @@ import Link from "next/link"
 interface CookiesPageProps {
   siteName: string
   domain: string
-  supportEmail?: string
 }
 
 export function CookiesPage({
   siteName,
   domain,
-  supportEmail = "admin@" + domain,
 }: CookiesPageProps) {
   const lastUpdated = "July 29, 2026"
 
@@ -131,7 +129,7 @@ export function CookiesPage({
             </ul>
             <p className="text-slate-700">
               Blocking essential cookies may prevent the Service from working correctly (e.g., you won&apos;t
-              be able to log in or access paid content).
+              be able to log in).
             </p>
           </section>
 
@@ -144,7 +142,6 @@ export function CookiesPage({
             <ul className="list-disc pl-6 mb-4 text-slate-700 space-y-1">
               <li><strong>Clerk</strong> — authentication cookies (essential)</li>
               <li><strong>Vercel Analytics</strong> — performance and usage analytics</li>
-              <li><strong>Stripe</strong> — may set payment-processor cookies for fraud detection if a payment flow is used later</li>
             </ul>
             <p className="text-slate-700">
               We do not control these third-party cookies. Refer to each provider&apos;s cookie policy for more
@@ -165,12 +162,11 @@ export function CookiesPage({
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-4">6. Contact</h2>
             <p className="text-slate-700">
-              For questions about our use of cookies:
+              For questions about our use of cookies, use the{" "}
+              <Link href="/contact" className="text-blue-600 underline">contact form</Link>.
+              The privacy policy is at{" "}
+              <Link href="/privacy" className="text-blue-600 underline">{domain}/privacy</Link>.
             </p>
-            <ul className="list-disc pl-6 mt-2 text-slate-700 space-y-1">
-              <li>Email: <a href={`mailto:${supportEmail}`} className="text-blue-600 underline">{supportEmail}</a></li>
-              <li>Privacy Policy: <Link href="/privacy" className="text-blue-600 underline">{domain}/privacy</Link></li>
-            </ul>
           </section>
         </div>
       </div>

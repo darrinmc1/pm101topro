@@ -32,7 +32,7 @@ export const STATUS_FAQS: FaqItem[] = [
   {
     id: "price",
     question: "Is Status Cleaner free?",
-    answer: "Two free generations are included. After that, Status Cleaner moves to Pro, which is not open yet. Join the list on the pricing page to hear when it is.",
+    answer: "Yes. Status Cleaner is free.",
   },
 ]
 

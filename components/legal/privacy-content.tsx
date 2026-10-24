@@ -3,15 +3,12 @@ import Link from "next/link"
 interface PrivacyPageProps {
   siteName: string
   domain: string
-  supportEmail?: string
   companyName?: string
   address?: string
 }
 
 export function PrivacyPage({
   siteName,
-  domain,
-  supportEmail = "admin@" + domain,
   companyName = siteName,
   address = "",
 }: PrivacyPageProps) {
@@ -45,12 +42,11 @@ export function PrivacyPage({
 
             <h3 className="text-lg font-semibold mb-2">1.1 Information You Provide</h3>
             <p className="text-slate-700 mb-3">
-              When you create an account, purchase a course, or contact us, we collect:
+              When you create an account or contact us, we collect:
             </p>
             <ul className="list-disc pl-6 mb-4 text-slate-700 space-y-1">
               <li>Name and email address</li>
               <li>Account credentials (password — stored as a salted hash)</li>
-              <li>Billing information (processed securely by Stripe — we never store full card numbers)</li>
               <li>Any content you submit via contact forms, topic requests, or feedback</li>
             </ul>
 
@@ -71,7 +67,6 @@ export function PrivacyPage({
             <p className="text-slate-700 mb-3">We use collected information for the following purposes:</p>
             <ul className="list-disc pl-6 mb-4 text-slate-700 space-y-1">
               <li>To provide and maintain the Service — deliver courses, templates, and tools</li>
-              <li>To process payments and manage subscriptions</li>
               <li>To communicate with you — send course updates, account notifications, and support responses</li>
               <li>To improve the Service — analyze usage patterns and fix issues</li>
               <li>To detect and prevent fraud, abuse, or security incidents</li>
@@ -95,11 +90,6 @@ export function PrivacyPage({
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  <tr>
-                    <td className="py-2 pr-4 text-slate-700">Stripe</td>
-                    <td className="py-2 pr-4 text-slate-700">Payment processing</td>
-                    <td className="py-2 text-slate-700">Name, email, billing address, card details (tokenized)</td>
-                  </tr>
                   <tr>
                     <td className="py-2 pr-4 text-slate-700">Clerk</td>
                     <td className="py-2 pr-4 text-slate-700">Authentication</td>
@@ -175,9 +165,6 @@ export function PrivacyPage({
               When you delete your account, we delete or anonymize your personal data within 30 days, unless we are
               required to retain it for legal, tax, or fraud-prevention purposes.
             </p>
-            <p className="text-slate-700">
-              Payment records may be retained longer to comply with financial regulations and tax obligations.
-            </p>
           </section>
 
           {/* Section 7 */}
@@ -195,7 +182,8 @@ export function PrivacyPage({
               <li><strong>Withdrawal of consent</strong> — withdraw consent at any time where processing is based on consent</li>
             </ul>
             <p className="text-slate-700">
-              To exercise any of these rights, contact us at <a href={`mailto:${supportEmail}`} className="text-blue-600 underline">{supportEmail}</a>.
+              To exercise any of these rights, use the{" "}
+              <Link href="/contact" className="text-blue-600 underline">contact form</Link>.
               We will respond within 30 days.
             </p>
           </section>
@@ -227,13 +215,12 @@ export function PrivacyPage({
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-4">10. Contact</h2>
             <p className="text-slate-700 mb-3">
-              If you have questions about this Privacy Policy, please contact us:
+              If you have questions about this Privacy Policy, use the{" "}
+              <Link href="/contact" className="text-blue-600 underline">contact form</Link>.
             </p>
-            <ul className="list-disc pl-6 text-slate-700 space-y-1">
-              <li>Email: <a href={`mailto:${supportEmail}`} className="text-blue-600 underline">{supportEmail}</a></li>
-              <li>Website: <Link href={`https://${domain}/contact`} className="text-blue-600 underline">{domain}/contact</Link></li>
-              {address && <li>Address: {address}</li>}
-            </ul>
+            {address ? (
+              <p className="text-slate-700">Address: {address}</p>
+            ) : null}
           </section>
         </div>
       </div>
