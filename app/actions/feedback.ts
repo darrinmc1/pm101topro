@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from '@supabase/supabase-js'
+import { notifyFeedbackWebhook } from '@/lib/feedback-webhook'
 
 export type FeedbackResult = { ok: boolean; message: string; id?: string }
 
@@ -97,6 +98,9 @@ export async function submitFeedbackAction(args: {
     //     feedback_type: args.feedback_type || 'general',
     //   },
     // })
+
+    // n8n feedback creator-run. A failed webhook must not change the user-facing result.
+    await notifyFeedbackWebhook()
 
     return {
       ok: true,
