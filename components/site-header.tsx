@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { BrandMark } from "@/components/brand-mark"
 import { AuthNav } from "@/components/auth-nav"
-import HumorToggle from "@/components/humor-toggle"
 import { getFirstFreeLessonPath } from "@/lib/content"
 
 const START_LEARNING_HREF = getFirstFreeLessonPath()
@@ -54,8 +53,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <HumorToggle />
-        <AuthNav />
+          <AuthNav />
           <Button asChild size="sm">
             <Link href={START_LEARNING_HREF}>Start learning free</Link>
           </Button>
