@@ -21,6 +21,11 @@ export function SiteFooter() {
             From your first project to running the room. Free project management
             courses across every methodology, plus AI-powered document tools.
           </p>
+          <p className="mt-4 text-xs leading-relaxed text-muted-foreground/70">
+            PM101toPro is not affiliated with, endorsed by, or sponsored by the
+            Project Management Institute. PMP, PMI, and CAPM are registered
+            marks of the Project Management Institute, Inc.
+          </p>
         </div>
 
         <nav aria-label="Footer">
