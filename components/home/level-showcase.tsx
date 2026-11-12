@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { LevelBadge } from "@/components/level-badge"
 import { LEVEL_ORDER, getCoursesByLevel } from "@/lib/content"
+import { isLessonReady } from "@/lib/lesson-body"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 
 const SAMPLE_TOPICS: Record<string, string[]> = {
@@ -43,6 +44,10 @@ export function LevelShowcase() {
           {LEVEL_ORDER.map((level, i) => {
             const courses     = getCoursesByLevel(level)
             const lessonCount = courses.reduce((sum, c) => sum + c.lessons.length, 0)
+            const readyCount  = courses.reduce(
+              (sum, c) => sum + c.lessons.filter((l) => isLessonReady(l.slug)).length,
+              0,
+            )
             return (
               <Link
                 key={level}
@@ -54,6 +59,11 @@ export function LevelShowcase() {
 
                 <p className="mt-4 text-sm text-muted-foreground">
                   {courses.length} courses · {lessonCount} lessons
+                  {readyCount < lessonCount && (
+                    <span className="block text-xs text-muted-foreground/70">
+                      {readyCount} live now, rest rolling out
+                    </span>
+                  )}
                 </p>
 
                 <ul className="mt-4 flex-1 space-y-2 text-sm text-foreground">

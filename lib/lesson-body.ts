@@ -1018,6 +1018,15 @@ const LESSON_CONTENT: Record<string, Omit<LessonBody, "practiceDocId">> = {
 // ---------------------------------------------------------------------------
 // Public API
 // ---------------------------------------------------------------------------
+
+// True once a lesson has real, hand-written content in LESSON_CONTENT above.
+// Lessons without an entry here still render (via the generic fallback in
+// getLessonBody), but they're not "ready" in the sense a course/lesson count
+// on the homepage should claim.
+export function isLessonReady(slug: string): boolean {
+  return slug in LESSON_CONTENT
+}
+
 export function getLessonBody(course: Course, lesson: Lesson): LessonBody {
   const content = LESSON_CONTENT[lesson.slug]
 
