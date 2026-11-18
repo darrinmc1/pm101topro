@@ -21,14 +21,14 @@ const METHODOLOGIES = [
     href: "/courses?methodology=pmp",
     description:
       "Structured learning aligned with the PMBOK framework. Build the knowledge and vocabulary you need to lead projects and pursue PMP certification.",
-    tag: "High-demand",
+    tag: "Certification",
   },
   {
     label: "Agile Project Management",
     href: "/courses?methodology=agile",
     description:
       "Iterative delivery, adaptive planning, and continuous improvement. Learn how Agile principles apply to real teams and real projects.",
-    tag: "Most popular",
+    tag: "Iterative",
   },
   {
     label: "Scrum Framework",

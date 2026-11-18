@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { CreateAccountLink } from "@/components/create-account-link"
 
 const ClerkSection = dynamic(() => import("@/components/clerk-auth-nav"), {
   ssr: false,
@@ -18,9 +19,12 @@ const isClerkConfigured =
 export function AuthNav() {
   if (!isClerkConfigured) {
     return (
-      <Button variant="ghost" size="sm" asChild>
-        <Link href="/sign-in">Sign in</Link>
-      </Button>
+      <div className="flex items-center gap-2">
+        <CreateAccountLink className="text-sm font-medium text-muted-foreground hover:text-foreground" />
+        <Button variant="ghost" size="sm" asChild>
+          <Link href="/sign-in">Sign in</Link>
+        </Button>
+      </div>
     )
   }
 

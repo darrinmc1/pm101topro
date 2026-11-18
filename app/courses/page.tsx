@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { CoursesBrowser } from "@/components/courses-browser"
 import { EmailSignup } from "@/components/email-signup"
+import type { Level, Methodology } from "@/lib/content"
 
 export const metadata: Metadata = {
   title: "Courses – PMP, Agile, Scrum & PMO Training",
@@ -33,8 +34,15 @@ export default async function CoursesPage({
   searchParams?: Promise<{ methodology?: string }>
 }) {
   const resolved = searchParams ? await searchParams : {}
-  const methodology = resolved?.methodology?.toLowerCase() ?? ""
-  const intro = METHODOLOGY_INTROS[methodology] ?? null
+  const raw = resolved?.methodology?.toLowerCase() ?? ""
+  const intro = METHODOLOGY_INTROS[raw] ?? null
+  const initialLevel: Level | "all" = raw === "pmo" ? "pmo" : "all"
+  const initialMethodology: Methodology | "scrum" | "all" =
+    raw === "scrum"
+      ? "scrum"
+      : raw === "pmp" || raw === "agile" || raw === "traditional" || raw === "general"
+        ? raw
+        : "all"
 
   return (
     <>
@@ -63,7 +71,11 @@ export default async function CoursesPage({
         </div>
       </section>
 
-      <CoursesBrowser />
+      <CoursesBrowser
+        key={`${initialLevel}-${initialMethodology}`}
+        initialLevel={initialLevel}
+        initialMethodology={initialMethodology}
+      />
       <EmailSignup source="courses" />
     </>
   )
