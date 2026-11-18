@@ -1,177 +1,163 @@
 import Link from "next/link"
+import {
+  CONTACT_EMAIL,
+  INTRO_PRICE_TERMS,
+  LEGAL_UPDATED,
+  REFUND_POLICY,
+  SELLER_NAME,
+} from "@/lib/legal"
+import { PLAN } from "@/lib/pricing"
 
-interface TermsPageProps {
-  siteName: string
-  domain: string
-  companyName?: string
-}
-
-export function TermsPage({ siteName, companyName = siteName }: TermsPageProps) {
-  const lastUpdated = "July 29, 2026"
-
+export function TermsPage({ siteName }: { siteName: string }) {
   return (
     <div className="min-h-screen bg-white">
       <div className="border-b bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 md:px-6 py-16">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-700 mb-3">Legal</p>
           <h1 className="text-4xl font-bold tracking-tight md:text-5xl mb-4">Terms &amp; Conditions</h1>
-          <p className="text-lg text-slate-600">
-            Last updated: {lastUpdated}
-          </p>
+          <p className="text-lg text-slate-600">Last updated: {LEGAL_UPDATED}</p>
         </div>
       </div>
 
       <div className="mx-auto max-w-3xl px-4 md:px-6 py-12">
         <div className="prose prose-slate max-w-none">
           <p className="lead text-lg text-slate-600">
-            Please read these Terms &amp; Conditions (&ldquo;Terms&rdquo;) carefully before using the {siteName} website
-            (the &ldquo;Service&rdquo;), operated by {companyName} (&ldquo;us,&rdquo; &ldquo;we,&rdquo; or &ldquo;our&rdquo;).
+            These Terms &amp; Conditions (&ldquo;Terms&rdquo;) cover the {siteName} website (the &ldquo;Service&rdquo;).
+            The seller is {SELLER_NAME} (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;).
           </p>
-
           <p className="text-sm text-slate-500 mt-2">
-            By accessing or using the Service, you agree to be bound by these Terms. If you disagree with any part,
-            you may not access the Service. These Terms apply to all visitors, users, and others who access or use the Service.
+            By using the Service you agree to these Terms. If you do not agree, do not use the Service.
           </p>
 
           <hr className="my-8" />
 
-          {/* Section 1 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">1. Accounts</h2>
+            <h2 className="text-2xl font-bold mb-4">1. The seller</h2>
             <p className="text-slate-700 mb-3">
-              When you create an account with us, you guarantee that the information you provide is accurate, complete,
-              and current at all times. Inaccurate, incomplete, or obsolete information may result in immediate termination
-              of your account.
-            </p>
-            <p className="text-slate-700 mb-3">
-              You are responsible for safeguarding the password and for any activities or actions under your account.
-              You must notify us immediately upon becoming aware of any breach of security or unauthorized use of your account.
+              Paid plans and one-off packs, when they are offered, are sold by {SELLER_NAME}.
+              A card statement may show TTPN or TTPN* plus the product name.
             </p>
             <p className="text-slate-700">
-              We reserve the right to refuse service, terminate accounts, or remove or edit content at our
-              sole discretion.
+              Questions about these Terms:{" "}
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-blue-600 underline">{CONTACT_EMAIL}</a>.
             </p>
           </section>
 
-          {/* Section 2 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">2. Intellectual Property</h2>
+            <h2 className="text-2xl font-bold mb-4">2. Accounts</h2>
             <p className="text-slate-700 mb-3">
-              All content on {siteName} — including courses, lessons, templates, tools, articles, graphics, logos,
-              and code — is the property of {companyName} or its content creators and is protected by applicable
-              intellectual property laws.
+              A free account needs an email address you can access. You are responsible for activity under that account
+              and for telling us if you think someone else is using it.
+            </p>
+            <p className="text-slate-700">
+              We may refuse, suspend, or close an account that breaks these Terms.
+            </p>
+          </section>
+
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold mb-4">3. Prices</h2>
+            <p className="text-slate-700 mb-3">
+              Prices are in Australian dollars and include GST. The current map is on the{" "}
+              <Link href="/pricing" className="text-blue-600 underline">pricing page</Link>.
             </p>
             <p className="text-slate-700 mb-3">
-              <strong>What you may do:</strong>
+              The {PLAN.name} is {PLAN.priceLabel} {PLAN.taxLabel}. {INTRO_PRICE_TERMS}
             </p>
+            <p className="text-slate-700 mb-3">
+              The A$5 first month is a limited-time intro price for people who create a free account with their email.
+              It is not a permanent rate.
+            </p>
+            <p className="text-slate-700">
+              Template collections are one-off packs. They are not a subscription, and they are not included in the
+              monthly plan unless the pricing page says so. We do not sell lifetime access, and we do not sell an
+              unlimited plan.
+            </p>
+          </section>
+
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold mb-4">4. Cancellation</h2>
+            <p className="text-slate-700">
+              You can cancel a subscription anytime. Cancellation stops the next renewal. You keep access until the
+              end of the period you have already paid for.
+            </p>
+          </section>
+
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold mb-4">5. Refunds</h2>
+            <p className="text-slate-700 mb-3">{REFUND_POLICY}</p>
+            <p className="text-slate-700">
+              To ask for a refund, email{" "}
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-blue-600 underline">{CONTACT_EMAIL}</a>.
+              The same wording is on the{" "}
+              <Link href="/refunds" className="text-blue-600 underline">refunds page</Link>.
+            </p>
+          </section>
+
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold mb-4">6. Intellectual property</h2>
+            <p className="text-slate-700 mb-3">
+              Courses, lessons, templates, tools, and the site itself belong to {SELLER_NAME} or its licensors.
+              You may use them for your own work. You may not resell them, republish a course as your own training,
+              or use the content to train a model.
+            </p>
+            <p className="text-slate-700">
+              If you think we have used your material without permission, email {CONTACT_EMAIL}.
+            </p>
+          </section>
+
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold mb-4">7. Acceptable use</h2>
+            <p className="text-slate-700 mb-3">Do not:</p>
             <ul className="list-disc pl-6 mb-4 text-slate-700 space-y-1">
-              <li>Access and view content for your personal, non-commercial use</li>
-              <li>Download templates for your own business use</li>
-              <li>Share links to public pages on social media</li>
-            </ul>
-            <p className="text-slate-700 mb-3">
-              <strong>What you may NOT do:</strong>
-            </p>
-            <ul className="list-disc pl-6 mb-4 text-slate-700 space-y-1">
-              <li>Re-sell, redistribute, or sublicense any content or templates</li>
-              <li>Reproduce courses or materials for commercial training programs without written permission</li>
-              <li>Copy, modify, or create derivative works of the platform itself</li>
-              <li>Use our content to train AI models or for similar machine-learning purposes</li>
-            </ul>
-            <p className="text-slate-700">
-              If you believe your intellectual property has been infringed, use the{" "}
-              <Link href="/contact" className="text-blue-600 underline">contact form</Link>.
-            </p>
-          </section>
-
-          {/* Section 6 */}
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">3. User Conduct</h2>
-            <p className="text-slate-700 mb-3">
-              You agree not to use the Service for any unlawful purpose or in violation of these Terms. Prohibited
-              behavior includes:
-            </p>
-            <ul className="list-disc pl-6 mb-4 text-slate-700 space-y-1">
-              <li>Attempting to access accounts, systems, or data without authorization</li>
-              <li>Uploading malicious code, viruses, or harmful content</li>
-              <li>Interfering with the operation of the Service</li>
-              <li>Harassing, abusing, or threatening other users or staff</li>
-              <li>Using automated tools (scrapers, bots) to extract content without permission</li>
+              <li>Break into accounts or systems</li>
+              <li>Upload malware</li>
+              <li>Interfere with the Service</li>
+              <li>Harass other people</li>
+              <li>Scrape the site with automated tools</li>
             </ul>
           </section>
 
-          {/* Section 7 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">4. Third-Party Services</h2>
-            <p className="text-slate-700 mb-3">
-              The Service may contain links to third-party websites or services that are not owned or controlled by us.
-              We have no control over and assume no responsibility for the content, privacy policies, or practices of
-              any third-party websites.
-            </p>
+            <h2 className="text-2xl font-bold mb-4">8. Advice</h2>
             <p className="text-slate-700">
-              We use third-party services for authentication (Clerk), analytics (Vercel),
-              and email delivery. These services have their own terms and privacy policies governing their use of your data.
+              The Service is training and document drafting. It is not legal, financial, or professional project advice
+              for your organisation. You still have to run the project.
             </p>
           </section>
 
-          {/* Section 8 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">5. Limitation of Liability</h2>
-            <p className="text-slate-700 mb-3">
-              To the fullest extent permitted by applicable law, {companyName} shall not be liable for any indirect,
-              incidental, special, consequential, or punitive damages arising out of or related to your use of the
-              Service, whether based on warranty, contract, tort (including negligence), or any other legal theory.
-            </p>
+            <h2 className="text-2xl font-bold mb-4">9. Liability</h2>
             <p className="text-slate-700">
-              The educational content provided is for informational purposes only and does not constitute professional
-              advice. Always consult qualified professionals for advice specific to your situation.
+              To the extent the law allows, {SELLER_NAME} is not liable for indirect, incidental, or consequential
+              loss arising from use of the Service. Nothing in these Terms excludes, restricts, or modifies rights
+              that cannot be excluded under the Australian Consumer Law.
             </p>
           </section>
 
-          {/* Section 9 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">6. Termination</h2>
-            <p className="text-slate-700 mb-3">
-              We may terminate or suspend your account immediately, without prior notice or liability, for any reason,
-              including breach of these Terms. Upon termination, your right to use the Service ceases immediately.
-            </p>
+            <h2 className="text-2xl font-bold mb-4">10. Governing law</h2>
             <p className="text-slate-700">
-              If you wish to terminate your account, you may simply discontinue using the Service or delete your account
-              from your account settings. Sections 2 (Intellectual Property), 5 (Limitation of Liability), and 8
-              (Governing Law) survive termination.
+              These Terms are governed by the laws of Queensland, Australia. You can still rely on the Australian
+              Consumer Law where it applies to you.
             </p>
           </section>
 
-          {/* Section 10 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">7. Changes to Terms</h2>
-            <p className="text-slate-700 mb-3">
-              We reserve the right to modify or replace these Terms at any time. Material changes will be notified
-              via email (if you have an account) or by posting a notice on the Service. Your continued use of the
-              Service after any changes constitutes acceptance of the new Terms.
-            </p>
+            <h2 className="text-2xl font-bold mb-4">11. Changes</h2>
             <p className="text-slate-700">
-              It is your responsibility to review these Terms periodically. The &ldquo;Last updated&rdquo; date at the
-              top of this page indicates when changes were last made.
+              We may update these Terms. The date at the top of this page is when they last changed. If you keep
+              using the Service after a change, you accept the updated Terms.
             </p>
           </section>
 
-          {/* Section 11 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">8. Governing Law</h2>
+            <h2 className="text-2xl font-bold mb-4">12. Contact</h2>
             <p className="text-slate-700">
-              These Terms shall be governed and construed in accordance with the laws of Queensland, Australia,
-              without regard to its conflict of law provisions. Our failure to enforce any right or provision
-              of these Terms will not be considered a waiver of those rights.
+              {SELLER_NAME}<br />
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-blue-600 underline">{CONTACT_EMAIL}</a>
             </p>
-          </section>
-
-          {/* Section 12 */}
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">9. Contact</h2>
-            <p className="text-slate-700">
-              If you have any questions about these Terms, use the{" "}
-              <Link href="/contact" className="text-blue-600 underline">contact form</Link>.
+            <p className="text-slate-700 mt-3">
+              You can also use the <Link href="/contact" className="text-blue-600 underline">contact form</Link>.
             </p>
           </section>
         </div>

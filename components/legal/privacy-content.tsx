@@ -1,18 +1,14 @@
 import Link from "next/link"
+import { CONTACT_EMAIL, LEGAL_UPDATED, SELLER_NAME } from "@/lib/legal"
 
 interface PrivacyPageProps {
   siteName: string
   domain: string
-  companyName?: string
-  address?: string
 }
 
-export function PrivacyPage({
-  siteName,
-  companyName = siteName,
-  address = "",
-}: PrivacyPageProps) {
-  const lastUpdated = "July 29, 2026"
+export function PrivacyPage({ siteName, domain }: PrivacyPageProps) {
+  const lastUpdated = LEGAL_UPDATED
+  const companyName = SELLER_NAME
 
   return (
     <div className="min-h-screen bg-white">
@@ -28,7 +24,7 @@ export function PrivacyPage({
         <div className="prose prose-slate max-w-none">
           <p className="lead text-lg text-slate-600">
             {companyName} (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) operates the {siteName} website
-            (the &ldquo;Service&rdquo;). This page explains how we collect, use, and protect your personal information.
+            (the &ldquo;Service&rdquo;) at {domain}. This page explains how we collect, use, and protect your personal information.
           </p>
           <p className="text-sm text-slate-500 mt-2">
             By using the Service, you agree to the collection and use of information in accordance with this policy.
@@ -46,8 +42,9 @@ export function PrivacyPage({
             </p>
             <ul className="list-disc pl-6 mb-4 text-slate-700 space-y-1">
               <li>Name and email address</li>
-              <li>Account credentials (password — stored as a salted hash)</li>
+              <li>Account credentials, held by our sign-in provider</li>
               <li>Any content you submit via contact forms, topic requests, or feedback</li>
+              <li>The pages you open while signed in (path and time, kept on your account)</li>
             </ul>
 
             <h3 className="text-lg font-semibold mb-2">1.2 Information Collected Automatically</h3>
@@ -67,6 +64,7 @@ export function PrivacyPage({
             <p className="text-slate-700 mb-3">We use collected information for the following purposes:</p>
             <ul className="list-disc pl-6 mb-4 text-slate-700 space-y-1">
               <li>To provide and maintain the Service — deliver courses, templates, and tools</li>
+              <li>To show the site owner how many accounts exist and which pages signed-in people opened</li>
               <li>To communicate with you — send course updates, account notifications, and support responses</li>
               <li>To improve the Service — analyze usage patterns and fix issues</li>
               <li>To detect and prevent fraud, abuse, or security incidents</li>
@@ -182,7 +180,9 @@ export function PrivacyPage({
               <li><strong>Withdrawal of consent</strong> — withdraw consent at any time where processing is based on consent</li>
             </ul>
             <p className="text-slate-700">
-              To exercise any of these rights, use the{" "}
+              To exercise any of these rights, email{" "}
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-blue-600 underline">{CONTACT_EMAIL}</a>{" "}
+              or use the{" "}
               <Link href="/contact" className="text-blue-600 underline">contact form</Link>.
               We will respond within 30 days.
             </p>
@@ -215,12 +215,12 @@ export function PrivacyPage({
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-4">10. Contact</h2>
             <p className="text-slate-700 mb-3">
-              If you have questions about this Privacy Policy, use the{" "}
+              If you have questions about this Privacy Policy, email{" "}
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-blue-600 underline">{CONTACT_EMAIL}</a>{" "}
+              or use the{" "}
               <Link href="/contact" className="text-blue-600 underline">contact form</Link>.
+              The seller is {companyName}.
             </p>
-            {address ? (
-              <p className="text-slate-700">Address: {address}</p>
-            ) : null}
           </section>
         </div>
       </div>

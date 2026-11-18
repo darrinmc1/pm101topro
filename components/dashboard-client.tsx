@@ -21,11 +21,13 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { PmWisdom } from "@/components/pm-wisdom"
 
-const SAVED_DOCUMENTS = [
-  { id: "doc-1", docTypeId: "project-charter", docTypeName: "Project Charter", title: "Website Relaunch - June", createdAt: "2 days ago" },
-  { id: "doc-2", docTypeId: "status-report", docTypeName: "Status Report", title: "Q2 Platform Migration", createdAt: "5 days ago" },
-  { id: "doc-3", docTypeId: "risk-register", docTypeName: "Risk Register", title: "Cloud Migration Risks", createdAt: "1 week ago" },
-]
+const SAVED_DOCUMENTS: {
+  id: string
+  docTypeId: string
+  docTypeName: string
+  title: string
+  createdAt: string
+}[] = []
 
 export function DashboardClient() {
   const { getAllProgress, getCourseProgress } = useProgress()

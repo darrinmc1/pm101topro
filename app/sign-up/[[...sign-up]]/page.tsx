@@ -7,7 +7,13 @@ export const metadata: Metadata = {
 
 export default function SignUpPage() {
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4 py-12">
+    <div className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-4 py-12">
+      <div className="mb-6 max-w-md text-center">
+        <h1 className="text-2xl font-bold">Create a free account</h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Email is enough. No card on this page. The A$5 first month is for people who do this.
+        </p>
+      </div>
       <SignUp
         appearance={{
           elements: {

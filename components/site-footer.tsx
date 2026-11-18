@@ -1,9 +1,12 @@
 import Link from "next/link"
 import { BrandMark } from "@/components/brand-mark"
+import { MERCHANT_DISCLOSURE } from "@/lib/legal"
 
 const FOOTER_LINKS = [
   { href: "/courses", label: "Courses" },
   { href: "/tools", label: "Tools" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/downloads", label: "Templates" },
   { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
@@ -40,9 +43,11 @@ export function SiteFooter() {
       <div className="border-t border-border">
         <div className="container flex flex-col gap-2 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 pm101toPro.com</p>
+          <p className="max-w-md">{MERCHANT_DISCLOSURE}</p>
           <div className="flex gap-4">
             <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
             <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
+            <Link href="/refunds" className="hover:text-foreground transition-colors">Refunds</Link>
             <Link href="/cookies" className="hover:text-foreground transition-colors">Cookies</Link>
           </div>
           <p className="font-mono text-muted-foreground/50">

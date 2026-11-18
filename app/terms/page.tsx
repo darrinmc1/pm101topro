@@ -6,10 +6,5 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-  return (
-    <TermsPage
-      siteName="PM101toPro"
-      domain="pm101topro.com"
-    />
-  )
+  return <TermsPage siteName="PM101toPro" />
 }

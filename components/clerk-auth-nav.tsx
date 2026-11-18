@@ -2,6 +2,7 @@
 
 import { useUser, UserButton, SignInButton } from "@clerk/nextjs"
 import { Button } from "@/components/ui/button"
+import { CreateAccountLink } from "@/components/create-account-link"
 
 export default function ClerkAuthNav() {
   const { isLoaded, isSignedIn, user } = useUser()
@@ -24,10 +25,13 @@ export default function ClerkAuthNav() {
   }
 
   return (
-    <SignInButton mode="modal">
-      <Button variant="ghost" size="sm">
-        Sign in
-      </Button>
-    </SignInButton>
+    <div className="flex items-center gap-2">
+      <CreateAccountLink className="text-sm font-medium text-muted-foreground hover:text-foreground" />
+      <SignInButton mode="modal">
+        <Button variant="ghost" size="sm">
+          Sign in
+        </Button>
+      </SignInButton>
+    </div>
   )
 }

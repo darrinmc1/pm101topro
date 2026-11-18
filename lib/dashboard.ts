@@ -8,12 +8,8 @@ export type CourseProgress = {
   resumeLesson: Lesson
 }
 
-// Seed progress (UI-first). Maps course slug -> number of completed lessons.
-const SEED_PROGRESS: Record<string, number> = {
-  "what-is-project-management": 3,
-  "agile-fundamentals": 1,
-  "scope-time-cost": 5,
-}
+// No seeded learner. Progress on the public site lives in the browser, not in a sample person.
+const SEED_PROGRESS: Record<string, number> = {}
 
 function toProgress(slug: string, completed: number): CourseProgress | null {
   const course = getCourse(slug)
@@ -63,7 +59,7 @@ export function getDashboardStats() {
     coursesInProgress,
     coursesCompleted,
     documentsCreated: SAVED_DOCUMENTS.length,
-    dayStreak: 6,
+    dayStreak: 0,
   }
 }
 
@@ -75,26 +71,4 @@ export type SavedDocument = {
   createdAt: string
 }
 
-export const SAVED_DOCUMENTS: SavedDocument[] = [
-  {
-    id: "doc-1",
-    docTypeId: "project-charter",
-    docTypeName: "Project Charter",
-    title: "Website Relaunch - June",
-    createdAt: "2 days ago",
-  },
-  {
-    id: "doc-2",
-    docTypeId: "status-report",
-    docTypeName: "Status Report",
-    title: "Q2 Platform Migration",
-    createdAt: "5 days ago",
-  },
-  {
-    id: "doc-3",
-    docTypeId: "risk-register",
-    docTypeName: "Risk Register",
-    title: "Cloud Migration Risks",
-    createdAt: "1 week ago",
-  },
-]
+export const SAVED_DOCUMENTS: SavedDocument[] = []

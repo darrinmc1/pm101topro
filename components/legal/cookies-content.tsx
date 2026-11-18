@@ -162,7 +162,9 @@ export function CookiesPage({
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-4">6. Contact</h2>
             <p className="text-slate-700">
-              For questions about our use of cookies, use the{" "}
+              For questions about our use of cookies, email{" "}
+              <a href="mailto:admin@pm101topro.com" className="text-blue-600 underline">admin@pm101topro.com</a>{" "}
+              or use the{" "}
               <Link href="/contact" className="text-blue-600 underline">contact form</Link>.
               The privacy policy is at{" "}
               <Link href="/privacy" className="text-blue-600 underline">{domain}/privacy</Link>.

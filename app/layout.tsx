@@ -5,6 +5,7 @@ import { Inter, JetBrains_Mono } from "next/font/google"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { FeedbackWidget } from "@/components/feedback-widget"
+import { UsageRecorderGate } from "@/components/usage-recorder-gate"
 import "./globals.css"
 
 const inter = Inter({
@@ -81,6 +82,7 @@ export default function RootLayout({
             <SiteFooter />
           </div>
           <FeedbackWidget />
+          <UsageRecorderGate />
           {process.env.NODE_ENV === "production" && <Analytics />}
         </body>
       </html>

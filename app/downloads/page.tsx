@@ -3,11 +3,13 @@ import Link from "next/link"
 import { Download, FileText } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { PmWisdom } from "@/components/pm-wisdom"
+import { CreateAccountLink } from "@/components/create-account-link"
+import { packForTemplate } from "@/lib/pricing"
 
 export const metadata: Metadata = {
-  title: "Free PM Templates",
+  title: "PM Templates",
   description:
-    "Download free, professional project management templates - Project Charter, Risk Register, RACI Matrix, Status Report, Business Case, Meeting Minutes, WBS, Budget Tracker, Stakeholder Register, and Project Closure - from pm101toPro.",
+    "The Project Charter template is free. Planning pack is A$9 and Delivery pack is A$15, one-off, inc GST. No checkout on this page.",
 }
 
 interface Template {
@@ -217,14 +219,27 @@ function TemplateCard({
 
         {/* Right - download CTA */}
         <div className="flex items-center border-t border-border px-6 py-4 sm:border-b-0 sm:border-l sm:px-8">
-          <Link
-            href={`/downloads/${template.filename}`}
-            download
-            className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors active:scale-[0.96] transition-transform hover:bg-accent/90"
-          >
-            <Download className="h-4 w-4" />
-            Download PDF
-          </Link>
+          {template.id === "project-charter" ? (
+            <div className="flex flex-col items-start gap-2">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-success">Free</p>
+              <Link
+                href={`/downloads/${template.filename}`}
+                download
+                className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent/90 active:scale-[0.96]"
+              >
+                <Download className="h-4 w-4" />
+                Download PDF
+              </Link>
+            </div>
+          ) : (
+            <div className="flex flex-col items-start gap-2">
+              <p className="text-sm text-muted-foreground">
+                {packForTemplate(template.id)?.name} · {packForTemplate(template.id)?.priceLabel}{" "}
+                {packForTemplate(template.id)?.taxLabel}
+              </p>
+              <CreateAccountLink className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent/90 active:scale-[0.96]" />
+            </div>
+          )}
         </div>
       </div>
     </Card>
@@ -238,15 +253,14 @@ export default function DownloadsPage() {
         <div className="container py-16">
           <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1 text-sm text-accent">
             <Download className="h-4 w-4" />
-            Free Templates
+            Templates
           </div>
           <h1 className="mt-4 max-w-2xl text-4xl font-extrabold tracking-tightest text-foreground text-balance">
-            Professional PM templates, ready to download
+            One charter is free. The other templates are packs.
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
-            Ten essential project management templates used by professional
-            PMs every day. Each is a fillable PDF - download, print or edit
-            digitally, and adapt to your project.
+            The Project Charter PDF is free. Planning pack is A$9 and Delivery pack is A$15, both one-off and inc GST.
+            Those packs are not for sale from this page.
           </p>
         </div>
       </section>

@@ -17,19 +17,22 @@ type MethodologyFilter = Methodology | "all"
 
 export function CoursesBrowser({
   initialLevel = "all",
+  initialMethodology = "all",
 }: {
   initialLevel?: LevelFilter
+  initialMethodology?: MethodologyFilter | "scrum"
 }) {
   const [level, setLevel] = useState<LevelFilter>(initialLevel)
-  const [methodology, setMethodology] = useState<MethodologyFilter>("all")
+  const [methodology, setMethodology] = useState<MethodologyFilter | "scrum">(initialMethodology)
 
   const filtered = useMemo(
     () =>
-      COURSES.filter(
-        (c) =>
-          (level === "all" || c.level === level) &&
-          (methodology === "all" || c.methodology === methodology),
-      ),
+      COURSES.filter((c) => {
+        if (level !== "all" && c.level !== level) return false
+        if (methodology === "all") return true
+        if (methodology === "scrum") return /scrum/i.test(`${c.slug} ${c.title}`)
+        return c.methodology === methodology
+      }),
     [level, methodology],
   )
 
@@ -67,6 +70,9 @@ export function CoursesBrowser({
               {m.label}
             </FilterPill>
           ))}
+          <FilterPill active={methodology === "scrum"} onClick={() => setMethodology("scrum")}>
+            Scrum
+          </FilterPill>
         </FilterRow>
       </div>
 
