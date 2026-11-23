@@ -45,7 +45,9 @@ export async function POST(request: Request) {
       )
     }
 
-    const from = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev"
+    const from =
+      process.env.RESEND_FROM_EMAIL?.trim() || "PM101 to Pro <pm101@send.ttpn.com.au>"
+    const replyTo = process.env.RESEND_REPLY_TO?.trim() || undefined
 
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -56,6 +58,7 @@ export async function POST(request: Request) {
       body: JSON.stringify({
         from,
         to,
+        ...(replyTo ? { reply_to: replyTo } : {}),
         subject: subject || "Message from pm101toPro",
         html:
           html ||
