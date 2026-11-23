@@ -107,7 +107,7 @@ function DocMockup() {
       <div className="space-y-4 py-4">
         {/* User message - types in */}
         <div className="flex justify-end">
-          <div className="max-w-[80%] rounded-2xl rounded-br-sm bg-accent
+          <div className="max-w-[80%] rounded-2xl rounded-br-sm bg-accent-action
                           px-4 py-2.5 text-sm text-accent-foreground min-h-[2.5rem]">
             {displayed}
             {!done && (

@@ -1,5 +1,6 @@
 import { auth, clerkClient } from "@clerk/nextjs/server"
 import { NextResponse } from "next/server"
+import { clerkEnabledForHost } from "@/lib/clerk-config"
 
 export const dynamic = "force-dynamic"
 
@@ -26,6 +27,11 @@ function readPages(metadata: Record<string, unknown> | undefined): RecentPage[] 
 }
 
 export async function POST(request: Request) {
+  const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host")
+  if (!clerkEnabledForHost(host)) {
+    return NextResponse.json({ ok: false }, { status: 401 })
+  }
+
   try {
     const { userId } = await auth()
     if (!userId) {

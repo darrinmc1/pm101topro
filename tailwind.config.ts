@@ -28,6 +28,7 @@ const config: Config = {
         ring: "hsl(var(--ring))",
         accent: {
           DEFAULT: "hsl(var(--accent))",
+          action: "hsl(var(--accent-action))",
           glow: "hsl(var(--accent-glow))",
           secondary: "hsl(var(--accent-secondary))",
           foreground: "hsl(var(--accent-foreground))",
