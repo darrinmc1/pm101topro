@@ -21,7 +21,7 @@ export default function Error({
         <p className="max-w-md text-sm text-muted-foreground">
           We ran into an unexpected issue loading this page.
         </p>
-        <p className="max-w-md text-xs italic text-muted-foreground/60">
+        <p className="max-w-md text-xs italic text-muted-foreground">
           The project plan looked great on paper.
         </p>
         <Button onClick={reset} variant="outline" size="sm">

@@ -122,7 +122,7 @@ function FilterPill({
       className={cn(
         "rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors",
         active
-          ? "border-accent bg-accent/15 text-accent"
+          ? "border-accent bg-background text-accent"
           : "border-border text-muted-foreground hover:border-accent/40 hover:text-foreground",
       )}
     >

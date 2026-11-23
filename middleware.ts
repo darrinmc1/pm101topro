@@ -2,16 +2,25 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server"
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
+import { isClerkKeyUsable } from "@/lib/clerk-config"
+
 const isProtectedRoute = createRouteMatcher([
   "/dashboard(.*)",
   "/api/subscribe(.*)",
   "/api/send-email(.*)",
 ])
 
-const clerkConfigured = Boolean(
-  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.startsWith("pk_") &&
-    process.env.CLERK_SECRET_KEY,
-)
+const clerkConfigured = isClerkKeyUsable() && Boolean(process.env.CLERK_SECRET_KEY)
+
+function rejectUnauthenticated(request: NextRequest) {
+  if (request.nextUrl.pathname.startsWith("/api/")) {
+    return NextResponse.json({ error: "Authentication required" }, { status: 401 })
+  }
+  const url = request.nextUrl.clone()
+  url.pathname = "/sign-in"
+  url.search = ""
+  return NextResponse.redirect(url)
+}
 
 const BLOCKED_SCRAPERS = [
   "Diffbot", "Bytespider", "Imagesift",
@@ -102,7 +111,8 @@ export default clerkConfigured
       }
       return applySecurity(request)
     })
-  : (request: NextRequest) => applySecurity(request)
+  : (request: NextRequest) =>
+      isProtectedRoute(request) ? rejectUnauthenticated(request) : applySecurity(request)
 
 export const config = {
   matcher: [

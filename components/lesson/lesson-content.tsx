@@ -27,7 +27,7 @@ export function LessonContent({ body }: { body: LessonBody }) {
       ))}
 
       {practiceDoc && (
-        <div className="mt-12 rounded-xl border border-accent/30 bg-accent/5 p-6">
+        <div className="mt-12 rounded-xl border border-accent/30 bg-background p-6">
           <p className="text-sm font-medium uppercase tracking-wide text-accent">Practice this</p>
           <h3 className="mt-2 text-lg font-semibold text-foreground">{practiceDoc.name}</h3>
           <p className="mt-1 text-sm leading-relaxed text-muted-foreground">

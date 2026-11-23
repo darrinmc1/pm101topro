@@ -1,4 +1,5 @@
 import { ClerkProviderWrapper } from "@/components/clerk-wrapper"
+import { isClerkKeyUsable } from "@/lib/clerk-config"
 import { Analytics } from "@vercel/analytics/next"
 import type { Metadata, Viewport } from "next"
 import { Inter, JetBrains_Mono } from "next/font/google"
@@ -58,7 +59,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ClerkProviderWrapper>
+    <ClerkProviderWrapper enabled={isClerkKeyUsable()}>
       <html
         lang="en"
         className={`dark bg-background ${inter.variable} ${jetbrainsMono.variable}`}

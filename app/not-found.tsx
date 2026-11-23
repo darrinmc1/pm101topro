@@ -40,7 +40,7 @@ export default function NotFound() {
           shipped. Let&apos;s get you back to something useful.
         </p>
 
-        <p className="mt-6 text-sm italic text-muted-foreground/60">
+        <p className="mt-6 text-sm italic text-muted-foreground">
           {joke}
         </p>
 

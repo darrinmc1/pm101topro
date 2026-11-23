@@ -220,7 +220,7 @@ function TemplateCard({
           <Link
             href={`/downloads/${template.filename}`}
             download
-            className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors active:scale-[0.96] transition-transform hover:bg-accent/90"
+            className="inline-flex items-center gap-2 rounded-lg bg-accent-fill px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors active:scale-[0.96] transition-transform hover:bg-accent-glow"
           >
             <Download className="h-4 w-4" />
             Download PDF
@@ -236,7 +236,7 @@ export default function DownloadsPage() {
     <>
       <section className="border-b border-border bg-surface">
         <div className="container py-16">
-          <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1 text-sm text-accent">
+          <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-background px-3 py-1 text-sm text-accent">
             <Download className="h-4 w-4" />
             Free Templates
           </div>

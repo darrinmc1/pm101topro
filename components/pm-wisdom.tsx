@@ -2,7 +2,7 @@
 
 import { Lightbulb, RefreshCw } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const PM_WISDOM: string[] = [
   "A project without a charter is like a ship without a rudder. Or a Gantt chart. Both are terrifying.",
@@ -28,9 +28,12 @@ const PM_WISDOM: string[] = [
 ]
 
 export function PmWisdom({ className }: { className?: string }) {
-  const [wisdom, setWisdom] = useState(
-    PM_WISDOM[Math.floor(Math.random() * PM_WISDOM.length)],
-  )
+  const [wisdom, setWisdom] = useState(PM_WISDOM[0])
+
+  // Pick after mount so server and client markup match.
+  useEffect(() => {
+    setWisdom(PM_WISDOM[Math.floor(Math.random() * PM_WISDOM.length)])
+  }, [])
 
   const refresh = () => {
     const remaining = PM_WISDOM.filter((w) => w !== wisdom)

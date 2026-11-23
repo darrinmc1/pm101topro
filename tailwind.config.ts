@@ -28,6 +28,7 @@ const config: Config = {
         ring: "hsl(var(--ring))",
         accent: {
           DEFAULT: "hsl(var(--accent))",
+          fill: "hsl(var(--accent-fill))",
           glow: "hsl(var(--accent-glow))",
           secondary: "hsl(var(--accent-secondary))",
           foreground: "hsl(var(--accent-foreground))",
@@ -50,7 +51,10 @@ const config: Config = {
         },
         success: "hsl(var(--success))",
         warning: "hsl(var(--warning))",
-        danger: "hsl(var(--danger))",
+        danger: {
+          DEFAULT: "hsl(var(--danger))",
+          fill: "hsl(var(--danger-fill))",
+        },
         pmo: "hsl(var(--pmo))",
       },
       fontFamily: {

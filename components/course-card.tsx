@@ -13,7 +13,7 @@ export function CourseCard({ course }: { course: Course }) {
     <Card className="group flex flex-col overflow-hidden transition-colors hover:border-accent/50">
       <div className="relative flex h-32 items-center justify-center overflow-hidden border-b border-border bg-line-grid">
         <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-        <span className="relative font-mono text-4xl font-bold tracking-tightest text-accent/70">
+        <span className="relative font-mono text-4xl font-bold tracking-tightest text-accent">
           {course.level === "101" ? "101" : course.level === "pmo" ? "PRO" : course.level.slice(0, 3).toUpperCase()}
         </span>
       </div>
