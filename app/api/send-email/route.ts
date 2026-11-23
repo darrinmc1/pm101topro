@@ -1,17 +1,22 @@
 import { NextResponse } from "next/server"
 import { auth } from "@clerk/nextjs/server"
+import { clerkEnabledForHost } from "@/lib/clerk-config"
 
 export async function POST(request: Request) {
   try {
-    // Check auth — graceful fallback when Clerk is not configured
+    const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host")
     let userId: string | null = null
-    try {
-      const session = await auth()
-      userId = session.userId
-    } catch {
-      // Clerk not configured — still allow in dev
+    if (clerkEnabledForHost(host)) {
+      try {
+        const session = await auth()
+        userId = session.userId
+      } catch {
+        userId = null
+      }
     }
 
+    // A publishable key is present (even a foreign one) means this route
+    // stays closed. Only a local setup with no Clerk key at all may send.
     if (!userId && process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY) {
       return NextResponse.json(
         { error: "Authentication required" },

@@ -1,16 +1,12 @@
 "use client"
 
 import dynamic from "next/dynamic"
+import { useClerkState } from "@/components/clerk-wrapper"
 
-const isClerkConfigured =
-  typeof process !== "undefined" &&
-  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.startsWith("pk_")
-
-const Recorder = isClerkConfigured
-  ? dynamic(() => import("@/components/usage-recorder"), { ssr: false })
-  : null
+const Recorder = dynamic(() => import("@/components/usage-recorder"), { ssr: false })
 
 export function UsageRecorderGate() {
-  if (!Recorder) return null
+  const { enabled } = useClerkState()
+  if (!enabled) return null
   return <Recorder />
 }

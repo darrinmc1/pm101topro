@@ -23,7 +23,7 @@ export default function DashboardPage() {
         >
           Back to the courses
         </Link>
-        <CreateAccountLink className="inline-flex items-center justify-center rounded-lg bg-accent px-4 py-3 text-sm font-semibold text-accent-foreground" />
+        <CreateAccountLink className="inline-flex items-center justify-center rounded-lg bg-accent-action px-4 py-3 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-glow" />
       </div>
     </div>
   )

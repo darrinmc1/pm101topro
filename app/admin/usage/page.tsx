@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { headers } from "next/headers"
 import { auth, clerkClient, currentUser } from "@clerk/nextjs/server"
+import { clerkEnabledForHost } from "@/lib/clerk-config"
 
 export const dynamic = "force-dynamic"
 
@@ -12,6 +14,19 @@ export const metadata: Metadata = {
 type RecentRow = { path: string; at: string; email: string }
 
 export default async function AdminUsagePage() {
+  const headerList = await headers()
+  const host = headerList.get("x-forwarded-host") ?? headerList.get("host")
+  if (!clerkEnabledForHost(host)) {
+    return (
+      <section className="container py-16">
+        <h1 className="text-3xl font-bold">Usage</h1>
+        <p className="mt-3 max-w-xl text-muted-foreground">
+          Sign-in is off until this site uses its own Clerk application. This page stays empty until then.
+        </p>
+      </section>
+    )
+  }
+
   let userId: string | null = null
   try {
     userId = (await auth()).userId
@@ -40,9 +55,8 @@ export default async function AdminUsagePage() {
       <section className="container py-16">
         <h1 className="text-3xl font-bold">Usage</h1>
         <p className="mt-3 max-w-xl text-muted-foreground">
-          This account is signed in. It is not marked as the owner. In the Clerk dashboard for this
-          existing application, open your user and set public metadata to {`{"role":"admin"}`}.
-          Do not create a second Clerk application.
+          This account is signed in. It is not marked as the owner. In the pm101toPro Clerk
+          application, open your user and set public metadata to {`{"role":"admin"}`}.
         </p>
       </section>
     )

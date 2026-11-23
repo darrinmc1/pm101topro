@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 }
 
 const ctaClass =
-  "inline-flex items-center justify-center rounded-lg bg-accent px-4 py-3 text-sm font-semibold text-accent-foreground transition-opacity hover:opacity-90"
+  "inline-flex items-center justify-center rounded-lg bg-accent-action px-4 py-3 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-glow"
 
 export default function PricingPage() {
   return (

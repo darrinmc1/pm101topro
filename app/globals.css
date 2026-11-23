@@ -18,6 +18,8 @@
     --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
     --accent: 217 91% 60%;
+    /* Solid buttons. Darker than --accent so white text clears 4.5:1. */
+    --accent-action: 217 91% 52%;
     --accent-glow: 224 76% 48%;
     --accent-secondary: 189 94% 43%;
     --accent-foreground: 0 0% 100%;

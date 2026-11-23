@@ -1,62 +1,60 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server"
-import { NextResponse } from "next/server"
-import type { NextRequest } from "next/server"
+import { NextResponse, type NextFetchEvent, type NextRequest } from "next/server"
+import { clerkEnabledForHost } from "@/lib/clerk-config"
 
-// Routes that require authentication
-const isProtectedRoute = createRouteMatcher([
-  "/dashboard(.*)",
-  "/api/send-email(.*)",
-])
+const isProtectedRoute = createRouteMatcher(["/dashboard(.*)", "/api/send-email(.*)"])
 
-// Known AI crawlers and scrapers that ignore robots.txt
 const BLOCKED_BOTS = [
-  "GPTBot", "ChatGPT-User", "CCBot", "anthropic-ai", "Claude-Web",
-  "Diffbot", "Bytespider", "cohere-ai", "PerplexityBot", "Imagesift",
-  "FacebookBot", "meta-externalagent", "DataForSeoBot", "DotBot",
-  "Meltwater", "Applebot-Extended", "Google-Extended", "PetalBot",
-  "Scrapy", "python-requests", "aiohttp", "httpx", "curl", "wget",
-  "Go-http-client", "Java/", "okhttp",
+  "GPTBot",
+  "ChatGPT-User",
+  "CCBot",
+  "anthropic-ai",
+  "Claude-Web",
+  "Diffbot",
+  "Bytespider",
+  "cohere-ai",
+  "PerplexityBot",
+  "Imagesift",
+  "FacebookBot",
+  "meta-externalagent",
+  "DataForSeoBot",
+  "DotBot",
+  "Meltwater",
+  "Applebot-Extended",
+  "Google-Extended",
+  "PetalBot",
+  "Scrapy",
+  "python-requests",
+  "aiohttp",
+  "httpx",
+  "curl",
+  "wget",
+  "Go-http-client",
+  "Java/",
+  "okhttp",
 ]
 
-// Paths that are safe from rate limiting (static assets)
 const SAFE_PATHS = ["/_next/", "/favicon", "/og-image", "/opengraph", "/icon"]
 
-// Simple in-memory rate limiter
 const rateLimit = new Map<string, { count: number; resetAt: number }>()
-const RATE_LIMIT_WINDOW = 60_000 // 1 minute
-const RATE_LIMIT_MAX = 60 // 60 requests per minute per IP
+const RATE_LIMIT_WINDOW = 60_000
+const RATE_LIMIT_MAX = 60
 
-export default clerkMiddleware(async (auth, request: NextRequest) => {
-  // === Clerk Auth Protection ===
-  if (isProtectedRoute(request)) {
-    try {
-      await auth.protect()
-    } catch {
-      // Graceful fallback: if Clerk is not configured, allow access anyway
-      const isConfigured =
-        process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
-        process.env.CLERK_SECRET_KEY
-      if (isConfigured) {
-        throw new Error("Authentication required")
-      }
-    }
-  }
-
+function applyGuard(request: NextRequest): NextResponse {
   const url = request.nextUrl.pathname
   const userAgent = request.headers.get("user-agent") || ""
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
-    || request.headers.get("x-real-ip")
-    || "unknown"
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip") ||
+    "unknown"
   const response = NextResponse.next()
 
-  // === 1. Security Headers ===
   response.headers.set("X-Robots-Tag", "noai, noimageai")
   response.headers.set("X-Content-Type-Options", "nosniff")
   response.headers.set("X-Frame-Options", "DENY")
   response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
   response.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()")
 
-  // === 2. Block known AI crawlers / scrapers ===
   const uaLower = userAgent.toLowerCase()
   for (const bot of BLOCKED_BOTS) {
     if (uaLower.includes(bot.toLowerCase())) {
@@ -67,8 +65,7 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
     }
   }
 
-  // === 3. Rate limiting (skip static assets) ===
-  if (!SAFE_PATHS.some((p) => url.startsWith(p))) {
+  if (!SAFE_PATHS.some((path) => url.startsWith(path))) {
     const now = Date.now()
     const entry = rateLimit.get(ip)
 
@@ -93,11 +90,23 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
   }
 
   return response
+}
+
+const withClerk = clerkMiddleware(async (auth, request) => {
+  if (isProtectedRoute(request)) {
+    await auth.protect()
+  }
+  return applyGuard(request)
 })
 
+export default function middleware(request: NextRequest, event: NextFetchEvent) {
+  const host = request.headers.get("x-forwarded-host") ?? request.nextUrl.hostname
+  if (!clerkEnabledForHost(host)) {
+    return applyGuard(request)
+  }
+  return withClerk(request, event)
+}
+
 export const config = {
-  matcher: [
-    // Match all routes except _next static files, images, etc.
-    "/((?!_next/static|_next/image|images/|favicon.ico).*)",
-  ],
+  matcher: ["/((?!_next/static|_next/image|images/|favicon.ico).*)"],
 }

@@ -1,6 +1,7 @@
 import { ClerkProviderWrapper } from "@/components/clerk-wrapper"
 import { Analytics } from "@vercel/analytics/next"
 import type { Metadata, Viewport } from "next"
+import { clerkMode } from "@/lib/clerk-config"
 import { Inter, JetBrains_Mono } from "next/font/google"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
@@ -70,7 +71,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ClerkProviderWrapper>
+    <ClerkProviderWrapper mode={clerkMode()}>
       <html
         lang="en"
         className={`dark bg-background ${inter.variable} ${jetbrainsMono.variable}`}

@@ -225,7 +225,7 @@ function TemplateCard({
               <Link
                 href={`/downloads/${template.filename}`}
                 download
-                className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent/90 active:scale-[0.96]"
+                className="inline-flex items-center gap-2 rounded-lg bg-accent-action px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-glow active:scale-[0.96]"
               >
                 <Download className="h-4 w-4" />
                 Download PDF
@@ -237,7 +237,7 @@ function TemplateCard({
                 {packForTemplate(template.id)?.name} · {packForTemplate(template.id)?.priceLabel}{" "}
                 {packForTemplate(template.id)?.taxLabel}
               </p>
-              <CreateAccountLink className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent/90 active:scale-[0.96]" />
+              <CreateAccountLink className="inline-flex items-center gap-2 rounded-lg bg-accent-action px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-glow active:scale-[0.96]" />
             </div>
           )}
         </div>
