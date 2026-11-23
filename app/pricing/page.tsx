@@ -65,7 +65,7 @@ export default function PricingPage() {
                 </li>
               ))}
             </ul>
-            <Link href="/tools/project-charter" className="mt-8 flex items-center justify-center gap-2 rounded-lg bg-accent px-4 py-3 text-sm font-semibold text-accent-foreground transition-opacity hover:opacity-90">
+            <Link href="/tools/project-charter" className="mt-8 flex items-center justify-center gap-2 rounded-lg bg-accent-fill px-4 py-3 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-glow">
               Try an AI document tool <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

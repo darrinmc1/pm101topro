@@ -42,7 +42,7 @@ export function ProSku() {
                   className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
                     plan.id === "free"
                       ? "bg-success/15 text-success"
-                      : "bg-accent/15 text-accent"
+                      : "border border-accent/40 bg-background text-accent"
                   }`}
                 >
                   {plan.id === "free" ? "Free" : "Paid"}

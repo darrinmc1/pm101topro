@@ -1,25 +1,46 @@
 "use client"
 
 import dynamic from "next/dynamic"
+import { createContext, useContext } from "react"
 import type { ReactNode } from "react"
+import { usePathname } from "next/navigation"
 
-const isClerkConfigured =
-  typeof process !== "undefined" &&
-  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.startsWith("pk_")
+import { isClerkAuthPath } from "@/lib/clerk-paths"
 
-// Dynamically import ClerkProvider so it only initializes at runtime
-// when a valid key is present. During SSR/SSG with no key, renders
-// children directly.
-const ClerkDynamicProvider = isClerkConfigured
-  ? dynamic(
-      () => import("@clerk/nextjs").then((mod) => mod.ClerkProvider),
-      { ssr: true, loading: () => null }
-    )
-  : null
+const ClerkDynamicProvider = dynamic(
+  () => import("@clerk/nextjs").then((mod) => mod.ClerkProvider),
+  { ssr: true },
+)
 
-export function ClerkProviderWrapper({ children }: { children: ReactNode }) {
-  if (!ClerkDynamicProvider) {
-    return <>{children}</>
-  }
-  return <ClerkDynamicProvider>{children}</ClerkDynamicProvider>
+const ClerkUiContext = createContext(false)
+
+export function useClerkUi() {
+  return useContext(ClerkUiContext)
+}
+
+export function ClerkProviderWrapper({
+  enabled,
+  children,
+}: {
+  enabled: boolean
+  children: ReactNode
+}) {
+  const pathname = usePathname() || "/"
+  const active = enabled && isClerkAuthPath(pathname)
+
+  const tree = active ? (
+    <ClerkDynamicProvider
+      signInUrl="/sign-in"
+      signUpUrl="/sign-up"
+      signInForceRedirectUrl="/dashboard"
+      signUpForceRedirectUrl="/dashboard"
+      afterSignOutUrl="/"
+    >
+      {children}
+    </ClerkDynamicProvider>
+  ) : (
+    <>{children}</>
+  )
+
+  return <ClerkUiContext.Provider value={active}>{tree}</ClerkUiContext.Provider>
 }

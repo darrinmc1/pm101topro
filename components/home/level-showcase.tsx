@@ -60,7 +60,7 @@ export function LevelShowcase() {
                 <p className="mt-4 text-sm text-muted-foreground">
                   {courses.length} courses · {lessonCount} lessons
                   {readyCount < lessonCount && (
-                    <span className="block text-xs text-muted-foreground/70">
+                    <span className="block text-xs text-muted-foreground">
                       {readyCount} live now, rest rolling out
                     </span>
                   )}

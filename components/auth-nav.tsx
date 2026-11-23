@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { useClerkUi } from "@/components/clerk-wrapper"
 
 const ClerkSection = dynamic(() => import("@/components/clerk-auth-nav"), {
   ssr: false,
@@ -11,15 +12,15 @@ const ClerkSection = dynamic(() => import("@/components/clerk-auth-nav"), {
   ),
 })
 
-const isClerkConfigured =
-  typeof process !== "undefined" &&
-  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.startsWith("pk_")
-
 export function AuthNav() {
-  if (!isClerkConfigured) {
+  const clerkUi = useClerkUi()
+
+  if (!clerkUi) {
     return (
       <Button variant="ghost" size="sm" asChild>
-        <Link href="/sign-in">Sign in</Link>
+        <Link href="/sign-in" prefetch={false}>
+          Sign in
+        </Link>
       </Button>
     )
   }

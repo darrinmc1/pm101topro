@@ -25,7 +25,7 @@ type Phase = "input" | "working" | "result" | "error"
 const RAG_STYLES: Record<RagStatus, string> = {
   green: "bg-success/15 text-success ring-1 ring-success/30",
   amber: "bg-warning/15 text-warning ring-1 ring-warning/30",
-  red: "bg-danger/15 text-danger ring-1 ring-danger/30",
+  red: "bg-background text-danger ring-1 ring-danger/40",
 }
 
 const RAG_LABEL: Record<RagStatus, string> = {

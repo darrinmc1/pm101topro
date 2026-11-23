@@ -13,7 +13,6 @@ export default function ClerkAuthNav() {
   if (isSignedIn && user) {
     return (
       <UserButton
-        afterSignOutUrl="/"
         appearance={{
           elements: {
             avatarBox: "h-8 w-8",

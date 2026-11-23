@@ -10,14 +10,14 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-accent text-accent-foreground shadow-lg shadow-blue-900/20 hover:bg-accent-glow",
+          "bg-accent-fill text-accent-foreground shadow-lg shadow-blue-900/20 hover:bg-accent-glow",
         outline:
           "border border-border bg-transparent text-foreground hover:border-accent/60 hover:bg-surface-raised",
         secondary:
           "bg-surface-raised text-foreground hover:bg-surface-raised/70",
         ghost: "text-foreground hover:bg-surface-raised",
         link: "text-accent underline-offset-4 hover:underline",
-        danger: "bg-danger text-white hover:bg-danger/90",
+        danger: "bg-danger-fill text-white hover:brightness-95",
       },
       size: {
         default: "h-10 px-5 py-2",
