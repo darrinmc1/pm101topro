@@ -19,11 +19,11 @@ export function Hero() {
             Project Management Mastery
           </p>
           <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl mb-6">
-            Project management{" "}
-            <span className="text-accent">from the first charter</span>
+            Learn project management{" "}
+            <span className="text-accent">by doing it.</span>
           </h1>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Written courses from that first charter to a PMO, plus tools that draft the documents. No credential at the end. The charter still has to get signed.
+            Step-by-step courses take you from your first project plan to running a whole project office, and built-in tools draft the documents for you. Skills and paperwork you can use at work tomorrow.
           </p>
           <ul className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
             {PROOF_POINTS.map((point) => (
