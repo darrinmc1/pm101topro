@@ -17,7 +17,7 @@ const buttonVariants = cva(
           "bg-surface-raised text-foreground hover:bg-surface-raised/70",
         ghost: "text-foreground hover:bg-surface-raised",
         link: "text-accent underline-offset-4 hover:underline",
-        danger: "bg-danger text-white hover:bg-danger/90",
+        danger: "bg-danger-fill text-white hover:brightness-95",
       },
       size: {
         default: "h-10 px-5 py-2",

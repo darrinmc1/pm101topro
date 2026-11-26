@@ -6,7 +6,7 @@ import { useClerkState } from "@/components/clerk-wrapper"
 const Recorder = dynamic(() => import("@/components/usage-recorder"), { ssr: false })
 
 export function UsageRecorderGate() {
-  const { enabled } = useClerkState()
-  if (!enabled) return null
+  const { active } = useClerkState()
+  if (!active) return null
   return <Recorder />
 }

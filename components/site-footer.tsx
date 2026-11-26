@@ -50,7 +50,7 @@ export function SiteFooter() {
             <Link href="/refunds" className="hover:text-foreground transition-colors">Refunds</Link>
             <Link href="/cookies" className="hover:text-foreground transition-colors">Cookies</Link>
           </div>
-          <p className="font-mono text-muted-foreground/50">
+          <p className="font-mono text-muted-foreground">
             {/* Footer easter egg - cycles through PM jokes on each visit */}
             {
               [

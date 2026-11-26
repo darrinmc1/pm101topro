@@ -8,7 +8,7 @@ export function CreateAccountLink({
   className?: string
 }) {
   return (
-    <Link href={ACCOUNT_CTA_HREF} className={cn(className)}>
+    <Link href={ACCOUNT_CTA_HREF} prefetch={false} className={cn(className)}>
       {ACCOUNT_CTA_LABEL}
     </Link>
   )

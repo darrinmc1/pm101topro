@@ -251,7 +251,7 @@ export default function DownloadsPage() {
     <>
       <section className="border-b border-border bg-surface">
         <div className="container py-16">
-          <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1 text-sm text-accent">
+          <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-background px-3 py-1 text-sm text-accent">
             <Download className="h-4 w-4" />
             Templates
           </div>
