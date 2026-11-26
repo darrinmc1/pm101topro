@@ -1,6 +1,8 @@
 "use client"
 
 import dynamic from "next/dynamic"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 import { useClerkState } from "@/components/clerk-wrapper"
 
 const ClerkSection = dynamic(() => import("@/components/clerk-auth-nav"), {
@@ -9,13 +11,19 @@ const ClerkSection = dynamic(() => import("@/components/clerk-auth-nav"), {
 })
 
 export function AuthNav() {
-  const { enabled, pending } = useClerkState()
+  const { pending, active } = useClerkState()
+
+  if (active) return <ClerkSection />
 
   if (pending) {
     return <div className="h-8 w-20 animate-pulse rounded-md bg-surface-raised" />
   }
 
-  if (!enabled) return null
-
-  return <ClerkSection />
+  return (
+    <Button variant="ghost" size="sm" asChild>
+      <Link href="/sign-in" prefetch={false}>
+        Sign in
+      </Link>
+    </Button>
+  )
 }

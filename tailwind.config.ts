@@ -51,7 +51,10 @@ const config: Config = {
         },
         success: "hsl(var(--success))",
         warning: "hsl(var(--warning))",
-        danger: "hsl(var(--danger))",
+        danger: {
+          DEFAULT: "hsl(var(--danger))",
+          fill: "hsl(var(--danger-fill))",
+        },
         pmo: "hsl(var(--pmo))",
       },
       fontFamily: {

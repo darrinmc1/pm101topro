@@ -60,7 +60,7 @@ export function HowItWorks() {
                           bg-surface p-6 ${STAGGER[i]}`}
             >
               {/* Step number */}
-              <span className="absolute right-5 top-5 font-mono text-sm text-muted-foreground/60">
+              <span className="absolute right-5 top-5 font-mono text-sm text-muted-foreground">
                 0{i + 1}
               </span>
 

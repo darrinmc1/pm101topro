@@ -28,7 +28,9 @@
     --success: 160 84% 39%;
     --warning: 38 92% 50%;
     --danger: 0 84% 60%;
-    --pmo: 258 90% 66%;
+    /* Filled danger buttons. White labels need a deeper red than danger text. */
+    --danger-fill: 0 72% 48%;
+    --pmo: 258 90% 71%;
     --radius: 0.75rem;
     color-scheme: dark;
   }

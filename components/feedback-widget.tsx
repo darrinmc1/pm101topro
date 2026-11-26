@@ -62,14 +62,14 @@ export function FeedbackWidget() {
       {isOpen && (
         <div className="mb-3 w-80 bg-slate-800 rounded-2xl shadow-2xl border-2 border-slate-700/60 overflow-hidden animate-in slide-in-from-bottom-4 duration-300">
           {/* Header */}
-          <div className="bg-gradient-to-r from-teal-600 to-cyan-600 px-5 py-4 flex items-center justify-between">
+          <div className="bg-gradient-to-r from-teal-800 to-cyan-800 px-5 py-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-xl">🌐</span>
               <h3 className="font-bold text-white text-sm">Send Feedback</h3>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-white/60 hover:text-white transition-colors"
+              className="text-white/80 hover:text-white transition-colors"
               aria-label="Close feedback"
             >
               <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -170,7 +170,7 @@ export function FeedbackWidget() {
               <button
                 type="submit"
                 disabled={status === "loading" || !rating || !category || !message}
-                className="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-2.5 rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                className="w-full bg-teal-700 hover:bg-teal-800 text-white font-bold py-2.5 rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed text-sm"
               >
                 {status === "loading" ? (
                   <span className="inline-flex items-center gap-2 justify-center">
@@ -195,7 +195,7 @@ export function FeedbackWidget() {
         className={`group flex items-center gap-2 px-5 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-105 ${
           isOpen
             ? "bg-teal-200 text-teal-900 border-2 border-teal-300"
-            : "bg-teal-600 text-white hover:bg-teal-500"
+            : "bg-teal-700 text-white hover:bg-teal-800"
         }`}
         aria-label={isOpen ? "Close feedback" : "Send feedback"}
       >
